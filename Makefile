@@ -49,6 +49,8 @@ FREE_PATH		=			$(SRC_PATH)free/
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
 
+EVENT_PATH		=			$(BASIC_PATH)event/
+
 WIN_PATH		=			$(BASIC_PATH)window/
 
 ## ==========================[MENU]===========================
@@ -78,10 +80,16 @@ TEST_PATH		=			tests/
 SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
 							$(UTILS_PATH)my_help.c					\
 
+SRC_GAME		=			$(GAME_PATH)game_core.c					\
+
+SRC_EVENT		=			$(EVENT_PATH)event.c					\
+
 SRC_WINDOW		=			$(WIN_PATH)my_window.c					\
 
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
+							$(SRC_GAME)								\
+							$(SRC_EVENT)
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

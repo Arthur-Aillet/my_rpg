@@ -12,6 +12,7 @@
 #include "my_controle_struct.h"
 
 typedef struct game_s {
+    int *keys;
     control_t *status;
     window_t *my_window;
 } game_t;

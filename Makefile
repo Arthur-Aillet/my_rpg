@@ -31,6 +31,8 @@ SRC_PATH		=			src/
 
 BASIC_PATH		=			$(SRC_PATH)basic/
 
+INIT_PATH		=			$(SRC_PATH)init/
+
 MENU_PATH		=			$(SRC_PATH)menu/
 
 GAME_PATH		=			$(SRC_PATH)game/
@@ -40,6 +42,8 @@ MINGAME_PATH	=			$(SRC_PATH)mini_game/
 ANIM_PATH		=			$(SRC_PATH)animation/
 
 EFFECT_PATH		=			$(SRC_PATH)effect/
+
+FREE_PATH		=			$(SRC_PATH)free/
 
 ## =========================[BASICS]==========================
 
@@ -127,6 +131,12 @@ fclean:		clean
 		rm -rf *gcda
 		rm -rf *gcno
 
+build_lib:
+
+debug:
+
+valgrind:
+
 tests_run:
 	make re -C lib/my
 	gcc -o $(NAME_TEST) $(SRC_GLOBAL) $(SRC_TEST) $(TEST_SRC) $(CRIT)
@@ -150,4 +160,4 @@ message:
 ## ===========================[END]===========================
 ## ===========================================================
 
-.PHONY:	all	re	clean	fclean	tests_run	message
+.PHONY:	all	re	clean	fclean	build_lib	debug	valgrind	tests_run	message

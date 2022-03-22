@@ -8,15 +8,7 @@
 #ifndef MY_PROJECT_H
     #define MY_PROJECT_H
 
-    #include "my.h"
-    #include <unistd.h>
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-    #include <assert.h>
-    #include <sys/stat.h>
-    #include <sys/types.h>
-    #include <sys/mman.h>
+    #include "my_game_struct.h"
 
 int my_error_handling(int ac, char **av);
 int my_help(void);

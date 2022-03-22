@@ -33,6 +33,7 @@ typedef struct window_s {
 void create_windows(window_t *window);
 void create_icon(window_t *window);
 window_t *generate_default_window(void);
+void set_correct_window_size(window_t *window);
 void free_window_struct(window_t *window);
 
 #endif /* !MY_WINDOW_H_ */

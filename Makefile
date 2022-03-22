@@ -45,6 +45,8 @@ EFFECT_PATH		=			$(SRC_PATH)effect/
 
 FREE_PATH		=			$(SRC_PATH)free/
 
+CSFML_PATH		=			$(SRC_PATH)csfml/
+
 ## =========================[BASICS]==========================
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
@@ -86,10 +88,13 @@ SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
 SRC_WINDOW		=			$(WIN_PATH)my_window.c					\
 
+SRC_CSFML		=			$(CSFML_PATH)object.c					\
+
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
-							$(SRC_EVENT)
+							$(SRC_EVENT)							\
+							$(SRC_CSFML)							\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

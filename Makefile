@@ -5,6 +5,8 @@
 ## MAKEFILE
 ##
 
+## ==========================[THINGS_NOT_IMPORTANT]==========================
+
 DEFAULT	=	"\e[0m"
 BOLD_T	=	"\e[1m"
 RED_C	=	"\e[31m"

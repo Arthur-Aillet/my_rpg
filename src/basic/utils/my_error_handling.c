@@ -11,7 +11,7 @@ int my_error_handling(int ac, char **av)
 {
     if (ac == 2 && my_strcmp(av[1], "-h") == 0)
         return 0;
-    if (ac != 2)
+    if (ac != 1)
         return 84;
     return 0;
 }

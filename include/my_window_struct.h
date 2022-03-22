@@ -8,6 +8,7 @@
 #ifndef MY_WINDOW_H_
     #define MY_WINDOW_H_
 
+    #include <SFML/Graphics.h>
 typedef struct window_s {
     sfRenderWindow *window;
     int height;

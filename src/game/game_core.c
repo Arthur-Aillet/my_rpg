@@ -5,7 +5,9 @@
 ** game_core
 */
 
+#include <SFML/Graphics.h>
 #include "my_window_struct.h"
+#include "my_text.h"
 #include "my_rpg.h"
 #include "my_events.h"
 #include "my_csfml_utils.h"
@@ -13,8 +15,9 @@
 int game_loop(int ac, char **av)
 {
     window_t *window = generate_default_window();
+    font_t **font = font_create_array();
     int *keys = init_keys();
-    object *test = create_object("test", (sfVector2f){0, 0}, (sfVector2f){60, 33});
+    object *test = create_object("test", VCF{0, 0}, VCF{60, 33});
 
     if (window == NULL)
         return 84;

@@ -16,7 +16,8 @@ text_t *text_setup_with_font(char *string, sfFont *font, int char_size)
 
     texte->text = sfText_create();
     texte->font = font;
-    sfText_setFont(texte->text, texte->font);
+    if (font != NULL)
+        sfText_setFont(texte->text, texte->font);
     sfText_setString(texte->text, string);
     sfText_setCharacterSize(texte->text, char_size);
     return (texte);

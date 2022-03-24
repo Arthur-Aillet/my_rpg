@@ -9,7 +9,9 @@
 #include "my_window_struct.h"
 #include "my_text.h"
 #include "my_rpg.h"
-#include "my_events.h"
+#include "my_mouse.h"
+#include "my_button.h"
+#include "my_event.h"
 #include "my_csfml_utils.h"
 
 int game_loop(int ac, char **av)
@@ -18,6 +20,9 @@ int game_loop(int ac, char **av)
     font_t **font = font_create_array();
     int *keys = init_keys();
     object *test = create_object("test", VCF{0, 0}, VCF{60, 33});
+    object *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
+    button_t *bouton_test = button_create(VCF{1, 1}, VCF{100, 100}, true);
+    button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
 
     if (window == NULL)
         return 84;
@@ -27,6 +32,8 @@ int game_loop(int ac, char **av)
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
+        display_button(window->window, bouton_test, keys);
+        update_mouse_cursor(window->window, mouse);
         sfRenderWindow_display(window->window);
     }
     free_window_struct(window);

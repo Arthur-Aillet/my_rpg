@@ -105,6 +105,7 @@ SRC_CSFML		=			$(CSFML_PATH)object.c					\
 							$(TEXT_PATH)fonts.c						\
 							$(BUTTON_PATH)button_manage.c			\
 							$(BUTTON_PATH)button_setup.c			\
+							$(BUTTON_PATH)button_setup2.c			\
 							$(BUTTON_PATH)button_utils.c			\
 
 SRC_MATH		=			$(MATH_PATH)math.c						\

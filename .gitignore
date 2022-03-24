@@ -8,3 +8,4 @@ my_rpg
 vgcore.*
 include/my.h
 .vscode/
+assets/UI utils/*

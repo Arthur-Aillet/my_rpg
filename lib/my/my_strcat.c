@@ -5,17 +5,14 @@
 ** STRCAT
 */
 
+int my_strlen(char const *str);
+
 char *my_strcat(char *dest, char const *src)
 {
-    int i = 0;
-    int j = 0;
+    int len = my_strlen(dest);
 
-    while (dest[i])
-        i++;
-    while (src[j]) {
-        dest[i + j] = src[j];
-        j++;
-    }
-    dest[i + j] = '\0';
+    for (int i = 0; src[i] != '\0'; i++)
+        dest[len + i] = src[i];
+    dest[len + my_strlen(src)] = '\0';
     return (dest);
 }

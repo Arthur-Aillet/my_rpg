@@ -2,6 +2,7 @@
     "object_title": {
         "field1": "rabbit",
         "field2": "carrot",
-        "field3": 1
+        "truc": 1,
+        "field4": "text with spaces test"
     }
 }

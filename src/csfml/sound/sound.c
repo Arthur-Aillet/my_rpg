@@ -15,10 +15,10 @@
 #include "my_sound.h"
 #include "my_files.h"
 
-sfSound *sound_from_array_font(char *name, sound_t **sounds)
+sfSound *find_sound(char *name, sound_t **sounds)
 {
     for (int i = 0; sounds[i] != NULL; i++)
-        if (sounds[i]->name == name)
+        if (my_strcmp(sounds[i]->name, name) == 0)
             return (sounds[i]->sound);
     return (NULL);
 }
@@ -38,7 +38,7 @@ void fill_sounds(DIR *fd, sound_t **sounds, char *name, struct dirent *dir)
             name = my_strcat(name, dir->d_name);
             sounds[number] = malloc(sizeof(sound_t));
             sounds[number]->buffer = sfSoundBuffer_createFromFile(name);
-            sounds[number]->sound = sfSound_create(name);
+            sounds[number]->sound = sfSound_create();
             sfSound_setBuffer(sounds[number]->sound, sounds[number]->buffer);
             sounds[number]->name = my_strdup(dir->d_name);
             number += 1;
@@ -47,17 +47,17 @@ void fill_sounds(DIR *fd, sound_t **sounds, char *name, struct dirent *dir)
     }
 }
 
-sfSound **sounds_create_array(void)
+sound_t **sounds_create_array(void)
 {
     int nbr_files = count_files_in_folder("assets/sound");
-    sfSound **sounds;
+    sound_t **sounds;
     DIR *fd = opendir("assets/sound");
-    char *name;
-    struct dirent *dir;
+    char *name = NULL;
+    struct dirent *dir = NULL;
 
     if (nbr_files == -1 || fd == NULL)
         return (NULL);
-    sounds = malloc(sizeof(sfSound *) * (nbr_files + 1));
+    sounds = malloc(sizeof(sound_t *) * (nbr_files + 1));
     if (fd == NULL || sounds == NULL)
         return (NULL);
     fill_sounds(fd, sounds, name, dir);

@@ -23,7 +23,7 @@ typedef struct text_s {
 } text_t;
 
 font_t **font_create_array(void);
-sfFont *font_from_array_font(char *name, font_t **fonts);
+sfFont *find_font(char *name, font_t **fonts);
 text_t *text_setup_with_font(char *string, sfFont *font, int char_size);
 void text_destroy(text_t *text);
 text_t *text_setup(char *string, char *font, int char_size);

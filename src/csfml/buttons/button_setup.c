@@ -68,10 +68,12 @@ void button_setup_text_file(button_t *bouton, char *text, char *font, int size)
 void button_setup_text(button_t *bouton, char *text, sfFont *font, int size)
 {
     bouton->text.text = sfText_create();
-    bouton->text.font = font;
-    sfText_setFont((*bouton).text.text, (*bouton).text.font);
-    if (text != NULL)
-        sfText_setString((*bouton).text.text, text);
+    if (font != NULL) {
+        bouton->text.font = sfFont_copy(font);
+        sfText_setFont((*bouton).text.text, (*bouton).text.font);
+        if (text != NULL)
+            sfText_setString((*bouton).text.text, text);
+    }
     sfText_setCharacterSize((*bouton).text.text, size);
     button_center_text(bouton);
 }

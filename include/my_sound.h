@@ -16,4 +16,7 @@ typedef struct sound_s {
     sfSoundBuffer *buffer;
 } sound_t;
 
+sfSound *find_sound(char *name, sound_t **sounds);
+sound_t **sounds_create_array(void);
+
 #endif /* !MY_SOUND_H_ */

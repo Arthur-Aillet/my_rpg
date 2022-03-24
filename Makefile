@@ -71,6 +71,8 @@ S_MENU_PATH		=			$(MENU_PATH)menu_settings/
 
 TEXT_PATH		=			$(CSFML_PATH)texts/
 
+SOUND_PATH		=			$(CSFML_PATH)sound/
+
 BUTTON_PATH		=			$(CSFML_PATH)buttons/
 
 ## ========================[MINI_GAME]========================
@@ -101,6 +103,7 @@ SRC_CSFML		=			$(CSFML_PATH)object.c					\
 							$(CSFML_PATH)type_transformer.c			\
 							$(TEXT_PATH)text.c						\
 							$(TEXT_PATH)fonts.c						\
+							$(SOUND_PATH)sound.c					\
 							$(BUTTON_PATH)button_manage.c			\
 							$(BUTTON_PATH)button_setup.c			\
 							$(BUTTON_PATH)button_setup2.c			\

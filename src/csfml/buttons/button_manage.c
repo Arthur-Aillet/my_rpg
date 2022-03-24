@@ -44,21 +44,21 @@ void display_button(sfRenderWindow *window, button_t *but, int *keys)
     sfVector2f mouse_pos = get_global_mouse_pos(window);
     sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
 
-    if (pos_in_square(mouse_pos, rect) == sfFalse) {
-        but->already_hoverd = 0;
+    if (pos_in_square(mouse_pos, rect) == false) {
+        but->already_hoverd = false;
         sfSprite_setTextureRect(but->sprite, (sfIntRect){0, 0, size.x / 3, size.y});
     }
     if (pos_in_square(mouse_pos, rect) == sfTrue && but->hover != NULL
-        && but->already_hoverd == 0) {
+        && but->already_hoverd == false) {
         sfSound_play(but->hover);
-        but->already_hoverd = 1;
+        but->already_hoverd = true;
     }
     button_update_state(mouse_pos, but, keys);
     if (pos_in_square(mouse_pos, rect) == sfTrue && keys[leftMouse] == 3)
         if (but->click != NULL)
             sfSound_play(but->click);
     sfRenderWindow_drawSprite(window, but->sprite, NULL);
-    if (but->display_text == sfTrue && but->text.text != NULL)
+    if (but->display_text == true)
         sfRenderWindow_drawText(window, but->text.text, NULL);
 }
 

@@ -47,6 +47,10 @@ FREE_PATH		=			$(SRC_PATH)free/
 
 CSFML_PATH		=			$(SRC_PATH)csfml/
 
+MATH_PATH		=			$(SRC_PATH)math/
+
+MOUSE_PATH		=			$(SRC_PATH)mouse/
+
 ## =========================[BASICS]==========================
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
@@ -91,20 +95,27 @@ SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
-SRC_WINDOW		=			$(WIN_PATH)my_window.c					\
+SRC_WINDOW		=			$(WIN_PATH)window.c					\
 
 SRC_CSFML		=			$(CSFML_PATH)object.c					\
+							$(CSFML_PATH)type_transformer.c			\
 							$(TEXT_PATH)text.c						\
 							$(TEXT_PATH)fonts.c						\
 							$(BUTTON_PATH)button_manage.c			\
 							$(BUTTON_PATH)button_setup.c			\
 							$(BUTTON_PATH)button_utils.c			\
 
+SRC_MATH		=			$(MATH_PATH)math.c						\
+
+SRC_MOUSE		=			$(MOUSE_PATH)mouse.c					\
+
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
 							$(SRC_CSFML)							\
+							$(SRC_MATH)								\
+							$(SRC_MOUSE)							\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

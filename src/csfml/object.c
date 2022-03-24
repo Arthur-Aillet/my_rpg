@@ -68,9 +68,15 @@ object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
 {
     object *objet = malloc(sizeof(object));
     sfFloatRect rect;
+    sfImage *image;
 
     objet->sprite = sfSprite_create();
     objet->texture = img;
+    if (objet->texture == NULL) {
+        image = create_blank_image();
+        objet->texture = sfTexture_createFromImage(image, NULL);
+        sfImage_destroy(image);
+    }
     sfSprite_setTexture(objet->sprite, objet->texture, sfFalse);
     rect = sfSprite_getGlobalBounds(objet->sprite);
     sfSprite_setOrigin(objet->sprite,

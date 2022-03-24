@@ -10,6 +10,7 @@ MAIN		=	src/json/localmain.c			\
 SRC			=	src/json/file_gestion.c			\
 				src/json/str_preprocessing.c	\
 				src/json/object_preprocessing.c	\
+				src/json/extract_fields.c		\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

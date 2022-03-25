@@ -19,9 +19,8 @@ typedef struct json_object_s {
     char **fields_obj;
     char **fields_int;
     char **data_str;
-    struct json_object_s *data_obj;
-    int *data_int;
-    struct json_object_s *obj_data;
+    struct json_object_s **data_obj;
+    int **data_int;
 } json_obj_t;
 
 char *get_file_content(char *path);
@@ -33,5 +32,8 @@ void extract_str_fields(json_obj_t *obj, char **fields);
 void extract_obj_fields(json_obj_t *obj, char **fields);
 void extract_int_fields(json_obj_t *obj, char **fields);
 json_obj_t *extract_obj(char *buffer, int begin);
+void count_malloc_each_type(json_obj_t *obj, char **buffers);
+
+char **axel_split(char *str, char separator);
 
 #endif

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "json.h"
+#include "my.h"
 
 int object_chars_len(char *buffer)
 {
@@ -48,32 +49,15 @@ char *select_by_quotes(char *buffer)
     return output;
 }
 
-void count_malloc_each_type(json_obj_t *obj, char **buffers)
-{
-    int nb_str = 0;
-    int nb_obj = 0;
-    int nb_int = 0;
-
-    for (int i = 0; buffers[i] != NULL; i++) {
-        nb_str += get_field_type(buffers[i]) == 1;
-        nb_obj += get_field_type(buffers[i]) == 2;
-        nb_int += get_field_type(buffers[i]) == 3;
-    }
-    obj->fields_str = malloc(sizeof(char) * (nb_str + 1));
-    obj->fields_str[nb_str] = NULL;
-    obj->fields_obj = malloc(sizeof(json_obj_t) * (nb_obj + 1));
-    obj->fields_obj[nb_obj] = NULL;
-    obj->fields_int = malloc(sizeof(int) * (nb_int + 1));
-    obj->fields_int[nb_int] = NULL;
-}
-
 void extract_fields_data(json_obj_t *obj, char *buffer)
 {
-    char **fields = my_split(buffer, ',');
-    int type = get_field_type(fields[0]);
+    char **fields = axel_split(buffer, ',');
 
     count_malloc_each_type(obj, fields);
-
+    extract_str_fields(obj, fields);
+    //extract_obj_fields(obj, fields); // enable after tests
+    extract_int_fields(obj, fields);
+    my_free_array(fields);
 }
 
 json_obj_t *extract_obj(char *buffer, int begin)

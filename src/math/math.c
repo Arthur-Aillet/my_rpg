@@ -33,11 +33,3 @@ float orient_a_to_b(sfVector2f po1, sfVector2f po2)
         angle *= -1;
     return (angle);
 }
-
-bool pos_in_square(sfVector2f pos, sfFloatRect rect)
-{
-    if (pos.x > rect.left && pos.x < rect.left + rect.width)
-        if (pos.y > rect.top && pos.y < rect.top + rect.height)
-            return (true);
-    return (false);
-}

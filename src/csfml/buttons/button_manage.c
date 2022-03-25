@@ -16,26 +16,17 @@
 
 void button_center_text(button_t *bouton)
 {
-    sfVector2f pos = sfSprite_getPosition(bouton->sprite);
-    sfFloatRect scale = sfSprite_getGlobalBounds(bouton->sprite);
-    sfFloatRect ownscale = sfText_getGlobalBounds(bouton->text.text);
+    sfFloatRect rect = sfText_getGlobalBounds(bouton->text.text);
+    sfVector2f scale = sfText_getScale(bouton->text.text);
 
-    pos = VCF{pos.x + scale.width / 2 , pos.y + scale.height / 2};
-    pos = VCF{pos.x - ownscale.width / 2 , pos.y - ownscale.height};
-    sfText_setPosition(bouton->text.text, pos);
+    sfText_setOrigin(bouton->text.text, VCF{rect.width / 2 / scale.x,
+    rect.height / scale.y});
+    sfText_setPosition(bouton->text.text, sfSprite_getPosition(bouton->sprite));
 }
 
 void button_update_state(sfVector2f mouse_pos, button_t *but, int *keys)
 {
-    sfVector2u size = sfTexture_getSize(but->texture);
-    sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
 
-    if (pos_in_square(mouse_pos, rect) == sfTrue && RELEASED)
-        sfSprite_setTextureRect(but->sprite,
-            (sfIntRect){size.x / 3, 0, size.x / 3, size.y});
-    if (pos_in_square(mouse_pos, rect) == sfTrue && CLICKED)
-        sfSprite_setTextureRect(but->sprite,
-            (sfIntRect){size.x / 3 * 2, 0, size.x / 3, size.y});
 }
 
 void display_button(sfRenderWindow *window, button_t *but, int *keys)
@@ -44,19 +35,51 @@ void display_button(sfRenderWindow *window, button_t *but, int *keys)
     sfVector2f mouse_pos = get_global_mouse_pos(window);
     sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
 
-    if (pos_in_square(mouse_pos, rect) == false) {
+    if (MOUSE_HOVER == false && but->already_hoverd == true) { // droped
+        sfSprite_move(but->sprite, VCF{-1 * but->displacement_hover.left, -1 * but->displacement_hover.top});
+        sfText_scale(but->text.text, VCF{1 / but->displacement_hover.width, 1 / but->displacement_hover.height});
+        sfSprite_scale(but->sprite, VCF{1 / but->displacement_hover.width, 1 / but->displacement_hover.height});
+        button_center_text(but);
         but->already_hoverd = false;
         sfSprite_setTextureRect(but->sprite, (sfIntRect){0, 0, size.x / 3, size.y});
     }
-    if (pos_in_square(mouse_pos, rect) == sfTrue && but->hover != NULL
-        && but->already_hoverd == false) {
-        sfSound_play(but->hover);
+    if (MOUSE_HOVER == true && but->already_hoverd == false) { // hoverd
+        if (but->hover != NULL)
+            sfSound_play(but->hover);
+        sfSprite_move(but->sprite, VCF{but->displacement_hover.left, but->displacement_hover.top});
+        sfText_scale(but->text.text, VCF{but->displacement_hover.width, but->displacement_hover.height});
+        sfSprite_scale(but->sprite, VCF{but->displacement_hover.width, but->displacement_hover.height});
+        button_center_text(but);
         but->already_hoverd = true;
     }
-    button_update_state(mouse_pos, but, keys);
-    if (pos_in_square(mouse_pos, rect) == sfTrue && keys[leftMouse] == 3)
+    if (MOUSE_HOVER == true && keys[leftMouse] == 3) { // During a click
+        but->already_clicked = false;
         if (but->click != NULL)
             sfSound_play(but->click);
+        sfSprite_move(but->sprite, VCF{-1 * but->displacement_click.left, -1 * but->displacement_click.top});
+        sfText_scale(but->text.text, VCF{1 / but->displacement_click.width, 1 / but->displacement_click.height});
+        sfSprite_scale(but->sprite, VCF{1 / but->displacement_click.width, 1 / but->displacement_click.height});
+        button_center_text(but);
+    }
+    if (MOUSE_HOVER == false && but->already_clicked == true) { // go out while a click
+        but->already_clicked = false;
+        sfSprite_move(but->sprite, VCF{-1 * but->displacement_click.left, -1 * but->displacement_click.top});
+        sfText_scale(but->text.text, VCF{1 / but->displacement_click.width, 1 / but->displacement_click.height});
+        sfSprite_scale(but->sprite, VCF{1 / but->displacement_click.width, 1 / but->displacement_click.height});
+        button_center_text(but);
+    }
+    if (MOUSE_HOVER == true && RELEASED && but->already_clicked == false) { //
+        sfSprite_setTextureRect(but->sprite, (sfIntRect){size.x / 3, 0, size.x / 3, size.y});
+    }
+    if (MOUSE_HOVER == true && CLICKED && but->already_clicked == false) { // click
+        but->already_clicked = true;
+        sfSprite_setTextureRect(but->sprite, (sfIntRect){size.x / 3 * 2, 0, size.x / 3, size.y});
+        sfSprite_move(but->sprite, VCF{but->displacement_click.left, but->displacement_click.top});
+        sfText_scale(but->text.text, VCF{but->displacement_click.width, but->displacement_click.height});
+        sfSprite_scale(but->sprite, VCF{but->displacement_click.width, but->displacement_click.height});
+        button_center_text(but);
+    }
+    button_update_state(mouse_pos, but, keys);
     sfRenderWindow_drawSprite(window, but->sprite, NULL);
     if (but->display_text == true)
         sfRenderWindow_drawText(window, but->text.text, NULL);

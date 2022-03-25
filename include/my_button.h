@@ -26,6 +26,7 @@ typedef struct button_s {
     sfSound *click;
     sfSoundBuffer *click_buf;
     bool already_hoverd;
+    bool already_clicked;
 } button_t;
 
 bool is_pressed(button_t bouton, sfRenderWindow *window, int *keys);

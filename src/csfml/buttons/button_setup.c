@@ -78,7 +78,7 @@ void button_setup_text(button_t *bouton, char *text, sfFont *font, int size)
     button_center_text(bouton);
 }
 
-void button_setup_sounds_file(button_t *but, char *click, char *hover, int vol)
+void button_setup_sounds_file(button_t *but, char *hover, char *click, int vol)
 {
     but->click = sfSound_create();
     but->hover = sfSound_create();

@@ -27,6 +27,7 @@ int game_loop(int ac, char **av)
     button_t *bouton_test = button_create(VCF{2, 1}, VCF{100, 100}, true);
     button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(bouton_test, "This is some exemple texte", find_font("Ancient.ttf", font), 40);
+    button_setup_sounds(bouton_test, find_sound("hover.ogg", sound), find_sound("click.ogg", sound), 100);
 
     if (window == NULL)
         return 84;

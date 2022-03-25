@@ -13,14 +13,14 @@
 #include <SFML/Audio.h>
 #include <stdlib.h>
 
-void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vol)
+void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
 {
-    if (but->click != NULL) {
+    if (click != NULL) {
         but->click = sfSound_copy(click);
         but->click_buf = NULL;
         sfSound_setVolume(but->click, vol);
     }
-    if (but->hover != NULL) {
+    if (hover != NULL) {
         but->hover = sfSound_copy(hover);
         but->hover_buf = NULL;
         sfSound_setVolume(but->hover, vol);

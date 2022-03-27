@@ -17,6 +17,8 @@
 
 sfSound *find_sound(char *name, sound_t **sounds)
 {
+    if (sounds == NULL)
+        return (NULL);
     for (int i = 0; sounds[i] != NULL; i++)
         if (my_strcmp(sounds[i]->name, name) == 0)
             return (sounds[i]->sound);

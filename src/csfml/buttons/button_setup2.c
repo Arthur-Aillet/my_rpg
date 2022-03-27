@@ -27,8 +27,8 @@ void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
     }
 }
 
-void button_setup_offset(button_t *bouton, sfFloatRect hover, sfFloatRect click)
+void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click)
 {
-    bouton->displacement_click = click;
-    bouton->displacement_hover = hover;
+    bouton->scale_hover = hover;
+    bouton->scale_click = click;
 }

@@ -17,7 +17,15 @@ bool is_pressed(button_t bouton, sfRenderWindow *window, int *keys)
     sfVector2f mouse_pos = get_global_mouse_pos(window);
     sfFloatRect rect = sfSprite_getGlobalBounds(bouton.sprite);
 
-    if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y) == true && (keys[leftMouse] == 3))
+    if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y) == true
+        && (keys[leftMouse] == 3))
         return (true);
     return (false);
+}
+
+void display_button(sfRenderWindow *window, button_t *but)
+{
+    sfRenderWindow_drawSprite(window, but->sprite, NULL);
+    if (but->display_text == true)
+        sfRenderWindow_drawText(window, but->text.text, NULL);
 }

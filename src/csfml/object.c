@@ -63,7 +63,6 @@ object *create_object(char *name, sfVector2f pos, sfVector2f scale)
     return (obj);
 }
 
-
 object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
 {
     object *objet = malloc(sizeof(object));

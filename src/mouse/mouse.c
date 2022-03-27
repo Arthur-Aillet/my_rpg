@@ -15,7 +15,7 @@ sfVector2f get_global_mouse_pos(sfRenderWindow *window)
 {
     return (sfRenderWindow_mapPixelToCoords(window,
     sfMouse_getPositionRenderWindow(window), sfRenderWindow_getView(window)));
- }
+}
 
 void update_mouse_cursor(sfRenderWindow *window, object *mouse)
 {

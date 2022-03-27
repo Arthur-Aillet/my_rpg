@@ -30,13 +30,13 @@ int game_loop(int ac, char **av)
     button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(bouton_test, "This is some exemple texte", find_font("Ancient.ttf", font), 40);
     button_setup_sounds(bouton_test, find_sound("hover.ogg", sound), find_sound("click.ogg", sound), 10);
-    button_setup_offset(bouton_test, (sfFloatRect){0,0,1.1,1.1}, (sfFloatRect) {1,1,1,1});
+    button_setup_offset(bouton_test, VCF{1.1, 1.1}, VCF{1.3, 1.3});
 
     button_t *bouton_test_2 = button_create(VCF{2, 1}, VCF{1200, 300}, true);
     button_setup_texture(bouton_test_2, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(bouton_test_2, "This is some exemple texte", find_font("Ancient.ttf", font), 40);
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", sound), find_sound("hover.ogg", sound), 10);
-    button_setup_offset(bouton_test_2, (sfFloatRect){0,10,1.05,1.05}, (sfFloatRect) {0,20,1,1});
+    button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
 
     if (window == NULL)
         return 84;
@@ -47,8 +47,8 @@ int game_loop(int ac, char **av)
         get_events(window->window, keys);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
-        display_button(window->window, bouton_test, keys);
-        display_button(window->window, bouton_test_2, keys);
+        update_button(window->window, bouton_test_2, keys);
+        update_button(window->window, bouton_test, keys);
         update_mouse_cursor(window->window, mouse);
         sfRenderWindow_drawSprite(window->window, cursor->sprite, NULL);
         sfRenderWindow_display(window->window);

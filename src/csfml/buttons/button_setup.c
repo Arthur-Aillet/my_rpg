@@ -19,8 +19,8 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
 
     bouton->display_text = display_text;
     bouton->sprite = sfSprite_create();
-    bouton->displacement_hover = (sfFloatRect) {0, 0, 1, 1};
-    bouton->displacement_click = (sfFloatRect) {0, 0, 1, 1};
+    bouton->scale_hover = VCF{1, 1};
+    bouton->scale_click = VCF{1, 1};
     bouton->click = NULL;
     bouton->hover = NULL;
     bouton->click_buf = NULL;
@@ -52,8 +52,8 @@ void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name)
     else
         sfSprite_setTextureRect(bouton->sprite, size);
     rect = sfSprite_getGlobalBounds(bouton->sprite);
-    sfSprite_setOrigin(bouton->sprite,
-    (sfVector2f){rect.width / 2 / sfSprite_getScale(bouton->sprite).x, rect.height / 2 / sfSprite_getScale(bouton->sprite).y});
+    sfSprite_setOrigin(bouton->sprite, VCF{rect.width / 2 / sfSprite_getScale(
+    bouton->sprite).x, rect.height / 2 / sfSprite_getScale(bouton->sprite).y});
 }
 
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size)
@@ -75,9 +75,9 @@ void button_setup_text(button_t *bouton, char *text, sfFont *font, int size)
         sfText_setFont((*bouton).text.text, (*bouton).text.font);
         if (text != NULL)
             sfText_setString((*bouton).text.text, text);
+        sfText_setCharacterSize((*bouton).text.text, size);
+        button_center_text(bouton);
     }
-    sfText_setCharacterSize((*bouton).text.text, size);
-    button_center_text(bouton);
 }
 
 void button_setup_sounds_file(button_t *but, char *hover, char *click, int vol)

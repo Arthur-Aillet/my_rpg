@@ -33,7 +33,7 @@ void fill_sounds(DIR *fd, sound_t **sounds, char *name, struct dirent *dir)
         if (dir == NULL)
             conti = 0;
         if (dir != NULL && dir->d_name[0] != '.') {
-            name = malloc(sizeof(char) * (13 + my_strlen(dir->d_name)));
+            name = malloc(sizeof(char) * (14 + my_strlen(dir->d_name)));
             name = my_strcpy(name, "assets/sound/");
             name = my_strcat(name, dir->d_name);
             sounds[number] = malloc(sizeof(sound_t));

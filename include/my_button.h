@@ -15,8 +15,8 @@
     #include "my_text.h"
 
 typedef struct button_s {
-    sfFloatRect displacement_hover;
-    sfFloatRect displacement_click;
+    sfVector2f scale_hover;
+    sfVector2f scale_click;
     text_t text;
     bool display_text;
     sfSprite *sprite;
@@ -37,9 +37,10 @@ void button_setup_text(button_t *bouton, char *text, sfFont *font, int size);
 void button_setup_sounds_file(button_t *but, char *click, char *hover, int vol);
 void button_center_text(button_t *bouton);
 void button_update_state(sfVector2f mouse_pos, button_t *but, int *keys);
-void display_button(sfRenderWindow *window, button_t *but, int *keys);
+void display_button(sfRenderWindow *window, button_t *but);
+void update_button(sfRenderWindow *window, button_t *but, int *keys);
 void destroy_button(button_t bouton);
 void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vo);
-void button_setup_offset(button_t *bouton, sfFloatRect hover, sfFloatRect clic);
+void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click);
 
 #endif

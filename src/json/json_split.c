@@ -6,6 +6,20 @@
 */
 
 #include <stdlib.h>
+#include "my.h"
+
+int skip_brackets(char *str, int force_entry)
+{
+    int status = str[0] == '{' || force_entry;
+    int output = 0;
+
+    for (int i = 1; str[i] && status > 0; i++) {
+        status += str[i] == '{';
+        status -= str[i] == '}';
+        output = i;
+    }
+    return output;
+}
 
 int word_count(char *str, char separator, int let_brackets)
 {
@@ -47,37 +61,24 @@ int next_closing_bracket(char *str, int level)
     return output + 1;
 }
 
-int skip_brackets(char *str, int force_entry)
-{
-    int status = str[0] == '{' || force_entry;
-    int output = 0;
-
-    for (int i = 1; str[i] && status > 0; i++) {
-        status += str[i] == '{';
-        status -= str[i] == '}';
-        output = i;
-    }
-    return output;
-}
-
 char **json_split(char *str, char separator, int let_brackets)
 {
     int count = word_count(str, separator, let_brackets);
     int offset = 0;
     int len = 0;
+    int bufferlen = my_strlen(str);
     char **output = malloc(sizeof(char *) * (count + 1));
 
     for (; str[offset] == separator; offset++);
     output[count] = NULL;
     for (int i = 0; i < count; i++) {
         len = word_len(&(str[offset]), separator, let_brackets);
-        printf("char étant %c\n", str[offset + len]);
         output[i] = malloc(sizeof(char) * (len + 1));
         for (int j = 0; j < len; j++)
             output[i][j] = str[j + offset];
         output[i][len] = '\0';
-        offset += len + 1;//word_len(output[i], separator, let_brackets) + 1;
-        for (; str[offset] == separator; offset++);
+        offset += len;
+        for (; str[offset] == separator && offset < bufferlen; offset++);
     }
     return output;
 }

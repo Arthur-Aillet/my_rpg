@@ -36,6 +36,7 @@ void count_malloc_each_type(json_obj_t *obj, char **buffers);
 char *select_to_comma(char *buffer);
 int skip_brackets(char *str, int force_entry);
 int next_closing_bracket(char *str, int level);
+void print_raw_data(json_obj_t *obj, int tab);
 char **json_split(char *str, char separator, int let_brackets);
 
 #endif

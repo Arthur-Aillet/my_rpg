@@ -9,7 +9,8 @@
             "obj2truc": 5,
             "obj2field4": "obj2text with spaces test",
             "third_obj": {
-                "obj3_field": "mama ça marche"
+                "obj3_field": "mama ça marche",
+                "obj3_doublon": "mama ça marche"
             }
         },
         "field4": "text with spaces test"

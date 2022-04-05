@@ -62,21 +62,25 @@ char *select_to_comma(char *buffer)
     return output;
 }
 
-void print_raw_data(json_obj_t *obj)
+void print_raw_data(json_obj_t *obj, int tab)
 {
-    my_printf("[%s/STR]\n", obj->name);
+    char *tabs = malloc(sizeof(char) * (tab * 4 + 1));
+
+    for (int i = 0; i < tab * 4; i++)
+        tabs[i] = ' ';
+    tabs[tab * 4] = '\0';
+    my_printf("%s[%s/STR]\n", tabs, obj->name);
     for (int i = 0; obj->fields_str[i]; i++)
-        my_printf("%s: %s\n", obj->fields_str[i], obj->data_str[i]);
-    write(1, "\n", 1);
-    my_printf("[%s/INT]\n", obj->name);
+        my_printf("%s  %s: %s\n", tabs, obj->fields_str[i], obj->data_str[i]);
+    my_printf("%s[%s/INT]\n", tabs, obj->name);
     for (int i = 0; obj->fields_int[i]; i++)
-        my_printf("%s: %i\n", obj->fields_int[i], obj->data_int[i]);
-    write(1, "\n", 1);
+        my_printf("%s  %s: %i\n", tabs, obj->fields_int[i], obj->data_int[i]);
+    my_printf("%s[%s/OBJ]\n", tabs, obj->name);
     for (int i = 0; obj->fields_obj[i]; i++) {
-        my_printf("%s:\n\n", obj->fields_obj[i]);
-        print_raw_data(&(obj->data_obj[i]));
+        my_printf("%s%s:\n", tabs, obj->fields_obj[i]);
+        print_raw_data(&(obj->data_obj[i]), tab + 1);
     }
-    write(1, "end\n\n", 5);
+    free(tabs);
 }
 
 void extract_fields_data(json_obj_t *obj, char *buffer)
@@ -100,7 +104,6 @@ void extract_fields_data(json_obj_t *obj, char *buffer)
 
 json_obj_t *extract_obj(char *buffer, int begin)
 {
-    int text_len = object_chars_len(buffer + begin);
     char *temp = NULL;
     json_obj_t *obj = malloc(sizeof(json_obj_t));
 

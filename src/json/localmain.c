@@ -16,6 +16,6 @@ int main(void)
     //printf("%s\nobj len : %d\ninquotes : %s\n\n", buffer, object_chars_len(buffer), select_by_quotes(buffer));
     json_obj_t *obj = extract_obj(buffer, 0);
     free(buffer);
-    print_raw_data(obj);
+    print_raw_data(obj, 0);
     return 0;
 }

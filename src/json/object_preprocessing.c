@@ -66,6 +66,10 @@ void print_raw_data(json_obj_t *obj, int tab)
 {
     char *tabs = malloc(sizeof(char) * (tab * 4 + 1));
 
+    if (obj == NULL) {
+        free(tabs);
+        return;
+    }
     for (int i = 0; i < tab * 4; i++)
         tabs[i] = ' ';
     tabs[tab * 4] = '\0';
@@ -83,23 +87,22 @@ void print_raw_data(json_obj_t *obj, int tab)
     free(tabs);
 }
 
-void extract_fields_data(json_obj_t *obj, char *buffer)
+int extract_fields_data(json_obj_t *obj, char *buffer)
 {
     char *local_buffer = my_strdup(buffer);
     char **fields = NULL;
 
     local_buffer[next_closing_bracket(local_buffer, 1)] = '\0';
-    printf("running on buffer %s\n\n", local_buffer);
+    if (verify_quotes(local_buffer))
+        return 1;
     fields = json_split(local_buffer, ',', 1);
-    for (int i = 0; fields[i]; i++)
-        printf("field %d = %s\n", i, fields[i]);
-    printf("\n\n");
     count_malloc_each_type(obj, fields);
     extract_str_fields(obj, fields);
     extract_obj_fields(obj, fields);
     extract_int_fields(obj, fields);
     my_free_array(fields);
     free(local_buffer);
+    return 0;
 }
 
 json_obj_t *extract_obj(char *buffer, int begin)
@@ -109,12 +112,13 @@ json_obj_t *extract_obj(char *buffer, int begin)
 
     buffer += begin;
     temp = select_by_quotes(buffer);
-    if (temp == NULL) {
+    if (temp == NULL || unexpected_eol(temp, 0)) {
         write(2, "[JSON/extract_obj] Invalid object title.\n", 43);
         return NULL;
     }
     obj->name = temp;
     for (; buffer[0] != '{' && buffer[0] != '\0'; buffer++);
-    extract_fields_data(obj, buffer + 1);
+    if (extract_fields_data(obj, buffer + 1))
+        return NULL;
     return obj;
 }

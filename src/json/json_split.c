@@ -18,6 +18,8 @@ int skip_brackets(char *str, int force_entry)
         status -= str[i] == '}';
         output = i;
     }
+    if (!str[output])
+        return -1;
     return output;
 }
 
@@ -31,8 +33,8 @@ int word_count(char *str, char separator, int let_brackets)
             result += 1;
         while (str[i] == separator)
             i++;
-        if (str[i] == '\0')
-            return result - 1;
+        //if (str[i] == '\0')
+        //    return result - 1;
     }
     return result;
 }

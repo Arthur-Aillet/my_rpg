@@ -109,6 +109,10 @@ json_obj_t *extract_obj(char *buffer, int begin)
 
     buffer += begin;
     temp = select_by_quotes(buffer);
+    if (temp == NULL) {
+        write(2, "[JSON/extract_obj] Invalid object title.\n", 43);
+        return NULL;
+    }
     obj->name = temp;
     for (; buffer[0] != '{' && buffer[0] != '\0'; buffer++);
     extract_fields_data(obj, buffer + 1);

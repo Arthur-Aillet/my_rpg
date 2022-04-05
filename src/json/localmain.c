@@ -17,5 +17,7 @@ int main(void)
     json_obj_t *obj = extract_obj(buffer, 0);
     free(buffer);
     print_raw_data(obj, 0);
+    free_json(obj);
+    free(obj);
     return 0;
 }

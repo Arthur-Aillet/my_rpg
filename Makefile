@@ -12,6 +12,7 @@ SRC			=	src/json/file_gestion.c			\
 				src/json/object_preprocessing.c	\
 				src/json/extract_fields.c		\
 				src/json/json_split.c			\
+				src/json/free_json.c			\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

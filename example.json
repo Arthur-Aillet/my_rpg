@@ -3,6 +3,15 @@
         "field1": "rabbit",
         "field2": "carrot",
         "truc": 1,
+        "second_object": {
+            "obj2field1": "obj2rabbit",
+            "obj2field2": "obj2carrot",
+            "obj2truc": 5,
+            "obj2field4": "obj2text with spaces test",
+            "third_obj": {
+                "obj3_field": "mama ça marche"
+            }
+        },
         "field4": "text with spaces test"
     }
 }

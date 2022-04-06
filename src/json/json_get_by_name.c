@@ -6,5 +6,28 @@
 */
 
 #include "json.h"
+#include "my.h"
 
-int get_int_by_name()
+int get_int_by_name(json_obj_t *obj, char *name)
+{
+    for (int i = 0; obj->fields_int[i]; i++)
+        if (my_strcmp(name, obj->fields_int[i]) == 0)
+            return obj->data_int[i];
+    return 0;
+}
+
+char *get_str_by_name(json_obj_t *obj, char *name)
+{
+    for (int i = 0; obj->fields_str[i]; i++)
+        if (my_strcmp(name, obj->fields_str[i]) == 0)
+            return obj->data_str[i];
+    return NULL;
+}
+
+json_obj_t *get_obj_by_name(json_obj_t *obj, char *name)
+{
+    for (int i = 0; obj->fields_obj[i]; i++)
+        if (my_strcmp(name, obj->fields_obj[i]) == 0)
+            return &(obj->data_obj[i]);
+    return NULL;
+}

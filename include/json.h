@@ -24,7 +24,7 @@ typedef struct json_object_s {
 } json_obj_t;
 
 char *get_file_content(char *path);
-void json_preprocessing(char *buffer);
+int json_preprocessing(char *buffer);
 int object_chars_len(char *buffer);
 char *select_by_quotes(char *buffer);
 int get_field_type(char *buffer);
@@ -41,5 +41,6 @@ char **json_split(char *str, char separator, int let_brackets);
 void free_json(json_obj_t *obj);
 int unexpected_eol(char *str, int line);
 int verify_quotes(char *str);
+int verify_brackets(char *str);
 
 #endif

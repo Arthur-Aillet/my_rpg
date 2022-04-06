@@ -25,7 +25,8 @@ char *get_file_content(char *path)
         fread(buffer, sizeof(char), size, fd);
         buffer[size] = '\0';
         fclose(fd);
-        json_preprocessing(buffer);
+        if (json_preprocessing(buffer))
+            return NULL;
         return buffer;
     }
     write(2, "[JSON/get_file_content()] File does not exists !\n", 49);

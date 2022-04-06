@@ -113,7 +113,7 @@ json_obj_t *extract_obj(char *buffer, int begin)
     buffer += begin;
     temp = select_by_quotes(buffer);
     if (temp == NULL || unexpected_eol(temp, 0)) {
-        write(2, "[JSON/extract_obj] Invalid object title.\n", 43);
+        write(2, "[JSON/extract_obj] Invalid object title.\n", 41);
         return NULL;
     }
     obj->name = temp;

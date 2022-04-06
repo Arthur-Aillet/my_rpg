@@ -40,3 +40,17 @@ int verify_quotes(char *str)
         my_printf("[JSON] ERROR: odd number of quotes.\n");
     return (count % 2);
 }
+
+int verify_brackets(char *str)
+{
+    int open = 0;
+    int close = 0;
+
+    for (int i = 0; str[i]; i++) {
+        open += str[i] == '{';
+        close += str[i] == '}';
+    }
+    if (close != open)
+        my_printf("[JSON] ERROR: Unclosed brackets in file.\n");
+    return (close != open);
+}

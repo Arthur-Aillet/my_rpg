@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "my.h"
+#include "json.h"
 
 void json_to_one_line(char *buffer)
 {
@@ -57,9 +58,12 @@ void remove_side_curly_brackets(char *buffer)
     }
 }
 
-void json_preprocessing(char *buffer)
+int json_preprocessing(char *buffer)
 {
     json_no_spaces(buffer);
     json_to_one_line(buffer);
+    if (verify_brackets(buffer))
+        return 1;
     remove_side_curly_brackets(buffer);
+    return 0;
 }

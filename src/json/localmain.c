@@ -13,6 +13,9 @@
 int main(void)
 {
     char *buffer = get_file_content("example.json");
+
+    if (buffer == NULL)
+        return 84;
     //printf("%s\nobj len : %d\ninquotes : %s\n\n", buffer, object_chars_len(buffer), select_by_quotes(buffer));
     json_obj_t *obj = extract_obj(buffer, 0);
     free(buffer);

@@ -10,7 +10,7 @@
 
 /*
 Returns this data type accessed by its name.
-Returns NULL no data is linked to this name
+Returns 0 if no data is linked to this name
 If 2 or more occurences of this name is found in this type, only the
 first found is returned.
 */
@@ -24,7 +24,7 @@ int get_int_by_name(json_obj_t *obj, char *name)
 
 /*
 Returns this data type accessed by its name.
-Returns NULL no data is linked to this name
+Returns NULL if no data is linked to this name
 If 2 or more occurences of this name is found in this type, only the
 first found is returned.
 */
@@ -38,7 +38,7 @@ char *get_str_by_name(json_obj_t *obj, char *name)
 
 /*
 Returns this data type accessed by its name.
-Returns NULL no data is linked to this name
+Returns NULL if no data is linked to this name
 If 2 or more occurences of this name is found in this type, only the
 first found is returned.
 */

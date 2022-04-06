@@ -16,6 +16,7 @@ SRC			=	src/json/generate/file_gestion.c			\
 				src/json/use/free_json.c					\
 				src/json/use/json_get_by_name.c				\
 				src/json/use/json_get_by_index.c			\
+				src/json/use/json_display_obj.c				\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

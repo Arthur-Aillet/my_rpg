@@ -10,17 +10,25 @@
 #include "json.h"
 #include "my.h"
 
-int main(void)
+json_obj_t *create_json_object(char *filepath)
 {
-    char *buffer = get_file_content("example.json");
+    char *buffer = get_file_content(filepath);
+    json_obj_t *obj = NULL;
 
     if (buffer == NULL)
-        return 84;
-    json_obj_t *obj = extract_obj(buffer, 0);
+        return NULL;
+    obj = extract_obj(buffer, 0);
     free(buffer);
+    return obj;
+}
+
+int main(void)
+{
+    json_obj_t *obj = create_json_object("example.json");
+
+    if (obj == NULL)
+        return 84;
     print_raw_data(obj, 0);
-    printf("\n\n");
-    print_raw_data(get_obj_by_index(obj, 0), 0);
     free_json(obj, 1);
     free(obj);
     return 0;

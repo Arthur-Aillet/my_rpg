@@ -87,24 +87,6 @@ void print_raw_data(json_obj_t *obj, int tab)
     free(tabs);
 }
 
-int extract_fields_data(json_obj_t *obj, char *buffer)
-{
-    char *local_buffer = my_strdup(buffer);
-    char **fields = NULL;
-
-    local_buffer[next_closing_bracket(local_buffer, 1)] = '\0';
-    if (verify_quotes(local_buffer))
-        return 1;
-    fields = json_split(local_buffer, ',', 1);
-    count_malloc_each_type(obj, fields);
-    extract_str_fields(obj, fields);
-    extract_obj_fields(obj, fields);
-    extract_int_fields(obj, fields);
-    my_free_array(fields);
-    free(local_buffer);
-    return 0;
-}
-
 json_obj_t *extract_obj(char *buffer, int begin)
 {
     char *temp = NULL;

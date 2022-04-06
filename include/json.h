@@ -41,6 +41,7 @@ char **json_split(char *str, char separator, int let_brackets);
 int unexpected_eol(char *str, int line);
 int verify_quotes(char *str);
 int verify_brackets(char *str);
+int extract_fields_data(json_obj_t *obj, char *buffer);
 
 void free_json(json_obj_t *obj, int recursive);
 int get_int_by_index(json_obj_t *obj, int index);

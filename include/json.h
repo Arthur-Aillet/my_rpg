@@ -38,9 +38,9 @@ int skip_brackets(char *str, int force_entry);
 int next_closing_bracket(char *str, int level);
 void print_raw_data(json_obj_t *obj, int tab);
 char **json_split(char *str, char separator, int let_brackets);
-void free_json(json_obj_t *obj);
 int unexpected_eol(char *str, int line);
 int verify_quotes(char *str);
 int verify_brackets(char *str);
 
+void free_json(json_obj_t *obj, int recursive);
 #endif

@@ -7,13 +7,14 @@
 
 MAIN		=	src/json/localmain.c			\
 
-SRC			=	src/json/file_gestion.c			\
-				src/json/str_preprocessing.c	\
-				src/json/object_preprocessing.c	\
-				src/json/extract_fields.c		\
-				src/json/json_split.c			\
-				src/json/free_json.c			\
-				src/json/json_error_handling.c	\
+SRC			=	src/json/generate/file_gestion.c			\
+				src/json/generate/str_preprocessing.c		\
+				src/json/generate/object_preprocessing.c	\
+				src/json/generate/extract_fields.c			\
+				src/json/generate/json_split.c				\
+				src/json/generate/json_error_handling.c		\
+				src/json/use/free_json.c					\
+				src/json/use/json_get_by_name.c				\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

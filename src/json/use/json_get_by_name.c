@@ -8,6 +8,12 @@
 #include "json.h"
 #include "my.h"
 
+/*
+Returns this data type accessed by its name.
+Returns NULL no data is linked to this name
+If 2 or more occurences of this name is found in this type, only the
+first found is returned.
+*/
 int get_int_by_name(json_obj_t *obj, char *name)
 {
     for (int i = 0; obj->fields_int[i]; i++)
@@ -16,6 +22,12 @@ int get_int_by_name(json_obj_t *obj, char *name)
     return 0;
 }
 
+/*
+Returns this data type accessed by its name.
+Returns NULL no data is linked to this name
+If 2 or more occurences of this name is found in this type, only the
+first found is returned.
+*/
 char *get_str_by_name(json_obj_t *obj, char *name)
 {
     for (int i = 0; obj->fields_str[i]; i++)
@@ -24,6 +36,12 @@ char *get_str_by_name(json_obj_t *obj, char *name)
     return NULL;
 }
 
+/*
+Returns this data type accessed by its name.
+Returns NULL no data is linked to this name
+If 2 or more occurences of this name is found in this type, only the
+first found is returned.
+*/
 json_obj_t *get_obj_by_name(json_obj_t *obj, char *name)
 {
     for (int i = 0; obj->fields_obj[i]; i++)

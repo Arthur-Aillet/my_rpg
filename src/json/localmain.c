@@ -16,11 +16,12 @@ int main(void)
 
     if (buffer == NULL)
         return 84;
-    //printf("%s\nobj len : %d\ninquotes : %s\n\n", buffer, object_chars_len(buffer), select_by_quotes(buffer));
     json_obj_t *obj = extract_obj(buffer, 0);
     free(buffer);
     print_raw_data(obj, 0);
-    //free_json(obj);
-    //free(obj);
+    printf("\n\n");
+    print_raw_data(get_obj_by_index(obj, 0), 0);
+    free_json(obj, 1);
+    free(obj);
     return 0;
 }

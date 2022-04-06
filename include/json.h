@@ -43,4 +43,11 @@ int verify_quotes(char *str);
 int verify_brackets(char *str);
 
 void free_json(json_obj_t *obj, int recursive);
+int get_int_by_index(json_obj_t *obj, int index);
+char *get_str_by_index(json_obj_t *obj, int index);
+json_obj_t *get_obj_by_index(json_obj_t *obj, int index);
+int get_int_by_name(json_obj_t *obj, char *name);
+char *get_str_by_name(json_obj_t *obj, char *name);
+json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
+
 #endif

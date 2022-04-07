@@ -33,6 +33,7 @@ BASIC_PATH		=			$(SRC_PATH)basic/
 
 INIT_PATH		=			$(SRC_PATH)init/
 
+
 MENU_PATH		=			$(SRC_PATH)menu/
 
 GAME_PATH		=			$(SRC_PATH)game/
@@ -50,6 +51,14 @@ CSFML_PATH		=			$(SRC_PATH)csfml/
 MATH_PATH		=			$(SRC_PATH)math/
 
 MOUSE_PATH		=			$(SRC_PATH)mouse/
+
+##=========================[INVENTORY]========================
+
+INVENTORY_PATH	=			$(SRC_PATH)inventory/
+
+##=========================[PARTICLES]========================
+
+PARTICLES_PATH = 			$(SRC_PATH)particle_system/
 
 ## =========================[BASICS]==========================
 
@@ -97,7 +106,23 @@ SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
-SRC_WINDOW		=			$(WIN_PATH)window.c					\
+SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
+							$(INVENTORY_PATH)get_keyboard_input.c	\
+							$(INVENTORY_PATH)get_positions.c		\
+							$(INVENTORY_PATH)get_slots.c			\
+							$(INVENTORY_PATH)inventory_displays.c	\
+							$(INVENTORY_PATH)inventory_events.c		\
+							$(INVENTORY_PATH)inventory_setups.c		\
+							$(INVENTORY_PATH)inventory_swaps.c		\
+							$(INVENTORY_PATH)is_adjacent_competences.c	\
+							$(INVENTORY_PATH)menu.c					\
+							$(INVENTORY_PATH)mouse.c				\
+							$(INVENTORY_PATH)pause_menu.c			\
+							$(INVENTORY_PATH)temp_main.c			\
+
+SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
+
+SRC_WINDOW		=			$(WIN_PATH)window.c						\
 
 SRC_CSFML		=			$(CSFML_PATH)object.c					\
 							$(CSFML_PATH)type_transformer.c			\
@@ -117,6 +142,8 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
+							$(SRC_INVENTORY)						\
+							$(SRC_PARTICLES)						\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\

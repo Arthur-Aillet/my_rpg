@@ -45,6 +45,12 @@ EFFECT_PATH		=			$(SRC_PATH)effect/
 
 FREE_PATH		=			$(SRC_PATH)free/
 
+CSFML_PATH		=			$(SRC_PATH)csfml/
+
+MATH_PATH		=			$(SRC_PATH)math/
+
+MOUSE_PATH		=			$(SRC_PATH)mouse/
+
 ## =========================[BASICS]==========================
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
@@ -61,7 +67,13 @@ H_MENU_PATH		=			$(MENU_PATH)menu_howtoplay/
 
 S_MENU_PATH		=			$(MENU_PATH)menu_settings/
 
-## ==========================[GAME]===========================
+## =========================[CSFML]===========================
+
+TEXT_PATH		=			$(CSFML_PATH)texts/
+
+SOUND_PATH		=			$(CSFML_PATH)sound/
+
+BUTTON_PATH		=			$(CSFML_PATH)buttons/
 
 ## ========================[MINI_GAME]========================
 
@@ -79,17 +91,35 @@ TEST_PATH		=			tests/
 
 SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
 							$(UTILS_PATH)my_help.c					\
+							$(UTILS_PATH)files_manager.c			\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
-SRC_WINDOW		=			$(WIN_PATH)my_window.c					\
+SRC_WINDOW		=			$(WIN_PATH)window.c					\
+
+SRC_CSFML		=			$(CSFML_PATH)object.c					\
+							$(CSFML_PATH)type_transformer.c			\
+							$(TEXT_PATH)text.c						\
+							$(TEXT_PATH)fonts.c						\
+							$(SOUND_PATH)sound.c					\
+							$(BUTTON_PATH)button_manage.c			\
+							$(BUTTON_PATH)button_setup.c			\
+							$(BUTTON_PATH)button_setup2.c			\
+							$(BUTTON_PATH)button_utils.c			\
+
+SRC_MATH		=			$(MATH_PATH)math.c						\
+
+SRC_MOUSE		=			$(MOUSE_PATH)mouse.c					\
 
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
-							$(SRC_EVENT)
+							$(SRC_EVENT)							\
+							$(SRC_CSFML)							\
+							$(SRC_MATH)								\
+							$(SRC_MOUSE)							\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c
@@ -102,7 +132,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 
@@ -124,7 +154,7 @@ all:	message
 		make $(NAME)
 
 $(NAME):	$(OBJ)
-		gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+		gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
 
 re:			fclean	all
 
@@ -152,15 +182,24 @@ tests_run:
 
 message:
 	@$(LINE_RETURN)
-	@$(ECHO) $(BOLD_T)$(RED_C)" ______________________________________________________________________________"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|                                                                              |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|      _     _____   ____  ____   ____    __  __ _____ _____ _____ _____       |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   | ____| |  _ \|  _ \ / ___|  |  \/  |  _  |_   _|  _  | ___ |      |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   |  _|   | |_| | |_| | | |\   | |\/| | |_| |_| | | | | |    _|      |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |___| |___  |  _  |  __/| |_| |  | |  | |  _  | | | | |_| | |\ \       |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|     |_____|_____| |_| \_\_|    \____|  |_|  |_|_| |_|\__| |_____|_| \_|      |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|                                                                              |"$(DEFAULT)
-	@$(ECHO) $(BOLD_T)$(RED_C)"|______________________________________________________________________________|"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)" _______________________________________________\
+	_______________________________"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|                                               \
+	                               |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|      _     _____   ____  ____   ____    __  __\
+	 _____ _____ _____ _____       |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   | ____| |  _ \|  _ \ / ___|  |  \/  \
+	|  _  |_   _|  _  | ___ |      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   |  _|   | |_| | |_| | | |\   | |\/| \
+	| |_| |_| | | | | |    _|      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |___| |___  |  _  |  __/| |_| |  | |  | \
+	|  _  | | | | |_| | |\ \       |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     |_____|_____| |_| \_\_|    \____|  |_|  |_\
+	|_| |_|\__| |_____|_| \_|      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|                                               \
+	                               |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|_______________________________________________\
+	_______________________________|"$(DEFAULT)
 	@$(LINE_RETURN)
 	@$(LINE_RETURN)
 
@@ -168,4 +207,5 @@ message:
 ## ===========================[END]===========================
 ## ===========================================================
 
-.PHONY:	all	re	clean	fclean	build_lib	debug	valgrind	tests_run	message
+.PHONY:	all	re	clean	fclean	build_lib	debug	valgrind	tests_run	mes\
+sage

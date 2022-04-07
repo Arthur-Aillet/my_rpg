@@ -18,11 +18,33 @@ void free_window_struct(window_t *window)
     free(window);
 }
 
+void set_correct_window_size(window_t *window)
+{
+    sfVector2u size = sfRenderWindow_getSize(window->window);
+    sfView *current_view = sfView_copy(sfRenderWindow_getView(window->window));
+    sfFloatRect rect = {0, 0, 1, 1};
+
+    if ((float) window->width / (float) window->height * size.y <= size.x) {
+        rect.width = (float) window->width / (float) window->height;
+        rect.width *= size.y;
+        rect.width /= size.x;
+    } else {
+        rect.height = (float) window->height / (float) window->width;
+        rect.height *= size.x;
+        rect.height /= size.y;
+    }
+    rect.top += (1 - rect.height) / 2;
+    rect.left += (1 - rect.width) / 2;
+    sfView_setViewport(current_view, rect);
+    sfRenderWindow_setView(window->window, current_view);
+    sfView_destroy(current_view);
+}
+
 window_t *generate_default_window(void)
 {
     window_t *window = malloc(sizeof(window_t));
 
-    window->icon_file = my_strdup("assets/img/missing.jpg");
+    window->icon_file = my_strdup("assets/img/icon.jpg");
     window->name = my_strdup("Le rpg major");
     if (window->icon_file == NULL || window->name == NULL)
         return (NULL);

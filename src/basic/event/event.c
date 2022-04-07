@@ -5,7 +5,7 @@
 ** event
 */
 
-#include "my_events.h"
+#include "my_event.h"
 
 #include <SFML/Window.h>
 #include <stdlib.h>
@@ -21,9 +21,9 @@ int *init_keys(void)
 
 void evolve_mouse(int *keys)
 {
-    if (keys[leftMouse] == press || keys[leftMouse] == release)
+    if (keys[leftMouse] == PRESS || keys[leftMouse] == RELEASED)
         keys[leftMouse] = (keys[leftMouse] + 1) % 4;
-    if (keys[rightMouse] == press || keys[rightMouse] == release)
+    if (keys[rightMouse] == PRESS || keys[rightMouse] == RELEASED)
         keys[rightMouse] = (keys[rightMouse] + 1) % 4;
 }
 
@@ -51,13 +51,13 @@ int *get_events(sfRenderWindow *window, int *keys)
         if (event.type == sfEvtClosed)
             sfRenderWindow_close(window);
         if (evntMousePressed && event.mouseButton.button == sfMouseLeft)
-            keys[leftMouse] = press;
+            keys[leftMouse] = PRESS;
         if (evntMouseReleased && event.mouseButton.button == sfMouseLeft)
-            keys[leftMouse] = release;
+            keys[leftMouse] = RELEASED;
         if (evntMousePressed && event.mouseButton.button == sfMouseRight)
-            keys[rightMouse] = press;
+            keys[rightMouse] = PRESS;
         if (evntMouseReleased && event.mouseButton.button == sfMouseRight)
-            keys[rightMouse] = release;
+            keys[rightMouse] = RELEASED;
     }
     return keys;
 }

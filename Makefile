@@ -1,57 +1,171 @@
 ##
 ## EPITECH PROJECT, 2021
-## My_Defender
+## MAKEFILE
 ## File description:
-## Makefile
+## MAKEFILE
 ##
 
-MAIN		=	src/json/localmain.c			\
+DEFAULT	=	"\e[0m"
+BOLD_T	=	"\e[1m"
+RED_C	=	"\e[31m"
+ECHO	=	/bin/echo -e
+LINE_RETURN	=	$(ECHO) ""
 
-SRC			=	src/json/generate/file_gestion.c			\
-				src/json/generate/str_preprocessing.c		\
-				src/json/generate/object_preprocessing.c	\
-				src/json/generate/extract_fields.c			\
-				src/json/generate/json_split.c				\
-				src/json/generate/json_error_handling.c		\
-				src/json/use/free_json.c					\
-				src/json/use/json_get_by_name.c				\
-				src/json/use/json_get_by_index.c			\
-				src/json/use/json_display_obj.c				\
+## ==========================================================================
+## ==========================================================================
+## ===================================[VAR]==================================
+## ==========================================================================
+## ==========================================================================
 
-MAINOBJ		=	$(MAIN:.c=.o)
-OBJ			=	$(SRC:.c=.o)
+NAME			=			my_rpg
 
-NAME		=	json_tests
+NAME_TEST		=			unit_test
 
-LIB			= 	-L. ./lib/libmy.a	\
+## ===================================================================
+## ==============================[PATHS]==============================
+## ===================================================================
 
+## ===========================[SRC]===========================
 
-CPPFLAGS	+=	-I include/
-CFLAGS		+=	-Wall -Wextra -g3
+SRC_PATH		=			src/
 
-$(NAME):		$(MAINOBJ) $(OBJ)
-				make -C lib/my/
-				gcc -o $(NAME) $(MAINOBJ) $(OBJ) $(CFLAGS) $(LIB)
+BASIC_PATH		=			$(SRC_PATH)basic/
 
-all:			$(NAME)
+INIT_PATH		=			$(SRC_PATH)init/
 
-c:				$(NAME)
-				./$(NAME)
-				mr_clean
+MENU_PATH		=			$(SRC_PATH)menu/
+
+GAME_PATH		=			$(SRC_PATH)game/
+
+MINGAME_PATH	=			$(SRC_PATH)mini_game/
+
+ANIM_PATH		=			$(SRC_PATH)animation/
+
+EFFECT_PATH		=			$(SRC_PATH)effect/
+
+FREE_PATH		=			$(SRC_PATH)free/
+
+## =========================[BASICS]==========================
+
+UTILS_PATH		=			$(BASIC_PATH)utils/
+
+EVENT_PATH		=			$(BASIC_PATH)event/
+
+WIN_PATH		=			$(BASIC_PATH)window/
+
+## ==========================[MENU]===========================
+
+M_MENU_PATH		=			$(MENU_PATH)menu_main/
+
+H_MENU_PATH		=			$(MENU_PATH)menu_howtoplay/
+
+S_MENU_PATH		=			$(MENU_PATH)menu_settings/
+
+## ==========================[GAME]===========================
+
+## ========================[MINI_GAME]========================
+
+POTION_PATH		=			$(MINGAME_PATH)potion/
+
+## ========================[ANIMATION]========================
+
+## =========================[EFFECTS]=========================
+
+TEST_PATH		=			tests/
+
+## ===================================================================
+## ===============================[SRC]===============================
+## ===================================================================
+
+SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
+							$(UTILS_PATH)my_help.c					\
+
+SRC_GAME		=			$(GAME_PATH)game_core.c					\
+
+SRC_EVENT		=			$(EVENT_PATH)event.c					\
+
+SRC_WINDOW		=			$(WIN_PATH)my_window.c					\
+
+SRC_GLOBAL		=			$(SRC_UTILS)							\
+							$(SRC_WINDOW)							\
+							$(SRC_GAME)								\
+							$(SRC_EVENT)
+
+SRC				=			$(SRC_GLOBAL)							\
+							main.c
+
+TEST_SRC		=			$(TEST_PATH)tests_error_handling.c		\
+
+OBJ				=			$(SRC:.c=.o)
+
+## ===================================================================
+## =============================[OPTIONS]=============================
+## ===================================================================
+
+CFLAGS			=			-Wall -Wextra
+
+CPPFLAGS		=			-I include
+
+LDFLAGS			=			-L lib -lmy							\
+							-lcsfml-graphics -lcsfml-system 	\
+							-lcsfml-audio -lcsfml-window		\
+							-lm									\
+
+CRIT			=			$(LDFLAGS) $(CPPFLAGS) -lcriterion --coverage
+
+## =========================================================================
+## =========================================================================
+## =================================[RULES]=================================
+## =========================================================================
+## =========================================================================
+
+all:	message
+		make re -C lib/my
+		make $(NAME)
+
+$(NAME):	$(OBJ)
+		gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+
+re:			fclean	all
 
 clean:
-				rm -f $(OBJ) $(MAINOBJ)
-				rm -f criterion_test
+		make clean -C lib/my
+		rm -rf $(OBJ)
 
-fclean: 		clean
-				rm -f $(NAME)
+fclean:		clean
+		make fclean -C lib/my
+		rm -rf $(NAME)
+		rm -rf $(NAME_TEST)
+		rm -rf *gcda
+		rm -rf *gcno
 
-re: 			fclean all
+build_lib:
+
+debug:
+
+valgrind:
 
 tests_run:
-				make -C lib/
-				gcc -o criterion_test tests/tests.c $(TESTS) --coverage \
-				-lcriterion -L. ./lib/lib.a
-				./criterion_test
+	make re -C lib/my
+	gcc -o $(NAME_TEST) $(SRC_GLOBAL) $(SRC_TEST) $(TEST_SRC) $(CRIT)
+	./$(NAME_TEST)
 
-.PHONY	=		all clean fclean re tests_run
+message:
+	@$(LINE_RETURN)
+	@$(ECHO) $(BOLD_T)$(RED_C)" ______________________________________________________________________________"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|                                                                              |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|      _     _____   ____  ____   ____    __  __ _____ _____ _____ _____       |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   | ____| |  _ \|  _ \ / ___|  |  \/  |  _  |_   _|  _  | ___ |      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |   |  _|   | |_| | |_| | | |\   | |\/| | |_| |_| | | | | |    _|      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     | |___| |___  |  _  |  __/| |_| |  | |  | |  _  | | | | |_| | |\ \       |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|     |_____|_____| |_| \_\_|    \____|  |_|  |_|_| |_|\__| |_____|_| \_|      |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|                                                                              |"$(DEFAULT)
+	@$(ECHO) $(BOLD_T)$(RED_C)"|______________________________________________________________________________|"$(DEFAULT)
+	@$(LINE_RETURN)
+	@$(LINE_RETURN)
+
+## ===========================================================
+## ===========================[END]===========================
+## ===========================================================
+
+.PHONY:	all	re	clean	fclean	build_lib	debug	valgrind	tests_run	message

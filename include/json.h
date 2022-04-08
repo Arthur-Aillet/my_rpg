@@ -43,13 +43,19 @@ int verify_quotes(char *str);
 int verify_brackets(char *str);
 int extract_fields_data(json_obj_t *obj, char *buffer);
 
+json_obj_t *create_json_object(char *filepath);
 void free_json(json_obj_t *obj, int recursive);
 int get_int_by_index(json_obj_t *obj, int index);
+    #define gibi(obj, index) get_int_by_index(obj, index)
 char *get_str_by_index(json_obj_t *obj, int index);
+    #define gsbi(obj, index) get_str_by_index(obj, index)
 json_obj_t *get_obj_by_index(json_obj_t *obj, int index);
+    #define gobi(obj, index) get_obj_by_index(obj, index)
 int get_int_by_name(json_obj_t *obj, char *name);
+    #define gibn(obj, name) get_int_by_name(obj, name)
 char *get_str_by_name(json_obj_t *obj, char *name);
+    #define gsbn(obj, name) get_str_by_name(obj, name)
 json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
-json_obj_t *create_json_object(char *filepath);
+    #define gobn(obj, name) get_obj_by_name(obj, name)
 
 #endif

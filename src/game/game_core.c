@@ -15,9 +15,15 @@
 #include "my_button.h"
 #include "my_event.h"
 #include "my_csfml_utils.h"
+#include "inventory_structures.h"
+
+struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
+struct item *create_items(void);
 
 int game_loop(int ac, char **av)
 {
+        struct item *items = create_items();
+        struct competences comp = {0, 0};
     window_t *window = generate_default_window();
     font_t **font = font_create_array();
     sound_t **sound = sounds_create_array();
@@ -45,6 +51,8 @@ int game_loop(int ac, char **av)
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
+        if (keys[sfKeyEscape] == PRESS)
+            menu(window->window, items, comp, (char *) keys);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

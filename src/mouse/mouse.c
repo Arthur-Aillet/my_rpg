@@ -20,6 +20,8 @@ sfVector2f get_global_mouse_pos(sfRenderWindow *window)
 void update_mouse_cursor(sfRenderWindow *window, object *mouse)
 {
     sfVector2f mouse_pos = get_global_mouse_pos(window);
+
     sfSprite_setPosition(mouse->sprite, mouse_pos);
     sfRenderWindow_drawSprite(window, mouse->sprite, NULL);
+    printf("x = %f, y = %f\n", mouse_pos.x, mouse_pos.y);
 }

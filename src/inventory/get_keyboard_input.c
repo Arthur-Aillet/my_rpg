@@ -7,6 +7,7 @@
 
 #include "csfml_libs.h"
 #include "keyboard.h"
+#include "my.h"
 
 #include <stdlib.h>
 

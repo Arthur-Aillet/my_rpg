@@ -18,7 +18,6 @@
     #define CHEST 2
     #define LEGS 3
     #define FEET 4
-    #define ABS(x) ((x < 0) ? (-x) : (x))
     #define BIG(x, y) ((x < y) ? (y) : (x))
     #define SMALL(x, y) ((x < y) ? (x) : (y))
     #define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))

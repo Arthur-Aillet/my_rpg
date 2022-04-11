@@ -106,6 +106,8 @@ SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
+SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
+
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
 							$(INVENTORY_PATH)get_keyboard_input.c	\
 							$(INVENTORY_PATH)get_positions.c		\
@@ -142,6 +144,7 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
+							$(SRC_POTION)							\
 							$(SRC_INVENTORY)						\
 							$(SRC_PARTICLES)						\
 							$(SRC_CSFML)							\

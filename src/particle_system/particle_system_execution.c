@@ -8,6 +8,7 @@
 #include "csfml_libs.h"
 #include "particles_structures.h"
 #include "inventory_macros.h"
+#include "my.h"
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -15,6 +15,7 @@
 #include "my_button.h"
 #include "my_event.h"
 #include "my_csfml_utils.h"
+#include "potions.h"
 #include "inventory_structures.h"
 
 struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
@@ -47,12 +48,14 @@ int game_loop(int ac, char **av)
     if (window == NULL)
         return 84;
     create_windows(window);
-    while(sfRenderWindow_isOpen(window->window)) {
+    while (sfRenderWindow_isOpen(window->window)) {
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
+        if (keys[sfKeyP] == PRESS)
+            potions_loop(window, keys, mouse);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

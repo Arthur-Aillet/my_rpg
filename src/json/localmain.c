@@ -17,6 +17,11 @@ int main(void)
     if (obj == NULL)
         return 84;
     print_raw_data(obj, 0);
+    printf("\n\n");
+    edit_int_by_name(obj, "truc", 5556);
+    edit_str_by_name(obj, "field2", "moop");
+    edit_str_by_name(get_obj_by_name(obj, "second_object"), "obj2field2", "moop second");
+    print_raw_data(obj, 0);
     free_json(obj, 1);
     free(obj);
     return 0;

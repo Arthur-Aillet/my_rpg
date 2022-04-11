@@ -13,10 +13,11 @@ SRC			=	src/json/generate/file_gestion.c			\
 				src/json/generate/extract_fields.c			\
 				src/json/generate/json_split.c				\
 				src/json/generate/json_error_handling.c		\
-				src/json/use/free_json.c					\
-				src/json/use/json_get_by_name.c				\
-				src/json/use/json_get_by_index.c			\
-				src/json/use/json_display_obj.c				\
+				src/json/use/get/json_get_by_name.c			\
+				src/json/use/get/json_get_by_index.c		\
+				src/json/use/get/json_display_obj.c			\
+				src/json/use/edit/free_json.c				\
+				src/json/use/edit/json_edit_by_name.c		\
 				src/json/use/json_main.c					\
 
 MAINOBJ		=	$(MAIN:.c=.o)

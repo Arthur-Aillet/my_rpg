@@ -58,4 +58,8 @@ char *get_str_by_name(json_obj_t *obj, char *name);
 json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
     #define gobn(obj, name) get_obj_by_name(obj, name)
 
+void edit_int_by_name(json_obj_t *obj, char *name, int value);
+void edit_str_by_name(json_obj_t *obj, char *name, char *value);
+void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t value);
+
 #endif

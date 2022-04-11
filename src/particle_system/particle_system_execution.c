@@ -92,6 +92,7 @@ struct particle *add_particle(struct particle *first, sfVector2f pos, int type, 
 struct particle *spark(sfRenderWindow *window, struct particle *part, object **sprites)
 {
     float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
+    float decay = (float)(rand() % 7 - 3) / 100;
 
     if (part->age <= 0) {
         part->trajectory.x = log2f(random * random);
@@ -100,6 +101,8 @@ struct particle *spark(sfRenderWindow *window, struct particle *part, object **s
         if (rand() % 2 == 0)
             part->trajectory.x *= -1;
     }
+    part->trajectory.x *= 0.98 + decay;
+    part->trajectory.y *= 0.98 + decay;
     part->velocity.x = part->pos.x + (part->trajectory.x);
     part->velocity.y = part->pos.y + (part->trajectory.y);
     part->pos = part->velocity;

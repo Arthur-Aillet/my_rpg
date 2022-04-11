@@ -40,7 +40,7 @@ int get_part_deathtime(int type)
         case (9) : return (rand() % 50 + 100);
         case (10) : return (rand() % 50 + 100);
         case (11) : return (rand() % 50 + 100);
-        case (12) : return (50);
+        case (12) : return (rand() % 25 + 50);
     }
     return (1);
 }
@@ -91,14 +91,17 @@ struct particle *add_particle(struct particle *first, sfVector2f pos, int type, 
 
 struct particle *spark(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
-    if (part->age <= 0) {
-        part->trajectory.x = random;
-        part->trajectory.y = (part->speed - random) * -1;
+    if (part->age <= part->speed) {
+        part->trajectory.x = log2f(random * random);
+        part->trajectory.y = log2f(part->speed - ABS(random)) * 2;
+        part->trajectory.y *= -1;
         if (rand() % 2 == 0)
             part->trajectory.x *= -1;
     }
+    part->trajectory.x *= 0.98;
+    part->trajectory.y *= 0.98;
     part->velocity.x = part->pos.x + (part->trajectory.x);
     part->velocity.y = part->pos.y + (part->trajectory.y);
     part->pos = part->velocity;
@@ -110,7 +113,7 @@ struct particle *spark(sfRenderWindow *window, struct particle *part, object **s
 
 struct particle *dust_ul(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % (part->speed * 2 + 1) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
     part->age += 1;
     part->trajectory.x -= part->speed / 2 + random;
@@ -127,7 +130,7 @@ struct particle *dust_left(sfRenderWindow *window, struct particle *part, object
 {
     part->age += 1;
     part->trajectory.x -= part->speed;
-    part->trajectory.y += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.y += fmod(rand(), (part->speed * 2 + 1)) - part->speed;
     part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
     part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
     part->pos = part->velocity;
@@ -138,7 +141,7 @@ struct particle *dust_left(sfRenderWindow *window, struct particle *part, object
 
 struct particle *dust_dl(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % (part->speed * 2 + 1) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
     part->age += 1;
     part->trajectory.x -= part->speed / 2 + random;
@@ -154,7 +157,7 @@ struct particle *dust_dl(sfRenderWindow *window, struct particle *part, object *
 struct particle *dust_down(sfRenderWindow *window, struct particle *part, object **sprites)
 {
     part->age += 1;
-    part->trajectory.x += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.x += fmod(rand(), (part->speed * 2 + 1)) - part->speed;
     part->trajectory.y += part->speed;
     part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
     part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
@@ -166,7 +169,7 @@ struct particle *dust_down(sfRenderWindow *window, struct particle *part, object
 
 struct particle *dust_dr(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % (part->speed * 2 + 1) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
     part->age += 1;
     part->trajectory.x += part->speed / 2 + random;
@@ -183,7 +186,7 @@ struct particle *dust_right(sfRenderWindow *window, struct particle *part, objec
 {
     part->age += 1;
     part->trajectory.x += part->speed;
-    part->trajectory.y += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.y += fmod(rand(), (part->speed * 2 + 1)) - part->speed;
     part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
     part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
     part->pos = part->velocity;
@@ -194,7 +197,7 @@ struct particle *dust_right(sfRenderWindow *window, struct particle *part, objec
 
 struct particle *dust_ur(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % (part->speed * 2 + 1) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
     part->age += 1;
     part->trajectory.x += part->speed / 1 + random;
@@ -210,7 +213,7 @@ struct particle *dust_ur(sfRenderWindow *window, struct particle *part, object *
 struct particle *dust_up(sfRenderWindow *window, struct particle *part, object **sprites)
 {
     part->age += 1;
-    part->trajectory.x += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.x += fmod(rand(), (part->speed * 2 + 1)) - part->speed;
     part->trajectory.y -= part->speed;
     part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
     part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
@@ -222,7 +225,7 @@ struct particle *dust_up(sfRenderWindow *window, struct particle *part, object *
 
 struct particle *dust_circle(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    float random = rand() % (part->speed * 2 + 1) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
     if (part->age <= part->speed) {
         part->trajectory.x = log2f(random * random);
@@ -246,8 +249,8 @@ struct particle *dust_circle(sfRenderWindow *window, struct particle *part, obje
 struct particle *fire(sfRenderWindow *window, struct particle *part, object **sprites)
 {
     part->age += 1;
-    part->trajectory.x += rand() % (part->speed + 1) - part->speed / 2;
-    part->trajectory.y += (rand() % (part->speed)) - part->speed / 1.9;
+    part->trajectory.x += fmod(rand(), (part->speed + 1)) - part->speed / 2;
+    part->trajectory.y += fmod(rand(), (part->speed)) - part->speed / 1.9;
     part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
     part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
     part->pos = part->velocity;
@@ -267,7 +270,7 @@ struct particle *rain(sfRenderWindow *window, struct particle *part, object **sp
 
 struct particle *snow(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int random = rand() % part->speed * 3 / 2;
+    float random = fmod(rand(), part->speed) * 3 / 2;
 
     if (rand() % 2 == 0)
         random *= -1;

@@ -8,7 +8,7 @@
 #ifndef JSON_H
     #define JSON_H
 
-// plutot que de faire une liste chainneé d'objets il vaudrait mieux
+// plutôt que de faire une liste chaineé d'objets il vaudrait mieux
 // vraiment faire un tableau, ça leur permettera de mieux naviguer dans les
 // objets. ça n'empeche pas de faire des fonctions pour trouver les objets
 // par nom !

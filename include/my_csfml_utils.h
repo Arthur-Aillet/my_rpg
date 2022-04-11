@@ -15,12 +15,10 @@
     #define VCU (sfVector2u)
     #define VCI (sfVector2i)
 
-
 typedef struct object_s {
     sfSprite *sprite;
     sfTexture *texture;
 } object;
-
 
 sfVector2f itofv2(sfVector2i vector);
 sfVector2i ftoiv2(sfVector2f vector);

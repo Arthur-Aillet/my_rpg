@@ -52,16 +52,16 @@ object **setup_part_sprites(void)
 
     result[0] = create_object("assets/img/snowflake.png", none, none);
     result[1] = create_object("assets/img/raindrop.png", none, none);
-    result[2] = create_object("assets/img/flame.png", none, none);
+    result[2] = create_object("assets/img/flame.png", none, VCF{1.4, 1.4});
     result[3] = create_object("assets/img/cloud.png", none, none);
     result[4] = result[3];
     result[5] = result[3];
     result[6] = result[3];
     result[7] = result[3];
-    result[8] = result[3];
-    result[9] = result[3];
-    result[10] = result[3];
-    result[11] = result[3];
+    result[8] = create_object("assets/img/flame.png", none, VCF{1.6, 1.6});
+    result[9] = result[8];
+    result[10] = result[8];
+    result[11] = result[8];
     result[12] = result[2];
     return (result);
 }

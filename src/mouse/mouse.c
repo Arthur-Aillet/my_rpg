@@ -23,5 +23,4 @@ void update_mouse_cursor(sfRenderWindow *window, object *mouse)
 
     sfSprite_setPosition(mouse->sprite, mouse_pos);
     sfRenderWindow_drawSprite(window, mouse->sprite, NULL);
-    printf("x = %f, y = %f\n", mouse_pos.x, mouse_pos.y);
 }

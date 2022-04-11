@@ -6,37 +6,19 @@
 */
 
 #include "inventory_structures.h"
+#include "my_csfml_utils.h"
 #include <stdlib.h>
 
-static struct object setup_select(void)
+static object **setup_pages(void)
 {
-    struct object result;
-    sfSprite *mouse = sfSprite_create();
-    sfTexture *tex = sfTexture_createFromFile("sprites/select.png", NULL);
-
-    result.sprite = mouse;
-    result.texture = tex;
-    sfSprite_setTexture(mouse, tex, 0);
-    return (result);
-}
-
-static struct object *setup_pages(void)
-{
-    struct object *result = malloc(sizeof(struct object) * 4);
-
+    object **result = malloc(sizeof(object *) * 4);
     sfVector2f scale = {4, 4};
-    result[0].sprite = sfSprite_create();
-    result[1].sprite = sfSprite_create();
-    result[2].sprite = sfSprite_create();
-    result[3].sprite = sfSprite_create();
-    result[0].texture = sfTexture_createFromFile("assets/img/inventory_background.jpg", NULL);
-    result[1].texture = sfTexture_createFromFile("assets/img/inventory.png", NULL);
-    result[2].texture = sfTexture_createFromFile("assets/img/ye_olde_map.png", NULL);
-    result[3].texture = sfTexture_createFromFile("assets/img/competences.png", NULL);
-    for (int i = 0; i < 4; i++) {
-        sfSprite_setTexture(result[i].sprite, result[i].texture, 0);
-        sfSprite_setScale(result[i].sprite, scale);
-    }
+    sfVector2f pos = {0, 0};
+
+    result[0] = create_object("assets/img/inventory_background.jpg", pos, scale);
+    result[1] = create_object("assets/img/inventory.png", pos, scale);
+    result[2] = create_object("assets/img/ye_olde_map.png", pos, scale);
+    result[3] = create_object("assets/img/competences.png", pos, scale);
     return (result);
 }
 

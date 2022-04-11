@@ -9,6 +9,7 @@
 #ifndef INVENTORY_STRUCTURES_H_
     #define INVENTORY_STRUCTURES_H_
     #include "csfml_libs.h"
+    #include "my_csfml_utils.h"
 
     struct competences {
         int dodge_roll;
@@ -24,21 +25,15 @@
         int armor_type;
     };
 
-    struct object {
-        sfSprite *sprite;
-        sfTexture *texture;
-    };
-
     struct txtobject {
         sfText *text;
         sfFont *font;
     };
 
-
     struct backgrounds {
         sfRenderWindow *window;
         struct item *items;
-        struct object *pages;
+        object **pages;
         struct txtobject text;
         char *keys;
         struct competences *comp;

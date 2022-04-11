@@ -19,6 +19,10 @@ LINE_RETURN	=	$(ECHO) ""
 
 NAME			=			my_rpg
 
+CC				=			gcc
+
+RM				=			rm -rf
+
 NAME_TEST		=			unit_test
 
 ## ===================================================================
@@ -54,11 +58,7 @@ MOUSE_PATH		=			$(SRC_PATH)mouse/
 
 JSON_PATH		=			$(SRC_PATH)json/
 
-##=========================[INVENTORY]========================
-
 INVENTORY_PATH	=			$(SRC_PATH)inventory/
-
-##=========================[PARTICLES]========================
 
 PARTICLES_PATH = 			$(SRC_PATH)particle_system/
 
@@ -176,7 +176,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -g3
+CFLAGS			=			-Wall -Wextra
 
 CPPFLAGS		=			-I include
 
@@ -198,26 +198,26 @@ all:	message
 		make $(NAME)
 
 $(NAME):	$(OBJ)
-		gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
 
 re:			fclean	all
 
 clean:
 		make clean -C lib/my
-		rm -rf $(OBJ)
+		$(RM) $(OBJ)
 
 fclean:		clean
 		make fclean -C lib/my
-		rm -rf $(NAME)
-		rm -rf $(NAME_TEST)
-		rm -rf *gcda
-		rm -rf *gcno
+		$(RM) $(NAME)
+		$(RM) $(NAME_TEST)
+		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
 
 debug:
 
-valgrind:
+valgrind:	$(CFLAGS) += -g
+valgrind:	re
 
 tests_run:
 	make re -C lib/my

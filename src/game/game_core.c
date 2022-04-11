@@ -19,11 +19,13 @@
 #include "inventory_structures.h"
 
 struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
+struct item create_yellow_flower(struct item item, int number);
 struct item *create_items(void);
 
 int game_loop(int ac, char **av)
 {
         struct item *items = create_items();
+        items[10] = create_yellow_flower(items[10], 100);
         struct competences comp = {0, 0};
     window_t *window = generate_default_window();
     font_t **font = font_create_array();

@@ -9,9 +9,9 @@
     #define MOUSE_H_
 
     #include "csfml_libs.h"
+    #include "my_csfml_utils.h"
 
-    struct object setup_mouse(void);
     void draw_mouse(sfRenderWindow *window, sfSprite *mouse);
-    void free_object(struct object object);
+    void free_object(object object);
 
 #endif /* !MOUSE_H_ */

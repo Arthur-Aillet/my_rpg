@@ -9,8 +9,10 @@
 #include "particles_structures.h"
 #include "inventory_macros.h"
 #include "my.h"
+#include "my_csfml_utils.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 void remove_particle(struct particle *previous)
 {
@@ -18,98 +20,253 @@ void remove_particle(struct particle *previous)
 
     if (previous->next != NULL) {
         temp = previous->next->next;
-        sfSprite_destroy(previous->next->sprite);
-        sfTexture_destroy(previous->next->texture);
         free(previous->next);
     }
     previous->next = temp;
 }
 
-sfTexture *get_part_type_texture(int type)
-{
-    switch (type) {
-        case (0) : return(sfTexture_createFromFile("assets/img/snowflake.png", NULL));
-        case (1) : return(sfTexture_createFromFile("assets/img/raindrop.png", NULL));
-        case (2) : return(sfTexture_createFromFile("assets/img/flame.png", NULL));
-    }
-    return (NULL);
-}
-
 int get_part_deathtime(int type)
 {
     switch (type) {
-        case (0) : return (250);
+        case (0) : return (260);
         case (1) : return (100);
         case (2) : return (500);
+        case (3) : return (100);
+        case (4) : return (rand() % 50 + 100);
+        case (5) : return (rand() % 50 + 100);
+        case (6) : return (rand() % 50 + 100);
+        case (7) : return (rand() % 50 + 100);
+        case (8) : return (rand() % 50 + 100);
+        case (9) : return (rand() % 50 + 100);
+        case (10) : return (rand() % 50 + 100);
+        case (11) : return (rand() % 50 + 100);
     }
     return (1);
 }
 
-struct particle *create_particle(sfVector2f pos, int type)
+object **setup_part_sprites(void)
+{
+    object **result = malloc (sizeof(object *) * 12);
+    sfVector2f none = {1, 1};
+
+    result[0] = create_object("assets/img/snowflake.png", none, none);
+    result[1] = create_object("assets/img/raindrop.png", none, none);
+    result[2] = create_object("assets/img/flame.png", none, none);
+    result[3] = create_object("assets/img/cloud.png", none, none);
+    result[4] = result[3];
+    result[5] = result[3];
+    result[6] = result[3];
+    result[7] = result[3];
+    result[8] = result[3];
+    result[9] = result[3];
+    result[10] = result[3];
+    result[11] = result[3];
+    return (result);
+}
+
+struct particle *create_particle(sfVector2f pos, int type, int speed)
 {
     struct particle *new = malloc(sizeof(struct particle));
     new->next = NULL;
     new->pos = pos;
+    new->trajectory = pos;
     new->scale = (sfVector2f) {1, 1};
+    new->speed = speed;
     new->type = type;
     new->velocity = (sfVector2f) {0, 0};
-    new->sprite = sfSprite_create();
-    new->texture = get_part_type_texture(type);
     new->lifetime = get_part_deathtime(type);
     new->age = 0;
-    sfSprite_setTexture(new->sprite, new->texture, 0);
-    sfSprite_setPosition(new->sprite, new->pos);
     return (new);
 }
 
-struct particle *fire(sfRenderWindow *window, struct particle *part)
+struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed)
 {
-    int speed = 20;
+    struct particle *new = create_particle(pos, type, speed);
 
-    part->pos.x += rand() % (speed + 1) - speed / 2;
-    part->pos.y += (rand() % (speed)) - speed / 1.9;
+    new->next = first;
+    return (new);
+}
+
+struct particle *dust_ul(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    int random = rand() % (part->speed * 2 + 1) - part->speed;
+
     part->age += 1;
-    part->velocity.x = (part->pos.x - sfSprite_getPosition(part->sprite).x) / 10;
-    part->velocity.y = (part->pos.y - sfSprite_getPosition(part->sprite).y) / 10;
-    sfSprite_move(part->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->sprite, NULL);
+    part->trajectory.x -= part->speed / 2 + random;
+    part->trajectory.y -= part->speed / 2;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_left(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    part->age += 1;
+    part->trajectory.x -= part->speed;
+    part->trajectory.y += rand() % (part->speed * 2 + 1) - part->speed;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_dl(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    int random = rand() % (part->speed * 2 + 1) - part->speed;
+
+    part->age += 1;
+    part->trajectory.x -= part->speed / 2 + random;
+    part->trajectory.y += part->speed / 2;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_down(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    part->age += 1;
+    part->trajectory.x += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.y += part->speed;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_dr(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    int random = rand() % (part->speed * 2 + 1) - part->speed;
+
+    part->age += 1;
+    part->trajectory.x += part->speed / 2 + random;
+    part->trajectory.y += part->speed / 2;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_right(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    part->age += 1;
+    part->trajectory.x += part->speed;
+    part->trajectory.y += rand() % (part->speed * 2 + 1) - part->speed;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_ur(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    int random = rand() % (part->speed * 2 + 1) - part->speed;
+
+    part->age += 1;
+    part->trajectory.x += part->speed / 1 + random;
+    part->trajectory.y -= part->speed / 1;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_up(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    part->age += 1;
+    part->trajectory.x += rand() % (part->speed * 2 + 1) - part->speed;
+    part->trajectory.y -= part->speed;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *dust_circle(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    float random = rand() % (part->speed * 2 + 1) - part->speed;
+
+    if (part->age <= part->speed) {
+        part->trajectory.x = log2f(random * random);
+        part->trajectory.y = log2f(part->speed - ABS(random)) * 2;
+        if (rand() % 2 == 0)
+            part->trajectory.y *= -1;
+        if (rand() % 2 == 0)
+            part->trajectory.x *= -1;
+    }
+    part->trajectory.x *= 0.98;
+    part->trajectory.y *= 0.98;
+    part->velocity.x = part->pos.x + (part->trajectory.x);
+    part->velocity.y = part->pos.y + (part->trajectory.y);
+    part->pos = part->velocity;
+    part->age += 1;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
+}
+
+struct particle *fire(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    part->age += 1;
+    part->trajectory.x += rand() % (part->speed + 1) - part->speed / 2;
+    part->trajectory.y += (rand() % (part->speed)) - part->speed / 1.9;
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
     return (part);
 }
 
-struct particle *rain(sfRenderWindow *window, struct particle *part)
+struct particle *rain(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int speed = 15;
-
     part->age += 1;
-    part->pos.y += speed;
-    sfSprite_setPosition(part->sprite, part->pos);
-    sfRenderWindow_drawSprite(window, part->sprite, NULL);
+    part->pos.y += part->speed;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->pos);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
     return (part);
 }
 
-struct particle *snow(sfRenderWindow *window, struct particle *part)
+struct particle *snow(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    int speed = 15;
-    int random = rand() % speed * 3 / 2;
+    int random = rand() % part->speed * 3 / 2;
 
     if (rand() % 2 == 0)
         random *= -1;
     part->age += 1;
-    part->pos.x += random;
-    part->pos.y += speed - ABS(random);
-    part->velocity.x = (part->pos.x - sfSprite_getPosition(part->sprite).x) / 10;
-    part->velocity.y = (part->pos.y - sfSprite_getPosition(part->sprite).y) / 10;
-    sfSprite_move(part->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->sprite, NULL);
+    part->trajectory.x += random;
+    part->trajectory.y += part->speed - ABS(random);
+    part->velocity.x = part->pos.x + (part->trajectory.x - part->pos.x) / 10;
+    part->velocity.y = part->pos.y + (part->trajectory.y - part->pos.y) / 10;
+    part->pos = part->velocity;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
     return (part);
 }
 
-void update_particles(sfRenderWindow *window, struct particle *start)
+void update_particles(sfRenderWindow *window, struct particle *start, object **sprites)
 {
-    static struct particle *(*tab[3])(sfRenderWindow *, struct particle *) = {snow, rain, fire};
+    static struct particle *(*tab[12])(sfRenderWindow *, struct particle *, object **) = {snow, rain, fire, dust_circle, dust_up, dust_ur, dust_right, dust_dr, dust_down, dust_dl, dust_left, dust_ul};
 
     while (start->next != NULL) {
-        start = tab[start->type](window, start);
+        start = tab[start->type](window, start, sprites);
         start = start->next;
         if (start->next != NULL && start->next->age > start->next->lifetime)
             remove_particle(start);

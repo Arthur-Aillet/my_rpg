@@ -40,13 +40,14 @@ int get_part_deathtime(int type)
         case (9) : return (rand() % 50 + 100);
         case (10) : return (rand() % 50 + 100);
         case (11) : return (rand() % 50 + 100);
+        case (12) : return (50);
     }
     return (1);
 }
 
 object **setup_part_sprites(void)
 {
-    object **result = malloc (sizeof(object *) * 12);
+    object **result = malloc (sizeof(object *) * 13);
     sfVector2f none = {1, 1};
 
     result[0] = create_object("assets/img/snowflake.png", none, none);
@@ -61,6 +62,7 @@ object **setup_part_sprites(void)
     result[9] = result[3];
     result[10] = result[3];
     result[11] = result[3];
+    result[12] = result[2];
     return (result);
 }
 
@@ -85,6 +87,25 @@ struct particle *add_particle(struct particle *first, sfVector2f pos, int type, 
 
     new->next = first;
     return (new);
+}
+
+struct particle *spark(sfRenderWindow *window, struct particle *part, object **sprites)
+{
+    int random = rand() % part->speed;
+
+    if (part->age <= 0) {
+        part->trajectory.x = random;
+        part->trajectory.y = (part->speed - random) * -1;
+        if (rand() % 2 == 0)
+            part->trajectory.x *= -1;
+    }
+    part->velocity.x = part->pos.x + (part->trajectory.x);
+    part->velocity.y = part->pos.y + (part->trajectory.y);
+    part->pos = part->velocity;
+    part->age += 1;
+    sfSprite_setPosition(sprites[part->type]->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, sprites[part->type]->sprite, NULL);
+    return(part);
 }
 
 struct particle *dust_ul(sfRenderWindow *window, struct particle *part, object **sprites)
@@ -263,7 +284,7 @@ struct particle *snow(sfRenderWindow *window, struct particle *part, object **sp
 
 void update_particles(sfRenderWindow *window, struct particle *start, object **sprites)
 {
-    static struct particle *(*tab[12])(sfRenderWindow *, struct particle *, object **) = {snow, rain, fire, dust_circle, dust_up, dust_ur, dust_right, dust_dr, dust_down, dust_dl, dust_left, dust_ul};
+    static struct particle *(*tab[13])(sfRenderWindow *, struct particle *, object **) = {snow, rain, fire, dust_circle, dust_up, dust_ur, dust_right, dust_dr, dust_down, dust_dl, dust_left, dust_ul, spark};
 
     while (start->next != NULL) {
         start = tab[start->type](window, start, sprites);

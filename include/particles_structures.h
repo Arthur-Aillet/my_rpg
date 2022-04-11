@@ -18,7 +18,7 @@ struct particle{
     int age;
     int lifetime;
     int type;
-    int speed;
+    float speed;
     struct particle *next;
 };
 

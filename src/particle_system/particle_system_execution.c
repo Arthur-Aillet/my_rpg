@@ -52,17 +52,17 @@ object **setup_part_sprites(void)
 
     result[0] = create_object("assets/img/snowflake.png", none, none);
     result[1] = create_object("assets/img/raindrop.png", none, none);
-    result[2] = create_object("assets/img/flame.png", none, VCF{1.4, 1.4});
+    result[2] = create_object("assets/img/flame.png", none, none);
     result[3] = create_object("assets/img/cloud.png", none, none);
     result[4] = result[3];
     result[5] = result[3];
     result[6] = result[3];
     result[7] = result[3];
-    result[8] = create_object("assets/img/flame.png", none, VCF{1.6, 1.6});
+    result[8] = create_object("assets/img/flame.png", none, none);
     result[9] = result[8];
     result[10] = result[8];
     result[11] = result[8];
-    result[12] = result[2];
+    result[12] = create_object("assets/img/spark.png", none, VCF{1.4, 1.4});;
     return (result);
 }
 
@@ -91,8 +91,8 @@ struct particle *add_particle(struct particle *first, sfVector2f pos, int type, 
 
 struct particle *spark(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
-    float decay = (float)(rand() % 7 - 3) / 100;
+    float random = fmod(rand(), (part->speed * 2 + 1) * 100) / 100 - part->speed;
+    float decay = (float) (rand() % 7 - 3) / 100;
 
     if (part->age <= 0) {
         part->trajectory.x = log2f(random * random);
@@ -103,6 +103,7 @@ struct particle *spark(sfRenderWindow *window, struct particle *part, object **s
     }
     part->trajectory.x *= 0.98 + decay;
     part->trajectory.y *= 0.98 + decay;
+    part->trajectory.y += 0.05;
     part->velocity.x = part->pos.x + (part->trajectory.x);
     part->velocity.y = part->pos.y + (part->trajectory.y);
     part->pos = part->velocity;
@@ -226,9 +227,9 @@ struct particle *dust_up(sfRenderWindow *window, struct particle *part, object *
 
 struct particle *dust_circle(sfRenderWindow *window, struct particle *part, object **sprites)
 {
-    float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
+    float random = fmod(rand(), (part->speed * 2 + 1) * 100) / 100 - part->speed;
 
-    if (part->age <= part->speed) {
+    if (part->age <= 4) {
         part->trajectory.x = log2f(random * random);
         part->trajectory.y = log2f(part->speed - ABS(random)) * 2;
         if (rand() % 2 == 0)

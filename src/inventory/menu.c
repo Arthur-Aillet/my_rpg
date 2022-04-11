@@ -184,7 +184,7 @@ struct item *menu(sfRenderWindow *window, struct item *items, struct competences
         start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, 0, 20);
         start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, 1, 15);
         start = add_particle(start, (sfVector2f) {970, 540}, 2, 10);
-        start = add_particle(start, (sfVector2f) {970, 540}, 12, 10);
+        start = add_particle(start, (sfVector2f) {970, 740}, 12, 10);
         if (rand() % 100 == 0)
             for (int i = 0; i < 1000; i++)
                 start = add_particle(start, (sfVector2f) {485, 540}, 3, 15);

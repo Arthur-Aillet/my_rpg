@@ -93,15 +93,13 @@ struct particle *spark(sfRenderWindow *window, struct particle *part, object **s
 {
     float random = fmod(rand(), (part->speed * 2 + 1)) - part->speed;
 
-    if (part->age <= part->speed) {
+    if (part->age <= 0) {
         part->trajectory.x = log2f(random * random);
         part->trajectory.y = log2f(part->speed - ABS(random)) * 2;
         part->trajectory.y *= -1;
         if (rand() % 2 == 0)
             part->trajectory.x *= -1;
     }
-    part->trajectory.x *= 0.98;
-    part->trajectory.y *= 0.98;
     part->velocity.x = part->pos.x + (part->trajectory.x);
     part->velocity.y = part->pos.y + (part->trajectory.y);
     part->pos = part->velocity;

@@ -22,15 +22,14 @@ struct item *menu(sfRenderWindow *window, struct item *items, struct competences
 struct item create_yellow_flower(struct item item, int number);
 struct item *create_items(void);
 
-int game_loop(int ac, char **av)
+int my_rpg(int ac, char **av)
 {
-        struct item *items = create_items();
-        items[10] = create_yellow_flower(items[10], 100);
-        struct competences comp = {0, 0};
-    window_t *window = generate_default_window();
+    game_t *game = init_game_struct();
+    struct item *items = create_items();
+    items[10] = create_yellow_flower(items[10], 100);
+    struct competences comp = {0, 0};
     font_t **font = font_create_array();
     sound_t **sound = sounds_create_array();
-    int *keys = init_keys();
     object *test = create_object("test", VCF{0, 0}, VCF{60, 33});
     object *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
     object *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});
@@ -47,25 +46,27 @@ int game_loop(int ac, char **av)
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", sound), find_sound("hover.ogg", sound), 10);
     button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
 
-    if (window == NULL)
+    if (game == NULL)
         return 84;
-    create_windows(window);
-    while (sfRenderWindow_isOpen(window->window)) {
-        set_correct_window_size(window);
-        sfRenderWindow_clear(window->window, sfBlack);
-        get_events(window->window, keys);
-        if (keys[sfKeyEscape] == PRESS)
-            menu(window->window, items, comp, (char *) keys);
-        if (keys[sfKeyP] == PRESS)
-            potions_loop(window, keys, mouse);
+    create_windows(game->window);
+    while (sfRenderWindow_isOpen(game->window->window)) {
+        set_correct_window_size(game->window);
+        sfRenderWindow_clear(game->window->window, sfBlack);
+        get_events(game->window->window, game->keys);
+        if (game->keys[sfKeyEscape] == PRESS)
+            menu(game->window->window, items, comp, (char *) game->keys);
+        if (game->keys[sfKeyP] == PRESS)
+            potions_loop(game->window, game->keys, mouse);
+        if (game->keys[sfKeyG] == PRESS)
+            my_game(game);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
-        sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
-        update_button(window->window, bouton_test_2, keys);
-        update_button(window->window, bouton_test, keys);
-        update_mouse_cursor(window->window, mouse);
-        sfRenderWindow_drawSprite(window->window, cursor->sprite, NULL);
-        sfRenderWindow_display(window->window);
+        sfRenderWindow_drawSprite(game->window->window, test->sprite, NULL);
+        update_button(game->window->window, bouton_test_2, game->keys);
+        update_button(game->window->window, bouton_test, game->keys);
+        update_mouse_cursor(game->window->window, mouse);
+        sfRenderWindow_drawSprite(game->window->window, cursor->sprite, NULL);
+        sfRenderWindow_display(game->window->window);
     }
-    free_window_struct(window);
+    free_window_struct(game->window);
     return 0;
 }

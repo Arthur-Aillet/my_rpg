@@ -37,7 +37,6 @@ BASIC_PATH		=			$(SRC_PATH)basic/
 
 INIT_PATH		=			$(SRC_PATH)init/
 
-
 MENU_PATH		=			$(SRC_PATH)menu/
 
 GAME_PATH		=			$(SRC_PATH)game/
@@ -104,7 +103,13 @@ SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
 							$(UTILS_PATH)my_help.c					\
 							$(UTILS_PATH)files_manager.c			\
 
+SRC_INIT		=			$(INIT_PATH)init_game_struct.c			\
+							$(INIT_PATH)init_game_status.c			\
+							$(INIT_PATH)init_in_game_struct.c		\
+							$(INIT_PATH)init_map_objects.c			\
+
 SRC_GAME		=			$(GAME_PATH)game_core.c					\
+							$(GAME_PATH)game_loop.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
@@ -142,17 +147,6 @@ SRC_MATH		=			$(MATH_PATH)math.c						\
 
 SRC_MOUSE		=			$(MOUSE_PATH)mouse.c					\
 
-SRC_GLOBAL		=			$(SRC_UTILS)							\
-							$(SRC_WINDOW)							\
-							$(SRC_GAME)								\
-							$(SRC_EVENT)							\
-							$(SRC_POTION)							\
-							$(SRC_INVENTORY)						\
-							$(SRC_PARTICLES)						\
-							$(SRC_CSFML)							\
-							$(SRC_MATH)								\
-							$(SRC_MOUSE)							\
-
 SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
 							$(JSON_PATH)generate/str_preprocessing.c	\
 							$(JSON_PATH)generate/object_preprocessing.c	\
@@ -163,7 +157,19 @@ SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
 							$(JSON_PATH)use/json_get_by_name.c			\
 							$(JSON_PATH)use/json_get_by_index.c			\
 							$(JSON_PATH)use/json_display_obj.c			\
-							$(JSON_PATH)use/main_json.c					\
+
+SRC_GLOBAL		=			$(SRC_UTILS)							\
+							$(SRC_WINDOW)							\
+							$(SRC_INIT)								\
+							$(SRC_GAME)								\
+							$(SRC_EVENT)							\
+							$(SRC_POTION)							\
+							$(SRC_INVENTORY)						\
+							$(SRC_PARTICLES)						\
+							$(SRC_CSFML)							\
+							$(SRC_MATH)								\
+							$(SRC_MOUSE)							\
+							$(SRC_JSON)								\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c
@@ -193,11 +199,11 @@ CRIT			=			$(LDFLAGS) $(CPPFLAGS) -lcriterion --coverage
 ## =========================================================================
 ## =========================================================================
 
-all:	message
-		make re -C lib/my
+all:
+		make message
 		make $(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME):	build_lib	$(OBJ)
 		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
 
 re:			fclean	all
@@ -213,6 +219,7 @@ fclean:		clean
 		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
+		make re -C lib/my
 
 debug:
 

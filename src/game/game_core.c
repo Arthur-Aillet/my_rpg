@@ -58,14 +58,8 @@ int game_loop(void)
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
-        if (keys[sfKeyP] == PRESS) {
-            potion = malloc(sizeof(potion_t));
-            potion->current_step = 1;
-            potion->numbers_steps = 2;
-            potion->difficulty = 2;
-            hammer_loop(window, keys, mouse, potion);
-            free(potion);
-        }
+        if (keys[sfKeyP] == PRESS)
+            potion_loop(window, font, sound, keys);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

@@ -21,6 +21,17 @@
 #include "my_csfml_utils.h"
 #include "particles_structures.h"
 
+void destroy_hammer_struct(hammer_t *hammer)
+{
+    destroy_object(hammer->anvil);
+    destroy_object(hammer->background);
+    destroy_object(hammer->hammer);
+    destroy_object(hammer->back_bar);
+    destroy_object(hammer->for_bar);
+    destroy_object(hammer->box_bar);
+    free(hammer);
+}
+
 hammer_t *setup_hammer_struct(void)
 {
     hammer_t *elements = malloc(sizeof(hammer_t));
@@ -85,7 +96,6 @@ void display_hammer(hammer_t *eleme, window_t *window)
 
 void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
 {
-    object **part = setup_part_sprites();
     hammer_t *elements = setup_hammer_struct();
     struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
@@ -108,4 +118,6 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
         update_mouse_cursor(window->window, mouse);
         sfRenderWindow_display(window->window);
     }
+    sfClock_destroy(clock);
+    destroy_hammer_struct(elements);
 }

@@ -56,7 +56,7 @@ int my_rpg(int ac, char **av)
         if (game->keys[sfKeyEscape] == PRESS)
             menu(game->window->window, items, comp, (char *) game->keys);
         if (game->keys[sfKeyP] == PRESS)
-            potions_loop(game->window, game->keys, mouse);
+            hammer_loop(game->window, game->keys, mouse, 2);
         if (game->keys[sfKeyG] == PRESS)
             my_game(game);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));

@@ -46,6 +46,8 @@ int my_rpg(int ac, char **av)
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", sound), find_sound("hover.ogg", sound), 10);
     button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
 
+    potion_t *potion;
+
     if (game == NULL)
         return 84;
     create_windows(game->window);
@@ -55,10 +57,16 @@ int my_rpg(int ac, char **av)
         get_events(game->window->window, game->keys);
         if (game->keys[sfKeyEscape] == PRESS)
             menu(game->window->window, items, comp, (char *) game->keys);
-        if (game->keys[sfKeyP] == PRESS)
-            hammer_loop(game->window, game->keys, mouse, 2);
+        if (game->keys[sfKeyP] == PRESS) {
+            potion = malloc(sizeof(potion_t));
+            potion->current_step = 1;
+            potion->numbers_steps = 2;
+            potion->difficulty = 2;
+            hammer_loop(game->window, game->keys, mouse, potion);
+            free(potion);
+        }
         if (game->keys[sfKeyG] == PRESS)
-            my_game(game);
+            menu(game->window->window, items, comp, (char *) game->keys);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(game->window->window, test->sprite, NULL);
         update_button(game->window->window, bouton_test_2, game->keys);

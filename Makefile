@@ -113,7 +113,8 @@ SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
-SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
+SRC_POTION		=			$(POTION_PATH)hammer_minigame1.c		\
+							$(POTION_PATH)hammer_minigame2.c		\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
 							$(INVENTORY_PATH)get_keyboard_input.c	\
@@ -157,9 +158,11 @@ SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
 							$(JSON_PATH)use/json_get_by_name.c			\
 							$(JSON_PATH)use/json_get_by_index.c			\
 							$(JSON_PATH)use/json_display_obj.c			\
+							$(JSON_PATH)use/json_main.c					\
 
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
+							$(SRC_JSON)								\
 							$(SRC_INIT)								\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
@@ -169,7 +172,6 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\
-							$(SRC_JSON)								\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

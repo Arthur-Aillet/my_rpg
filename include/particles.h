@@ -1,19 +1,38 @@
 /*
 ** EPITECH PROJECT, 2022
-** my_rpg
+** rpg - particles structures
 ** File description:
-** particles
+** here be explenations
 */
 
-#ifndef PARTICLES_H_
-    #define PARTICLES_H_
+#include <csfml_libs.h>
+#include "my_csfml_utils.h"
 
-    #include "my_csfml_utils.h"
-    #include "particles_structures.h"
+#ifndef PARTICLES_STRUCTURES_H_
+    #define PARTICLES_STRUCTURES_H_
 
-object **setup_part_sprites(void);
-sfVector2f itofv2(sfVector2i vector);
+    #define SIGN(x) ((x > 0) ? (1) : (-1))
+    #define SFSGP(x) sfSprite_getPosition(x)
+    #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10
+    #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
+
+
 void update_particles(sfRenderWindow *window, struct particle *start);
-struct particle *create_particle(sfVector2f pos, int type, int speed, object **textures);
-struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed, object **textures);
-#endif /* !PARTICLES_H_ */
+struct particle *create_particle(sfVector2f pos, int type, int speed);
+struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
+
+struct particle{
+    sfVector2f pos;
+    sfVector2f trajectory;
+    sfVector2f velocity;
+    sfVector2f scale;
+    object *object;
+    int age;
+    int lifetime;
+    int type;
+    float speed;
+    float rotation;
+    struct particle *next;
+};
+
+#endif /* !PARTICLES_STRUCTURES_H_ */

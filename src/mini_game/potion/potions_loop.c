@@ -139,7 +139,7 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
             sfClock_restart(clock);
         }
         hammer_controls(elements, &start, keys);
-        display_hammer(elements, window, nbr_steps, current_step);
+        display_hammer(elements, window, nbr_steps, steps_down);
         update_particles(window->window, start);
         update_mouse_cursor(window->window, mouse);
         sfRenderWindow_display(window->window);

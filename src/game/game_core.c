@@ -22,7 +22,7 @@ struct item *menu(sfRenderWindow *window, struct item *items, struct competences
 struct item create_yellow_flower(struct item item, int number);
 struct item *create_items(void);
 
-int game_loop(int ac, char **av)
+int game_loop(void)
 {
         struct item *items = create_items();
         items[10] = create_yellow_flower(items[10], 100);
@@ -57,7 +57,7 @@ int game_loop(int ac, char **av)
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
         if (keys[sfKeyP] == PRESS)
-            potions_loop(window, keys, mouse);
+            hammer_loop(window, keys, mouse);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

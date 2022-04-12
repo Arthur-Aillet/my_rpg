@@ -6,6 +6,7 @@
 */
 
 #include "keyboard.h"
+#include "particles.h"
 #include "pause_menu.h"
 #include "csfml_libs.h"
 #include "mouse.h"

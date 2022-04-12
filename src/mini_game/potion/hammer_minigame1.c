@@ -67,8 +67,6 @@ void display_hammer(hammer_t *eleme, window_t *window, potion_t *pot)
 
 int hammer_update(int *keys, hammer_t *elements, potion_t *pot, sfClock *clock)
 {
-    if (keys[sfKeyU] == PRESS)
-        pot->numbers_steps += 1;
     if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
         return (0);
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >=

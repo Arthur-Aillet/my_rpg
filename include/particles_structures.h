@@ -12,13 +12,13 @@
 
 struct particle{
     sfVector2f pos;
+    sfVector2f trajectory;
     sfVector2f velocity;
     sfVector2f scale;
     int age;
     int lifetime;
     int type;
-    sfSprite *sprite;
-    sfTexture *texture;
+    float speed;
     struct particle *next;
 };
 

@@ -9,6 +9,7 @@
 #include "mouse.h"
 #include "keyboard.h"
 #include "inventory.h"
+#include "my_csfml_utils.h"
 
 #include <stdlib.h>
 
@@ -41,9 +42,9 @@ void pause_menu(sfRenderWindow *window, char *keys)
     sfTexture *bg = sfTexture_createFromFile("asset/img/ye_olde_map.png", NULL);
     sfSprite_setTexture(bg_sprite, bg, 0);
     sfSprite_setTexture(pause_sprite, pause, 0);
-    struct object mouse = setup_mouse();
     sfVector2f p2scale = {5, 5};
     sfVector2f p2pos = {90, 0};
+    object *mouse = create_object("assets/img/cursor.h", p2pos, (sfVector2f) {0, 0});
     sfSprite_setScale(bg_sprite, p2scale);
     sfSprite_setPosition(bg_sprite, p2pos);
     sfVector2u size_of_window;
@@ -54,10 +55,9 @@ void pause_menu(sfRenderWindow *window, char *keys)
         sfRenderWindow_drawSprite(window, pause_sprite, NULL);
         size_of_window = sfRenderWindow_getSize(window);
         close = get_pause_event(window, keys);
-        draw_mouse(window, mouse.sprite);
+        draw_mouse(window, mouse->sprite);
         sfRenderWindow_display(window);
     }
-    free_object(mouse);
     sfSprite_destroy(pause_sprite);
     sfTexture_destroy(pause);
     sfSprite_destroy(bg_sprite);

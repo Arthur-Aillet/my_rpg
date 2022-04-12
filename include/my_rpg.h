@@ -13,6 +13,6 @@
 int my_error_handling(int ac, char **av);
 int my_help(void);
 
-int game_loop(int ac, char **av);
+int game_loop(void);
 
 #endif /* !MY_PROJECT_H */

@@ -15,14 +15,17 @@
 #include "my_button.h"
 #include "my_event.h"
 #include "my_csfml_utils.h"
+#include "potions.h"
 #include "inventory_structures.h"
 
 struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
+struct item create_yellow_flower(struct item item, int number);
 struct item *create_items(void);
 
-int game_loop(int ac, char **av)
+int game_loop(void)
 {
         struct item *items = create_items();
+        items[10] = create_yellow_flower(items[10], 100);
         struct competences comp = {0, 0};
     window_t *window = generate_default_window();
     font_t **font = font_create_array();
@@ -47,12 +50,14 @@ int game_loop(int ac, char **av)
     if (window == NULL)
         return 84;
     create_windows(window);
-    while(sfRenderWindow_isOpen(window->window)) {
+    while (sfRenderWindow_isOpen(window->window)) {
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
+        if (keys[sfKeyP] == PRESS)
+            hammer_loop(window, keys, mouse, 1);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

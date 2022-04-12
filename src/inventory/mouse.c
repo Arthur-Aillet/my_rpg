@@ -9,18 +9,6 @@
 #include "inventory.h"
 #include "my_csfml_utils.h"
 
-struct object setup_mouse(void)
-{
-    struct object result;
-    sfSprite *mouse = sfSprite_create();
-    sfTexture *tex = sfTexture_createFromFile("assets/img/cursors.png", NULL);
-
-    result.sprite = mouse;
-    result.texture = tex;
-    sfSprite_setTexture(mouse, tex, 0);
-    return (result);
-}
-
 void draw_mouse(sfRenderWindow *window, sfSprite *mouse)
 {
     sfVector2f mousepos;

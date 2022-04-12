@@ -21,6 +21,6 @@ typedef struct hammer_s {
     float points;
 } hammer_t;
 
-void hammer_loop(window_t *window, int *keys, object *mouse);
+void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty);
 
 #endif /* !POTIONS_H_ */

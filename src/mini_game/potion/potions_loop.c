@@ -83,12 +83,13 @@ void display_hammer(hammer_t *eleme, window_t *window)
     sfRenderWindow_drawSprite(window->window, eleme->box_bar->sprite, NULL);
 }
 
-void hammer_loop(window_t *window, int *keys, object *mouse)
+void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
 {
     object **part = setup_part_sprites();
     hammer_t *elements = setup_hammer_struct();
     struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
+    sfClock *clock = sfClock_create();
     elements->points = 2;
 
     while (sfRenderWindow_isOpen(window->window) && open) {
@@ -97,6 +98,10 @@ void hammer_loop(window_t *window, int *keys, object *mouse)
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
             open = false;
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= (float) 1 / (difficulty * 2)) {
+            elements->points -= (elements->points > 2) ? 1 : 0;
+            sfClock_restart(clock);
+        }
         hammer_controls(elements, &start, keys);
         display_hammer(elements, window);
         update_particles(window->window, start);

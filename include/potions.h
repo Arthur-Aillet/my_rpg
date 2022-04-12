@@ -15,7 +15,6 @@ typedef struct hammer_s {
     object *anvil;
     object *background;
     object *box_bar;
-    object *back_bar;
     object *for_bar;
     int has_spawn;
     float points;

@@ -26,7 +26,6 @@ void destroy_hammer_struct(hammer_t *hammer)
     destroy_object(hammer->anvil);
     destroy_object(hammer->background);
     destroy_object(hammer->hammer);
-    destroy_object(hammer->back_bar);
     destroy_object(hammer->for_bar);
     destroy_object(hammer->box_bar);
     free(hammer);
@@ -36,14 +35,13 @@ hammer_t *setup_hammer_struct(void)
 {
     hammer_t *elements = malloc(sizeof(hammer_t));
     sfFloatRect bounds_anvil;
+    sfFloatRect bounds_for;
     sfFloatRect bounds_hammer;
 
-    elements->back_bar = create_object
-        ("assets/img/potions/back_progress.jpg", VCF{710, 200}, VCF{1, 1});
     elements->for_bar = create_object
-        ("assets/img/potions/forground_progress.png", VCF{710, 200}, VCF{1, 1});
+        ("assets/img/potions/forground_progress.png", VCF{1920 / 2, 210}, VCF{2, 2});
     elements->box_bar = create_object
-        ("assets/img/potions/box_progress.png", VCF{710, 200}, VCF{1, 1});
+        ("assets/img/potions/box_progress.jpg", VCF{710, 200}, VCF{2, 2});
     elements->background = create_object
         ("assets/img/potions/background.jpg", VCF{0, 0}, VCF{1, 1});
     elements->hammer = create_object
@@ -52,6 +50,9 @@ hammer_t *setup_hammer_struct(void)
         ("assets/img/potions/anvil.png", VCF{0, 0}, VCF{1.5, 1.5});
     bounds_anvil = sfSprite_getGlobalBounds(elements->anvil->sprite);
     bounds_hammer = sfSprite_getGlobalBounds(elements->hammer->sprite);
+    bounds_for = sfSprite_getGlobalBounds(elements->for_bar->sprite);
+    sfSprite_setOrigin(elements->for_bar->sprite,
+        VCF{bounds_for.width / 4, bounds_for.height / 4});
     sfSprite_setOrigin(elements->anvil->sprite,
         VCF{bounds_anvil.height / 3, bounds_anvil.width / 3});
     sfSprite_setOrigin(elements->hammer->sprite,
@@ -75,7 +76,7 @@ void hammer_controls(hammer_t *elements, struct particle **start, int *keys)
                 (rand() % 100 + 100) / 10);
         }
         elements->has_spawn = true;
-        for (int i = 0; elements->points + 1 <= 102 && i < 3; i++)
+        for (int i = 0; elements->points + 1 <= 102 && i < 4; i++)
             elements->points += 1;
     }
     if (sfSprite_getRotation(elements->hammer->sprite) < 41)
@@ -87,11 +88,10 @@ void display_hammer(hammer_t *eleme, window_t *window)
     sfRenderWindow_drawSprite(window->window, eleme->background->sprite, NULL);
     sfRenderWindow_drawSprite(window->window, eleme->anvil->sprite, NULL);
     sfRenderWindow_drawSprite(window->window, eleme->hammer->sprite, NULL);
-    sfRenderWindow_drawSprite(window->window, eleme->back_bar->sprite, NULL);
     sfSprite_setScale(eleme->for_bar->sprite,
-        VCF{(eleme->points > 100) ? 1 : eleme->points / 100, 1});
-    sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
+        VCF{(eleme->points > 100) ? 2 : eleme->points / 100 * 2, 2});
     sfRenderWindow_drawSprite(window->window, eleme->box_bar->sprite, NULL);
+    sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
 }
 
 void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
@@ -100,7 +100,7 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
     struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
-    elements->points = 2;
+    elements->points = 0;
 
     while (sfRenderWindow_isOpen(window->window) && open) {
         set_correct_window_size(window);
@@ -108,8 +108,9 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
             open = false;
-        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= (float) 1 / (difficulty * 2)) {
-            elements->points -= (elements->points > 2) ? 1 : 0;
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= (float) 1 / (difficulty)) {
+            elements->points -= (elements->points >= 1) ? 0 : 0;
+            elements->points -= (elements->points >= 1) ? 0 : 0;
             sfClock_restart(clock);
         }
         hammer_controls(elements, &start, keys);

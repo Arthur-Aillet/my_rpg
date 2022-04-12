@@ -57,7 +57,7 @@ int game_loop(void)
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
         if (keys[sfKeyP] == PRESS)
-            hammer_loop(window, keys, mouse, 10);
+            hammer_loop(window, keys, mouse, 1);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

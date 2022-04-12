@@ -20,9 +20,18 @@ void remove_particle(struct particle *previous)
 
     if (previous->next != NULL) {
         temp = previous->next->next;
+        destroy_object(previous->next->object);
         free(previous->next);
     }
     previous->next = temp;
+}
+
+void exterminate(struct particle *first)
+{
+    while(first->next != NULL)
+        remove_particle(first);
+    destroy_object(first->object);
+    free(first);
 }
 
 int get_part_deathtime(int type)

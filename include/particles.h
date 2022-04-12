@@ -33,5 +33,6 @@ struct particle{
 void update_particles(sfRenderWindow *window, struct particle *start);
 struct particle *create_particle(sfVector2f pos, int type, int speed);
 struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
+void exterminate(struct particle *first);
 
 #endif /* !PARTICLES_STRUCTURES_H_ */

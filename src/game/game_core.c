@@ -47,6 +47,8 @@ int game_loop(void)
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", sound), find_sound("hover.ogg", sound), 10);
     button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
 
+    potion_t *potion;
+
     if (window == NULL)
         return 84;
     create_windows(window);
@@ -56,8 +58,14 @@ int game_loop(void)
         get_events(window->window, keys);
         if (keys[sfKeyEscape] == PRESS)
             menu(window->window, items, comp, (char *) keys);
-        if (keys[sfKeyP] == PRESS)
-            hammer_loop(window, keys, mouse, 1);
+        if (keys[sfKeyP] == PRESS) {
+            potion = malloc(sizeof(potion_t));
+            potion->current_step = 1;
+            potion->numbers_steps = 2;
+            potion->difficulty = 2;
+            hammer_loop(window, keys, mouse, potion);
+            free(potion);
+        }
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
         update_button(window->window, bouton_test_2, keys);

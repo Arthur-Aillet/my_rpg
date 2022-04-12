@@ -122,6 +122,7 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
     int open = true;
     int nbr_steps = 1;
     int steps_down = 1;
+    int current_step = 1;
     sfClock *clock = sfClock_create();
 
     elements->points = 0;

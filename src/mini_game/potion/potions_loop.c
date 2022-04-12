@@ -36,12 +36,18 @@ hammer_t *setup_hammer_struct(void)
     hammer_t *elements = malloc(sizeof(hammer_t));
     sfFloatRect bounds_anvil;
     sfFloatRect bounds_for;
+    sfFloatRect bounds_full;
+    sfFloatRect bounds_empty;
     sfFloatRect bounds_hammer;
 
+    elements->circle_full = create_object
+        ("assets/img/potions/circle_full.png", VCF{1920 / 2, 200}, VCF{2, 2});
+    elements->circle_empty = create_object
+        ("assets/img/potions/circle_empty.png", VCF{1920 / 2, 200}, VCF{2, 2});
     elements->for_bar = create_object
-        ("assets/img/potions/forground_progress.png", VCF{1920 / 2, 210}, VCF{2, 2});
+        ("assets/img/potions/forground_progress.png", VCF{1920 / 2, 270}, VCF{2, 2});
     elements->box_bar = create_object
-        ("assets/img/potions/box_progress.jpg", VCF{710, 200}, VCF{2, 2});
+        ("assets/img/potions/box_progress.jpg", VCF{710, 260}, VCF{2, 2});
     elements->background = create_object
         ("assets/img/potions/background.jpg", VCF{0, 0}, VCF{1, 1});
     elements->hammer = create_object
@@ -51,6 +57,12 @@ hammer_t *setup_hammer_struct(void)
     bounds_anvil = sfSprite_getGlobalBounds(elements->anvil->sprite);
     bounds_hammer = sfSprite_getGlobalBounds(elements->hammer->sprite);
     bounds_for = sfSprite_getGlobalBounds(elements->for_bar->sprite);
+    bounds_full = sfSprite_getGlobalBounds(elements->circle_full->sprite);
+    bounds_empty = sfSprite_getGlobalBounds(elements->circle_empty->sprite);
+    sfSprite_setOrigin(elements->circle_full->sprite,
+        VCF{bounds_full.width / 4, bounds_full.height / 4});
+    sfSprite_setOrigin(elements->circle_empty->sprite,
+        VCF{bounds_empty.width / 4, bounds_empty.height / 4});
     sfSprite_setOrigin(elements->for_bar->sprite,
         VCF{bounds_for.width / 4, bounds_for.height / 4});
     sfSprite_setOrigin(elements->anvil->sprite,
@@ -83,7 +95,7 @@ void hammer_controls(hammer_t *elements, struct particle **start, int *keys)
         elements->has_spawn = false;
 }
 
-void display_hammer(hammer_t *eleme, window_t *window)
+void display_hammer(hammer_t *eleme, window_t *window, int nbr_steps, int current)
 {
     sfRenderWindow_drawSprite(window->window, eleme->background->sprite, NULL);
     sfRenderWindow_drawSprite(window->window, eleme->anvil->sprite, NULL);
@@ -91,6 +103,15 @@ void display_hammer(hammer_t *eleme, window_t *window)
     sfSprite_setScale(eleme->for_bar->sprite,
         VCF{(eleme->points > 100) ? 2 : eleme->points / 100 * 2, 2});
     sfRenderWindow_drawSprite(window->window, eleme->box_bar->sprite, NULL);
+    for (int i = nbr_steps; i > 0; i--) {
+        if (i > nbr_steps - current) {
+            sfSprite_setPosition(eleme->circle_full->sprite, VCF{1920 / 2 - ((3 * 36) * i) + ((3 * 36) * ((float) (nbr_steps + 1) / 2)), 200});
+            sfRenderWindow_drawSprite(window->window, eleme->circle_full->sprite, NULL);
+        } else {
+            sfSprite_setPosition(eleme->circle_empty->sprite, VCF{1920 / 2 - ((3 * 36) * i) + ((3 * 36) * ((float) (nbr_steps + 1) / 2)), 200});
+            sfRenderWindow_drawSprite(window->window, eleme->circle_empty->sprite, NULL);
+        }
+    }
     sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
 }
 
@@ -99,22 +120,26 @@ void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
     hammer_t *elements = setup_hammer_struct();
     struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
+    int nbr_steps = 1;
+    int steps_down = 1;
     sfClock *clock = sfClock_create();
-    elements->points = 0;
 
+    elements->points = 0;
     while (sfRenderWindow_isOpen(window->window) && open) {
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
+        if (keys[sfKeyU] == PRESS)
+            nbr_steps += 1;
         if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
             open = false;
         if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= (float) 1 / (difficulty)) {
-            elements->points -= (elements->points >= 1) ? 0 : 0;
-            elements->points -= (elements->points >= 1) ? 0 : 0;
+            elements->points -= (elements->points >= 1) ? 1 : 0;
+            elements->points -= (elements->points >= 1) ? 1 : 0;
             sfClock_restart(clock);
         }
         hammer_controls(elements, &start, keys);
-        display_hammer(elements, window);
+        display_hammer(elements, window, nbr_steps, current_step);
         update_particles(window->window, start);
         update_mouse_cursor(window->window, mouse);
         sfRenderWindow_display(window->window);

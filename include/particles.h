@@ -16,11 +16,6 @@
     #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10
     #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
 
-
-void update_particles(sfRenderWindow *window, struct particle *start);
-struct particle *create_particle(sfVector2f pos, int type, int speed);
-struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
-
 struct particle{
     sfVector2f pos;
     sfVector2f trajectory;
@@ -34,5 +29,9 @@ struct particle{
     float rotation;
     struct particle *next;
 };
+
+void update_particles(sfRenderWindow *window, struct particle *start);
+struct particle *create_particle(sfVector2f pos, int type, int speed);
+struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
 
 #endif /* !PARTICLES_STRUCTURES_H_ */

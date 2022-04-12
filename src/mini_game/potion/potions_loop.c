@@ -99,7 +99,7 @@ void hammer_loop(window_t *window, int *keys, object *mouse)
             open = false;
         hammer_controls(elements, &start, keys);
         display_hammer(elements, window);
-        update_particles(window->window, start, part);
+        update_particles(window->window, start);
         update_mouse_cursor(window->window, mouse);
         sfRenderWindow_display(window->window);
     }

@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2021
-## My_Defender
+## JSON Makefile
 ## File description:
 ## Makefile
 ##

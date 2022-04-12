@@ -11,7 +11,7 @@
             "obj2field4": "obj2text with spaces test",
             "third_obj": {
                 "obj3_field": "mama ça marche",
-                "obj3_doublon": "mama ça marche"
+                "obj3_doublon": "mama ça marche2"
             }
         },
         "field4": "text with spaces test"

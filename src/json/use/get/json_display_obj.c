@@ -29,13 +29,13 @@ void print_raw_data(json_obj_t *obj, int tab)
         return;
     }
     my_printf("%s[%s/STR]\n", tabs, obj->name);
-    for (int i = 0; obj->fields_str[i]; i++)
+    for (int i = 0; obj->fields_str != NULL && obj->fields_str[i]; i++)
         my_printf("%s  %s: %s\n", tabs, obj->fields_str[i], obj->data_str[i]);
     my_printf("%s[%s/INT]\n", tabs, obj->name);
-    for (int i = 0; obj->fields_int[i]; i++)
+    for (int i = 0; obj->fields_int != NULL && obj->fields_int[i]; i++)
         my_printf("%s  %s: %i\n", tabs, obj->fields_int[i], obj->data_int[i]);
     my_printf("%s[%s/OBJ]\n", tabs, obj->name);
-    for (int i = 0; obj->fields_obj[i]; i++) {
+    for (int i = 0; obj->fields_obj != NULL && obj->fields_obj[i]; i++) {
         my_printf("%s%s:\n", tabs, obj->fields_obj[i]);
         print_raw_data(&(obj->data_obj[i]), tab + 1);
     }

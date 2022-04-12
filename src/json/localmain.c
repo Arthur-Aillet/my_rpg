@@ -24,6 +24,8 @@ int main(void)
     print_raw_data(obj, 0);
     printf("\n\n");
     add_int_by_name(obj, "HEHEHEHA", 99);
+    add_str_by_name(obj, "inner field", "this data is added !");
+    add_obj_by_name(obj, "hey", obj);
     print_raw_data(obj, 0);
     free_json(obj, 1);
     free(obj);

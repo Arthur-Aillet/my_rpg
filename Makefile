@@ -16,10 +16,13 @@ SRC			=	src/json/generate/file_gestion.c			\
 				src/json/use/get/json_get_by_name.c			\
 				src/json/use/get/json_get_by_index.c		\
 				src/json/use/get/json_display_obj.c			\
-				src/json/use/edit/free_json.c				\
-				src/json/use/edit/json_edit_by_name.c		\
-				src/json/use/edit/json_add_field.c			\
 				src/json/use/json_main.c					\
+															\
+				src/json/use/edit/json_add_field.c			\
+				src/json/use/edit/json_edit_by_name.c		\
+				src/json/use/edit/manage_json.c				\
+				src/json/generate/duplicate_data.c			\
+				src/json/generate/allocation.c				\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

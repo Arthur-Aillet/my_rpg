@@ -2,64 +2,148 @@
 ** EPITECH PROJECT, 2022
 ** my_rpg
 ** File description:
-** potions_loop
+** hammer_loop
 */
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "my_window_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
 #include "my_rpg.h"
+#include "potions.h"
 #include "my_mouse.h"
 #include "my_button.h"
+#include "particles.h"
 #include "my_event.h"
 #include "my_csfml_utils.h"
 #include "particles_structures.h"
 
-void potions_loop(window_t *window, int *keys, object *mouse)
+void destroy_hammer_struct(hammer_t *hammer)
 {
-    object **part = setup_part_sprites();
-    font_t **font = font_create_array();
-    sound_t **sound = sounds_create_array();
-    object *back = create_object("assets/img/potions/background.jpg", VCF{0, 0}, VCF{1, 1});
-    object *hammer = create_object("assets/img/potions/hammer.png", VCF{0, 0}, VCF{1, 1});
-    object *anvil = create_object("assets/img/potions/anvil.png", VCF{0, 0}, VCF{1.5, 1.5});
-    sfFloatRect bounds_anvil = sfSprite_getGlobalBounds(anvil->sprite);
-    sfFloatRect bounds_hammer = sfSprite_getGlobalBounds(hammer->sprite);
-    struct particle *start = create_particle((sfVector2f) {0, 0}, 0);
-    int open = 1;
-    int last_has_spawn = 0;
+    destroy_object(hammer->anvil);
+    destroy_object(hammer->background);
+    destroy_object(hammer->hammer);
+    destroy_object(hammer->for_bar);
+    destroy_object(hammer->box_bar);
+    free(hammer);
+}
 
-    sfSprite_setOrigin(anvil->sprite, VCF{bounds_anvil.height / 3, bounds_anvil.width / 3});
-    sfSprite_setOrigin(hammer->sprite, VCF{bounds_hammer.height / 2, bounds_hammer.width / 2});
-    sfSprite_setPosition(anvil->sprite, VCF{1920 / 2 + 5, 1080 / 2 + 100});
-    sfSprite_setPosition(hammer->sprite, VCF{1920 / 2 - 70, 1080 / 2 - 65});
+hammer_t *setup_hammer_struct(void)
+{
+    hammer_t *elements = malloc(sizeof(hammer_t));
+    sfFloatRect bounds_anvil;
+    sfFloatRect bounds_for;
+    sfFloatRect bounds_full;
+    sfFloatRect bounds_empty;
+    sfFloatRect bounds_hammer;
+
+    elements->circle_full = create_object
+        ("assets/img/potions/circle_full.png", VCF{1920 / 2, 200}, VCF{2, 2});
+    elements->circle_empty = create_object
+        ("assets/img/potions/circle_empty.png", VCF{1920 / 2, 200}, VCF{2, 2});
+    elements->for_bar = create_object
+        ("assets/img/potions/forground_progress.png", VCF{1920 / 2, 270}, VCF{2, 2});
+    elements->box_bar = create_object
+        ("assets/img/potions/box_progress.jpg", VCF{710, 260}, VCF{2, 2});
+    elements->background = create_object
+        ("assets/img/potions/background.jpg", VCF{0, 0}, VCF{1, 1});
+    elements->hammer = create_object
+        ("assets/img/potions/hammer.png", VCF{0, 0}, VCF{1, 1});
+    elements->anvil = create_object
+        ("assets/img/potions/anvil.png", VCF{0, 0}, VCF{1.5, 1.5});
+    bounds_anvil = sfSprite_getGlobalBounds(elements->anvil->sprite);
+    bounds_hammer = sfSprite_getGlobalBounds(elements->hammer->sprite);
+    bounds_for = sfSprite_getGlobalBounds(elements->for_bar->sprite);
+    bounds_full = sfSprite_getGlobalBounds(elements->circle_full->sprite);
+    bounds_empty = sfSprite_getGlobalBounds(elements->circle_empty->sprite);
+    sfSprite_setOrigin(elements->circle_full->sprite,
+        VCF{bounds_full.width / 4, bounds_full.height / 4});
+    sfSprite_setOrigin(elements->circle_empty->sprite,
+        VCF{bounds_empty.width / 4, bounds_empty.height / 4});
+    sfSprite_setOrigin(elements->for_bar->sprite,
+        VCF{bounds_for.width / 4, bounds_for.height / 4});
+    sfSprite_setOrigin(elements->anvil->sprite,
+        VCF{bounds_anvil.height / 3, bounds_anvil.width / 3});
+    sfSprite_setOrigin(elements->hammer->sprite,
+        VCF{bounds_hammer.height / 2, bounds_hammer.width / 2});
+    sfSprite_setPosition(elements->anvil->sprite, VCF{965, 640});
+    sfSprite_setPosition(elements->hammer->sprite, VCF{890, 475});
+    elements->has_spawn = false;
+    return (elements);
+}
+
+void hammer_controls(hammer_t *elements, struct particle **start, int *keys)
+{
+    if (CLICKED && sfSprite_getRotation(elements->hammer->sprite) < 41)
+        sfSprite_rotate(elements->hammer->sprite, 9);
+    if (!CLICKED && sfSprite_getRotation(elements->hammer->sprite) > 0)
+        sfSprite_rotate(elements->hammer->sprite, -9);
+    if (sfSprite_getRotation(elements->hammer->sprite) >= 41
+        && elements->has_spawn == false) {
+        for (int i = rand() % 5 + 2; i != 0; i--) {
+            *start = add_particle(*start, VCF{1920 / 2, 1080 / 2}, 12,
+                (rand() % 100 + 100) / 10);
+        }
+        elements->has_spawn = true;
+        for (int i = 0; elements->points + 1 <= 102 && i < 4; i++)
+            elements->points += 1;
+    }
+    if (sfSprite_getRotation(elements->hammer->sprite) < 41)
+        elements->has_spawn = false;
+}
+
+void display_hammer(hammer_t *eleme, window_t *window, int nbr_steps, int current)
+{
+    sfRenderWindow_drawSprite(window->window, eleme->background->sprite, NULL);
+    sfRenderWindow_drawSprite(window->window, eleme->anvil->sprite, NULL);
+    sfRenderWindow_drawSprite(window->window, eleme->hammer->sprite, NULL);
+    sfSprite_setScale(eleme->for_bar->sprite,
+        VCF{(eleme->points > 100) ? 2 : eleme->points / 100 * 2, 2});
+    sfRenderWindow_drawSprite(window->window, eleme->box_bar->sprite, NULL);
+    for (int i = nbr_steps; i > 0; i--) {
+        if (i > nbr_steps - current) {
+            sfSprite_setPosition(eleme->circle_full->sprite, VCF{1920 / 2 - ((3 * 36) * i) + ((3 * 36) * ((float) (nbr_steps + 1) / 2)), 200});
+            sfRenderWindow_drawSprite(window->window, eleme->circle_full->sprite, NULL);
+        } else {
+            sfSprite_setPosition(eleme->circle_empty->sprite, VCF{1920 / 2 - ((3 * 36) * i) + ((3 * 36) * ((float) (nbr_steps + 1) / 2)), 200});
+            sfRenderWindow_drawSprite(window->window, eleme->circle_empty->sprite, NULL);
+        }
+    }
+    sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
+}
+
+void hammer_loop(window_t *window, int *keys, object *mouse, int difficulty)
+{
+    hammer_t *elements = setup_hammer_struct();
+    struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
+    int open = true;
+    int nbr_steps = 1;
+    int steps_down = 1;
+    sfClock *clock = sfClock_create();
+
+    elements->points = 0;
     while (sfRenderWindow_isOpen(window->window) && open) {
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
         get_events(window->window, keys);
-        if (keys[sfKeyEscape] == PRESS)
-            open = 0;
-        if (CLICKED && sfSprite_getRotation(hammer->sprite) < 41)
-            sfSprite_rotate(hammer->sprite, 9);
-        if (!CLICKED && sfSprite_getRotation(hammer->sprite) > 0)
-            sfSprite_rotate(hammer->sprite, -9);
-        sfRenderWindow_drawSprite(window->window, back->sprite, NULL);
-        sfRenderWindow_drawSprite(window->window, anvil->sprite, NULL);
-        sfRenderWindow_drawSprite(window->window, hammer->sprite, NULL);
-        if (sfSprite_getRotation(hammer->sprite) >= 41 && last_has_spawn == 0) {
-            for (int i = rand() % 5 + 2; i != 0; i--) {
-                start = add_particle(start, (sfVector2f) {1920 / 2, 1080 / 2}, 12, (rand() % 100 + 100) / 10);
-            }
-            last_has_spawn = 1;
+        if (keys[sfKeyU] == PRESS)
+            nbr_steps += 1;
+        if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
+            open = false;
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >= (float) 1 / (difficulty)) {
+            elements->points -= (elements->points >= 1) ? 1 : 0;
+            elements->points -= (elements->points >= 1) ? 1 : 0;
+            sfClock_restart(clock);
         }
-        if (sfSprite_getRotation(hammer->sprite) < 41)
-            last_has_spawn = 0;
+        hammer_controls(elements, &start, keys);
+        display_hammer(elements, window, nbr_steps, current_step);
+        update_particles(window->window, start);
         update_mouse_cursor(window->window, mouse);
-        update_particles(window->window, start, part);
-        //sfRenderWindow_drawSprite(window->window, mouse->sprite, NULL);
         sfRenderWindow_display(window->window);
     }
+    sfClock_destroy(clock);
+    destroy_hammer_struct(elements);
 }

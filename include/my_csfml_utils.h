@@ -25,5 +25,6 @@ sfVector2i ftoiv2(sfVector2f vector);
 object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f size);
 object *create_object(char *name, sfVector2f pos, sfVector2f scale);
 sfImage *create_blank_image(void);
+void destroy_object(object *objet);
 
 #endif /* !MY_CSFML_UTILS_H_ */

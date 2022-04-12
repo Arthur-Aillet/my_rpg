@@ -6,12 +6,13 @@
 */
 
 #include "keyboard.h"
+#include "particles.h"
 #include "pause_menu.h"
 #include "csfml_libs.h"
 #include "mouse.h"
 #include "inventory.h"
 #include "menu_prototypes.h"
-#include "particles_structures.h"
+#include "particles.h"
 #include "my_csfml_utils.h"
 
 #include <stdio.h>
@@ -19,11 +20,7 @@
 #include <stdlib.h>
 
 object setup_mouse(void);
-object **setup_part_sprites(void);
 sfVector2f itofv2(sfVector2i vector);
-void update_particles(sfRenderWindow *window, struct particle *start, object **sprites);
-struct particle *create_particle(sfVector2f pos, int type, int speed);
-struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
 
 sfRenderWindow *create_window(unsigned int width, unsigned int height)
 {
@@ -178,7 +175,6 @@ struct item *menu(sfRenderWindow *window, struct item *items, struct competences
     static void (*disp[3])(struct backgrounds) = {disp_inv, disp_map, disp_cmp};
     struct events (*evt[3])(struct events) = {evt_inv, evt_map, evt_cmp};
     struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
-    object **part_sprites = setup_part_sprites();
 
     while (sfRenderWindow_isOpen(window)) {
         start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, 0, 20);
@@ -188,17 +184,17 @@ struct item *menu(sfRenderWindow *window, struct item *items, struct competences
         if (rand() % 100 == 0)
             for (int i = 0; i < 1000; i++)
                 start = add_particle(start, (sfVector2f) {485, 540}, 3, 15);
-        start = add_particle(start, (sfVector2f) {1465, 540}, 4, 10);
-        start = add_particle(start, (sfVector2f) {1465, 540}, 5, 10);
-        start = add_particle(start, (sfVector2f) {1465, 540}, 6, 10);
-        start = add_particle(start, (sfVector2f) {1465, 540}, 7, 10);
+        start = add_particle(start, (sfVector2f) {1465, 540}, 4, -10);
+        start = add_particle(start, (sfVector2f) {1465, 540}, 5, -10);
+        start = add_particle(start, (sfVector2f) {1465, 540}, 6, -10);
+        start = add_particle(start, (sfVector2f) {1465, 540}, 7, -10);
         start = add_particle(start, (sfVector2f) {1465, 540}, 8, 10);
         start = add_particle(start, (sfVector2f) {1465, 540}, 9, 10);
         start = add_particle(start, (sfVector2f) {1465, 540}, 10, 10);
         start = add_particle(start, (sfVector2f) {1465, 540}, 11, 10);
         disp[page](backgrounds);
         events = evt[page](events);
-        update_particles(window, start, part_sprites);
+        update_particles(window, start);
         sfRenderWindow_display(window);
     }
     return (items);

@@ -84,3 +84,9 @@ object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
     sfSprite_setPosition(objet->sprite, pos);
     return (objet);
 }
+
+void destroy_object(object *objet)
+{
+    sfTexture_destroy(objet->texture);
+    sfSprite_destroy(objet->sprite);
+}

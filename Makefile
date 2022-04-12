@@ -18,6 +18,7 @@ SRC			=	src/json/generate/file_gestion.c			\
 				src/json/use/get/json_display_obj.c			\
 				src/json/use/edit/free_json.c				\
 				src/json/use/edit/json_edit_by_name.c		\
+				src/json/use/edit/json_add_field.c			\
 				src/json/use/json_main.c					\
 
 MAINOBJ		=	$(MAIN:.c=.o)
@@ -29,7 +30,7 @@ LIB			= 	-L. ./lib/libmy.a	\
 
 
 CPPFLAGS	+=	-I include/
-CFLAGS		+=	-Wall -Wextra -g3
+CFLAGS		+=	-Wall -Wextra -g3 -ggdb
 
 $(NAME):		$(MAINOBJ) $(OBJ)
 				make -C lib/my/

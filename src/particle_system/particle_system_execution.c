@@ -6,7 +6,7 @@
 */
 
 #include "csfml_libs.h"
-#include "particles_structures.h"
+#include "particles.h"
 #include "inventory_macros.h"
 #include "my.h"
 #include "my_csfml_utils.h"
@@ -69,8 +69,9 @@ object **setup_part_sprites(void)
     return (result);
 }
 
-struct particle *create_particle(sfVector2f pos, int type, int speed, object **textures)
+struct particle *create_particle(sfVector2f pos, int type, int speed)
 {
+    object **textures = setup_part_sprites();
     struct particle *new = malloc(sizeof(struct particle));
     new->next = NULL;
     new->pos = pos;
@@ -86,9 +87,9 @@ struct particle *create_particle(sfVector2f pos, int type, int speed, object **t
     return (new);
 }
 
-struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed, object **textures)
+struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed)
 {
-    struct particle *new = create_particle(pos, type, speed, textures);
+    struct particle *new = create_particle(pos, type, speed);
 
     new->next = first;
     return (new);
@@ -110,6 +111,7 @@ struct particle *spark(sfRenderWindow *window, struct particle *part)
     part->velocity.y *= 0.98 + decay;
     part->velocity.y += 0.05;
     part->age += 1;
+    sfSprite_rotate(part->object->sprite, SIGN(part->velocity.x) * 5);
     sfSprite_setColor(part->object->sprite, sfColor_fromRGBA(255, 255, 255, 255 - part->age));
     sfSprite_scale(part->object->sprite, (sfVector2f) {0.98 + decay, 0.98 + decay});
     sfSprite_move(part->object->sprite, part->velocity);

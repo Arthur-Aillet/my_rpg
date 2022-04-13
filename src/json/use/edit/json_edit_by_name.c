@@ -40,12 +40,12 @@ The original value is replaced by the new one.
 ! Deprecated ! > The object isn't fully duplicated. Can cause free() / edition
 conflicts.
 */
-void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t value)
+void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value)
 {
     if (obj == NULL)
         return;
     for (int i = 0; obj->fields_obj[i]; i++)
         if (my_strcmp(name, obj->fields_obj[i]) == 0) {
-            obj->data_obj[i] = value;
+            obj->data_obj[i] = duplicate_obj(value);
         }
 }

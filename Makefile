@@ -134,6 +134,7 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)creation.c				\
 							$(PARTICLES_PATH)destruction.c			\
 							$(PARTICLES_PATH)particles/dust.c		\
+							$(PARTICLES_PATH)particles/electricity.c\
 							$(PARTICLES_PATH)particles/fire.c		\
 							$(PARTICLES_PATH)particles/snow.c		\
 							$(PARTICLES_PATH)particles/spark.c		\

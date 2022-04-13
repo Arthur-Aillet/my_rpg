@@ -10,9 +10,8 @@
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
 #include "keyboard.h"
+#include "my_csfml_utils.h"
 #include <stdio.h>
-
-sfVector2f itofv2(sfVector2i vector);
 
 events_t evt_inv(events_t events)
 {

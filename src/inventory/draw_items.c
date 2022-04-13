@@ -7,13 +7,10 @@
 
 #include "inventory_structures.h"
 #include "inventory_macros.h"
+#include "inventory_prototypes.h"
 #include "my.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
-sfVector2f get_comp_pos(int comp);
-int *get_competence_state(int comp, competences_t competences);
 
 static char *my_itos(int i)
 {

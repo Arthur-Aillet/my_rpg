@@ -76,6 +76,7 @@ item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *k
         start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10);
         start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);
         start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);
+        start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);
         disp[page](backgrounds);
         events = evt[page](events);
         update_particles(window, start);

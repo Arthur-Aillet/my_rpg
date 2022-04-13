@@ -5,11 +5,10 @@
 ** MY_PROJECT_H
 */
 
-#ifndef MY_PROJECT_H
-    #define MY_PROJECT_H
+#pragma once
 
-    #include "json.h"
-    #include "my_game_struct.h"
+#include "json.h"
+#include "my_game_struct.h"
 
 int my_error_handling(int ac, char **av);
 int my_help(void);
@@ -22,5 +21,3 @@ int *init_keys(void);
 
 int my_rpg(int ac, char **av);
 int my_game(game_t *game);
-
-#endif /* !MY_PROJECT_H */

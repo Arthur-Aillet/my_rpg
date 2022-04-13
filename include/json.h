@@ -5,13 +5,7 @@
 ** json.h
 */
 
-#ifndef JSON_H
-    #define JSON_H
-
-// plutôt que de faire une liste chaineé d'objets il vaudrait mieux
-// vraiment faire un tableau, ça leur permettera de mieux naviguer dans les
-// objets. ça n'empeche pas de faire des fonctions pour trouver les objets
-// par nom !
+#pragma once
 
 typedef struct json_object_s {
     char *name;
@@ -57,5 +51,3 @@ char *get_str_by_name(json_obj_t *obj, char *name);
     #define gsbn(obj, name) get_str_by_name(obj, name)
 json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
     #define gobn(obj, name) get_obj_by_name(obj, name)
-
-#endif

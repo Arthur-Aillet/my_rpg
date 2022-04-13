@@ -5,10 +5,9 @@
 ** here be descriptions
 */
 
-#include "inventory_structures.h"
+#pragma once
 
-#ifndef MENU_PROTOTYPES_H_
-    #define MENU_PROTOTYPES_H_
+#include "inventory_structures.h"
 
 int get_competence(sfVector2f pos);
 int get_slot(sfVector2f pos);
@@ -34,5 +33,3 @@ void draw_items(sfRenderWindow *window, struct item *items, struct txtobject tex
 struct events evt_cmp(struct events events);
 struct events evt_inv(struct events events);
 struct events evt_map(struct events events);
-
-#endif /* !MENU_PROTOTYPES_H_ */

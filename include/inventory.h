@@ -5,11 +5,7 @@
 ** here be definitions
 */
 
-#ifndef structures
-    #define structures
+#pragma once
 
-    #include "inventory_macros.h"
-    #include "inventory_structures.h"
-
-
-#endif /* !structures */
+#include "inventory_macros.h"
+#include "inventory_structures.h"

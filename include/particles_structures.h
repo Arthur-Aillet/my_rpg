@@ -5,10 +5,9 @@
 ** here be explenations
 */
 
-#include <csfml_libs.h>
+#pragma once
 
-#ifndef PARTICLES_STRUCTURES_H_
-    #define PARTICLES_STRUCTURES_H_
+#include <csfml_libs.h>
 
 struct particle{
     sfVector2f pos;
@@ -21,5 +20,3 @@ struct particle{
     float speed;
     struct particle *next;
 };
-
-#endif /* !PARTICLES_STRUCTURES_H_ */

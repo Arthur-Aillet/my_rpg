@@ -5,11 +5,10 @@
 ** here be explenations
 */
 
+#pragma once
+
 #include <csfml_libs.h>
 #include "my_csfml_utils.h"
-
-#ifndef PARTICLES_STRUCTURES_H_
-    #define PARTICLES_STRUCTURES_H_
 
     #define SIGN(x) ((x > 0) ? (1) : (-1))
     #define SFSGP(x) sfSprite_getPosition(x)
@@ -34,5 +33,3 @@ void update_particles(sfRenderWindow *window, struct particle *start);
 struct particle *create_particle(sfVector2f pos, int type, int speed);
 struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
 void exterminate(struct particle *first);
-
-#endif /* !PARTICLES_STRUCTURES_H_ */

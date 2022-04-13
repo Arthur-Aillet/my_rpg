@@ -6,7 +6,7 @@
 */
 
 #include "my_button.h"
-#include "my_event.h"
+#include "keyboard.h"
 #include "my_mouse.h"
 #include "my_math.h"
 #include "my_csfml_utils.h"
@@ -24,9 +24,9 @@ void button_center_text(button_t *bouton)
     sfText_setPosition(bouton->text.text, sfSprite_getPosition(bouton->sprite));
 }
 
-void click_but(button_t *but, sfVector2f mouse_pos, sfFloatRect rect, int *keys)
+void click_but(button_t *but, sfVector2f mouse_pos, sfFloatRect rect, char *keys)
 {
-    if (MOUSE_HOVER == true && keys[leftMouse] == 3) {
+    if (MOUSE_HOVER == true && LCLICK == RELEASE) {
         but->already_clicked = false;
         if (but->click != NULL)
             sfSound_play(but->click);
@@ -40,7 +40,7 @@ void click_but(button_t *but, sfVector2f mouse_pos, sfFloatRect rect, int *keys)
         sfSprite_scale(but->sprite, INVERT_VCF(but->scale_click));
         button_center_text(but);
     }
-    if (MOUSE_HOVER == true && CLICKED && but->already_clicked == false) {
+    if (MOUSE_HOVER == true && LCLICK == PRESS && but->already_clicked == false) {
         but->already_clicked = true;
         sfText_scale(but->text.text, but->scale_click);
         sfSprite_scale(but->sprite, but->scale_click);
@@ -48,7 +48,7 @@ void click_but(button_t *but, sfVector2f mouse_pos, sfFloatRect rect, int *keys)
     }
 }
 
-void button_update_texture_state(sfVector2f mouse_pos, button_t *but, int *keys)
+void button_update_texture_state(sfVector2f mouse_pos, button_t *but, char *keys)
 {
     sfVector2u size = sfTexture_getSize(but->texture);
     sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
@@ -56,15 +56,15 @@ void button_update_texture_state(sfVector2f mouse_pos, button_t *but, int *keys)
     if (MOUSE_HOVER == false)
         sfSprite_setTextureRect(but->sprite,
             (sfIntRect){0, 0, size.x / 3, size.y});
-    if (MOUSE_HOVER == true && RELEASED)
+    if (MOUSE_HOVER == true && LCLICK == RELEASE)
         sfSprite_setTextureRect(but->sprite,
             (sfIntRect){size.x / 3, 0, size.x / 3, size.y});
-    if (MOUSE_HOVER == true && CLICKED)
+    if (MOUSE_HOVER == true && LCLICK == PRESS)
         sfSprite_setTextureRect(but->sprite,
             (sfIntRect){size.x / 3 * 2, 0, size.x / 3, size.y});
 }
 
-void update_button(sfRenderWindow *window, button_t *but, int *keys)
+void update_button(sfRenderWindow *window, button_t *but, char *keys)
 {
     sfVector2f mouse_pos = get_global_mouse_pos(window);
     sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);

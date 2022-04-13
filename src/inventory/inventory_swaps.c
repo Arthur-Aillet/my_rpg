@@ -7,7 +7,7 @@
 
 #include "inventory_structures.h"
 
-struct competences set_competence_state(int comp, struct competences comps, int state)
+competences_t set_competence_state(int comp, competences_t comps, int state)
 {
     switch (comp) {
         case (1) : comps.fireball = state;
@@ -18,15 +18,15 @@ struct competences set_competence_state(int comp, struct competences comps, int 
     return (comps);
 }
 
-struct item *swap_items(int origin, int dest, struct item *items)
+item_t *swap_items(int origin, int dest, item_t *items)
 {
-    struct item temp = items[dest];
+    item_t temp = items[dest];
     items[dest] = items[origin];
     items[origin] = temp;
     return (items);
 }
 
-struct item *add_items(int origin, int dest, struct item *items)
+item_t *add_items(int origin, int dest, item_t *items)
 {
     items[dest].quantity += items[origin].quantity;
     items[origin].quantity = 0;
@@ -34,7 +34,7 @@ struct item *add_items(int origin, int dest, struct item *items)
     return (items);
 }
 
-struct item *split_item(int origin, int dest, struct item *items, int number)
+item_t *split_item(int origin, int dest, item_t *items, int number)
 {
     items[dest].quantity = number;
     items[origin].quantity = items[origin].quantity - number;
@@ -47,7 +47,7 @@ struct item *split_item(int origin, int dest, struct item *items, int number)
     return (items);
 }
 
-struct item *level_items(int dest, int origin, int max, struct item *items)
+item_t *level_items(int dest, int origin, int max, item_t *items)
 {
     if (items[dest].type == 0 && items[origin].type == 0)
         return (items);

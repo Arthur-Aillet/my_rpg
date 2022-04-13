@@ -17,11 +17,11 @@
 typedef struct object_s {
     sfSprite *sprite;
     sfTexture *texture;
-} object;
+} object_t;
 
 sfVector2f itofv2(sfVector2i vector);
 sfVector2i ftoiv2(sfVector2f vector);
-object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f size);
-object *create_object(char *name, sfVector2f pos, sfVector2f scale);
+object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f si);
+object_t *create_object(char *name, sfVector2f pos, sfVector2f scale);
 sfImage *create_blank_image(void);
-void destroy_object(object *objet);
+void destroy_object(object_t *objet);

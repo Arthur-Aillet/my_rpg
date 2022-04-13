@@ -28,7 +28,7 @@ int object_chars_len(char *buffer)
         count++;
     }
     if (buffer[count - 1] != '}') {
-        write(2, "[JSON/object_chars_len] Invalid object end\n", 43);
+        write(2, "[JSON/object_chars_len] Invalid object_t end\n", 43);
         return 0;
     }
     return count - 1;
@@ -70,7 +70,7 @@ json_obj_t *extract_obj(char *buffer, int begin)
     buffer += begin;
     temp = select_by_quotes(buffer);
     if (temp == NULL || unexpected_eol(temp, 0)) {
-        write(2, "[JSON/extract_obj] Invalid object title.\n", 41);
+        write(2, "[JSON/extract_obj] Invalid object_t title.\n", 41);
         return NULL;
     }
     obj->name = temp;

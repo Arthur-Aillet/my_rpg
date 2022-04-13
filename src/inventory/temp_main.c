@@ -5,28 +5,15 @@
 ** temp_main
 */
 
-#include "inventory.h"
+#include "inventory_prototypes.h"
+#include "inventory_macros.h"
 #include <stdlib.h>
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 sfRenderWindow *create_window(unsigned int width, unsigned int height);
-struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
+item_t *menu(sfRenderWindow *window, item_t *items, competences_t comp, char *keys);
 
-struct item *create_items(void)
-{
-    struct item *result = malloc(sizeof (struct item) * NB_SLOTS);
-    for (int i = 0; i < NB_SLOTS; i++) {
-        result[i].quantity = 0;
-        result[i].type = NOTHING;
-        result[i].sprite = sfSprite_create();
-        result[i].texture = sfTexture_create(1, 1);
-        result[i].stack_size = 1;
-        result[i].armor_type = 5;
-    }
-    return (result);
-}
-
-struct item create_yellow_flower(struct item item, int number)
+item_t create_yellow_flower(item_t item, int number)
 {
     sfTexture_destroy(item.texture);
     item.stack_size = 255;
@@ -54,8 +41,8 @@ char *fill_str(char c, int size)
 //{
 //    int fireball = 0;
 //    int dodgeroll = 0;
-//    struct item *items = create_items();
-//    struct competences comp = {dodgeroll, fireball};
+//    item_t *items = create_items();
+//    competences_t comp = {dodgeroll, fireball};
 //    sfRenderWindow *window = create_window(1920, 1080);
 //    sfVector2f pos = {970, 540};
 //    char *keys = fill_str(0, 106);

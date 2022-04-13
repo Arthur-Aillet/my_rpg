@@ -11,4 +11,4 @@
 #include "my_csfml_utils.h"
 
 void draw_mouse(sfRenderWindow *window, sfSprite *mouse);
-void free_object(object object);
+void free_object(object_t object);

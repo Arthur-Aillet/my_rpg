@@ -19,7 +19,7 @@ char *generate_tabs(int len)
     return tabs;
 }
 
-//Prints all object data.
+//Prints all object_t data.
 void print_raw_data(json_obj_t *obj, int tab)
 {
     char *tabs = generate_tabs(tab);

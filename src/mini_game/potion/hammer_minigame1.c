@@ -17,15 +17,15 @@
 #include "my_mouse.h"
 #include "my_button.h"
 #include "particles.h"
-#include "my_event.h"
+#include "keyboard.h"
 #include "my_csfml_utils.h"
 #include "particles.h"
 
-void hammer_controls(hammer_t *elements, struct particle **start, int *keys)
+void hammer_controls(hammer_t *elements, particle_t **start, char *keys)
 {
-    if (CLICKED && sfSprite_getRotation(elements->hammer->sprite) < 41)
+    if (LCLICK == 1 && sfSprite_getRotation(elements->hammer->sprite) < 41)
         sfSprite_rotate(elements->hammer->sprite, 9);
-    if (!CLICKED && sfSprite_getRotation(elements->hammer->sprite) > 0)
+    if (LCLICK != 1 && sfSprite_getRotation(elements->hammer->sprite) > 0)
         sfSprite_rotate(elements->hammer->sprite, -9);
     if (sfSprite_getRotation(elements->hammer->sprite) >= 41
         && elements->has_spawn == false) {
@@ -65,7 +65,7 @@ void display_hammer(hammer_t *eleme, window_t *window, potion_t *pot)
     sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
 }
 
-int hammer_update(int *keys, hammer_t *elements, potion_t *pot, sfClock *clock)
+int hammer_update(char *keys, hammer_t *elements, potion_t *pot, sfClock *clock)
 {
     if (keys[sfKeyU] == PRESS)
         pot->numbers_steps += 1;
@@ -80,17 +80,17 @@ int hammer_update(int *keys, hammer_t *elements, potion_t *pot, sfClock *clock)
     return (1);
 }
 
-void hammer_loop(window_t *window, int *keys, object *mouse, potion_t *potion)
+void hammer_loop(window_t *window, char *keys, object_t *mouse, potion_t *potion)
 {
     hammer_t *elements = setup_hammer_struct();
-    struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
+    particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
 
     while (sfRenderWindow_isOpen(window->window) && open) {
         set_correct_window_size(window);
         sfRenderWindow_clear(window->window, sfBlack);
-        get_events(window->window, keys);
+        keys = get_keyboard_input(keys, window->window);
         open = hammer_update(keys, elements, potion, clock);
         hammer_controls(elements, &start, keys);
         display_hammer(elements, window, potion);

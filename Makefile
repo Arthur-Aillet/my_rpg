@@ -59,15 +59,17 @@ JSON_PATH		=			$(SRC_PATH)json/
 
 INVENTORY_PATH	=			$(SRC_PATH)inventory/
 
-PARTICLES_PATH = 			$(SRC_PATH)particle_system/
+PARTICLES_PATH	= 			$(SRC_PATH)particle_system/
+
+DIALOGUE_PATH	=			$(SRC_PATH)dialogue/
 
 ## =========================[BASICS]==========================
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
 
-EVENT_PATH		=			$(BASIC_PATH)event/
-
 WIN_PATH		=			$(BASIC_PATH)window/
+
+KEY_PATH		=			$(BASIC_PATH)keyboard/
 
 ## ==========================[MENU]===========================
 
@@ -111,26 +113,35 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c			\
 SRC_GAME		=			$(GAME_PATH)game_core.c					\
 							$(GAME_PATH)game_loop.c					\
 
-SRC_EVENT		=			$(EVENT_PATH)event.c					\
+SRC_KEY			=			$(KEY_PATH)keyboard_input.c				\
+							$(KEY_PATH)keyboard_input_init.c		\
 
 SRC_POTION		=			$(POTION_PATH)hammer_minigame1.c		\
 							$(POTION_PATH)hammer_minigame2.c		\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
-							$(INVENTORY_PATH)get_keyboard_input.c	\
 							$(INVENTORY_PATH)get_positions.c		\
 							$(INVENTORY_PATH)get_slots.c			\
 							$(INVENTORY_PATH)inventory_displays.c	\
 							$(INVENTORY_PATH)inventory_events.c		\
+							$(INVENTORY_PATH)inventory_interactions.c	\
 							$(INVENTORY_PATH)inventory_setups.c		\
 							$(INVENTORY_PATH)inventory_swaps.c		\
 							$(INVENTORY_PATH)is_adjacent_competences.c	\
-							$(INVENTORY_PATH)menu.c					\
-							$(INVENTORY_PATH)mouse.c				\
-							$(INVENTORY_PATH)pause_menu.c			\
+							$(INVENTORY_PATH)inventory.c					\
 							$(INVENTORY_PATH)temp_main.c			\
 
+SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c				\
+							$(DIALOGUE_PATH)dialogue_utils.c		\
+
 SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
+							$(PARTICLES_PATH)creation.c				\
+							$(PARTICLES_PATH)destruction.c			\
+							$(PARTICLES_PATH)particles/dust.c		\
+							$(PARTICLES_PATH)particles/fire.c		\
+							$(PARTICLES_PATH)particles/snow.c		\
+							$(PARTICLES_PATH)particles/spark.c		\
+							$(PARTICLES_PATH)particles/water.c		\
 
 SRC_WINDOW		=			$(WIN_PATH)window.c						\
 
@@ -162,16 +173,17 @@ SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
 
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
-							$(SRC_JSON)								\
-							$(SRC_INIT)								\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
 							$(SRC_POTION)							\
 							$(SRC_INVENTORY)						\
 							$(SRC_PARTICLES)						\
+							$(SRC_DIALOGUE)							\
+							$(SRC_JSON)								\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\
+							$(SRC_KEY)								\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

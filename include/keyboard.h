@@ -124,4 +124,5 @@
 #define RELEASE -1
 #define NHELD   0
 
-char *get_keyboard_input(sfEvent event, char *keys, sfRenderWindow *window);
+char *get_keyboard_input(char *keys, sfRenderWindow *window);
+char *init_keys(void);

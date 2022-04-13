@@ -10,26 +10,47 @@
 #include <csfml_libs.h>
 #include "my_csfml_utils.h"
 
-    #define SIGN(x) ((x > 0) ? (1) : (-1))
-    #define SFSGP(x) sfSprite_getPosition(x)
-    #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10
-    #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
+#define SIGN(x) ((x > 0) ? (1) : (-1))
+#define SFSGP(x) sfSprite_getPosition(x)
+#define SMOOTHY (part->pos.y - SFSGP(part->object_t->sprite).y) / 10
+#define SMOOTHX (part->pos.x - SFSGP(part->object_t->sprite).x) / 10
+#define TRANSPARENT(x) sfColor_fromRGBA(255, 255, 255, x)
 
-struct particle{
+typedef struct particle_s {
     sfVector2f pos;
     sfVector2f trajectory;
     sfVector2f velocity;
     sfVector2f scale;
-    object *object;
+    object_t *object_t;
     int age;
     int lifetime;
     int type;
     float speed;
     float rotation;
-    struct particle *next;
-};
+    struct particle_s *next;
+} particle_t;
 
-void update_particles(sfRenderWindow *window, struct particle *start);
-struct particle *create_particle(sfVector2f pos, int type, int speed);
-struct particle *add_particle(struct particle *first, sfVector2f pos, int type, int speed);
-void exterminate(struct particle *first);
+particle_t *spark(sfRenderWindow *window, particle_t *part);
+
+particle_t *rain(sfRenderWindow *window, particle_t *part);
+
+particle_t *snow(sfRenderWindow *window, particle_t *part);
+
+particle_t *fire(sfRenderWindow *window, particle_t *part);
+particle_t *fire_up(sfRenderWindow *window, particle_t *part);
+particle_t *fire_ur(sfRenderWindow *window, particle_t *part);
+particle_t *fire_right(sfRenderWindow *window, particle_t *part);
+particle_t *fire_dr(sfRenderWindow *window, particle_t *part);
+
+particle_t *dust_circle(sfRenderWindow *window, particle_t *part);
+particle_t *dust_up(sfRenderWindow *window, particle_t *part);
+particle_t *dust_ur(sfRenderWindow *window, particle_t *part);
+particle_t *dust_right(sfRenderWindow *window, particle_t *part);
+particle_t *dust_dr(sfRenderWindow *window, particle_t *part);
+
+void update_particles(sfRenderWindow *window,
+particle_t *start);
+particle_t *create_particle(sfVector2f pos, int type, int speed);
+particle_t *add_particle(particle_t *first, sfVector2f pos, int, int);
+void exterminate(particle_t *first);
+void remove_particle(particle_t *previous);

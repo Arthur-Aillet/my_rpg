@@ -67,10 +67,14 @@ static char *get_scroll(sfEvent event, char *keys)
     return (keys);
 }
 
-char *get_keyboard_input(sfEvent event, char *keys, sfRenderWindow *window)
+char *get_keyboard_input(char *keys, sfRenderWindow *window)
 {
+    sfEvent event;
+
     cleanup_keys(keys);
     while (sfRenderWindow_pollEvent(window, &event)) {
+        if (event.type == sfEvtClosed)
+            sfRenderWindow_close(window);
         keys = get_click(event, keys);
         keys = get_scroll(event, keys);
         if (event.type == sfEvtKeyPressed)

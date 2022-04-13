@@ -19,7 +19,7 @@
 #include "particles.h"
 #include "my_event.h"
 #include "my_csfml_utils.h"
-#include "particles_structures.h"
+#include "particles.h"
 
 void hammer_controls(hammer_t *elements, struct particle **start, int *keys)
 {

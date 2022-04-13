@@ -31,6 +31,9 @@ maps_t *init_game_maps(void)
 
     if (maps == NULL)
         return NULL;
+    printf("===========================================\n");
+    print_raw_data(obj, 1);
+    printf("===========================================\n");
     init_map_objects(maps, obj);
     return maps;
 }

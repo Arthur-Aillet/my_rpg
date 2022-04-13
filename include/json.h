@@ -73,7 +73,7 @@ json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
 // ####################### EDIT DATA ######################
 void edit_int_by_name(json_obj_t *obj, char *name, int value);
 void edit_str_by_name(json_obj_t *obj, char *name, char *value);
-void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t value);
+void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value);
 json_obj_t duplicate_obj(json_obj_t *obj);
 
 // ####################### add DATA #######################

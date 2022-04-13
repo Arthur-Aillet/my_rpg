@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-MAIN		=	src/json/localmain.c			\
+MAIN		=	src/json/localmain.c						\
 
 SRC			=	src/json/generate/file_gestion.c			\
 				src/json/generate/str_preprocessing.c		\

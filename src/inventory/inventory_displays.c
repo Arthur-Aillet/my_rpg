@@ -6,7 +6,7 @@
 */
 
 #include "inventory_structures.h"
-#include "menu_prototypes.h"
+#include "inventory_prototypes.h"
 #include <stdio.h>
 
 void disp_inv(struct backgrounds bgs)

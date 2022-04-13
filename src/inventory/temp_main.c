@@ -5,26 +5,13 @@
 ** temp_main
 */
 
-#include "inventory.h"
+#include "inventory_prototypes.h"
+#include "inventory_macros.h"
 #include <stdlib.h>
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 sfRenderWindow *create_window(unsigned int width, unsigned int height);
 struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
-
-struct item *create_items(void)
-{
-    struct item *result = malloc(sizeof (struct item) * NB_SLOTS);
-    for (int i = 0; i < NB_SLOTS; i++) {
-        result[i].quantity = 0;
-        result[i].type = NOTHING;
-        result[i].sprite = sfSprite_create();
-        result[i].texture = sfTexture_create(1, 1);
-        result[i].stack_size = 1;
-        result[i].armor_type = 5;
-    }
-    return (result);
-}
 
 struct item create_yellow_flower(struct item item, int number)
 {

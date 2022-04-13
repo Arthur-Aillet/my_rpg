@@ -32,22 +32,22 @@ static char *my_itos(int i)
     return (result);
 }
 
-void draw_end_at(sfRenderWindow *window, struct item item, struct txtobject text)
+void draw_end_at(sfRenderWindow *window, struct item item, struct txtobject txt)
 {
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
     sfVector2f pos = sfSprite_getPosition(item.sprite);
     pos.x += 100;
     pos.y += 100;
-    sfText_setFont(text.text, text.font);
-    sfText_setString(text.text, string);
-    sfText_setCharacterSize(text.text, 25);
-    sfText_setColor(text.text, sfWhite);
-    sfText_setOutlineThickness(text.text, 1);
-    sfText_setOutlineColor(text.text, sfBlack);
-    sfText_setOrigin(text.text, origin);
-    sfText_setPosition(text.text, pos);
-    sfRenderWindow_drawText(window, text.text, NULL);
+    sfText_setFont(txt.text, txt.font);
+    sfText_setString(txt.text, string);
+    sfText_setCharacterSize(txt.text, 25);
+    sfText_setColor(txt.text, sfWhite);
+    sfText_setOutlineThickness(txt.text, 1);
+    sfText_setOutlineColor(txt.text, sfBlack);
+    sfText_setOrigin(txt.text, origin);
+    sfText_setPosition(txt.text, pos);
+    sfRenderWindow_drawText(window, txt.text, NULL);
     free(string);
 }
 
@@ -64,11 +64,11 @@ void print_item(sfRenderWindow *window, struct item item, sfVector2f pos)
 
 void draw_competences(sfRenderWindow *window, struct competences *comp)
 {
-    sfTexture *texture = sfTexture_createFromFile("assets/img/select.png", NULL);
+    sfTexture *txture = sfTexture_createFromFile("assets/img/select.png", NULL);
     sfSprite *select = sfSprite_create();
     int *state = NULL;
 
-    sfSprite_setTexture(select, texture, 0);
+    sfSprite_setTexture(select, txture, 0);
     for (int i = 0; i < 67; i++) {
         sfSprite_setPosition(select, get_comp_pos(i));
         state = get_competence_state(i, *comp);
@@ -78,7 +78,7 @@ void draw_competences(sfRenderWindow *window, struct competences *comp)
     return;
 }
 
-void draw_items(sfRenderWindow *window, struct item *items, struct txtobject text)
+void draw_items(sfRenderWindow *wnd, struct item *items, struct txtobject txt)
 {
     sfVector2f pos = {0, 0};
 
@@ -89,9 +89,9 @@ void draw_items(sfRenderWindow *window, struct item *items, struct txtobject tex
     }
     for (int i = NB_SLOTS - 1; i >= 0; i--) {
         if (items[i].quantity != 0) {
-            pos = get_slot_pos(i, window);
-            print_item(window, items[i], pos);
-            draw_end_at(window, items[i], text);
+            pos = get_slot_pos(i, wnd);
+            print_item(wnd, items[i], pos);
+            draw_end_at(wnd, items[i], txt);
         }
     }
 }

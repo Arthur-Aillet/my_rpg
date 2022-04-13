@@ -1,0 +1,29 @@
+{
+    "maps": {
+        "field": {
+            "tileset": "assets/in_game/tileset/tileset_test.png",
+            "scheme": "assets/in_game/maps/field.map",
+            "definition": 84,
+            "height": 1,
+            "width": 1
+        },"house": {
+            "tileset": "assets/in_game/tileset/tileset_test.png",
+            "scheme": "assets/in_game/maps/house.map",
+            "definition": 84,
+            "height": 1,
+            "width": 1
+        },"garden": {
+            "tileset": "assets/in_game/tileset/tileset_test.png",
+            "scheme": "assets/in_game/maps/garden.map",
+            "definition": 84,
+            "height": 1,
+            "width": 1
+        },"town": {
+            "tileset": "assets/in_game/tileset/tileset_test.png",
+            "scheme": "assets/in_game/maps/town.map",
+            "definition": 84,
+            "height": 1,
+            "width": 1
+        }
+    }
+}

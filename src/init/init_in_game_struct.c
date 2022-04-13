@@ -28,13 +28,20 @@ maps_t *init_game_maps(void)
 {
     maps_t *maps = malloc(sizeof(maps_t));
     json_obj_t *obj = create_json_object("config/maps.json");
+    int i = 0;
+    json_obj_t *tmp = get_obj_by_index(obj, i);
 
     if (maps == NULL)
         return NULL;
-    printf("===========================================\n");
-    print_raw_data(obj, 1);
-    printf("===========================================\n");
-    init_map_objects(maps, obj);
+    while (tmp != NULL)
+        tmp = get_obj_by_index(obj, i++);
+    maps = malloc(sizeof(maps_t) * i);
+    i = 0;
+    while (tmp != NULL) {
+        tmp = get_obj_by_index(obj, i);
+        init_map_objects(maps, tmp, i++);
+    }
+    maps[i] = NULL;
     return maps;
 }
 

@@ -21,11 +21,11 @@
 #include "my_csfml_utils.h"
 #include "particles.h"
 
-void hammer_controls(hammer_t *elements, struct particle **start, char *keys)
+void hammer_controls(hammer_t *elements, particle_t **start, char *keys)
 {
-    if (LCLICK == PRESS && sfSprite_getRotation(elements->hammer->sprite) < 41)
+    if (LCLICK == 1 && sfSprite_getRotation(elements->hammer->sprite) < 41)
         sfSprite_rotate(elements->hammer->sprite, 9);
-    if (LCLICK != PRESS && sfSprite_getRotation(elements->hammer->sprite) > 0)
+    if (LCLICK != 1 && sfSprite_getRotation(elements->hammer->sprite) > 0)
         sfSprite_rotate(elements->hammer->sprite, -9);
     if (sfSprite_getRotation(elements->hammer->sprite) >= 41
         && elements->has_spawn == false) {
@@ -83,7 +83,7 @@ int hammer_update(char *keys, hammer_t *elements, potion_t *pot, sfClock *clock)
 void hammer_loop(window_t *window, char *keys, object_t *mouse, potion_t *potion)
 {
     hammer_t *elements = setup_hammer_struct();
-    struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
+    particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
 

@@ -54,13 +54,8 @@ static object_t **setup_part_sprites(void)
 
 particle_t *create_particle(sfVector2f pos, int type, int speed)
 {
-<<<<<<< HEAD
-    object **textures = setup_part_sprites();
-    particle_t *new = malloc(sizeof(particle_t));
-=======
     object_t **textures = setup_part_sprites();
-    particle *new = malloc(sizeof(particle));
->>>>>>> 42a7175 ([MERGE])
+    particle_t *new = malloc(sizeof(particle_t));
     new->next = NULL;
     new->pos = pos;
     new->trajectory = pos;

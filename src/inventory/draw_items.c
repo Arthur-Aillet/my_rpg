@@ -75,7 +75,6 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
         if (state != 0)
             sfRenderWindow_drawSprite(window, select, NULL);
     }
-    return;
 }
 
 void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)

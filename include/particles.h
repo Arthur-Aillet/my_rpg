@@ -28,7 +28,7 @@ typedef struct particle_s {
     int type;
     float speed;
     float rotation;
-    particle_t *next;
+    struct particle_s *next;
 } particle_t;
 
 particle_t *spark(sfRenderWindow *window, particle_t *part);

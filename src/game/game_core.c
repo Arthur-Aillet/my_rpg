@@ -20,9 +20,9 @@
 #include "potions.h"
 #include "inventory_structures.h"
 
-struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
-struct item create_yellow_flower(struct item item, int number);
-struct item *create_items(void);
+item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys);
+item_t create_yellow_flower(item_t item, int number);
+item_t *create_items(void);
 
 game_t *init_game(void)
 {
@@ -38,9 +38,11 @@ game_t *init_game(void)
 int game_loop(void)
 {
     game_t *game = init_game();
-        struct item *items = create_items();
+        item_t *items = create_items();
         items[10] = create_yellow_flower(items[10], 100);
-        struct competences comp = {0, 0};
+        competences_t *comp = malloc(sizeof(competences_t));
+        comp->dodge_roll = 0;
+        comp->fireball = 0;
     object_t *test = create_object("test", VCF{0, 0}, VCF{60, 33});
     object_t *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
     object_t *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});

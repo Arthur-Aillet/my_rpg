@@ -11,7 +11,7 @@
 static int get_part_deathtime(int type)
 {
     switch (type) {
-        case (0) : return (rand() % 260);
+        case (0) : return (rand() % 200 + 70);
         case (1) : return (rand() % 100);
         case (2) : return (500);
         case (3) : return (90);
@@ -52,6 +52,7 @@ static object_t **setup_part_sprites(void)
     return (result);
 }
 
+/*creates one particle of given type and gives it a speed and a position*/
 particle_t *create_particle(sfVector2f pos, int type, int speed)
 {
     object_t **textures = setup_part_sprites();
@@ -60,7 +61,7 @@ particle_t *create_particle(sfVector2f pos, int type, int speed)
     new->pos = pos;
     new->trajectory = pos;
     new->scale = (sfVector2f) {1, 1};
-    new->object_t = create_textured_object(textures[type]->texture,
+    new->object = create_textured_object(textures[type]->texture,
         pos, sfSprite_getScale(textures[type]->sprite));
     new->speed = speed;
     new->type = type;
@@ -71,6 +72,8 @@ particle_t *create_particle(sfVector2f pos, int type, int speed)
     return (new);
 }
 
+/*creates one particle of given type, gives it a speed and a position,
+then adds it to the chained list*/
 particle_t *add_particle(particle_t *first, sfVector2f pos, int type, int speed)
 {
     particle_t *new = create_particle(pos, type, speed);

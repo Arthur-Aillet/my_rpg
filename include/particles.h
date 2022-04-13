@@ -11,18 +11,34 @@
 #ifndef PARTICLES_STRUCTURES_H_
     #define PARTICLES_STRUCTURES_H_
 
+    #define MAX(x, y) (x > y) ? (x) : (y)
     #define SIGN(x) ((x > 0) ? (1) : (-1))
     #define SFSGP(x) sfSprite_getPosition(x)
-    #define SMOOTHY (part->pos.y - SFSGP(part->object_t->sprite).y) / 10
-    #define SMOOTHX (part->pos.x - SFSGP(part->object_t->sprite).x) / 10
+    #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10
+    #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
     #define TRANSPARENT(x) sfColor_fromRGBA(255, 255, 255, x)
+    #define FADE TRANSPARENT(MAX(255 - (part->age * 255 / part->lifetime), 0))
+
+    #define SNOW            0
+    #define RAIN            1
+    #define FIRE            2
+    #define DUST_CIRCLE     3
+    #define DUST_UP         4
+    #define DUST_UP_RIGHT   5
+    #define DUST_RIGHT      6
+    #define DUST_DOWN_RIGHT 7
+    #define FIRE_UP         8
+    #define FIRE_UP_RIGHT   9
+    #define FIRE_RIGHT      10
+    #define FIRE_DOWN_RIGHT 11
+    #define SPARK           12
 
 typedef struct particle_s {
     sfVector2f pos;
     sfVector2f trajectory;
     sfVector2f velocity;
     sfVector2f scale;
-    object_t *object_t;
+    object_t *object;
     int age;
     int lifetime;
     int type;

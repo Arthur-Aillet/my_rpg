@@ -14,7 +14,7 @@
 
 sfVector2f itofv2(sfVector2i vector);
 
-struct events evt_inv(struct events events)
+events_t evt_inv(events_t events)
 {
     sfVector2i mousepos = sfMouse_getPositionRenderWindow(events.window);
     static int pressed = 0;
@@ -33,7 +33,7 @@ struct events evt_inv(struct events events)
     return (events);
 }
 
-struct events evt_map(struct events events)
+events_t evt_map(events_t events)
 {
     events.keys = get_keyboard_input(events.keys, events.window);
     if (events.D == PRESS)
@@ -43,7 +43,7 @@ struct events evt_map(struct events events)
     return (events);
 }
 
-struct events evt_cmp(struct events events)
+events_t evt_cmp(events_t events)
 {
     sfVector2i mousepos = sfMouse_getPositionRenderWindow(events.window);
     static int competence = 0;

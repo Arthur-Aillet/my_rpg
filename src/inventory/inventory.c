@@ -23,9 +23,9 @@ object setup_mouse(void);
 sfVector2f itofv2(sfVector2i vector);
 void display_dialogue(sfRenderWindow *window, char *json_path, char *keys, font_t **fonts);
 
-struct item *create_items(void)
+item_t *create_items(void)
 {
-    struct item *result = malloc(sizeof (struct item) * NB_SLOTS);
+    item_t *result = malloc(sizeof (item_t) * NB_SLOTS);
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;
@@ -37,13 +37,13 @@ struct item *create_items(void)
     return (result);
 }
 
-void free_txtobject(struct txtobject object)
+void free_txtobject(txtobject_t object)
 {
     sfText_destroy(object.text);
     sfFont_destroy(object.font);
 }
 
-int count_item(struct item *items, int type)
+int count_item(item_t *items, int type)
 {
     int count = 0;
 
@@ -53,14 +53,14 @@ int count_item(struct item *items, int type)
     return (count);
 }
 
-struct item *menu(sfRenderWindow *window, struct item *items, struct competences *comp, char *keys)
+item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys)
 {
-    struct backgrounds backgrounds = setup_backgrounds(items, comp, window, keys);
+    backgrounds_t backgrounds = setup_backgrounds(items, comp, window, keys);
     static int page = 0;
-    struct events events = {window, items, &page, keys, comp};
-    static void (*disp[3])(struct backgrounds) = {disp_inv, disp_map, disp_cmp};
-    struct events (*evt[3])(struct events) = {evt_inv, evt_map, evt_cmp};
-    struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
+    events_t events = {window, items, &page, keys, comp};
+    static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
+    events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
+    particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     font_t **fonts = font_create_array();
 
     while (sfRenderWindow_isOpen(window)) {

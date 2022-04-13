@@ -13,7 +13,7 @@
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 sfVector2f get_comp_pos(int comp);
-int *get_competence_state(int comp, struct competences competences);
+int *get_competence_state(int comp, competences_t competences);
 
 static char *my_itos(int i)
 {
@@ -32,7 +32,7 @@ static char *my_itos(int i)
     return (result);
 }
 
-void draw_end_at(sfRenderWindow *window, struct item item, struct txtobject txt)
+void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
@@ -51,7 +51,7 @@ void draw_end_at(sfRenderWindow *window, struct item item, struct txtobject txt)
     free(string);
 }
 
-void print_item(sfRenderWindow *window, struct item item, sfVector2f pos)
+void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 {
     sfVector2f scale = {4, 4};
     sfVector2f mvt;
@@ -62,7 +62,7 @@ void print_item(sfRenderWindow *window, struct item item, sfVector2f pos)
     sfRenderWindow_drawSprite(window, item.sprite, NULL);
 }
 
-void draw_competences(sfRenderWindow *window, struct competences *comp)
+void draw_competences(sfRenderWindow *window, competences_t *comp)
 {
     sfTexture *txture = sfTexture_createFromFile("assets/img/select.png", NULL);
     sfSprite *select = sfSprite_create();
@@ -78,7 +78,7 @@ void draw_competences(sfRenderWindow *window, struct competences *comp)
     return;
 }
 
-void draw_items(sfRenderWindow *wnd, struct item *items, struct txtobject txt)
+void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)
 {
     sfVector2f pos = {0, 0};
 

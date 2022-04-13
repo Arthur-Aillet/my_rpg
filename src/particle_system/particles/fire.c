@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-particle *fire_dr(sfRenderWindow *window, particle *part)
+particle_t *fire_dr(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
     float rdom = fmod(rand(), f) - ABS(part->speed);
@@ -25,7 +25,7 @@ particle *fire_dr(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *fire_right(sfRenderWindow *window, particle *part)
+particle_t *fire_right(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
 
@@ -39,7 +39,7 @@ particle *fire_right(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *fire_ur(sfRenderWindow *window, particle *part)
+particle_t *fire_ur(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
     float rdom = fmod(rand(), f) - ABS(part->speed);
@@ -54,7 +54,7 @@ particle *fire_ur(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *fire_up(sfRenderWindow *window, particle *part)
+particle_t *fire_up(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
 
@@ -68,7 +68,7 @@ particle *fire_up(sfRenderWindow *window, particle *part)
     return (part);
 }
 
-particle *fire(sfRenderWindow *window, particle *part)
+particle_t *fire(sfRenderWindow *window, particle_t *part)
 {
     part->age += 1;
     part->pos.x += fmod(rand(), (part->speed + 1)) - part->speed / 2;

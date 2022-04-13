@@ -11,9 +11,9 @@
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 sfRenderWindow *create_window(unsigned int width, unsigned int height);
-struct item *menu(sfRenderWindow *window, struct item *items, struct competences comp, char *keys);
+item_t *menu(sfRenderWindow *window, item_t *items, competences_t comp, char *keys);
 
-struct item create_yellow_flower(struct item item, int number)
+item_t create_yellow_flower(item_t item, int number)
 {
     sfTexture_destroy(item.texture);
     item.stack_size = 255;
@@ -41,8 +41,8 @@ char *fill_str(char c, int size)
 //{
 //    int fireball = 0;
 //    int dodgeroll = 0;
-//    struct item *items = create_items();
-//    struct competences comp = {dodgeroll, fireball};
+//    item_t *items = create_items();
+//    competences_t comp = {dodgeroll, fireball};
 //    sfRenderWindow *window = create_window(1920, 1080);
 //    sfVector2f pos = {970, 540};
 //    char *keys = fill_str(0, 106);

@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-particle *snow(sfRenderWindow *window, particle *part)
+particle_t *snow(sfRenderWindow *window, particle_t *part)
 {
     float rdom = fmod(rand(), part->speed * 100) / 100 * 3 / 2;
 

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** rpg - particle destruction
+** rpg - particle_t destruction
 ** File description:
 ** i have become death destroyer of worlds
 */
@@ -8,9 +8,9 @@
 #include "particles.h"
 #include <stdlib.h>
 
-void remove_particle(particle *previous)
+void remove_particle(particle_t *previous)
 {
-    particle *temp = NULL;
+    particle_t *temp = NULL;
 
     if (previous->next != NULL) {
         temp = previous->next->next;
@@ -20,7 +20,7 @@ void remove_particle(particle *previous)
     previous->next = temp;
 }
 
-void exterminate(particle *first)
+void exterminate(particle_t *first)
 {
     while(first->next != NULL)
         remove_particle(first);

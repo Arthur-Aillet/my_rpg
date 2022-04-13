@@ -52,10 +52,10 @@ static object **setup_part_sprites(void)
     return (result);
 }
 
-particle *create_particle(sfVector2f pos, int type, int speed)
+particle_t *create_particle(sfVector2f pos, int type, int speed)
 {
     object **textures = setup_part_sprites();
-    particle *new = malloc(sizeof(particle));
+    particle_t *new = malloc(sizeof(particle_t));
     new->next = NULL;
     new->pos = pos;
     new->trajectory = pos;
@@ -71,9 +71,9 @@ particle *create_particle(sfVector2f pos, int type, int speed)
     return (new);
 }
 
-particle *add_particle(particle *first, sfVector2f pos, int type, int speed)
+particle_t *add_particle(particle_t *first, sfVector2f pos, int type, int speed)
 {
-    particle *new = create_particle(pos, type, speed);
+    particle_t *new = create_particle(pos, type, speed);
 
     new->next = first;
     return (new);

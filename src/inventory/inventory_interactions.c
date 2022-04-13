@@ -10,7 +10,7 @@
 #include "keyboard.h"
 #include "csfml_libs.h"
 
-struct item *pickup_item(struct item new, struct item *items)
+item_t *pickup_item(item_t new, item_t *items)
 {
     int free_spot = 0;
 
@@ -28,7 +28,7 @@ struct item *pickup_item(struct item new, struct item *items)
     return (items);
 }
 
-struct item *pickup_items(struct item *items, char *keys, int *pressed, int slot)
+item_t *pickup_items(item_t *items, char *keys, int *pressed, int slot)
 {
     if (items[slot].type != 0) {
         switch ((LCLICK == 2) * 4 + (RCLICK == 2) * 2 + (LSHIFT == 1)) {
@@ -47,7 +47,7 @@ struct item *pickup_items(struct item *items, char *keys, int *pressed, int slot
     return (items);
 }
 
-static struct item *equip(int pressed, int slot, struct item *items)
+static item_t *equip(int pressed, int slot, item_t *items)
 {
     if (items[0].armor_type == slot - 60 || items[0].armor_type == 5) {
         return (swap_items(slot, 0, items));
@@ -55,7 +55,7 @@ static struct item *equip(int pressed, int slot, struct item *items)
     return (swap_items(pressed, 0, items));
 }
 
-struct item *drop_items(struct item *items, int pressed, int slot)
+item_t *drop_items(item_t *items, int pressed, int slot)
 {
     int ptype = (items[pressed].type == items[0].type) * 4;
     if (items[0].type == 0)
@@ -84,7 +84,7 @@ struct item *drop_items(struct item *items, int pressed, int slot)
     return (items);
 }
 
-struct item *consume(struct item *items, int type, int quantity)
+item_t *consume(item_t *items, int type, int quantity)
 {
     int nb_items = count_item(items, type);
     int j = 0;

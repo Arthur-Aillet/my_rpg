@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-particle *dust_dr(sfRenderWindow *window, particle *part)
+particle_t *dust_dr(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
     float rdom = fmod(rand(), f) - ABS(part->speed);
@@ -26,7 +26,7 @@ particle *dust_dr(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *dust_right(sfRenderWindow *window, particle *part)
+particle_t *dust_right(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
 
@@ -41,7 +41,7 @@ particle *dust_right(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *dust_ur(sfRenderWindow *window, particle *part)
+particle_t *dust_ur(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
     float rdom = fmod(rand(), f) - ABS(part->speed);
@@ -57,7 +57,7 @@ particle *dust_ur(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *dust_up(sfRenderWindow *window, particle *part)
+particle_t *dust_up(sfRenderWindow *window, particle_t *part)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
     part->age += 1;
@@ -71,7 +71,7 @@ particle *dust_up(sfRenderWindow *window, particle *part)
     return(part);
 }
 
-particle *dust_circle(sfRenderWindow *window, particle *part)
+particle_t *dust_circle(sfRenderWindow *window, particle_t *part)
 {
     float rdom = fmod(rand(), (part->speed * 2 + 1) * 100) / 100 - part->speed;
 

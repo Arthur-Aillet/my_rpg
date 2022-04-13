@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-particle *spark(sfRenderWindow *window, particle *part)
+particle_t *spark(sfRenderWindow *window, particle_t *part)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;
     float decay = (float) (rand() % 7 - 3) / 100;

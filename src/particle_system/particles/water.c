@@ -7,7 +7,7 @@
 
 #include "particles.h"
 
-particle *rain(sfRenderWindow *window, particle *part)
+particle_t*rain(sfRenderWindow *window, particle_t*part)
 {
     part->age += 1;
     part->velocity.y = part->speed;

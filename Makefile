@@ -112,6 +112,7 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
 							$(POTION_PATH)hammer_minigame1.c		\
 							$(POTION_PATH)hammer_minigame2.c		\
 							$(POTION_PATH)minigame.c				\
+							$(POTION_PATH)mortar_minigame1.c		\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
 							$(INVENTORY_PATH)get_keyboard_input.c	\

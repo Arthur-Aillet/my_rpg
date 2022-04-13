@@ -32,5 +32,5 @@ void destroy_minigame_struct(minigame_t *hammer);
 minigame_t *setup_hammer_struct(void);
 minigame_t *setup_elements(void);
 void hammer_loop(window_t *window, int *keys, sound_t **sound, object *mouse, potion_t *potion);
-
+void mortar_loop(window_t *window, int *keys, sound_t **sounds, object *mouse, potion_t *potion);
 #endif /* !POTIONS_H_ */

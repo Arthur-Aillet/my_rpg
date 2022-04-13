@@ -51,6 +51,7 @@ window_t *generate_default_window(void)
     window->framerate = 75;
     window->vsync = true;
     window->type = 1;
+    create_windows(window);
     return (window);
 }
 

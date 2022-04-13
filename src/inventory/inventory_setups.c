@@ -9,9 +9,9 @@
 #include "my_csfml_utils.h"
 #include <stdlib.h>
 
-static object **setup_pages(void)
+static object_t **setup_pages(void)
 {
-    object **result = malloc(sizeof(object *) * 4);
+    object_t **result = malloc(sizeof(object_t *) * 4);
     sfVector2f scale = {4, 4};
     sfVector2f pos = {0, 0};
 
@@ -22,17 +22,17 @@ static object **setup_pages(void)
     return (result);
 }
 
-static struct txtobject setup_text(void)
+static txtobject_t setup_text(void)
 {
-    struct txtobject result;
+    txtobject_t result;
     result.font = sfFont_createFromFile("assets/font/arcade.TTF");
     result.text = sfText_create();
     return (result);
 }
 
-struct backgrounds setup_backgrounds(struct item *items, struct competences *comp, sfRenderWindow *window, char *keys)
+backgrounds_t setup_backgrounds(item_t *items, competences_t *comp, sfRenderWindow *window, char *keys)
 {
-    struct backgrounds result;
+    backgrounds_t result;
 
     result.items = items;
     result.pages = setup_pages();

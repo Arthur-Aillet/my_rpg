@@ -19,15 +19,15 @@
 #include "my_mouse.h"
 #include "my_button.h"
 #include "particles.h"
-#include "my_event.h"
+#include "keyboard.h"
 #include "my_csfml_utils.h"
-#include "particles_structures.h"
+#include "particles.h"
 
-void hammer_controls(minigame_t *elements, struct particle **start, int *keys, sfSound *sound)
+void hammer_controls(minigame_t *elements, particle_t **start, char *keys, sfSound *sound)
 {
-    if (CLICKED && sfSprite_getRotation(elements->hammer->sprite) < 41)
+    if (LCLICK == 1 && sfSprite_getRotation(elements->hammer->sprite) < 41)
         sfSprite_rotate(elements->hammer->sprite, 9);
-    if (!CLICKED && sfSprite_getRotation(elements->hammer->sprite) > 0)
+    if (LCLICK != 1 && sfSprite_getRotation(elements->hammer->sprite) > 0)
         sfSprite_rotate(elements->hammer->sprite, -9);
     if (sfSprite_getRotation(elements->hammer->sprite) >= 41
         && elements->has_spawn == false) {
@@ -68,7 +68,7 @@ void display_hammer(minigame_t *eleme, window_t *window, potion_t *pot)
     sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
 }
 
-int hammer_update(int *keys, minigame_t *elements, potion_t *pot, sfClock *clock)
+int hammer_update(char *keys, minigame_t *elements, potion_t *pot, sfClock *clock)
 {
     if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
         return (0);
@@ -81,24 +81,24 @@ int hammer_update(int *keys, minigame_t *elements, potion_t *pot, sfClock *clock
     return (1);
 }
 
-void hammer_loop(window_t *window, int *keys, sound_t **sounds, object *mouse, potion_t *potion)
+void hammer_loop(game_t *game, potion_t *potion)
 {
     minigame_t *elements = setup_hammer_struct();
-    struct particle *start = create_particle((sfVector2f) {0, 0}, 0, 0);
+    particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
-    sfSound *sound = sfSound_copy(find_sound("anvil.ogg", sounds));
+    sfSound *sound = sfSound_copy(find_sound("anvil.ogg", game->sounds));
 
-    while (sfRenderWindow_isOpen(window->window) && open) {
-        set_correct_window_size(window);
-        sfRenderWindow_clear(window->window, sfBlack);
-        get_events(window->window, keys);
-        open = hammer_update(keys, elements, potion, clock);
-        hammer_controls(elements, &start, keys, sound);
-        display_hammer(elements, window, potion);
-        update_particles(window->window, start);
-        update_mouse_cursor(window->window, mouse);
-        sfRenderWindow_display(window->window);
+    while (sfRenderWindow_isOpen(game->window->window) && open) {
+        set_correct_window_size(game->window);
+        sfRenderWindow_clear(game->window->window, sfBlack);
+        game->keys = get_keyboard_input(game->keys, game->window->window);
+        open = hammer_update(game->keys, elements, potion, clock);
+        hammer_controls(elements, &start, game->keys, sound);
+        display_hammer(elements, game->window, potion);
+        update_particles(game->window->window, start);
+        update_mouse_cursor(game->window->window, game->mouse);
+        sfRenderWindow_display(game->window->window);
     }
     sfClock_destroy(clock);
     destroy_minigame_struct(elements);

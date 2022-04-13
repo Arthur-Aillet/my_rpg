@@ -17,9 +17,9 @@
 #include "my_mouse.h"
 #include "my_button.h"
 #include "particles.h"
-#include "my_event.h"
+#include "keyboard.h"
 #include "my_csfml_utils.h"
-#include "particles_structures.h"
+#include "particles.h"
 
 minigame_t *setup_elements(void)
 {

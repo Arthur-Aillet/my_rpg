@@ -8,43 +8,44 @@
 
 #ifndef INVENTORY_STRUCTURES_H_
     #define INVENTORY_STRUCTURES_H_
+
     #include "csfml_libs.h"
     #include "my_csfml_utils.h"
 
-    struct competences {
+    typedef struct competences_s {
         int dodge_roll;
         int fireball;
-    };
+    } competences_t;
 
-    struct item {
+    typedef struct item_s {
         sfSprite *sprite;
         sfTexture *texture;
         int quantity;
         int stack_size;
         int type;
         int armor_type;
-    };
+    } item_t;
 
-    struct txtobject {
+    typedef struct txtobject_s {
         sfText *text;
         sfFont *font;
-    };
+    } txtobject_t;
 
-    struct backgrounds {
+    typedef struct backgrounds_s {
         sfRenderWindow *window;
-        struct item *items;
-        object **pages;
-        struct txtobject text;
+        item_t *items;
+        object_t **pages;
+        txtobject_t text;
         char *keys;
-        struct competences *comp;
-    };
+        competences_t *comp;
+    } backgrounds_t;
 
-    struct events {
+    typedef struct events_s {
         sfRenderWindow *window;
-        struct item *items;
+        item_t *items;
         int *page;
         char *keys;
-        struct competences *comp;
-    };
+        competences_t *comp;
+    } events_t;
 
 #endif /* !INVENTORY_STRUCTURES_H_ */

@@ -155,17 +155,21 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\
 
-SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
-							$(JSON_PATH)generate/str_preprocessing.c	\
-							$(JSON_PATH)generate/object_preprocessing.c	\
-							$(JSON_PATH)generate/extract_fields.c		\
-							$(JSON_PATH)generate/json_split.c			\
+SRC_JSON		=			$(JSON_PATH)generate/allocation.c		\
+							$(JSON_PATH)generate/duplicate_data.c	\
+							$(JSON_PATH)generate/extract_fields.c	\
+							$(JSON_PATH)generate/file_gestion.c		\
 							$(JSON_PATH)generate/json_error_handling.c	\
-							$(JSON_PATH)use/free_json.c					\
-							$(JSON_PATH)use/json_get_by_name.c			\
-							$(JSON_PATH)use/json_get_by_index.c			\
-							$(JSON_PATH)use/json_display_obj.c			\
-							$(JSON_PATH)use/main_json.c					\
+							$(JSON_PATH)generate/json_split.c			\
+							$(JSON_PATH)generate/object_preprocessing.c	\
+							$(JSON_PATH)generate/str_preprocessing.c	\
+							$(JSON_PATH)use/edit/json_add_field.c	\
+							$(JSON_PATH)use/edit/json_edit_by_name.c	\
+							$(JSON_PATH)use/edit/manage_json.c		\
+							$(JSON_PATH)use/get/json_display_obj.c	\
+							$(JSON_PATH)use/get/json_get_by_index.c	\
+							$(JSON_PATH)use/get/json_get_by_name.c	\
+							$(JSON_PATH)json_main.c
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

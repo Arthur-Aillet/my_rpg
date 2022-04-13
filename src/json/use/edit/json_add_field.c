@@ -68,7 +68,7 @@ Used to add a new field to the type json_obj_t. Name will be the name with wich
 you will be able to get the added value with get_obj_by_name()
 The value is duplicated so the one given can be freed.
 ! this function is deprecated because lead to heavy code and
-has not been fully tested !
+has one valgrind error !
 */
 void add_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value)
 {

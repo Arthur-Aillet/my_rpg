@@ -68,9 +68,9 @@ DIALOGUE_PATH	=			$(SRC_PATH)dialogue/
 
 UTILS_PATH		=			$(BASIC_PATH)utils/
 
-EVENT_PATH		=			$(BASIC_PATH)event/
-
 WIN_PATH		=			$(BASIC_PATH)window/
+
+KEY_PATH		=			$(BASIC_PATH)keyboard/
 
 ## ==========================[MENU]===========================
 
@@ -108,14 +108,14 @@ SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
-SRC_EVENT		=			$(EVENT_PATH)event.c					\
+SRC_KEY			=			$(KEY_PATH)keyboard_input.c				\
+							$(KEY_PATH)keyboard_input_init.c		\
 
 SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
 							$(POTION_PATH)hammer_minigame1.c		\
 							$(POTION_PATH)hammer_minigame2.c		\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
-							$(INVENTORY_PATH)get_keyboard_input.c	\
 							$(INVENTORY_PATH)get_positions.c		\
 							$(INVENTORY_PATH)get_slots.c			\
 							$(INVENTORY_PATH)inventory_displays.c	\
@@ -179,6 +179,7 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\
+							$(SRC_KEY)								\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c

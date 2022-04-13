@@ -32,9 +32,15 @@
 
     typedef struct backgrounds_s {
         sfRenderWindow *window;
+<<<<<<< HEAD
         item_t *items;
         object **pages;
         txtobject_t text;
+=======
+        struct item *items;
+        object_t **pages;
+        struct txtobject text;
+>>>>>>> 42a7175 ([MERGE])
         char *keys;
         competences_t *comp;
     } backgrounds_t;

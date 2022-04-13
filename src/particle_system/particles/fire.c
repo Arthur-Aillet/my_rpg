@@ -20,8 +20,8 @@ particle_t *fire_dr(sfRenderWindow *window, particle_t *part)
     part->pos.y += part->speed / 2;
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return(part);
 }
 
@@ -34,8 +34,8 @@ particle_t *fire_right(sfRenderWindow *window, particle_t *part)
     part->pos.y += fmod(rand(), f) - ABS(part->speed);
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return(part);
 }
 
@@ -49,8 +49,8 @@ particle_t *fire_ur(sfRenderWindow *window, particle_t *part)
     part->pos.y -= part->speed / 2;
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return(part);
 }
 
@@ -63,8 +63,8 @@ particle_t *fire_up(sfRenderWindow *window, particle_t *part)
     part->pos.y -= part->speed;
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return (part);
 }
 
@@ -75,7 +75,7 @@ particle_t *fire(sfRenderWindow *window, particle_t *part)
     part->pos.y += fmod(rand(), (part->speed)) - part->speed / 1.9;
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return (part);
 }

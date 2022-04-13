@@ -22,8 +22,8 @@ particle_t *snow(sfRenderWindow *window, particle_t *part)
     part->rotation = rand() % 11 - 5;
     part->velocity.x = SMOOTHX;
     part->velocity.y = SMOOTHY;
-    sfSprite_rotate(part->object->sprite, part->rotation);
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_rotate(part->object_t->sprite, part->rotation);
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return (part);
 }

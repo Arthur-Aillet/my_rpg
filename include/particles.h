@@ -13,8 +13,8 @@
 
     #define SIGN(x) ((x > 0) ? (1) : (-1))
     #define SFSGP(x) sfSprite_getPosition(x)
-    #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10
-    #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
+    #define SMOOTHY (part->pos.y - SFSGP(part->object_t->sprite).y) / 10
+    #define SMOOTHX (part->pos.x - SFSGP(part->object_t->sprite).x) / 10
     #define TRANSPARENT(x) sfColor_fromRGBA(255, 255, 255, x)
 
 typedef struct particle_s {
@@ -22,7 +22,7 @@ typedef struct particle_s {
     sfVector2f trajectory;
     sfVector2f velocity;
     sfVector2f scale;
-    object *object;
+    object_t *object_t;
     int age;
     int lifetime;
     int type;

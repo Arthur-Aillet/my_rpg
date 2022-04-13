@@ -28,14 +28,14 @@ static int get_part_deathtime(int type)
     return (1);
 }
 
-static object **setup_part_sprites(void)
+static object_t **setup_part_sprites(void)
 {
-    static object **result = NULL;
+    static object_t **result = NULL;
     sfVector2f none = {1, 1};
 
     if (result != NULL)
         return (result);
-    result = malloc (sizeof(object *) * 13);
+    result = malloc (sizeof(object_t *) * 13);
     result[0] = create_object("assets/img/snowflake.png", none, none);
     result[1] = create_object("assets/img/raindrop.png", none, none);
     result[2] = create_object("assets/img/flame.png", none, none);
@@ -54,13 +54,18 @@ static object **setup_part_sprites(void)
 
 particle_t *create_particle(sfVector2f pos, int type, int speed)
 {
+<<<<<<< HEAD
     object **textures = setup_part_sprites();
     particle_t *new = malloc(sizeof(particle_t));
+=======
+    object_t **textures = setup_part_sprites();
+    particle *new = malloc(sizeof(particle));
+>>>>>>> 42a7175 ([MERGE])
     new->next = NULL;
     new->pos = pos;
     new->trajectory = pos;
     new->scale = (sfVector2f) {1, 1};
-    new->object = create_textured_object(textures[type]->texture,
+    new->object_t = create_textured_object(textures[type]->texture,
         pos, sfSprite_getScale(textures[type]->sprite));
     new->speed = speed;
     new->type = type;

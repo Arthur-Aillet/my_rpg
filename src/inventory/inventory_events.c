@@ -46,6 +46,7 @@ events_t evt_map(events_t events)
 events_t evt_cmp(events_t events)
 {
     sfVector2i mousepos = sfMouse_getPositionRenderWindow(events.window);
+
     static int competence = 0;
     static int selected = 0;
     events.keys = get_keyboard_input(events.keys, events.window);

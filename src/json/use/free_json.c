@@ -9,9 +9,9 @@
 #include "json.h"
 
 /*
-Free a json object and it's content.
+Free a json object_t and it's content.
 Recursive parameter decides wether or not to free objets contained in the given
-object. If set to 0, you are able to acces the data precendtly contained in
+object_t. If set to 0, you are able to acces the data precendtly contained in
 obj->data_obj if you kept a copy of it's adress.
 */
 void free_json(json_obj_t *obj, int recursive)

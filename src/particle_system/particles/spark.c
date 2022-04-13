@@ -26,10 +26,10 @@ particle_t *spark(sfRenderWindow *window, particle_t *part)
     part->velocity.y *= 0.98 + decay;
     part->velocity.y += 0.05;
     part->age += 1;
-    sfSprite_rotate(part->object->sprite, SIGN(part->velocity.x) * 5);
-    sfSprite_setColor(part->object->sprite, TRANSPARENT(255 - part->age));
-    sfSprite_scale(part->object->sprite, VCF {0.99 + decay, 0.99 + decay});
-    sfSprite_move(part->object->sprite, part->velocity);
-    sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
+    sfSprite_rotate(part->object_t->sprite, SIGN(part->velocity.x) * 5);
+    sfSprite_setColor(part->object_t->sprite, TRANSPARENT(255 - part->age));
+    sfSprite_scale(part->object_t->sprite, VCF {0.99 + decay, 0.99 + decay});
+    sfSprite_move(part->object_t->sprite, part->velocity);
+    sfRenderWindow_drawSprite(window, part->object_t->sprite, NULL);
     return(part);
 }

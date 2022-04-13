@@ -126,6 +126,7 @@
     #define NHELD   0
 
 char *get_keyboard_input(char *keys, sfRenderWindow *window);
+char *init_keys(void);
 
 #endif /* !KEYBOARD_MACROS_H_ */
 

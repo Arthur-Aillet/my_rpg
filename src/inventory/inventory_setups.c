@@ -9,9 +9,9 @@
 #include "my_csfml_utils.h"
 #include <stdlib.h>
 
-static object **setup_pages(void)
+static object_t **setup_pages(void)
 {
-    object **result = malloc(sizeof(object *) * 4);
+    object_t **result = malloc(sizeof(object_t *) * 4);
     sfVector2f scale = {4, 4};
     sfVector2f pos = {0, 0};
 

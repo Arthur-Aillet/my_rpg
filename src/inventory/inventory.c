@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-object setup_mouse(void);
+object_t setup_mouse(void);
 sfVector2f itofv2(sfVector2i vector);
 void display_dialogue(sfRenderWindow *window, char *json_path, char *keys, font_t **fonts);
 
@@ -37,10 +37,14 @@ item_t *create_items(void)
     return (result);
 }
 
+<<<<<<< HEAD
 void free_txtobject(txtobject_t object)
+=======
+void free_txtobject(struct txtobject object_t)
+>>>>>>> 42a7175 ([MERGE])
 {
-    sfText_destroy(object.text);
-    sfFont_destroy(object.font);
+    sfText_destroy(object_t.text);
+    sfFont_destroy(object_t.font);
 }
 
 int count_item(item_t *items, int type)

@@ -48,7 +48,7 @@ void sf_text_set_pixel_size(sfText *text, sfVector2f size)
 
 void draw_chatbox(sfRenderWindow *window, int direction)
 {
-    static object *textbox = NULL;
+    static object_t *textbox = NULL;
     sfVector2f pos = {0, 0};
     sfVector2f scale = {4, 4};
 

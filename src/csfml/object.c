@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** my_rpg
 ** File description:
-** object
+** object_t
 */
 
 #include "my_csfml_utils.h"
@@ -43,9 +43,9 @@ sfImage *create_blank_image(void)
     return (image);
 }
 
-object *create_object(char *name, sfVector2f pos, sfVector2f scale)
+object_t *create_object(char *name, sfVector2f pos, sfVector2f scale)
 {
-    object *obj = malloc(sizeof(object));
+    object_t *obj = malloc(sizeof(object_t));
     sfImage *image;
 
     obj->sprite = sfSprite_create();
@@ -63,9 +63,9 @@ object *create_object(char *name, sfVector2f pos, sfVector2f scale)
     return (obj);
 }
 
-object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
+object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
 {
-    object *objet = malloc(sizeof(object));
+    object_t *objet = malloc(sizeof(object_t));
     sfFloatRect rect;
     sfImage *image;
 
@@ -85,7 +85,7 @@ object *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
     return (objet);
 }
 
-void destroy_object(object *objet)
+void destroy_object(object_t *objet)
 {
     sfTexture_destroy(objet->texture);
     sfSprite_destroy(objet->sprite);

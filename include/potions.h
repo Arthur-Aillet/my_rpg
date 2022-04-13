@@ -10,7 +10,7 @@
 
     #include "my_csfml_utils.h"
 
-typedef struct hammer_s {
+typedef struct minigame_s {
     object *hammer;
     object *anvil;
     object *background;
@@ -20,7 +20,7 @@ typedef struct hammer_s {
     object *circle_empty;
     int has_spawn;
     float points;
-} hammer_t;
+} minigame_t;
 
 typedef struct potion_s {
     int difficulty;
@@ -28,9 +28,9 @@ typedef struct potion_s {
     int numbers_steps;
 } potion_t;
 
-void destroy_hammer_struct(hammer_t *hammer);
-hammer_t *setup_hammer_struct(void);
-hammer_t *setup_elements(void);
-void hammer_loop(window_t *window, int *keys, object *mouse, potion_t *potion);
+void destroy_minigame_struct(minigame_t *hammer);
+minigame_t *setup_hammer_struct(void);
+minigame_t *setup_elements(void);
+void hammer_loop(window_t *window, int *keys, sound_t **sound, object *mouse, potion_t *potion);
 
 #endif /* !POTIONS_H_ */

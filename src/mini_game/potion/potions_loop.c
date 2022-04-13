@@ -42,7 +42,7 @@ void potion_loop(window_t *window, font_t **font, sound_t **sound, int *keys)
             potion->numbers_steps = 2;
             potion->difficulty = 2;
             while (potion->current_step != potion->numbers_steps) {
-                hammer_loop(window, keys, mouse, potion);
+                hammer_loop(window, keys, sound, mouse, potion);
                 if (keys[sfKeyEscape] == PRESS)
                     break;
                 potion->current_step += 1;

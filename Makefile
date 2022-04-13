@@ -19,6 +19,10 @@ LINE_RETURN	=	$(ECHO) ""
 
 NAME			=			my_rpg
 
+CC				=			gcc
+
+RM				=			rm -rf
+
 NAME_TEST		=			unit_test
 
 ## ===================================================================
@@ -32,6 +36,7 @@ SRC_PATH		=			src/
 BASIC_PATH		=			$(SRC_PATH)basic/
 
 INIT_PATH		=			$(SRC_PATH)init/
+
 
 MENU_PATH		=			$(SRC_PATH)menu/
 
@@ -50,6 +55,12 @@ CSFML_PATH		=			$(SRC_PATH)csfml/
 MATH_PATH		=			$(SRC_PATH)math/
 
 MOUSE_PATH		=			$(SRC_PATH)mouse/
+
+JSON_PATH		=			$(SRC_PATH)json/
+
+INVENTORY_PATH	=			$(SRC_PATH)inventory/
+
+PARTICLES_PATH = 			$(SRC_PATH)particle_system/
 
 ## =========================[BASICS]==========================
 
@@ -97,7 +108,27 @@ SRC_GAME		=			$(GAME_PATH)game_core.c					\
 
 SRC_EVENT		=			$(EVENT_PATH)event.c					\
 
-SRC_WINDOW		=			$(WIN_PATH)window.c					\
+SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
+							$(POTION_PATH)hammer_minigame1.c		\
+							$(POTION_PATH)hammer_minigame2.c		\
+
+SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
+							$(INVENTORY_PATH)get_keyboard_input.c	\
+							$(INVENTORY_PATH)get_positions.c		\
+							$(INVENTORY_PATH)get_slots.c			\
+							$(INVENTORY_PATH)inventory_displays.c	\
+							$(INVENTORY_PATH)inventory_events.c		\
+							$(INVENTORY_PATH)inventory_setups.c		\
+							$(INVENTORY_PATH)inventory_swaps.c		\
+							$(INVENTORY_PATH)is_adjacent_competences.c	\
+							$(INVENTORY_PATH)menu.c					\
+							$(INVENTORY_PATH)mouse.c				\
+							$(INVENTORY_PATH)pause_menu.c			\
+							$(INVENTORY_PATH)temp_main.c			\
+
+SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
+
+SRC_WINDOW		=			$(WIN_PATH)window.c						\
 
 SRC_CSFML		=			$(CSFML_PATH)object.c					\
 							$(CSFML_PATH)type_transformer.c			\
@@ -117,9 +148,24 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
+							$(SRC_POTION)							\
+							$(SRC_INVENTORY)						\
+							$(SRC_PARTICLES)						\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\
 							$(SRC_MOUSE)							\
+
+SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
+							$(JSON_PATH)generate/str_preprocessing.c	\
+							$(JSON_PATH)generate/object_preprocessing.c	\
+							$(JSON_PATH)generate/extract_fields.c		\
+							$(JSON_PATH)generate/json_split.c			\
+							$(JSON_PATH)generate/json_error_handling.c	\
+							$(JSON_PATH)use/free_json.c					\
+							$(JSON_PATH)use/json_get_by_name.c			\
+							$(JSON_PATH)use/json_get_by_index.c			\
+							$(JSON_PATH)use/json_display_obj.c			\
+							$(JSON_PATH)use/main_json.c					\
 
 SRC				=			$(SRC_GLOBAL)							\
 							main.c
@@ -132,7 +178,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -g3
+CFLAGS			=			-Wall -Wextra
 
 CPPFLAGS		=			-I include
 
@@ -154,26 +200,26 @@ all:	message
 		make $(NAME)
 
 $(NAME):	$(OBJ)
-		gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
 
 re:			fclean	all
 
 clean:
 		make clean -C lib/my
-		rm -rf $(OBJ)
+		$(RM) $(OBJ)
 
 fclean:		clean
 		make fclean -C lib/my
-		rm -rf $(NAME)
-		rm -rf $(NAME_TEST)
-		rm -rf *gcda
-		rm -rf *gcno
+		$(RM) $(NAME)
+		$(RM) $(NAME_TEST)
+		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
 
 debug:
 
-valgrind:
+valgrind:	$(CFLAGS) += -g
+valgrind:	re
 
 tests_run:
 	make re -C lib/my

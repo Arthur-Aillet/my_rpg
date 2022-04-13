@@ -8,6 +8,10 @@
 #include "json.h"
 #include "my.h"
 
+/*
+Edit the wanted int value found by the given name.
+The original value is replaced by the new one.
+*/
 void edit_int_by_name(json_obj_t *obj, char *name, int value)
 {
     if (obj == NULL)
@@ -17,6 +21,10 @@ void edit_int_by_name(json_obj_t *obj, char *name, int value)
             obj->data_int[i] = value;
 }
 
+/*
+Edit the wanted char * (str) value found by the given name.
+The original value is replaced by the new one.
+*/
 void edit_str_by_name(json_obj_t *obj, char *name, char *value)
 {
     if (obj == NULL)
@@ -26,6 +34,12 @@ void edit_str_by_name(json_obj_t *obj, char *name, char *value)
             obj->data_str[i] = my_strdup(value);
 }
 
+/*
+Edit the wanted object value found by the given name.
+The original value is replaced by the new one.
+! Deprecated ! > The object isn't fully duplicated. Can cause free() / edition
+conflicts.
+*/
 void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t value)
 {
     if (obj == NULL)

@@ -29,16 +29,16 @@ typedef struct button_s {
     bool already_clicked;
 } button_t;
 
-bool is_pressed(button_t bouton, sfRenderWindow *window, int *keys);
+bool is_pressed(button_t bouton, sfRenderWindow *window, char *keys);
 button_t *button_create(sfVector2f size, sfVector2f position, bool display_tex);
 void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name);
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size);
 void button_setup_text(button_t *bouton, char *text, sfFont *font, int size);
 void button_setup_sounds_file(button_t *but, char *click, char *hover, int vol);
 void button_center_text(button_t *bouton);
-void button_update_state(sfVector2f mouse_pos, button_t *but, int *keys);
+void button_update_state(sfVector2f mouse_pos, button_t *but, char *keys);
 void display_button(sfRenderWindow *window, button_t *but);
-void update_button(sfRenderWindow *window, button_t *but, int *keys);
+void update_button(sfRenderWindow *window, button_t *but, char *keys);
 void destroy_button(button_t bouton);
 void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vo);
 void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click);

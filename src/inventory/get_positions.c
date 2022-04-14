@@ -6,8 +6,7 @@
 */
 
 #include "csfml_libs.h"
-
-sfVector2f itofv2(sfVector2i vector);
+#include "my_csfml_utils.h"
 
 sfVector2f get_comp_pos(int comp)
 {

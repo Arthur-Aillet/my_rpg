@@ -22,7 +22,7 @@ static int get_armorpos(sfVector2f pos)
     return (0);
 }
 
-int get_competence_state(int comp, struct competences competences)
+int get_competence_state(int comp, competences_t competences)
 {
     switch (comp) {
         case (1) : return (competences.fireball);

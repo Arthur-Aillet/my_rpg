@@ -37,8 +37,6 @@ BASIC_PATH		=			$(SRC_PATH)basic/
 
 INIT_PATH		=			$(SRC_PATH)init/
 
-UI_PATH			=			$(SRC_PATH)ui/
-
 MENU_PATH		=			$(SRC_PATH)menu/
 
 GAME_PATH		=			$(SRC_PATH)game/
@@ -117,9 +115,6 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
 							$(POTION_PATH)minigame.c				\
 							$(POTION_PATH)mortar_minigame1.c		\
 
-SRC_UI			=			$(UI_PATH)display_healthbar.c			\
-							$(UI_PATH)display_ui.c
-
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
 							$(INVENTORY_PATH)get_positions.c		\
 							$(INVENTORY_PATH)get_slots.c			\
@@ -182,7 +177,6 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_INVENTORY)						\
 							$(SRC_PARTICLES)						\
 							$(SRC_DIALOGUE)							\
-							$(SRC_UI)								\
 							$(SRC_JSON)								\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\

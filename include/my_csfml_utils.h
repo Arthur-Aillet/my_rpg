@@ -5,15 +5,14 @@
 ** my_csfml_utils
 */
 
-#ifndef MY_CSFML_UTILS_H_
-    #define MY_CSFML_UTILS_H_
+#pragma once
 
-    #include <SFML/Graphics.h>
-    #include <SFML/System.h>
+#include <SFML/Graphics.h>
+#include <SFML/System.h>
 
-    #define VCF (sfVector2f)
-    #define VCU (sfVector2u)
-    #define VCI (sfVector2i)
+#define VCF (sfVector2f)
+#define VCU (sfVector2u)
+#define VCI (sfVector2i)
 
 typedef struct object_s {
     sfSprite *sprite;
@@ -26,5 +25,3 @@ object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f si);
 object_t *create_object(char *name, sfVector2f pos, sfVector2f scale);
 sfImage *create_blank_image(void);
 void destroy_object(object_t *objet);
-
-#endif /* !MY_CSFML_UTILS_H_ */

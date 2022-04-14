@@ -5,10 +5,9 @@
 ** potions
 */
 
-#ifndef POTIONS_H_
-    #define POTIONS_H_
+#pragma once
 
-    #include "my_csfml_utils.h"
+#include "my_csfml_utils.h"
 
 typedef struct hammer_s {
     object_t *hammer;
@@ -32,5 +31,3 @@ void destroy_hammer_struct(hammer_t *hammer);
 hammer_t *setup_hammer_struct(void);
 hammer_t *setup_elements(void);
 void hammer_loop(window_t *window, char *keys, object_t *mouse, potion_t *potion);
-
-#endif /* !POTIONS_H_ */

@@ -5,8 +5,7 @@
 ** json.h
 */
 
-#ifndef JSON_H
-    #define JSON_H
+#pragma once
 
 typedef struct json_object_s {
     char *name;
@@ -80,5 +79,3 @@ json_obj_t duplicate_obj(json_obj_t *obj);
 void add_int_by_name(json_obj_t *obj, char *name, int value);
 void add_str_by_name(json_obj_t *obj, char *name, char *value);
 void add_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value);
-
-#endif

@@ -11,7 +11,7 @@
 #include "my.h"
 #include "my_rpg.h"
 
-player_t *init_game_player(void)
+player_t *init_game_player(maps_t *field)
 {
     player_t *player = malloc(sizeof(player_t));
     json_obj_t *obj1 = create_json_object("config/player.json");
@@ -23,6 +23,8 @@ player_t *init_game_player(void)
     player->name = get_str_by_name(obj, "name");
     player->tex_p = sfTexture_createFromFile(get_str_by_name(obj,
         "sprite_sheet"), NULL);
+    player->pos.x = field->width / 2;
+    player->pos.y = field->height / 2;
     player->sp_p = sfSprite_create();
     sfSprite_setTexture(player->sp_p, player->tex_p, sfTrue);
     return player;
@@ -36,11 +38,6 @@ maps_t **init_game_maps(void)
     json_obj_t *tmp1 = get_obj_by_index(obj, i);
     json_obj_t *tmp = get_obj_by_index(tmp1, i);
 
-    printf("================================\n");
-    print_raw_data(obj, 1);
-    printf("================================\n");
-    print_raw_data(tmp1, 1);
-    printf("================================\n");
     if (maps == NULL)
         return NULL;
     while (tmp != NULL)
@@ -48,11 +45,7 @@ maps_t **init_game_maps(void)
     maps = malloc(sizeof(maps_t *) * i);
     i = 0;
     tmp = get_obj_by_index(tmp1, i);
-    print_raw_data(tmp, 1);
-    printf("================================\n");
     while (tmp != NULL) {
-        print_raw_data(tmp, 1);
-        printf("================================\n");
         maps[i] = malloc(sizeof(maps_t));
         init_map_objects(maps, tmp, i++);
         tmp = get_obj_by_index(tmp1, i);
@@ -67,7 +60,7 @@ in_game_t *init_in_game_struct(void)
     sfFloatRect cam_rect = {0, 0, 1920, 1080};
 
     game->maps = init_game_maps();
-    game->player = init_game_player();
+    game->player = init_game_player(game->maps[0]);
     game->current = my_strdup("field");
     game->cam = sfView_createFromRect(cam_rect);
     if (game == NULL)

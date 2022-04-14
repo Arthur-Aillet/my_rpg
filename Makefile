@@ -21,8 +21,6 @@ NAME			=			my_rpg
 
 CC				=			gcc
 
-RM				=			rm -rf
-
 NAME_TEST		=			unit_test
 
 ## ===================================================================
@@ -193,7 +191,7 @@ all:
 		make $(NAME)
 
 $(NAME):	build_lib	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 re:			fclean	all
 

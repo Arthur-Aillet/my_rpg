@@ -26,8 +26,8 @@ void potion_loop(game_t *game)
     object_t *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
     button_t *fire_potion = button_create(VCF{2, 1}, VCF{1920 / 2, 1080 / 2}, true);
     potion_t *potion = malloc(sizeof(potion_t));
-    static struct particle *(*minigames[1])(game_t *, potion_t *) = {hammer_loop};
-    char *tests = my_strdup("00");
+    void (*minigames[2])(game_t *, potion_t *) = {hammer_loop, mortar_loop};
+    char *tests = my_strdup("101");
     int open = 1;
 
     button_setup_texture(fire_potion, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
@@ -42,7 +42,7 @@ void potion_loop(game_t *game)
             open = 0;
         if (is_pressed(*fire_potion, game->window->window, game->keys)) {
             potion->current_step = 0;
-            potion->numbers_steps = 2;
+            potion->numbers_steps = my_strlen(tests);
             potion->difficulty = 2;
             while (potion->current_step != potion->numbers_steps) {
                 minigames[tests[0] - '0'](game, potion);

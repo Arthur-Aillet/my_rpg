@@ -113,8 +113,7 @@ SRC_KEY			=			$(KEY_PATH)keyboard_input.c				\
 							$(KEY_PATH)keyboard_input_init.c		\
 
 SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
-							$(POTION_PATH)hammer_minigame1.c		\
-							$(POTION_PATH)hammer_minigame2.c		\
+							$(POTION_PATH)hammer_minigame.c			\
 							$(POTION_PATH)minigame.c				\
 							$(POTION_PATH)mortar_minigame1.c		\
 

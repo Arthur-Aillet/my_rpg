@@ -32,7 +32,7 @@ game_t *init_game(void)
     game->sounds = sounds_create_array();
     game->keys = init_keys();
     game->window = generate_default_window();
-    game->mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
+    game->mouse = create_object("assets/img/cursors.png", VCF{0, 0}, VCF{1, 1});
     return (game);
 }
 

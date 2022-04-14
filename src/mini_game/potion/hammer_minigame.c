@@ -23,6 +23,27 @@
 #include "my_csfml_utils.h"
 #include "particles.h"
 
+minigame_t *setup_hammer_struct(void)
+{
+    minigame_t *elements = setup_elements();
+    sfFloatRect bd_anvil;
+    sfFloatRect bd_hammer;
+
+    elements->hammer = create_object
+        ("assets/img/potions/hammer.png", VCF{0, 0}, VCF{1, 1});
+    elements->anvil = create_object
+        ("assets/img/potions/anvil.png", VCF{0, 0}, VCF{1.5, 1.5});
+    bd_anvil = sfSprite_getGlobalBounds(elements->anvil->sprite);
+    bd_hammer = sfSprite_getGlobalBounds(elements->hammer->sprite);
+    sfSprite_setOrigin(elements->anvil->sprite,
+        VCF{bd_anvil.height / 3, bd_anvil.width / 3});
+    sfSprite_setOrigin(elements->hammer->sprite,
+        VCF{bd_hammer.height / 2, bd_hammer.width / 2});
+    sfSprite_setPosition(elements->anvil->sprite, VCF{965, 640});
+    sfSprite_setPosition(elements->hammer->sprite, VCF{890, 475});
+    return (elements);
+}
+
 void hammer_controls(minigame_t *elements, particle_t **start, char *keys, sfSound *sound)
 {
     if (LCLICK == 1 && sfSprite_getRotation(elements->hammer->sprite) < 41)
@@ -46,39 +67,9 @@ void hammer_controls(minigame_t *elements, particle_t **start, char *keys, sfSou
 
 void display_hammer(minigame_t *eleme, window_t *window, potion_t *pot)
 {
-    sfRenderWindow_drawSprite(window->window, eleme->background->sprite, NULL);
+    display_minigame(eleme, window, pot);
     sfRenderWindow_drawSprite(window->window, eleme->anvil->sprite, NULL);
     sfRenderWindow_drawSprite(window->window, eleme->hammer->sprite, NULL);
-    sfSprite_setScale(eleme->for_bar->sprite,
-        VCF{(eleme->points > 100) ? 2 : eleme->points / 100 * 2, 2});
-    sfRenderWindow_drawSprite(window->window, eleme->box_bar->sprite, NULL);
-    for (int i = pot->numbers_steps; i > 0; i--) {
-        if (i > pot->numbers_steps - pot->current_step) {
-            sfSprite_setPosition(eleme->circle_full->sprite, VCF{960 - ((108) *
-                i) + ((108) * ((float) (pot->numbers_steps + 1) / 2)), 200});
-            sfRenderWindow_drawSprite(window->window,
-                eleme->circle_full->sprite, NULL);
-        } else {
-            sfSprite_setPosition(eleme->circle_empty->sprite, VCF{960 - ((108) *
-                i) + ((108) * ((float) (pot->numbers_steps + 1) / 2)), 200});
-            sfRenderWindow_drawSprite(window->window,
-                eleme->circle_empty->sprite, NULL);
-        }
-    }
-    sfRenderWindow_drawSprite(window->window, eleme->for_bar->sprite, NULL);
-}
-
-int hammer_update(char *keys, minigame_t *elements, potion_t *pot, sfClock *clock)
-{
-    if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
-        return (0);
-    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >=
-        (float) 1 / (pot->difficulty)) {
-        elements->points -= (elements->points >= 1) ? 1 : 0;
-        elements->points -= (elements->points >= 1) ? 1 : 0;
-        sfClock_restart(clock);
-    }
-    return (1);
 }
 
 void hammer_loop(game_t *game, potion_t *potion)
@@ -93,7 +84,7 @@ void hammer_loop(game_t *game, potion_t *potion)
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
         game->keys = get_keyboard_input(game->keys, game->window->window);
-        open = hammer_update(game->keys, elements, potion, clock);
+        open = minigame_update(game->keys, elements, potion, clock);
         hammer_controls(elements, &start, game->keys, sound);
         display_hammer(elements, game->window, potion);
         update_particles(game->window->window, start);

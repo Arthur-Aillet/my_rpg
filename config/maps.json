@@ -2,28 +2,44 @@
     "maps": {
         "field": {
             "tileset": "assets/in_game/tileset/tileset_test.png",
-            "scheme": "assets/in_game/maps/field.map",
-            "definition": 84,
-            "height": 1,
-            "width": 1
+            "map": "assets/in_game/maps/field.map",
+            "definition": 64,
+            "height": 6,
+            "width": 16,
+            "top": "NULL",
+            "bot": "town",
+            "left": "dungeon",
+            "right": "house"
         },"house": {
             "tileset": "assets/in_game/tileset/tileset_test.png",
-            "scheme": "assets/in_game/maps/house.map",
-            "definition": 84,
+            "map": "assets/in_game/maps/house.map",
+            "definition": 64,
             "height": 1,
-            "width": 1
+            "width": 1,
+            "top": "NULL",
+            "bot": "NULL",
+            "left": "field",
+            "right": "garden"
         },"garden": {
             "tileset": "assets/in_game/tileset/tileset_test.png",
-            "scheme": "assets/in_game/maps/garden.map",
-            "definition": 84,
+            "map": "assets/in_game/maps/garden.map",
+            "definition": 64,
             "height": 1,
-            "width": 1
+            "width": 1,
+            "top": "NULL",
+            "bot": "NULL",
+            "left": "house",
+            "right": "NULL"
         },"town": {
             "tileset": "assets/in_game/tileset/tileset_test.png",
-            "scheme": "assets/in_game/maps/town.map",
-            "definition": 84,
+            "map": "assets/in_game/maps/town.map",
+            "definition": 64,
             "height": 1,
-            "width": 1
+            "width": 1,
+            "top": "field",
+            "bot": "NULL",
+            "left": "NULL",
+            "right": "NULL"
         }
     }
 }

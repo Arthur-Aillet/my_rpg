@@ -20,44 +20,18 @@
 #include "potions.h"
 #include "inventory_structures.h"
 
-item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys);
-item_t create_yellow_flower(item_t item, int number);
-item_t *create_items(void);
-
-game_t *init_game(void)
-{
-    game_t *game = malloc(sizeof(game_t));
-
-    game->fonts = font_create_array();
-    game->sounds = sounds_create_array();
-    game->keys = init_keys();
-    game->window = generate_default_window();
-    return (game);
-}
 
 int my_rpg(int ac, char **av)
 {
-<<<<<<< HEAD
     game_t *game = init_game_struct();
-    struct item *items = create_items();
+    item_t *items = create_items();
     items[10] = create_yellow_flower(items[10], 100);
-    struct competences comp = {0, 0};
-    font_t **font = font_create_array();
-    sound_t **sound = sounds_create_array();
-    object *test = create_object("test", VCF{0, 0}, VCF{60, 33});
-    object *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
-    object *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});
-=======
-    game_t *game = init_game();
-        item_t *items = create_items();
-        items[10] = create_yellow_flower(items[10], 100);
-        competences_t *comp = malloc(sizeof(competences_t));
-        comp->dodge_roll = 0;
-        comp->fireball = 0;
+    competences_t *comp = malloc(sizeof(competences_t));
+    comp->dodge_roll = 0;
+    comp->fireball = 0;
     object_t *test = create_object("test", VCF{0, 0}, VCF{60, 33});
     object_t *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
     object_t *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});
->>>>>>> main
 
     button_t *bouton_test = button_create(VCF{2, 1}, VCF{300, 300}, true);
     button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
@@ -79,7 +53,7 @@ int my_rpg(int ac, char **av)
     while (sfRenderWindow_isOpen(game->window->window)) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
-        get_events(game->window->window, game->keys);
+        game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->keys[sfKeyEscape] == PRESS)
             menu(game->window->window, items, comp, (char *) game->keys);
         if (game->keys[sfKeyP] == PRESS) {
@@ -91,7 +65,7 @@ int my_rpg(int ac, char **av)
             free(potion);
         }
         if (game->keys[sfKeyG] == PRESS)
-            menu(game->window->window, items, comp, (char *) game->keys);
+            game_loop(game);
         sfSprite_setPosition(cursor->sprite, sfSprite_getPosition(bouton_test->sprite));
         sfRenderWindow_drawSprite(game->window->window, test->sprite, NULL);
         update_button(game->window->window, bouton_test_2, game->keys);

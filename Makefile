@@ -173,6 +173,7 @@ SRC_JSON		=			$(JSON_PATH)generate/file_gestion.c			\
 
 SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_WINDOW)							\
+							$(SRC_INIT)								\
 							$(SRC_GAME)								\
 							$(SRC_EVENT)							\
 							$(SRC_POTION)							\

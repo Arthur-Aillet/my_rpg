@@ -15,6 +15,8 @@ game_t *init_game_struct(void)
 
     if (game == NULL)
         return NULL;
+    game->fonts = font_create_array();
+    game->sounds = sounds_create_array();
     game->window = generate_default_window();
     game->status = init_game_status();
     game->keys = init_keys();

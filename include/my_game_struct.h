@@ -7,23 +7,19 @@
 
 #pragma once
 
-<<<<<<< HEAD
 #include <SFML/Graphics.h>
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
-=======
-    #include "my_window_struct.h"
-    #include "my_controle_struct.h"
-    #include "my_text.h"
-    #include "my_sound.h"
-    #include "my_csfml_utils.h"
->>>>>>> main
+#include "my_window_struct.h"
+#include "my_controle_struct.h"
+#include "my_text.h"
+#include "my_sound.h"
+#include "my_csfml_utils.h"
 
 typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
     sfSprite* sp_ts;
-    char **tileset;
     char **map;
     int def;
     int height;
@@ -35,6 +31,7 @@ typedef struct maps_s {
 } maps_t;
 
 typedef struct player_s {
+    sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;
     char *name;
@@ -42,6 +39,9 @@ typedef struct player_s {
 } player_t;
 
 typedef struct in_game_s {
+    char *current;
+    sfVector2f pos_cam;
+    sfView *cam;
     maps_t **maps;
     player_t *player;
 } in_game_t;
@@ -50,11 +50,8 @@ typedef struct game_s {
     char *keys;
     control_t *status;
     window_t *window;
-<<<<<<< HEAD
-    in_game_t *game;
-=======
     object_t *mouse;
     font_t **fonts;
     sound_t **sounds;
->>>>>>> main
+    in_game_t *game;
 } game_t;

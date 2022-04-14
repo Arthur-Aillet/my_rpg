@@ -15,5 +15,9 @@
             }
         },
         "field4": "text with spaces test"
+    },
+    "second primitive": {
+        "field1": "rabbit",
+        "field2": "carrot"
     }
 }

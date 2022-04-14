@@ -13,12 +13,12 @@
 
 int main(void)
 {
-    //json_obj_t *obj = create_json_object("example.json");
+    json_obj_t *obj = create_json_object("example.json");
 
-    //if (obj == NULL)
-    //    return 84;
-    //print_raw_data(obj, 0);
-    //printf("\n\n");
+    if (obj == NULL)
+        return 84;
+    print_raw_data(obj, 0);
+    printf("\n");
     //edit_int_by_name(obj, "truc", 5556);
     //edit_str_by_name(obj, "field2", "moop");
     //edit_str_by_name(get_obj_by_name(obj, "second_object"), "obj2field2", "moop second");
@@ -28,14 +28,14 @@ int main(void)
     //add_str_by_name(obj, "inner field", "this data is added !");
     //add_obj_by_name(obj, "hey", obj);
     //print_raw_data(obj, 0);
-    //free_json(obj, 1);
-    //free(obj);
+    free_json(obj, 1);
+    free(obj);
 
-    cchar_t *test = create_cchar("this is");
-    add_cchar(test, " my text\n");
-    char *result = cchar_to_arr(test);
-    printf("result : %s\n", result);
-    free(result);
-    free_cchar(test);
+    //cchar_t *test = create_cchar("this is");
+    //add_cchar(test, " my text\n");
+    //char *result = cchar_to_arr(test);
+    //printf("result : %s\n", result);
+    //free(result);
+    //free_cchar(test);
     return 0;
 }

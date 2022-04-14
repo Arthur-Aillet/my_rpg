@@ -68,11 +68,14 @@ json_obj_t *extract_obj(char *buffer, int begin)
     json_obj_t *obj = malloc(sizeof(json_obj_t));
 
     buffer += begin;
+    printf("will work on buffer :\n%s\n", buffer);
     temp = select_by_quotes(buffer);
-    if (temp == NULL || unexpected_eol(temp, 0)) {
-        write(2, "[JSON/extract_obj] Invalid object title.\n", 41);
-        return NULL;
-    }
+    //if (temp == NULL || unexpected_eol(temp, 0)) {
+    //    write(2, "[JSON/extract_obj] Invalid object title.\n", 41);
+    //    return NULL;
+    //}
+    if (temp == NULL)
+        temp = my_strdup("noname");
     obj->name = temp;
     for (; buffer[0] != '{' && buffer[0] != '\0'; buffer++);
     if (extract_fields_data(obj, buffer + 1))

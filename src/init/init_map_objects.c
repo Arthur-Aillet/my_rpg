@@ -11,7 +11,7 @@
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i)
 {
     maps[i]->name = obj->name;
-    maps[i]->tex_ts = sfTexture_createFromFile(get_str_by_name(obj, 0),
+    maps[i]->tex_ts = sfTexture_createFromFile(get_str_by_name(obj, "tileset"),
         NULL);
     maps[i]->sp_ts = sfSprite_create();
     maps[i]->map = my_split(my_read_file(get_str_by_name(obj, "map")), "\n");

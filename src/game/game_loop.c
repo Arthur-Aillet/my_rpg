@@ -6,21 +6,29 @@
 */
 
 #include "my_game_struct.h"
+#include "my.h"
+
+void my_display_player(game_t *game, int i)
+{
+    
+}
 
 void my_display_world(game_t *game)
 {
     int i = 0;
-    while (game->game->maps[i] && my_strcmp(game->game->current, game->game->maps[i]->name) != 0)
+
+    while (game->game->maps[i] && my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
         i++;
-    printf("%d\n", i);
+    my_display_map(game, game->game->maps[i], i);
+    my_display_player(game, i);
 }
 
 int game_loop(game_t *game)
 {
     while (game->status->end_game == 0) {
-        my_display_world(game);
         sfRenderWindow_clear(game->window->window, sfBlack);
+        my_display_world(game);
         sfRenderWindow_display(game->window->window);
     }
-    return;
+    return 0;
 }

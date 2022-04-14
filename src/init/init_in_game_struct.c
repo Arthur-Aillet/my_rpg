@@ -39,10 +39,11 @@ maps_t **init_game_maps(void)
         tmp = get_obj_by_index(obj, i++);
     maps = malloc(sizeof(maps_t *) * i);
     i = 0;
+    tmp = get_obj_by_index(obj, i);
     while (tmp != NULL) {
-        tmp = get_obj_by_index(obj, i);
         maps[i] = malloc(sizeof(maps_t));
         init_map_objects(maps, tmp, i++);
+        tmp = get_obj_by_index(obj, i);
     }
     maps[i] = NULL;
     return maps;

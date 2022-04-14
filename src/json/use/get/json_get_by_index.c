@@ -18,6 +18,8 @@ int get_int_by_index(json_obj_t *obj, int index)
 {
     int max_array = 0;
 
+    if (obj == NULL || obj->fields_int == NULL)
+        return 0;
     for (max_array = 0; obj->fields_int[max_array]; max_array++);
     if (index < max_array)
         return obj->data_int[index];
@@ -34,6 +36,8 @@ char *get_str_by_index(json_obj_t *obj, int index)
 {
     int max_array = 0;
 
+    if (obj == NULL || obj->fields_str == NULL)
+        return NULL;
     for (max_array = 0; obj->fields_str[max_array]; max_array++);
     if (index < max_array)
         return obj->data_str[index];
@@ -50,6 +54,8 @@ json_obj_t *get_obj_by_index(json_obj_t *obj, int index)
 {
     int max_array = 0;
 
+    if (obj == NULL || obj->fields_obj == NULL)
+        return NULL;
     for (max_array = 0; obj->fields_obj[max_array]; max_array++);
     if (index < max_array)
         return &(obj->data_obj[index]);

@@ -8,11 +8,6 @@
 #ifndef JSON_H
     #define JSON_H
 
-// plutôt que de faire une liste chaineé d'objets il vaudrait mieux
-// vraiment faire un tableau, ça leur permettera de mieux naviguer dans les
-// objets. ça n'empeche pas de faire des fonctions pour trouver les objets
-// par nom !
-
 typedef struct json_object_s {
     char *name;
     char **fields_str;
@@ -22,6 +17,13 @@ typedef struct json_object_s {
     struct json_object_s *data_obj;
     int *data_int;
 } json_obj_t;
+
+    #define MAX(x, y) x > y ? x : y
+    #define MIN(x, y) x < y ? x : y
+
+// ########################################################
+// ####################### LIB PART #######################
+// ########################################################
 
 char *get_file_content(char *path);
 int json_preprocessing(char *buffer);
@@ -43,6 +45,16 @@ int verify_quotes(char *str);
 int verify_brackets(char *str);
 int extract_fields_data(json_obj_t *obj, char *buffer);
 
+void duplicate_int_data(json_obj_t *initial_obj, json_obj_t *new_obj);
+void duplicate_str_data(json_obj_t *initial_obj, json_obj_t *new_obj);
+void duplicate_obj_data(json_obj_t *initial_obj, json_obj_t *new_obj);
+
+
+// ########################################################
+// ######################### USED #########################
+// ########################################################
+
+// ####################### GET DATA #######################
 json_obj_t *create_json_object(char *filepath);
 void free_json(json_obj_t *obj, int recursive);
 int get_int_by_index(json_obj_t *obj, int index);
@@ -57,5 +69,16 @@ char *get_str_by_name(json_obj_t *obj, char *name);
     #define gsbn(obj, name) get_str_by_name(obj, name)
 json_obj_t *get_obj_by_name(json_obj_t *obj, char *name);
     #define gobn(obj, name) get_obj_by_name(obj, name)
+
+// ####################### EDIT DATA ######################
+void edit_int_by_name(json_obj_t *obj, char *name, int value);
+void edit_str_by_name(json_obj_t *obj, char *name, char *value);
+void edit_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value);
+json_obj_t duplicate_obj(json_obj_t *obj);
+
+// ####################### add DATA #######################
+void add_int_by_name(json_obj_t *obj, char *name, int value);
+void add_str_by_name(json_obj_t *obj, char *name, char *value);
+void add_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value);
 
 #endif

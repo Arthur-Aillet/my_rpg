@@ -87,7 +87,7 @@ void mortar_crush_plants(minigame_t *elements, bool *grab, particle_t **start)
         for (int i = 0; i != nbr_of_leaves; i++)
             *start = add_particle(*start, VCF{1920 / 2 + rand()
                 % 120 - 60, 1080 / 2 + 35 + rand() % 10}, LEAF,
-                (rand() % 100 + 100) / 10);
+                (rand() % 500 + 100) / 10);
         elements->points += 8;
         elements->step = elements->step + 1;
         if (elements->step == 4)

@@ -33,6 +33,7 @@
     #define FIRE_DOWN_RIGHT 11
     #define SPARK           12
     #define ELECTRICITY     13
+    #define LEAF            14
 
 typedef struct particle_s {
     sfVector2f pos;
@@ -47,6 +48,8 @@ typedef struct particle_s {
     float rotation;
     struct particle_s *next;
 } particle_t;
+
+particle_t *leaf_fragment(sfRenderWindow *window, particle_t *part);
 
 particle_t *elctric_pulse(sfRenderWindow *window, particle_t *part);
 

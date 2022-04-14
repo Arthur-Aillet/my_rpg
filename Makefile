@@ -37,6 +37,7 @@ BASIC_PATH		=			$(SRC_PATH)basic/
 
 INIT_PATH		=			$(SRC_PATH)init/
 
+UI_PATH			=			$(SRC_PATH)ui/
 
 MENU_PATH		=			$(SRC_PATH)menu/
 
@@ -115,6 +116,9 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
 							$(POTION_PATH)hammer_minigame1.c		\
 							$(POTION_PATH)hammer_minigame2.c		\
 
+SRC_UI			=			$(UI_PATH)display_healthbar.c			\
+							$(UI_PATH)display_ui.c
+
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
 							$(INVENTORY_PATH)get_positions.c		\
 							$(INVENTORY_PATH)get_slots.c			\
@@ -139,6 +143,7 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)particles/snow.c		\
 							$(PARTICLES_PATH)particles/spark.c		\
 							$(PARTICLES_PATH)particles/water.c		\
+							$(PARTICLES_PATH)particles/leaves.c		\
 
 SRC_WINDOW		=			$(WIN_PATH)window.c						\
 
@@ -176,6 +181,7 @@ SRC_GLOBAL		=			$(SRC_UTILS)							\
 							$(SRC_INVENTORY)						\
 							$(SRC_PARTICLES)						\
 							$(SRC_DIALOGUE)							\
+							$(SRC_UI)								\
 							$(SRC_JSON)								\
 							$(SRC_CSFML)							\
 							$(SRC_MATH)								\

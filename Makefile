@@ -83,7 +83,9 @@ SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c					\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)game_loop.c						\
+							$(GAME_PATH)display/my_display_world.c		\
 							$(GAME_PATH)display/my_display_map.c		\
+							$(GAME_PATH)display/my_display_player.c		\
 
 SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\

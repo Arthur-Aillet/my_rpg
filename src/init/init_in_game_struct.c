@@ -23,8 +23,8 @@ player_t *init_game_player(maps_t *field)
     player->name = get_str_by_name(obj, "name");
     player->tex_p = sfTexture_createFromFile(get_str_by_name(obj,
         "sprite_sheet"), NULL);
-    player->pos.x = field->width / 2;
-    player->pos.y = field->height / 2;
+    player->pos.x = (field->width / 2) * 64;
+    player->pos.y = (field->height / 2) * 64;
     player->sp_p = sfSprite_create();
     sfSprite_setTexture(player->sp_p, player->tex_p, sfTrue);
     return player;

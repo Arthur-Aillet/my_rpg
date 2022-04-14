@@ -27,4 +27,6 @@ item_t *create_items(void);
 int my_rpg(int ac, char **av);
 int game_loop(game_t *game);
 
-void my_display_map(game_t *game, maps_t *maps, int i);
+void display_world(game_t *game);
+void display_map(game_t *game, maps_t *maps, int i);
+void display_player(game_t *game, int i);

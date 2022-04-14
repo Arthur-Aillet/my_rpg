@@ -141,6 +141,8 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)particles/snow.c			\
 							$(PARTICLES_PATH)particles/spark.c			\
 							$(PARTICLES_PATH)particles/water.c			\
+							$(PARTICLES_PATH)particles/leaves.c			\
+							$(PARTICLES_PATH)particles/electricity.c	\
 
 SRC_UI			=			$(UI_PATH)display_healthbar.c				\
 							$(UI_PATH)display_ui.c						\

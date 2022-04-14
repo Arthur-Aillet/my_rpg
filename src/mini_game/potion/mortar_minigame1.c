@@ -65,18 +65,29 @@ void mortar_physics(minigame_t *elements, game_t *game)
     }
 }
 
-void mortar_crush_plants(minigame_t *elements, game_t *game, bool *grab)
+void mortar_crush_plants(minigame_t *elements, bool *grab, particle_t **start)
 {
     sfFloatRect rect;
     sfFloatRect rect2;
+    int nbr_of_leaves = rand() % 3 + 1;
     sfFloatRect pilon = sfSprite_getGlobalBounds(elements->pilon->sprite);
 
-    rect.top = 1080 / 2;
-    rect.left = 1920 / 2 - 80;
-    rect.width = 150;
-    rect.height = 100;
+    rect.top = 1080 / 2 + 70;
+    rect.left = 1920 / 2 - 1;
+    rect.width = 1;
+    rect.height = 10;
+    if (!sfFloatRect_intersects(&rect, &pilon, &rect2)
+        && pilon.top < rect.top - 20)
+        elements->has_spawn = false;
+    if (*grab == false || pilon.top > rect.top - 200)
+        elements->has_spawn = true;
     if (elements->has_spawn == false && *grab == true
     && sfFloatRect_intersects(&rect, &pilon, &rect2)) {
+        sfSound_play(elements->sound);
+        for (int i = 0; i != nbr_of_leaves; i++)
+            *start = add_particle(*start, VCF{1920 / 2 + rand()
+                % 120 - 60, 1080 / 2 + 35 + rand() % 10}, LEAF,
+                (rand() % 100 + 100) / 10);
         elements->points += 8;
         elements->step = elements->step + 1;
         if (elements->step == 4)
@@ -89,12 +100,9 @@ void mortar_crush_plants(minigame_t *elements, game_t *game, bool *grab)
             sfSprite_setTexture(elements->leaves->sprite, elements->leaves3, sfFalse);
         elements->has_spawn = true;
     }
-    if (!sfFloatRect_intersects(&rect, &pilon, &rect2)
-    && pilon.top < rect.top)
-        elements->has_spawn = false;
 }
 
-void mortar_controls(minigame_t *elements, game_t *game, bool *grab)
+void mortar_controls(minigame_t *elements, game_t *game, bool *grab, particle_t **start)
 {
     sfFloatRect rect;
     sfFloatRect pilon = sfSprite_getGlobalBounds(elements->pilon->sprite);
@@ -120,7 +128,7 @@ void mortar_controls(minigame_t *elements, game_t *game, bool *grab)
     }
     if (*grab == true)
         mortar_physics(elements, game);
-    mortar_crush_plants(elements, game, grab);
+    mortar_crush_plants(elements, grab, start);
 }
 
 void display_mortar(minigame_t *elem, window_t *window, potion_t *pot)
@@ -132,7 +140,7 @@ void display_mortar(minigame_t *elem, window_t *window, potion_t *pot)
     sfRenderWindow_drawSprite(window->window, elem->pilon->sprite, NULL);
 }
 
-minigame_t *setup_mortar_struct(void)
+minigame_t *setup_mortar_struct(sound_t **sounds)
 {
     minigame_t *elements = setup_elements();
     sfFloatRect bd_mortar_front;
@@ -140,6 +148,7 @@ minigame_t *setup_mortar_struct(void)
     sfFloatRect bd_pilon;
     sfFloatRect bd_leaves;
 
+    elements->sound = sfSound_copy(find_sound("leaves.ogg", sounds));
     elements->has_spawn = true;
     elements->leaves1 = sfTexture_createFromFile("assets/img/potions/leaves.png", NULL);
     elements->leaves2 = sfTexture_createFromFile("assets/img/potions/leaves2.png", NULL);
@@ -173,20 +182,20 @@ minigame_t *setup_mortar_struct(void)
 
 void mortar_loop(game_t *game, potion_t *potion)
 {
-    minigame_t *elements = setup_mortar_struct();
+    minigame_t *elements = setup_mortar_struct(game->sounds);
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     bool grab = false;
     sfClock *clock = sfClock_create();
-    sfSound *sound = sfSound_copy(find_sound("anvil.ogg", game->sounds));
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
         game->keys = get_keyboard_input(game->keys, game->window->window);
-        mortar_controls(elements, game, &grab);
+        mortar_controls(elements, game, &grab, &start);
         open = minigame_update(game->keys, elements, potion, clock);
         display_mortar(elements, game->window, potion);
+        update_particles(game->window->window, start);
         update_mouse_cursor(game->window->window, game->mouse);
         sfRenderWindow_display(game->window->window);
     }

@@ -30,6 +30,7 @@ typedef struct minigame_s {
     int has_spawn;
     int step;
     float points;
+    sfSound *sound;
 } minigame_t;
 
 typedef struct potion_s {

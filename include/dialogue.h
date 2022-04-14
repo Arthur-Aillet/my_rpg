@@ -9,6 +9,7 @@
     #define DIALOGUE_H_
 
     #include "csfml_libs.h"
+    #include "my_text.h"
 
 char *add_new_lines(char *str);
 void draw_chatbox(sfRenderWindow *window, int direction);

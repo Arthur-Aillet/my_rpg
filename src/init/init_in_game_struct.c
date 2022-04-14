@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "json.h"
 #include "my_game_struct.h"
 #include "my.h"
 #include "my_rpg.h"
@@ -13,7 +14,8 @@
 player_t *init_game_player(void)
 {
     player_t *player = malloc(sizeof(player_t));
-    json_obj_t *obj = create_json_object("config/player.json");
+    json_obj_t *obj1 = create_json_object("config/player.json");
+    json_obj_t *obj = get_obj_by_index(obj1, 0);
 
     if (player == NULL)
         return NULL;
@@ -31,19 +33,29 @@ maps_t **init_game_maps(void)
     maps_t **maps = malloc(sizeof(maps_t));
     json_obj_t *obj = create_json_object("config/maps.json");
     int i = 0;
-    json_obj_t *tmp = get_obj_by_index(obj, i);
+    json_obj_t *tmp1 = get_obj_by_index(obj, i);
+    json_obj_t *tmp = get_obj_by_index(tmp1, i);
 
+    printf("================================\n");
+    print_raw_data(obj, 1);
+    printf("================================\n");
+    print_raw_data(tmp1, 1);
+    printf("================================\n");
     if (maps == NULL)
         return NULL;
     while (tmp != NULL)
-        tmp = get_obj_by_index(obj, i++);
+        tmp = get_obj_by_index(tmp1, i++);
     maps = malloc(sizeof(maps_t *) * i);
     i = 0;
-    tmp = get_obj_by_index(obj, i);
+    tmp = get_obj_by_index(tmp1, i);
+    print_raw_data(tmp, 1);
+    printf("================================\n");
     while (tmp != NULL) {
+        print_raw_data(tmp, 1);
+        printf("================================\n");
         maps[i] = malloc(sizeof(maps_t));
         init_map_objects(maps, tmp, i++);
-        tmp = get_obj_by_index(obj, i);
+        tmp = get_obj_by_index(tmp1, i);
     }
     maps[i] = NULL;
     return maps;

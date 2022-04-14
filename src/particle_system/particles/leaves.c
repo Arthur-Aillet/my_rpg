@@ -12,7 +12,7 @@
 
 /*a fragment of a once proud and mighty tree destined to fall in the underworld
 recomended starting pos: exact point of inpact
-recomended speed: 20*/
+recomended speed: 50*/
 particle_t *leaf_fragment(sfRenderWindow *window, particle_t *part)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;

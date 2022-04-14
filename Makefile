@@ -5,24 +5,26 @@
 ## Makefile
 ##
 
-MAIN		=	src/json/localmain.c						\
+MAIN		=	src/json/localmain.c							\
 
-SRC			=	src/json/generate/file_gestion.c			\
-				src/json/generate/str_preprocessing.c		\
-				src/json/generate/object_preprocessing.c	\
-				src/json/generate/extract_fields.c			\
-				src/json/generate/json_split.c				\
-				src/json/generate/json_error_handling.c		\
-				src/json/use/get/json_get_by_name.c			\
-				src/json/use/get/json_get_by_index.c		\
-				src/json/use/get/json_display_obj.c			\
-				src/json/use/json_main.c					\
-															\
-				src/json/use/edit/json_add_field.c			\
-				src/json/use/edit/json_edit_by_name.c		\
-				src/json/use/edit/manage_json.c				\
-				src/json/generate/duplicate_data.c			\
-				src/json/generate/allocation.c				\
+SRC			=	src/json/generate/reader/file_gestion.c			\
+				src/json/generate/reader/str_preprocessing.c	\
+				src/json/generate/reader/object_preprocessing.c	\
+				src/json/generate/reader/extract_fields.c		\
+				src/json/generate/reader/json_split.c			\
+				src/json/generate/reader/json_error_handling.c	\
+				src/json/use/get/json_get_by_name.c				\
+				src/json/use/get/json_get_by_index.c			\
+				src/json/use/get/json_display_obj.c				\
+				src/json/use/json_main.c						\
+																\
+				src/json/use/edit/json_add_field.c				\
+				src/json/use/edit/json_edit_by_name.c			\
+				src/json/use/edit/manage_json.c					\
+				src/json/generate/reader/duplicate_data.c		\
+				src/json/generate/reader/allocation.c			\
+																\
+				src/json/dependencies/chain_chars.c				\
 
 MAINOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)

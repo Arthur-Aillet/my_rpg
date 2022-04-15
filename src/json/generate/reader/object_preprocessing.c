@@ -68,7 +68,6 @@ json_obj_t *extract_obj(char *buffer, int begin)
     json_obj_t *obj = malloc(sizeof(json_obj_t));
 
     buffer += begin;
-    printf("will work on buffer :\n%s\n", buffer);
     temp = select_by_quotes(buffer);
     if (temp == NULL)
         temp = my_strdup("noname");

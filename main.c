@@ -14,7 +14,7 @@ int main(int ac, char **av)
         return 84;
     if (ac == 2 && my_strcmp(av[1], "-h") == 0)
         return my_help();
-    if (game_loop() == 84)
+    if (my_rpg(ac, av) == 84)
         return 84;
     return 0;
 }

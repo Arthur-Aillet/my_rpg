@@ -57,12 +57,10 @@ char *cchar_to_arr(cchar_t *input)
 void free_cchar(cchar_t *chain)
 {
     if (chain != NULL) {
-        printf("will free data : %s\n", chain->data);
         if (chain->next != NULL)
             free_cchar(chain->next);
         if (chain->data != NULL)
             free(chain->data);
         free(chain);
     }
-    printf("freed\n");
 }

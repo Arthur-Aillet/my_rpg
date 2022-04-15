@@ -5,8 +5,7 @@
 ** potions
 */
 
-#ifndef POTIONS_H_
-    #define POTIONS_H_
+#pragma once
 
     #include "my_csfml_utils.h"
     #include "my_rpg.h"
@@ -52,5 +51,3 @@ void display_hammer(minigame_t *eleme, window_t *window, potion_t *pot);
 int hammer_update(char *keys, minigame_t *elements, potion_t *pot, sfClock *clock);
 void display_minigame(minigame_t *eleme, window_t *window, potion_t *pot);
 int minigame_update(char *keys, minigame_t *elements, potion_t *pot, sfClock *clock);
-
-#endif /* !POTIONS_H_ */

@@ -21,8 +21,6 @@ NAME			=			my_rpg
 
 CC				=			gcc
 
-RM				=			rm -rf
-
 NAME_TEST		=			unit_test
 
 ## ===================================================================
@@ -35,65 +33,27 @@ SRC_PATH		=			src/
 
 BASIC_PATH		=			$(SRC_PATH)basic/
 
-INIT_PATH		=			$(SRC_PATH)init/
-
-MENU_PATH		=			$(SRC_PATH)menu/
-
-GAME_PATH		=			$(SRC_PATH)game/
-
-MINGAME_PATH	=			$(SRC_PATH)mini_game/
-
-ANIM_PATH		=			$(SRC_PATH)animation/
-
-EFFECT_PATH		=			$(SRC_PATH)effect/
-
-FREE_PATH		=			$(SRC_PATH)free/
-
 CSFML_PATH		=			$(SRC_PATH)csfml/
-
-MATH_PATH		=			$(SRC_PATH)math/
-
-MOUSE_PATH		=			$(SRC_PATH)mouse/
-
-JSON_PATH		=			$(SRC_PATH)json/
-
-INVENTORY_PATH	=			$(SRC_PATH)inventory/
-
-PARTICLES_PATH	= 			$(SRC_PATH)particle_system/
 
 DIALOGUE_PATH	=			$(SRC_PATH)dialogue/
 
-## =========================[BASICS]==========================
+GAME_PATH		=			$(SRC_PATH)game/
 
-UTILS_PATH		=			$(BASIC_PATH)utils/
+INIT_PATH		=			$(SRC_PATH)init/
 
-WIN_PATH		=			$(BASIC_PATH)window/
+INVENTORY_PATH	=			$(SRC_PATH)inventory/
 
-KEY_PATH		=			$(BASIC_PATH)keyboard/
+JSON_PATH		=			$(SRC_PATH)json/
 
-## ==========================[MENU]===========================
+MATH_PATH		=			$(SRC_PATH)math/
 
-M_MENU_PATH		=			$(MENU_PATH)menu_main/
+MINGAME_PATH	=			$(SRC_PATH)mini_game/
 
-H_MENU_PATH		=			$(MENU_PATH)menu_howtoplay/
+MOUSE_PATH		=			$(SRC_PATH)mouse/
 
-S_MENU_PATH		=			$(MENU_PATH)menu_settings/
+PARTICLES_PATH	= 			$(SRC_PATH)particle_system/
 
-## =========================[CSFML]===========================
-
-TEXT_PATH		=			$(CSFML_PATH)texts/
-
-SOUND_PATH		=			$(CSFML_PATH)sound/
-
-BUTTON_PATH		=			$(CSFML_PATH)buttons/
-
-## ========================[MINI_GAME]========================
-
-POTION_PATH		=			$(MINGAME_PATH)potion/
-
-## ========================[ANIMATION]========================
-
-## =========================[EFFECTS]=========================
+UI_PATH			=			$(SRC_PATH)ui/
 
 TEST_PATH		=			tests/
 
@@ -101,61 +61,55 @@ TEST_PATH		=			tests/
 ## ===============================[SRC]===============================
 ## ===================================================================
 
-SRC_UTILS		=			$(UTILS_PATH)my_error_handling.c		\
-							$(UTILS_PATH)my_help.c					\
-							$(UTILS_PATH)files_manager.c			\
+SRC_BASICS		=			$(BASIC_PATH)utils/my_error_handling.c		\
+							$(BASIC_PATH)utils/my_help.c				\
+							$(BASIC_PATH)utils/files_manager.c			\
+							$(BASIC_PATH)window/window.c				\
+							$(BASIC_PATH)keyboard/keyboard_input.c		\
+							$(BASIC_PATH)keyboard/keyboard_input_init.c	\
 
-SRC_GAME		=			$(GAME_PATH)game_core.c					\
+SRC_CSFML		=			$(CSFML_PATH)object.c						\
+							$(CSFML_PATH)type_transformer.c				\
+							$(CSFML_PATH)texts/text.c					\
+							$(CSFML_PATH)texts/fonts.c					\
+							$(CSFML_PATH)sound/sound.c					\
+							$(CSFML_PATH)buttons/button_manage.c		\
+							$(CSFML_PATH)buttons/button_setup.c			\
+							$(CSFML_PATH)buttons/button_setup2.c		\
+							$(CSFML_PATH)buttons/button_utils.c			\
 
-SRC_KEY			=			$(KEY_PATH)keyboard_input.c				\
-							$(KEY_PATH)keyboard_input_init.c		\
+SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c					\
+							$(DIALOGUE_PATH)dialogue_utils.c			\
 
-SRC_POTION		=			$(POTION_PATH)potions_loop.c			\
-							$(POTION_PATH)hammer_minigame.c			\
-							$(POTION_PATH)minigame.c				\
-							$(POTION_PATH)mortar_minigame1.c		\
+SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
+							$(POTION_PATH)hammer_minigame.c				\
+							$(POTION_PATH)minigame.c					\
+							$(POTION_PATH)mortar_minigame1.c			\
 
-SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c			\
-							$(INVENTORY_PATH)get_positions.c		\
-							$(INVENTORY_PATH)get_slots.c			\
-							$(INVENTORY_PATH)inventory_displays.c	\
-							$(INVENTORY_PATH)inventory_events.c		\
+SRC_GAME		=			$(GAME_PATH)game_core.c						\
+							$(GAME_PATH)game_loop.c						\
+							$(GAME_PATH)display/my_display_world.c		\
+							$(GAME_PATH)display/my_display_map.c		\
+							$(GAME_PATH)display/my_display_player.c		\
+							$(GAME_PATH)actions/player/player_action.c	\
+							$(GAME_PATH)actions/player/player_move.c	\
+
+SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
+							$(INIT_PATH)init_game_status.c				\
+							$(INIT_PATH)init_in_game_struct.c			\
+							$(INIT_PATH)init_map_objects.c				\
+
+SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
+							$(INVENTORY_PATH)get_positions.c			\
+							$(INVENTORY_PATH)get_slots.c				\
+							$(INVENTORY_PATH)inventory_displays.c		\
+							$(INVENTORY_PATH)inventory_events.c			\
 							$(INVENTORY_PATH)inventory_interactions.c	\
-							$(INVENTORY_PATH)inventory_setups.c		\
-							$(INVENTORY_PATH)inventory_swaps.c		\
+							$(INVENTORY_PATH)inventory_setups.c			\
+							$(INVENTORY_PATH)inventory_swaps.c			\
 							$(INVENTORY_PATH)is_adjacent_competences.c	\
-							$(INVENTORY_PATH)inventory.c					\
-							$(INVENTORY_PATH)temp_main.c			\
-
-SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c				\
-							$(DIALOGUE_PATH)dialogue_utils.c		\
-
-SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
-							$(PARTICLES_PATH)creation.c				\
-							$(PARTICLES_PATH)destruction.c			\
-							$(PARTICLES_PATH)particles/dust.c		\
-							$(PARTICLES_PATH)particles/electricity.c\
-							$(PARTICLES_PATH)particles/fire.c		\
-							$(PARTICLES_PATH)particles/snow.c		\
-							$(PARTICLES_PATH)particles/spark.c		\
-							$(PARTICLES_PATH)particles/water.c		\
-							$(PARTICLES_PATH)particles/leaves.c		\
-
-SRC_WINDOW		=			$(WIN_PATH)window.c						\
-
-SRC_CSFML		=			$(CSFML_PATH)object.c					\
-							$(CSFML_PATH)type_transformer.c			\
-							$(TEXT_PATH)text.c						\
-							$(TEXT_PATH)fonts.c						\
-							$(SOUND_PATH)sound.c					\
-							$(BUTTON_PATH)button_manage.c			\
-							$(BUTTON_PATH)button_setup.c			\
-							$(BUTTON_PATH)button_setup2.c			\
-							$(BUTTON_PATH)button_utils.c			\
-
-SRC_MATH		=			$(MATH_PATH)math.c						\
-
-SRC_MOUSE		=			$(MOUSE_PATH)mouse.c					\
+							$(INVENTORY_PATH)inventory.c				\
+							$(INVENTORY_PATH)temp_main.c				\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 							$(JSON_PATH)generate/reader/str_preprocessing.c		\
@@ -176,24 +130,47 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 																				\
 							$(JSON_PATH)dependencies/chain_chars.c				\
 
-SRC_GLOBAL		=			$(SRC_UTILS)							\
-							$(SRC_WINDOW)							\
-							$(SRC_GAME)								\
-							$(SRC_EVENT)							\
-							$(SRC_POTION)							\
-							$(SRC_INVENTORY)						\
-							$(SRC_PARTICLES)						\
-							$(SRC_DIALOGUE)							\
-							$(SRC_JSON)								\
-							$(SRC_CSFML)							\
-							$(SRC_MATH)								\
-							$(SRC_MOUSE)							\
-							$(SRC_KEY)								\
+SRC_MATH		=			$(MATH_PATH)math.c							\
 
-SRC				=			$(SRC_GLOBAL)							\
+SRC_KEY			=			$(KEY_PATH)keyboard_input.c					\
+							$(KEY_PATH)keyboard_input_init.c			\
+
+SRC_MINIGAME	=			$(MINGAME_PATH)hammer_minigame1.c			\
+							$(MINGAME_PATH)hammer_minigame2.c			\
+
+SRC_MOUSE		=			$(MOUSE_PATH)mouse.c						\
+
+SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
+							$(PARTICLES_PATH)creation.c					\
+							$(PARTICLES_PATH)destruction.c				\
+							$(PARTICLES_PATH)particles/dust.c			\
+							$(PARTICLES_PATH)particles/fire.c			\
+							$(PARTICLES_PATH)particles/snow.c			\
+							$(PARTICLES_PATH)particles/spark.c			\
+							$(PARTICLES_PATH)particles/water.c			\
+							$(PARTICLES_PATH)particles/leaves.c			\
+							$(PARTICLES_PATH)particles/electricity.c	\
+
+SRC_UI			=			$(UI_PATH)display_healthbar.c				\
+							$(UI_PATH)display_ui.c						\
+
+SRC_GLOBAL		=			$(SRC_BASICS)								\
+							$(SRC_CSFML)								\
+							$(SRC_DIALOGUE)								\
+							$(SRC_GAME)									\
+							$(SRC_INIT)									\
+							$(SRC_INVENTORY)							\
+							$(SRC_JSON)									\
+							$(SRC_MATH)									\
+							$(SRC_MINIGAME)								\
+							$(SRC_MOUSE)								\
+							$(SRC_PARTICLES)							\
+							$(SRC_UI)									\
+
+SRC				=			$(SRC_GLOBAL)								\
 							main.c
 
-TEST_SRC		=			$(TEST_PATH)tests_error_handling.c		\
+TEST_SRC		=			$(TEST_PATH)tests_error_handling.c			\
 
 OBJ				=			$(SRC:.c=.o)
 
@@ -218,12 +195,12 @@ CRIT			=			$(LDFLAGS) $(CPPFLAGS) -lcriterion --coverage
 ## =========================================================================
 ## =========================================================================
 
-all:	message
-		make re -C lib/my
+all:
+		make message
 		make $(NAME)
 
-$(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
+$(NAME):	build_lib	$(OBJ)
+		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 re:			fclean	all
 
@@ -238,6 +215,7 @@ fclean:		clean
 		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
+		make re -C lib/my
 
 debug:
 

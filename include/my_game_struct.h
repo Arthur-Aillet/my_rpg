@@ -5,14 +5,46 @@
 ** my_game_struct
 */
 
-#ifndef MY_GAME_STRUCT_H_
-    #define MY_GAME_STRUCT_H_
+#pragma once
 
-    #include "my_window_struct.h"
-    #include "my_controle_struct.h"
-    #include "my_text.h"
-    #include "my_sound.h"
-    #include "my_csfml_utils.h"
+#include <SFML/Graphics.h>
+#include "my_window_struct.h"
+#include "my_controle_struct.h"
+#include "my_window_struct.h"
+#include "my_controle_struct.h"
+#include "my_text.h"
+#include "my_sound.h"
+#include "my_csfml_utils.h"
+
+typedef struct maps_s {
+    char *name;
+    sfTexture *tex_ts;
+    sfSprite* sp_ts;
+    char **map;
+    int def;
+    int height;
+    int width;
+    char *left;
+    char *right;
+    char *top;
+    char *bot;
+} maps_t;
+
+typedef struct player_s {
+    sfVector2f pos;
+    sfTexture *tex_p;
+    sfSprite *sp_p;
+    char *name;
+    int move_spd;
+} player_t;
+
+typedef struct in_game_s {
+    char *current;
+    sfVector2f pos_cam;
+    sfView *cam;
+    maps_t **maps;
+    player_t *player;
+} in_game_t;
 
 typedef struct game_s {
     char *keys;
@@ -21,6 +53,5 @@ typedef struct game_s {
     object_t *mouse;
     font_t **fonts;
     sound_t **sounds;
+    in_game_t *game;
 } game_t;
-
-#endif /* !MY_GAME_STRUCT_H_ */

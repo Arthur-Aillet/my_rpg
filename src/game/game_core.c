@@ -20,30 +20,18 @@
 #include "potions.h"
 #include "inventory_structures.h"
 
-item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys);
-item_t create_yellow_flower(item_t item, int number);
-item_t *create_items(void);
 
-game_t *init_game(void)
+int my_rpg(int ac, char **av)
 {
-    game_t *game = malloc(sizeof(game_t));
-
-    game->fonts = font_create_array();
-    game->sounds = sounds_create_array();
-    game->keys = init_keys();
-    game->window = generate_default_window();
-    game->mouse = create_object("assets/img/cursors.png", VCF{0, 0}, VCF{1, 1});
-    return (game);
-}
-
-int game_loop(void)
-{
-    game_t *game = init_game();
-        item_t *items = create_items();
-        items[10] = create_yellow_flower(items[10], 100);
-        competences_t *comp = malloc(sizeof(competences_t));
-        comp->dodge_roll = 0;
-        comp->fireball = 0;
+    game_t *game = init_game_struct();
+    item_t *items = create_items();
+    items[10] = create_yellow_flower(items[10], 100);
+    competences_t *comp = malloc(sizeof(competences_t));
+    comp->dodge_roll = 0;
+    comp->fireball = 0;
+    object_t *test = create_object("test", VCF{0, 0}, VCF{60, 33});
+    object_t *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
+    object_t *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});
 
     button_t *bouton_test = button_create(VCF{2, 1}, VCF{300, 300}, true);
     button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
@@ -57,7 +45,9 @@ int game_loop(void)
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", game->sounds), find_sound("hover.ogg", game->sounds), 10);
     button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
 
-    if (game->window == NULL)
+    potion_t *potion;
+
+    if (game == NULL)
         return 84;
     while (sfRenderWindow_isOpen(game->window->window)) {
         set_correct_window_size(game->window);
@@ -67,6 +57,8 @@ int game_loop(void)
             menu(game->window->window, items, comp, game->keys);
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
+        if (game->keys[sfKeyG] == PRESS)
+            game_loop(game);
         update_button(game->window->window, bouton_test_2, game->keys);
         update_button(game->window->window, bouton_test, game->keys);
         update_mouse_cursor(game->window->window, game->mouse);

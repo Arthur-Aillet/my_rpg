@@ -41,6 +41,7 @@ typedef struct player_s {
 typedef struct in_game_s {
     char *current;
     sfVector2f pos_cam;
+    sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
     player_t *player;

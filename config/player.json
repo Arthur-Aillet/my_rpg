@@ -1,7 +1,7 @@
 {
     "player": {
         "name": "steve",
-        "move_speed": 5,
+        "move_speed": 8,
         "sprite_sheet": "assets/in_game/player.png"
     }
 }

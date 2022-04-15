@@ -6,6 +6,7 @@
 */
 
 #include "my_rpg.h"
+#include "my.h"
 
 void display_world(game_t *game)
 {

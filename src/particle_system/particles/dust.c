@@ -9,6 +9,7 @@
 #include "my.h"
 #include <math.h>
 #include <stdlib.h>
+#include "json.h"
 
 /*a particle with one purpose, going down and right.
 you can make them go up and left with negative speed

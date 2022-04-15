@@ -7,9 +7,9 @@
 
 #pragma once
 
-    #include "my_csfml_utils.h"
-    #include "my_rpg.h"
-    #include "particles.h"
+#include "my_csfml_utils.h"
+#include "my_rpg.h"
+#include "particles.h"
 
 typedef struct minigame_s {
     object_t *hammer;

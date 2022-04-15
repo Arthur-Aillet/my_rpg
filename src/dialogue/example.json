@@ -1,47 +1,45 @@
 
 {
-    "json": {
-        "step1": {
-            "direction": 0,
-            "immage": "assets/img/far_edgehog.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "..."
-        },
-        "step2": {
-            "direction": 1,
-            "immage": "assets/img/bap_close.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "...\n..."
-        },
-        "step3": {
-            "direction": 1,
-            "immage": "assets/img/bap_open.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "I\n\n..."
-        },
-        "step4": {
-            "direction": 1,
-            "immage": "assets/img/bap_close.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "..."
-        },
-        "step5": {
-            "direction": 1,
-            "immage": "assets/img/bap_open.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "I've been trying to reach you about your car's extended warranty"
-        },
-        "step6": {
-            "direction": 1,
-            "immage": "assets/img/bap_close.png",
-            "font": "Ancient.ttf",
-            "name": "Y. kira",
-            "text": "...\n"
-        }
+    "step1": {
+        "direction": 0,
+        "immage": "assets/img/far_edgehog.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "..."
+    },
+    "step2": {
+        "direction": 1,
+        "immage": "assets/img/bap_close.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "...\n..."
+    },
+    "step3": {
+        "direction": 1,
+        "immage": "assets/img/bap_open.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "I\n\n..."
+    },
+    "step4": {
+        "direction": 1,
+        "immage": "assets/img/bap_close.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "..."
+    },
+    "step5": {
+        "direction": 1,
+        "immage": "assets/img/bap_open.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "I've been trying to reach you about your car's extended warranty"
+    },
+    "step6": {
+        "direction": 1,
+        "immage": "assets/img/bap_close.png",
+        "font": "Ancient.ttf",
+        "name": "Y. kira",
+        "text": "...\n"
     }
 }

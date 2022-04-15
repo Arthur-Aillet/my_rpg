@@ -29,9 +29,6 @@ int my_rpg(int ac, char **av)
     competences_t *comp = malloc(sizeof(competences_t));
     comp->dodge_roll = 0;
     comp->fireball = 0;
-    object_t *test = create_object("test", VCF{0, 0}, VCF{60, 33});
-    object_t *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
-    object_t *cursor = create_object("test", VCF{0, 0}, VCF{.1, .1});
 
     button_t *bouton_test = button_create(VCF{2, 1}, VCF{300, 300}, true);
     button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
@@ -44,8 +41,6 @@ int my_rpg(int ac, char **av)
     button_setup_text(bouton_test_2, "This is some exemple texte", find_font("Ancient.ttf", game->fonts), 40);
     button_setup_sounds(bouton_test_2, find_sound("click.ogg", game->sounds), find_sound("hover.ogg", game->sounds), 10);
     button_setup_offset(bouton_test_2, VCF{1.05, 1.05}, VCF{.9, .9});
-
-    potion_t *potion;
 
     if (game == NULL)
         return 84;

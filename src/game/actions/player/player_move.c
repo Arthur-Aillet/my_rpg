@@ -6,6 +6,7 @@
 */
 
 #include "my_rpg.h"
+#include "keyboard.h"
 
 static int more_than_one_key(game_t *game)
 {

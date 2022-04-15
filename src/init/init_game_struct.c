@@ -6,6 +6,8 @@
 */
 
 #include <stdlib.h>
+
+#include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "my_rpg.h"
 
@@ -15,6 +17,7 @@ game_t *init_game_struct(void)
 
     if (game == NULL)
         return NULL;
+    game->mouse = create_object("assets/img/cursors.png", VCF{1, 1}, VCF{1, 1});
     game->fonts = font_create_array();
     game->sounds = sounds_create_array();
     game->window = generate_default_window();

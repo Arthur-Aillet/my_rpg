@@ -10,5 +10,6 @@
 void display_player(game_t *game, int i)
 {
     sfSprite_setPosition(game->game->player->sp_p, game->game->player->pos);
-    sfRenderWindow_drawSprite(game->window->window, game->game->player->sp_p, NULL);
+    sfRenderWindow_drawSprite(game->window->window, game->game->player->sp_p,
+        NULL);
 }

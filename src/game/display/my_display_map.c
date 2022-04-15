@@ -7,7 +7,7 @@
 
 #include "my_rpg.h"
 
-void print_tile_map(game_t *game, char **map, sfVector2f vec, int i)
+static void print_tile_map(game_t *game, char **map, sfVector2f vec, int i)
 {
     sfIntRect rect = {0, 0, 64, 64};
 
@@ -18,7 +18,8 @@ void print_tile_map(game_t *game, char **map, sfVector2f vec, int i)
     vec.x *= 64;
     vec.y *= 64;
     sfSprite_setPosition(game->game->maps[i]->sp_ts, vec);
-    sfRenderWindow_drawSprite(game->window->window, game->game->maps[i]->sp_ts, NULL);
+    sfRenderWindow_drawSprite(game->window->window, game->game->maps[i]->sp_ts,
+        NULL);
 }
 
 void display_map(game_t *game, maps_t *maps, int i)

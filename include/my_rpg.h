@@ -30,3 +30,6 @@ int game_loop(game_t *game);
 void display_world(game_t *game);
 void display_map(game_t *game, maps_t *maps, int i);
 void display_player(game_t *game, int i);
+
+void player_actions(game_t *game);
+void player_move(game_t *game);

@@ -28,6 +28,10 @@ int game_loop(game_t *game)
         poll_event_keys(game);
         sfRenderWindow_display(game->window->window);
     }
+    game->game->pos_cam.x = 960;
+    game->game->pos_cam.y = 540;
+    sfView_setCenter(game->game->cam, game->game->pos_cam);
+    sfRenderWindow_setView(game->window->window, game->game->cam);
     game->status->end_game = 0;
     return 0;
 }

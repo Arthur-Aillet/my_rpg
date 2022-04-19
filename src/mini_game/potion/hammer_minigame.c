@@ -58,7 +58,7 @@ void hammer_controls(minigame_t *elements, particle_t **start, char *keys, sfSou
                 (rand() % 100 + 100) / 10);
         }
         elements->has_spawn = true;
-        for (int i = 0; elements->points + 1 <= 102 && i < 4; i++)
+        for (int i = 0; elements->points + 1 <= 102 && i < 8; i++)
             elements->points += 1;
     }
     if (sfSprite_getRotation(elements->hammer->sprite) < 41)

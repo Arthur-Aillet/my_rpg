@@ -24,6 +24,42 @@ static int more_than_one_key(game_t *game)
     return 0;
 }
 
+int player_is_collide(game_t *game)
+{
+    int i = -1;
+    int j = 0;
+    int map = 0;
+    int ret = 0;
+
+    while (game->game->maps[map] && my_strcmp(game->game->maps[map]->name,
+        game->game->current) != 0)
+        map++;
+    while (game->game->maps[map]->map[++i]) {
+        j = -1;
+        while (game->game->maps[map]->map[i][++j])
+            ret = ((int)(game->game->player->pos.x / 64) == j ||
+                (int)(game->game->player->pos.x / 64) + 1 == j) &&
+                game->game->maps[map]->map[i][j] == '1' &&
+                ((int)(game->game->player->pos.y / 64) == i ||
+                (int)(game->game->player->pos.y / 64) + 1 == i) ? 1 : ret;
+    }
+    return ret;
+}
+
+void handle_collide(game_t *game, int spd)
+{
+    if (player_is_collide(game)) {
+        if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
+            game->game->player->pos.y += spd;
+        if (game->keys[sfKeyDown] || game->keys[sfKeyS])
+            game->game->player->pos.y -= spd;
+        if (game->keys[sfKeyLeft] || game->keys[sfKeyQ])
+            game->game->player->pos.x += spd;
+        if (game->keys[sfKeyRight] || game->keys[sfKeyD])
+            game->game->player->pos.x -= spd;
+    }
+}
+
 void player_move(game_t *game)
 {
     int spd = game->game->player->move_spd;
@@ -41,4 +77,5 @@ void player_move(game_t *game)
         game->game->player->pos.x -= spd;
     if (game->keys[sfKeyRight] || game->keys[sfKeyD])
         game->game->player->pos.x += spd;
+    handle_collide(game, spd);
 }

@@ -5,17 +5,19 @@
 ** game_loop
 */
 
+#include "my_rpg.h"
+#include "keyboard.h"
 #include "my_game_struct.h"
 #include "my.h"
 
 static void poll_event_keys(game_t *game)
 {
     game->keys = get_keyboard_input(game->keys, game->window->window);
-    if (game->keys[sfKeyEscape])
+    if (game->ESC)
         game->status->end_game = 1;
-    if (game->keys[sfKeyP])
+    if (game->P)
         game->status->end_game = 1;
-    if (game->keys[sfKeyI])
+    if (game->I)
         game->status->end_game = 1;
 }
 

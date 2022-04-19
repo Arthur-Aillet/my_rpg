@@ -1,6 +1,5 @@
 
 {
-    "json": {
         "step1": {
             "direction": 0,
             "immage": "assets/img/far_edgehog.png",
@@ -43,5 +42,5 @@
             "name": "Y. kira",
             "text": "...\n"
         }
-    }
+
 }

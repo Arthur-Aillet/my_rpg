@@ -37,18 +37,20 @@ int player_is_collide(game_t *game)
     while (game->game->maps[map]->map[++i]) {
         j = -1;
         while (game->game->maps[map]->map[i][++j])
-            ret = ((int)(game->game->player->pos.x / 64) == j ||
-                (int)(game->game->player->pos.x / 64) + 1 == j) &&
+            ret = ((int)((game->game->player->pos.x + 1)/ 64) == j ||
+                (int)((game->game->player->pos.x - 1) / 64) + 1 == j) &&
                 game->game->maps[map]->map[i][j] == '1' &&
-                ((int)(game->game->player->pos.y / 64) == i ||
-                (int)(game->game->player->pos.y / 64) + 1 == i) ? 1 : ret;
+                ((int)((game->game->player->pos.y + 1) / 64) == i ||
+                (int)((game->game->player->pos.y - 1) / 64) + 1 == i) ? 1 : ret;
     }
     return ret;
 }
 
 void handle_collide(game_t *game, int spd)
 {
-    if (player_is_collide(game)) {
+    if (player_is_collide(game) ||
+        game->game->player->pos.y <= 0 ||
+        game->game->player->pos.x <= 0) {
         if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
             game->game->player->pos.y += spd;
         if (game->keys[sfKeyDown] || game->keys[sfKeyS])
@@ -62,20 +64,23 @@ void handle_collide(game_t *game, int spd)
 
 void player_move(game_t *game)
 {
-    int spd = game->game->player->move_spd;
+    int spd = 1;
+    int count = game->game->player->move_spd;
 
-    if (game->keys[sfKeyLShift])
-        spd *= 1.5;
-    if (more_than_one_key(game))
-        spd /= 1.2;
     game->keys = get_keyboard_input(game->keys, game->window->window);
-    if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
-        game->game->player->pos.y -= spd;
-    if (game->keys[sfKeyDown] || game->keys[sfKeyS])
-        game->game->player->pos.y += spd;
-    if (game->keys[sfKeyLeft] || game->keys[sfKeyQ])
-        game->game->player->pos.x -= spd;
-    if (game->keys[sfKeyRight] || game->keys[sfKeyD])
-        game->game->player->pos.x += spd;
-    handle_collide(game, spd);
+    if (game->keys[sfKeyLShift])
+            count *= 1.5;
+        if (more_than_one_key(game))
+            count /= 1.2;
+    while (count--) {
+        if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
+            game->game->player->pos.y -= spd;
+        if (game->keys[sfKeyDown] || game->keys[sfKeyS])
+            game->game->player->pos.y += spd;
+        if (game->keys[sfKeyLeft] || game->keys[sfKeyQ])
+            game->game->player->pos.x -= spd;
+        if (game->keys[sfKeyRight] || game->keys[sfKeyD])
+            game->game->player->pos.x += spd;
+        handle_collide(game, spd);
+    }
 }

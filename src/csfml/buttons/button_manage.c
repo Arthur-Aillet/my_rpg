@@ -18,10 +18,11 @@ void button_center_text(button_t *bouton)
 {
     sfFloatRect rect = sfText_getGlobalBounds(bouton->text.text);
     sfVector2f scale = sfText_getScale(bouton->text.text);
+    sfVector2f pos = sfSprite_getPosition(bouton->sprite);
 
     sfText_setOrigin(bouton->text.text, VCF{rect.width / 2 / scale.x,
     rect.height / scale.y});
-    sfText_setPosition(bouton->text.text, sfSprite_getPosition(bouton->sprite));
+    sfText_setPosition(bouton->text.text, VCF{pos.x, pos.y + 3});
 }
 
 void sf_text_set_size(sfText *text, sfVector2f size)

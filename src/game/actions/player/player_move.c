@@ -48,9 +48,16 @@ int player_is_collide(game_t *game)
 
 void handle_collide(game_t *game, int spd)
 {
+    int map = 0;
+
+    while (game->game->maps[map] && my_strcmp(game->game->maps[map]->name,
+        game->game->current) != 0)
+        map++;
     if (player_is_collide(game) ||
         game->game->player->pos.y <= 0 ||
-        game->game->player->pos.x <= 0) {
+        game->game->player->pos.x <= 0 ||
+        game->game->player->pos.y >= (game->game->maps[map]->height - 1) * 64 ||
+        game->game->player->pos.x >= (game->game->maps[map]->width - 1) * 64) {
         if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
             game->game->player->pos.y += spd;
         if (game->keys[sfKeyDown] || game->keys[sfKeyS])

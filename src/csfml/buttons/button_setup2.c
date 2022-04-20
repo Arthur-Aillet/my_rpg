@@ -34,3 +34,15 @@ void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click)
     bouton->scale_hover = VCF{rect.width * hover.x, rect.height * hover.y};
     bouton->scale_click = VCF{rect.width * click.x, rect.height * click.y};
 }
+
+void button_setup_correct_texture(button_t *bouton, sfIntRect size)
+{
+    sfSprite_setTexture(bouton->sprite, bouton->texture, sfFalse);
+    if (size.height * 3 < (int) sfTexture_getSize(bouton->texture).y
+    || size.width * 3 < (int) sfTexture_getSize(bouton->texture).x)
+        sfSprite_setTextureRect(bouton->sprite, (sfIntRect){0, 0,
+            (float) sfTexture_getSize(bouton->texture).y / 3,
+            sfTexture_getSize(bouton->texture).x});
+    else
+        sfSprite_setTextureRect(bouton->sprite, size);
+}

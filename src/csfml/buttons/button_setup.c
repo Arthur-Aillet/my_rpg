@@ -34,32 +34,28 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
     return (bouton);
 }
 
-void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name)
+void button_setup_texture(button_t *btn, sfIntRect size, char *file_name)
 {
     sfImage *image;
     sfFloatRect rect;
 
-    bouton->texture = sfTexture_createFromFile(file_name, NULL);
-    if (bouton->texture == NULL) {
+    btn->texture = sfTexture_createFromFile(file_name, NULL);
+    if (btn->texture == NULL) {
         image = create_blank_image();
-        bouton->texture = sfTexture_createFromImage(image, NULL);
+        btn->texture = sfTexture_createFromImage(image, NULL);
         sfImage_destroy(image);
     }
-    sfSprite_setTexture(bouton->sprite, bouton->texture, sfFalse);
-    if (size.height * 3 < (int) sfTexture_getSize(bouton->texture).y
-    || size.width * 3 < (int) sfTexture_getSize(bouton->texture).x)
-        sfSprite_setTextureRect(bouton->sprite, (sfIntRect){0, 0,
-            (float) sfTexture_getSize(bouton->texture).y / 3,
-            sfTexture_getSize(bouton->texture).x});
-    else
-        sfSprite_setTextureRect(bouton->sprite, size);
-    rect = sfSprite_getGlobalBounds(bouton->sprite);
-    sfSprite_setOrigin(bouton->sprite, VCF{rect.width / 2 / sfSprite_getScale(
-    bouton->sprite).x, rect.height / 2 / sfSprite_getScale(bouton->sprite).y});
-    bouton->scale_click = VCF{rect.width * bouton->scale_click.x, rect.height * bouton->scale_click.y};
-    bouton->original_scale = VCF{rect.width, rect.height};
-    bouton->original_text_scale = VCF{rect.width * bouton->original_text_scale.x, rect.height * bouton->original_text_scale.y};
-    bouton->scale_hover = VCF{rect.width * bouton->scale_hover.x, rect.height * bouton->scale_hover.y};
+    button_setup_correct_texture(btn, size);
+    rect = sfSprite_getGlobalBounds(btn->sprite);
+    sfSprite_setOrigin(btn->sprite, VCF{rect.width / 2 / sfSprite_getScale(
+    btn->sprite).x, rect.height / 2 / sfSprite_getScale(btn->sprite).y});
+    btn->scale_click = VCF{rect.width * btn->scale_click.x,
+        rect.height * btn->scale_click.y};
+    btn->original_scale = VCF{rect.width, rect.height};
+    btn->original_text_scale = VCF{rect.width *
+        btn->original_text_scale.x, rect.height * btn->original_text_scale.y};
+    btn->scale_hover = VCF{rect.width * btn->scale_hover.x,
+        rect.height * btn->scale_hover.y};
 }
 
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size)

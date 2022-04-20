@@ -23,5 +23,7 @@ sfVector2f itofv2(sfVector2i vector);
 sfVector2i ftoiv2(sfVector2f vector);
 object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f si);
 object_t *create_object(char *name, sfVector2f pos, sfVector2f scale);
+void sf_sprite_set_pixel_size(sfSprite *sprite, sfVector2f size);
+void sf_text_set_pixel_size(sfText *text, sfVector2f size);
 sfImage *create_blank_image(void);
 void destroy_object(object_t *objet);

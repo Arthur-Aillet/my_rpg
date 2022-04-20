@@ -8,6 +8,7 @@
 #pragma once
 
 #define FONT(name, fonts) font_from_array_font(name, fonts)
+#define FONTG(font) find_font(font, game->fonts)
 
 #include <SFML/Graphics.h>
 

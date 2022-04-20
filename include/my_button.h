@@ -16,6 +16,8 @@
 typedef struct button_s {
     sfVector2f scale_hover;
     sfVector2f scale_click;
+    sfVector2f original_scale;
+    sfVector2f original_text_scale;
     text_t text;
     bool display_text;
     sfSprite *sprite;
@@ -28,7 +30,7 @@ typedef struct button_s {
     bool already_clicked;
 } button_t;
 
-bool is_pressed(button_t bouton, sfRenderWindow *window, char *keys);
+bool is_pressed(button_t *bouton, sfRenderWindow *window, char *keys);
 button_t *button_create(sfVector2f size, sfVector2f position, bool display_tex);
 void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name);
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size);
@@ -41,3 +43,5 @@ void update_button(sfRenderWindow *window, button_t *but, char *keys);
 void destroy_button(button_t bouton);
 void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vo);
 void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click);
+void button_setup_correct_texture(button_t *bouton, sfIntRect size);
+void sf_text_set_size(sfText *text, sfVector2f size);

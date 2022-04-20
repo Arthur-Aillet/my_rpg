@@ -28,14 +28,6 @@ static object_t **get_parts(void)
     return (result);
 }
 
-static void sf_sprite_set_pixel_size(sfSprite *sprite, sfVector2f size)
-{
-    sfIntRect rect = sfSprite_getTextureRect(sprite);
-    sfVector2f scale = {size.x / rect.width, size.y / rect.height};
-
-    sfSprite_setScale(sprite, scale);
-}
-
 static void display_circle(sfRenderWindow *window, object_t **parts)
 {
     sf_sprite_set_pixel_size(parts[4]->sprite, VCF {100, 100});

@@ -21,6 +21,8 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
     bouton->sprite = sfSprite_create();
     bouton->scale_hover = VCF{1, 1};
     bouton->scale_click = VCF{1, 1};
+    bouton->original_scale = size;
+    bouton->original_text_scale = VCF{1, 1};
     bouton->click = NULL;
     bouton->hover = NULL;
     bouton->click_buf = NULL;
@@ -54,6 +56,10 @@ void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name)
     rect = sfSprite_getGlobalBounds(bouton->sprite);
     sfSprite_setOrigin(bouton->sprite, VCF{rect.width / 2 / sfSprite_getScale(
     bouton->sprite).x, rect.height / 2 / sfSprite_getScale(bouton->sprite).y});
+    bouton->scale_click = VCF{rect.width * bouton->scale_click.x, rect.height * bouton->scale_click.y};
+    bouton->original_scale = VCF{rect.width, rect.height};
+    bouton->original_text_scale = VCF{rect.width * bouton->original_text_scale.x, rect.height * bouton->original_text_scale.y};
+    bouton->scale_hover = VCF{rect.width * bouton->scale_hover.x, rect.height * bouton->scale_hover.y};
 }
 
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size)

@@ -23,12 +23,14 @@ void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
     if (hover != NULL) {
         but->hover = sfSound_copy(hover);
         but->hover_buf = NULL;
-        sfSound_setVolume(but->hover, vol);
+        sfSound_setVolume(but->hover, vol / 2);
     }
 }
 
 void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click)
 {
-    bouton->scale_hover = hover;
-    bouton->scale_click = click;
+    sfFloatRect rect = sfSprite_getGlobalBounds(bouton->sprite);
+
+    bouton->scale_hover = VCF{rect.width * hover.x, rect.height * hover.y};
+    bouton->scale_click = VCF{rect.width * click.x, rect.height * click.y};
 }

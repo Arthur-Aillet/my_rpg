@@ -11,7 +11,7 @@
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 sfRenderWindow *create_window(unsigned int width, unsigned int height);
-item_t *menu(sfRenderWindow *window, item_t *items, competences_t comp, char *keys);
+item_t *inventory(sfRenderWindow *window, item_t *items, competences_t comp, char *keys);
 
 item_t create_yellow_flower(item_t item, int number)
 {

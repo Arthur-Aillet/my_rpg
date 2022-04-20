@@ -16,6 +16,8 @@
 typedef struct button_s {
     sfVector2f scale_hover;
     sfVector2f scale_click;
+    sfVector2f original_scale;
+    sfVector2f original_text_scale;
     text_t text;
     bool display_text;
     sfSprite *sprite;

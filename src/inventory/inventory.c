@@ -77,40 +77,20 @@ item_t *inventory(sfRenderWindow *window, item_t *items, competences_t *comp, ch
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     font_t **fonts = font_create_array();
-    ui_t health = (ui_t) {0, 1500};
+    player_t player = {0, 1000, 0, 500, 0, 250, VCF {0, 0}, NULL, NULL, "\0", 0};
 
     while (sfRenderWindow_isOpen(window)) {
-        if (J == 2) {
-            start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, SNOW, 20);
-            start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, RAIN, 15);
-            start = add_particle(start, (sfVector2f) {970, 540}, FIRE, 20);
-            if (rand() % 100 == 0)
-                for (int i = 0; i < 1000; i++)
-                    start = add_particle(start, (sfVector2f) {485, 540}, DUST_CIRCLE, 15);
-            start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP, -10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP_RIGHT, -10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, DUST_RIGHT, -10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, DUST_DOWN_RIGHT, -10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP, 10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP_RIGHT, 10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10);
-            start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);
-            start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);
-            start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);
-            start = add_particle(start, (sfVector2f) {1800, 540}, LEAF, 50);
-        }
+        if (J == 2) {   start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, SNOW, 20);    start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, RAIN, 15); start = add_particle(start, (sfVector2f) {970, 540}, FIRE, 20);  if (rand() % 100 == 0)    for (int i = 0; i < 1000; i++)  start = add_particle(start, (sfVector2f) {485, 540}, DUST_CIRCLE, 15);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP, -10);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP_RIGHT, -10);  start = add_particle(start, (sfVector2f) {1465, 540}, DUST_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, DUST_DOWN_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP, 10);    start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP_RIGHT, 10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10); start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);  start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);  start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);    start = add_particle(start, (sfVector2f) {1800, 540}, LEAF, 50);}
         disp[page](backgrounds);//
         events = evt[page](events);//
-        update_particles(window, start);//
-        if (P) {
+        update_particles(window, start);
+        if (ESC == 2) {
             exterminate(start);
             return (items);
         }
         display_dialogue(window, "src/dialogue/example.json", keys, fonts);
-        display_ui(window, health);
-        //health.health = health.max_health;
-        health.health += 1;
-        if (health.health > health.max_health) health.health = 0;
+        player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
+        display_ui(window, &player);
         sfRenderWindow_display(window);//
     }
     return (items);

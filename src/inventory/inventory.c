@@ -67,7 +67,7 @@ item_t *menu(sfRenderWindow *window, item_t *items, competences_t *comp, char *k
         disp[page](backgrounds);//
         events = evt[page](events);//
         update_particles(window, start);
-        if (ESC) {
+        if (ESC == 2) {
             exterminate(start);
             return (items);
         }

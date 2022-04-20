@@ -30,7 +30,7 @@ typedef struct button_s {
     bool already_clicked;
 } button_t;
 
-bool is_pressed(button_t bouton, sfRenderWindow *window, char *keys);
+bool is_pressed(button_t *bouton, sfRenderWindow *window, char *keys);
 button_t *button_create(sfVector2f size, sfVector2f position, bool display_tex);
 void button_setup_texture(button_t *bouton, sfIntRect size, char *file_name);
 void button_setup_text_file(button_t *bouton, char *text, char *font, int size);

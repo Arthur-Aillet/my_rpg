@@ -9,6 +9,8 @@
 
 #include <SFML/Audio.h>
 
+#define SOUNDG(sound) find_sound(sound, game->sounds)
+
 typedef struct sound_s {
     char *name;
     sfSound *sound;

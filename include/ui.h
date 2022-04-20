@@ -7,16 +7,15 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
+#include "my_game_struct.h"
 
 #ifndef UI_H_
     #define UI_H_
 
-typedef struct ui_s {
-    float health;
-    float max_health;
-} ui_t;
-
+void display_stamina(sfRenderWindow *window, float current, float max, object_t **parts);
+void display_exp(sfRenderWindow *window, float current, float max, object_t **parts);
+void display_ui(sfRenderWindow *window, player_t *player);
 void display_health(sfRenderWindow *window, float current, float max, object_t **parts);
-void display_ui(sfRenderWindow *window, ui_t ui);
+void display_ui(sfRenderWindow *window, player_t *palyer);
 
 #endif /* !UI_H_ */

@@ -24,8 +24,10 @@ void remove_particle(particle_t *prev)
 /*destroys all the particles int the list*/
 void exterminate(particle_t *first)
 {
-    while(first->next != NULL)
+    while(first->next != NULL) {
         remove_particle(first);
+        first = first->next;
+    }
     sfSprite_destroy(first->object->sprite);
     free(first);
 }

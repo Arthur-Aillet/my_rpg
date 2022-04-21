@@ -45,7 +45,7 @@ void potion_loop(game_t *game)
     button_t *fire_potion = button_create(VCF{2, 1}, VCF{1920 / 2, 540}, true);
     int open = 1;
 
-    button_setup_texture(fire_potion, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
+    button_setup_texture_file(fire_potion, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(fire_potion, "Fire potion", find_font("Ancient.ttf", game->fonts), 40);
     button_setup_sounds(fire_potion, find_sound("hover.ogg", game->sounds), find_sound("click.ogg", game->sounds), 10);
     button_setup_offset(fire_potion, VCF{1.1, 1.1}, VCF{1.2, 1.2});
@@ -55,7 +55,7 @@ void potion_loop(game_t *game)
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->keys[sfKeyEscape] == PRESS)
             open = 0;
-        if (is_pressed(*fire_potion, game->window->window, game->keys))
+        if (is_pressed(fire_potion, game->window->window, game->keys))
             create_potion(game);
         sfRenderWindow_drawSprite(game->window->window, test->sprite, NULL);
         update_button(game->window->window, fire_potion, game->keys);

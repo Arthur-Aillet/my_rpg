@@ -31,6 +31,12 @@ typedef struct maps_s {
 } maps_t;
 
 typedef struct player_s {
+    float health;
+    float max_health;
+    float stamina;
+    float max_stamina;
+    float exp;
+    float max_exp;
     sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;
@@ -41,6 +47,7 @@ typedef struct player_s {
 typedef struct in_game_s {
     char *current;
     sfVector2f pos_cam;
+    sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
     player_t *player;

@@ -15,6 +15,7 @@ game_t *init_game_struct(void)
 
     if (game == NULL)
         return NULL;
+    game->mouse = create_object("assets/img/cursors.png", VCF{0, 0}, VCF{1.4, 1.4});
     game->fonts = font_create_array();
     game->sounds = sounds_create_array();
     game->window = generate_default_window();

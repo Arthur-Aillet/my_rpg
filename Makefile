@@ -59,6 +59,8 @@ UI_PATH			=			$(SRC_PATH)ui/
 
 POTION_PATH		=			$(MINGAME_PATH)potion/
 
+P_ANIM_PATH		=			$(SRC_PATH)player_animation/
+
 TEST_PATH		=			tests/
 
 ## ===================================================================
@@ -163,6 +165,8 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 SRC_UI			=			$(UI_PATH)display_bars.c					\
 							$(UI_PATH)display_ui.c						\
 
+SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c	\
+
 SRC_GLOBAL		=			$(SRC_BASICS)								\
 							$(SRC_CSFML)								\
 							$(SRC_DIALOGUE)								\
@@ -177,6 +181,7 @@ SRC_GLOBAL		=			$(SRC_BASICS)								\
 							$(SRC_PARTICLES)							\
 							$(SRC_UI)									\
 							$(SRC_MENU)									\
+							$(SRC_PLAYER_ANIM)							\
 
 SRC				=			$(SRC_GLOBAL)								\
 							main.c

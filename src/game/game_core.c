@@ -20,8 +20,6 @@
 #include "menu.h"
 #include "inventory_structures.h"
 
-int menu(game_t *game, item_t *items, competences_t *comp);
-
 int my_rpg(int ac, char **av)
 {
     game_t *game = init_game_struct();

@@ -50,18 +50,18 @@ void sf_text_set_size(sfText *text, sfVector2f size)
     sfText_setScale(text, VCF{1, size.y / rect.height});
 }
 
-void destroy_button(button_t bouton)
+void destroy_button(button_t *bouton)
 {
-    sfSprite_destroy(bouton.sprite);
-    sfTexture_destroy(bouton.texture);
-    if (bouton.display_text == 1) {
-        sfText_destroy(bouton.text.text);
-        sfFont_destroy(bouton.text.font);
+    sfSprite_destroy(bouton->sprite);
+    sfTexture_destroy(bouton->texture);
+    if (bouton->display_text == 1) {
+        sfText_destroy(bouton->text.text);
+        sfFont_destroy(bouton->text.font);
     }
-    sfSound_stop(bouton.click);
-    sfSound_stop(bouton.hover);
-    sfSound_destroy(bouton.click);
-    sfSound_destroy(bouton.hover);
-    sfSoundBuffer_destroy(bouton.click_buf);
-    sfSoundBuffer_destroy(bouton.hover_buf);
+    sfSound_stop(bouton->click);
+    sfSound_stop(bouton->hover);
+    sfSound_destroy(bouton->click);
+    sfSound_destroy(bouton->hover);
+    sfSoundBuffer_destroy(bouton->click_buf);
+    sfSoundBuffer_destroy(bouton->hover_buf);
 }

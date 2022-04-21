@@ -46,19 +46,21 @@ main_menu_t *init_main_menu(game_t *game)
 {
     main_menu_t *menu = malloc(sizeof(main_menu_t));
 
-    menu->back = create_object("assets/img/menu/focus.jpg", VCF{0, -30}, VCF{1, 1});
-    menu->title = create_object("assets/img/menu/title.png", VCF{480, -50}, VCF{.25, .25});
+    menu->back = create_object("assets/img/menu/focus.jpg", VCF{0, -30},
+        VCF{1, 1});
+    menu->title = create_object("assets/img/menu/title.png",
+        VCF{480, -50}, VCF{.25, .25});
     menu->new_game = button_create(VCF{2.2, 1}, VCF{960, 412}, true);
     menu->continue_game = button_create(VCF{2.2, 1}, VCF{960, 540}, true);
     menu->options = button_create(VCF{2.2, 1}, VCF{960, 668}, true);
     menu->quit = button_create(VCF{2.2, 1}, VCF{960, 796}, true);
-    button_setup_texture(menu->new_game,
+    button_setup_texture_file(menu->new_game,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_texture(menu->continue_game,
+    button_setup_texture_file(menu->continue_game,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_texture(menu->options,
+    button_setup_texture_file(menu->options,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_texture(menu->quit,
+    button_setup_texture_file(menu->quit,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     setup_menu_buttons(menu, game);
     return (menu);
@@ -79,7 +81,6 @@ void update_menu(main_menu_t *menu, game_t *game)
 int menu(game_t *game, item_t *items, competences_t *comp)
 {
     main_menu_t *menu = init_main_menu(game);
-    potion_t *potion;
     int open = 1;
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {
@@ -90,17 +91,12 @@ int menu(game_t *game, item_t *items, competences_t *comp)
             open = 0;
         if (game->keys[sfKeyEscape] == PRESS)
             inventory(game->window->window, items, comp, game->keys);
-        if (game->keys[sfKeyP] == PRESS) {
-            potion = malloc(sizeof(potion_t));
-            potion->current_step = 1;
-            potion->numbers_steps = 2;
-            potion->difficulty = 2;
-            hammer_loop(game->window, game->keys, game->mouse, potion);
-            free(potion);
-        }
+        if (game->keys[sfKeyP] == PRESS)
+            potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
             game_loop(game);
         update_menu(menu, game);
     }
+    destroy_button(menu->quit);
     return 0;
 }

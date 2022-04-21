@@ -9,6 +9,7 @@
 #include "keyboard.h"
 #include "my_game_struct.h"
 #include "my.h"
+#include "keyboard.h"
 
 static void poll_event_keys(game_t *game)
 {

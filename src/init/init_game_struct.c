@@ -6,6 +6,8 @@
 */
 
 #include <stdlib.h>
+
+#include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "my_rpg.h"
 

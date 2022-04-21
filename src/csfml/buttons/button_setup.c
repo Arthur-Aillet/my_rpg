@@ -34,7 +34,7 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
     return (bouton);
 }
 
-void button_setup_texture(button_t *btn, sfIntRect size, char *file_name)
+void button_setup_texture_file(button_t *btn, sfIntRect size, char *file_name)
 {
     sfImage *image;
     sfFloatRect rect;

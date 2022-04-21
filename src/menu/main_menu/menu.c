@@ -12,7 +12,7 @@
 #include "my_window_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
-#include "menu.h"
+#include "main_menu.h"
 #include "my_rpg.h"
 #include "my_mouse.h"
 #include "my_button.h"
@@ -95,6 +95,8 @@ int menu(game_t *game, item_t *items, competences_t *comp)
             potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
             game_loop(game);
+        if (is_pressed(menu->options, game->window->window, game->keys))
+            option(game, items, comp);
         update_menu(menu, game);
     }
     destroy_button(menu->quit);

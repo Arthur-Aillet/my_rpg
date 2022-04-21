@@ -20,4 +20,15 @@ typedef struct main_menu_s{
     button_t *quit;
 } main_menu_t;
 
+typedef struct options_menu_s{
+    object_t *back;
+    object_t *title;
+    button_t *new_game;
+    button_t *continue_game;
+    button_t *options;
+    button_t *quit;
+} options_menu_t;
+
+
+int option(game_t *game, item_t *items, competences_t *comp);
 int menu(game_t *game, item_t *items, competences_t *comp);

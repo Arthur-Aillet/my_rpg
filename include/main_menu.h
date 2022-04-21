@@ -23,9 +23,9 @@ typedef struct main_menu_s{
 typedef struct options_menu_s{
     object_t *back;
     object_t *title;
-    button_t *new_game;
-    button_t *continue_game;
-    button_t *options;
+    button_t *controls;
+    button_t *display;
+    button_t *volume;
     button_t *quit;
 } options_menu_t;
 

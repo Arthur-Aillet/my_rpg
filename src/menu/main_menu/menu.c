@@ -36,10 +36,10 @@ void setup_menu_buttons(main_menu_t *menu, game_t *game)
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
     button_setup_sounds(menu->quit,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06});
+    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
 }
 
 main_menu_t *init_main_menu(game_t *game)

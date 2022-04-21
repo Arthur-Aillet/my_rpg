@@ -27,10 +27,11 @@ void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
     }
 }
 
-void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click)
+void button_setup_offset(button_t *bouton, VCFO hover, VCFO click, VCFO text)
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(bouton->sprite);
 
+    bouton->text_offset = VCF{text.x, text.y};
     bouton->scale_hover = VCF{rect.width * hover.x, rect.height * hover.y};
     bouton->scale_click = VCF{rect.width * click.x, rect.height * click.y};
 }

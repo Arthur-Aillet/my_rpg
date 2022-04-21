@@ -23,6 +23,7 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
     bouton->scale_click = VCF{1, 1};
     bouton->original_scale = size;
     bouton->original_text_scale = VCF{1, 1};
+    bouton->text_offset = VCF{0, 0};
     bouton->click = NULL;
     bouton->hover = NULL;
     bouton->click_buf = NULL;

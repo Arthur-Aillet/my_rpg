@@ -48,7 +48,7 @@ void potion_loop(game_t *game)
     button_setup_texture_file(fire_potion, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(fire_potion, "Fire potion", find_font("Ancient.ttf", game->fonts), 40);
     button_setup_sounds(fire_potion, find_sound("hover.ogg", game->sounds), find_sound("click.ogg", game->sounds), 10);
-    button_setup_offset(fire_potion, VCF{1.1, 1.1}, VCF{1.2, 1.2});
+    button_setup_offset(fire_potion, VCF{1.1, 1.1}, VCF{1.2, 1.2}, VCF{0, 0});
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);

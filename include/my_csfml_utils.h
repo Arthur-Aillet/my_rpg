@@ -11,6 +11,7 @@
 #include <SFML/System.h>
 
 #define VCF (sfVector2f)
+#define VCFO sfVector2f
 #define VCU (sfVector2u)
 #define VCI (sfVector2i)
 

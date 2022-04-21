@@ -18,6 +18,7 @@ typedef struct button_s {
     sfVector2f scale_click;
     sfVector2f original_scale;
     sfVector2f original_text_scale;
+    sfVector2f text_offset;
     text_t text;
     bool display_text;
     sfSprite *sprite;
@@ -43,6 +44,6 @@ void display_button(sfRenderWindow *window, button_t *but);
 void update_button(sfRenderWindow *window, button_t *but, char *keys);
 void destroy_button(button_t *bouton);
 void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vo);
-void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click);
+void button_setup_offset(button_t *b, sfVector2f h, sfVector2f c, sfVector2f t);
 void button_setup_correct_texture(button_t *bouton, sfIntRect size);
 void sf_text_set_size(sfText *text, sfVector2f size);

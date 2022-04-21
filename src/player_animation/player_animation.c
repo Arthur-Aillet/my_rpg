@@ -9,6 +9,7 @@
 #include "my_csfml_utils.h"
 #include "csfml_libs.h"
 #include "my.h"
+#include "my_rpg.h"
 #include <stdlib.h>
 
 static char *add_str(char *src1, char *src2)
@@ -63,20 +64,19 @@ static void set_player_rect(animation_t player_animation, int step)
 animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state)
 {
     static animation_t *player_animations = NULL;
-    static float time = 0;
     static int previous_state = 0;
     static int step = 0;
+    static sfClock *clock = NULL;
     if (player_animations == NULL)
         player_animations = get_player_animations();
+    if (clock == NULL)
+        clock = sfClock_create();
     if (previous_state != state) {
         step = 0;
         previous_state = state;
     }
-    time += 1;
-    if (time >= 5) {
+    if (TIME(clock, 0.1))
         step += 1;
-        time = 0;
-    }
     step = step % player_animations[state].animation_size;
     set_player_rect(player_animations[state], step);
     sfSprite_setPosition(player_animations[state].spritesheet->sprite, pos);

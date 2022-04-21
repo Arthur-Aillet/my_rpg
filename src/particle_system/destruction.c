@@ -9,16 +9,16 @@
 #include <stdlib.h>
 
 /*removes the next particle in the list*/
-void remove_particle(particle_t *previous)
+void remove_particle(particle_t *prev)
 {
     particle_t *temp = NULL;
 
-    if (previous->next != NULL) {
-        temp = previous->next->next;
-        sfSprite_destroy(previous->next->object->sprite);
-        free(previous->next);
-    }
-    previous->next = temp;
+    if (prev->next == NULL || prev->next->age < prev->next->lifetime)
+        return;
+    temp = prev->next->next;
+    sfSprite_destroy(prev->next->object->sprite);
+    free(prev->next);
+    prev->next = temp;
 }
 
 /*destroys all the particles int the list*/

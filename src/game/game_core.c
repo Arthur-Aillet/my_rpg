@@ -17,7 +17,7 @@
 #include "my_button.h"
 #include "keyboard.h"
 #include "my_csfml_utils.h"
-#include "menu.h"
+#include "main_menu.h"
 #include "inventory_structures.h"
 
 int my_rpg(int ac, char **av)
@@ -31,7 +31,6 @@ int my_rpg(int ac, char **av)
 
     if (game == NULL)
         return 84;
-    create_windows(game->window);
     menu(game, items, comp);
     free_window_struct(game->window);
     return 0;

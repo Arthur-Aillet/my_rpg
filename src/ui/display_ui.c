@@ -25,7 +25,7 @@ static object_t **get_parts(void)
     result = malloc(sizeof(object_t) * 9);
     result[0] = create_object("assets/img/ui/pp_bg.png", pos_circle, scale);
     result[1] = create_object("assets/img/ui/pp_circle.png", pos_circle, scale);
-    result[2] = create_object("assets/img/bap_open.png", VCF {30, 30}, scale);
+    result[2] = create_object("assets/img/player/neutral.png", VCF {49, 25}, scale);
     result[3] = create_object("assets/img/ui/health_bg.png", pos_health, scale);
     result[4] = create_object("assets/img/ui/health.png", pos_health, scale);
     result[5] = create_object("assets/img/ui/stamina_bg.png", pos_stamina, scale);
@@ -37,7 +37,7 @@ static object_t **get_parts(void)
 
 static void display_circle(sfRenderWindow *window, object_t **parts)
 {
-    sf_sprite_set_pixel_size(parts[2]->sprite, VCF {100, 100});
+    sf_sprite_set_pixel_size(parts[2]->sprite, VCF {144 * 0.5, 229 * 0.5});
     sfRenderWindow_drawSprite(window, parts[0]->sprite, NULL);
     sfRenderWindow_drawSprite(window, parts[2]->sprite, NULL);
     sfRenderWindow_drawSprite(window, parts[1]->sprite, NULL);

@@ -12,4 +12,3 @@
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Text.h>
 #include <SFML/Graphics/Font.h>
-#include <SFML/System.h>

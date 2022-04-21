@@ -17,7 +17,6 @@ type 1 = Fenetre sans bord
 type 2 = Fenetre plein ecran
 
 */
-
 typedef struct window_s {
     sfRenderWindow *window;
     char *icon_file;

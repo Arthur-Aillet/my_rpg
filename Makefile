@@ -57,6 +57,8 @@ PARTICLES_PATH	= 			$(SRC_PATH)particle_system/
 
 UI_PATH			=			$(SRC_PATH)ui/
 
+POTION_PATH		=			$(MINGAME_PATH)potion/
+
 TEST_PATH		=			tests/
 
 ## ===================================================================
@@ -82,6 +84,13 @@ SRC_CSFML		=			$(CSFML_PATH)object.c						\
 
 SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c					\
 							$(DIALOGUE_PATH)dialogue_utils.c			\
+
+SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
+							$(POTION_PATH)hammer_minigame.c				\
+							$(POTION_PATH)minigame.c					\
+							$(POTION_PATH)mortar_physics.c				\
+							$(POTION_PATH)mortar_init.c					\
+							$(POTION_PATH)mortar_minigame.c				\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)game_loop.c						\
@@ -136,8 +145,7 @@ SRC_MATH		=			$(MATH_PATH)math.c							\
 SRC_KEY			=			$(KEY_PATH)keyboard_input.c					\
 							$(KEY_PATH)keyboard_input_init.c			\
 
-SRC_MINIGAME	=			$(MINGAME_PATH)hammer_minigame1.c			\
-							$(MINGAME_PATH)hammer_minigame2.c			\
+
 
 SRC_MOUSE		=			$(MOUSE_PATH)mouse.c						\
 
@@ -163,6 +171,7 @@ SRC_GLOBAL		=			$(SRC_BASICS)								\
 							$(SRC_INVENTORY)							\
 							$(SRC_JSON)									\
 							$(SRC_MATH)									\
+							$(SRC_POTION)								\
 							$(SRC_MINIGAME)								\
 							$(SRC_MOUSE)								\
 							$(SRC_PARTICLES)							\
@@ -180,7 +189,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 

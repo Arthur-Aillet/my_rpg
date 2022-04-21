@@ -81,7 +81,6 @@ void update_menu(main_menu_t *menu, game_t *game)
 int menu(game_t *game, item_t *items, competences_t *comp)
 {
     main_menu_t *menu = init_main_menu(game);
-    potion_t *potion;
     int open = 1;
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {
@@ -92,14 +91,8 @@ int menu(game_t *game, item_t *items, competences_t *comp)
             open = 0;
         if (game->keys[sfKeyEscape] == PRESS)
             inventory(game->window->window, items, comp, game->keys);
-        if (game->keys[sfKeyP] == PRESS) {
-            potion = malloc(sizeof(potion_t));
-            potion->current_step = 1;
-            potion->numbers_steps = 2;
-            potion->difficulty = 2;
-            hammer_loop(game->window, game->keys, game->mouse, potion);
-            free(potion);
-        }
+        if (game->keys[sfKeyP] == PRESS)
+            potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
             game_loop(game);
         update_menu(menu, game);

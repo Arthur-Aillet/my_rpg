@@ -10,7 +10,6 @@
 #include <csfml_libs.h>
 #include "my_csfml_utils.h"
 
-#define MAX(x, y) (x > y) ? (x) : (y)
 #define SIGN(x) ((x > 0) ? (1) : (-1))
 #define SFSGP(x) sfSprite_getPosition(x)
 #define SMOOTHY (part->pos.y - SFSGP(part->object->sprite).y) / 10

@@ -5,7 +5,6 @@
 ** dere be definitions
 */
 
-
 #pragma once
 
 #include "csfml_libs.h"

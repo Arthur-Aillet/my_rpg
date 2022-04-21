@@ -13,15 +13,17 @@
 fades, scales, kills and displays all of them*/
 void update_particles(sfRenderWindow *window, particle_t *start)
 {
-    static particle_t *(*tab[15])(sfRenderWindow *, particle_t *) = {
+    static sfClock *clock = NULL;
+    static particle_t *(*tab[16])(sfRenderWindow *, particle_t *, sfClock *) = {
             snow, rain, fire, dust_circle, dust_up, dust_ur, dust_right,
             dust_dr, fire_up, fire_ur, fire_right, fire_dr, spark,
-            elctric_pulse, leaf_fragment};
+            elctric_pulse, leaf_fragment, light_dust};
 
+    if (clock == NULL)
+        clock = sfClock_create();
     while (start->next != NULL) {
-        start = tab[start->type](window, start);
+        start = tab[start->type](window, start, clock);
         start = start->next;
-        if (start->next != NULL && start->next->age > start->next->lifetime)
-            remove_particle(start);
+        remove_particle(start);
     }
 }

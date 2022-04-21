@@ -13,7 +13,7 @@ static int get_part_deathtime(int type)
     switch (type) {
         case (0) : return (rand() % 200 + 70);
         case (1) : return (rand() % 100);
-        case (2) : return (500);
+        case (2) : return (150);
         case (3) : return (90);
         case (4) : return (rand() % 50 + 100);
         case (5) : return (rand() % 50 + 100);
@@ -26,6 +26,7 @@ static int get_part_deathtime(int type)
         case (12) : return (rand() % 25 + 50);
         case (13) : return (rand() % 100 + 10);
         case (14) : return (1920);
+        case (15) : return (500);
     }
     return (1);
 }
@@ -36,6 +37,7 @@ static object_t **more_part_sprites(object_t **result)
     result[12] = create_object("assets/img/spark.png", none, VCF{1.4, 1.4});
     result[13] = create_object("assets/img/espark.png", none, none);
     result[14] = create_object("assets/img/leaf.png", none, none);
+    result[15] = create_object("assets/img/fine_dust.png", none, none);
     return (result);
 }
 
@@ -46,7 +48,7 @@ static object_t **setup_part_sprites(void)
 
     if (result != NULL)
         return (result);
-    result = malloc (sizeof(object_t *) * 15);
+    result = malloc (sizeof(object_t *) * 16);
     result[0] = create_object("assets/img/snowflake.png", none, none);
     result[1] = create_object("assets/img/raindrop.png", none, none);
     result[2] = create_object("assets/img/flame.png", none, none);

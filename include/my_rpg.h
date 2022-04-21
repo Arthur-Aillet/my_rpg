@@ -11,6 +11,12 @@
 #include "json.h"
 #include "my_game_struct.h"
 
+#define BIG(x, y) ((x < y) ? (y) : (x))
+#define SMALL(x, y) ((x < y) ? (x) : (y))
+#define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))
+#define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
+                , y), 0, 0.03)
+
 int my_error_handling(int ac, char **av);
 int my_help(void);
 

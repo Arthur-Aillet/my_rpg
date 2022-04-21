@@ -38,7 +38,7 @@ void button_center_text(button_t *bouton)
 
     sfText_setOrigin(bouton->text.text, VCF{rect.width / 2 / scale.x,
     rect.height / scale.y});
-    sfText_setPosition(bouton->text.text, VCF{pos.x, pos.y + 3});
+    sfText_setPosition(bouton->text.text, VCF{pos.x, pos.y});
 }
 
 void sf_text_set_size(sfText *text, sfVector2f size)

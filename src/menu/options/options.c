@@ -25,7 +25,7 @@ void setup_options_buttons(options_menu_t *option, game_t *game)
 {
     button_setup_text(option->new_game, "New game", FONTG("Ancient.ttf"), 40);
     button_setup_text(option->options, "Options", FONTG("Ancient.ttf"), 40);
-    button_setup_text(option->quit, "Quit", FONTG("Ancient.ttf"), 40);
+    button_setup_text(option->quit, "Retrun", FONTG("Ancient.ttf"), 40);
     button_setup_text(option->continue_game,
         "Continue game", FONTG("Ancient.ttf"), 40);
     button_setup_sounds(option->new_game,
@@ -39,21 +39,21 @@ void setup_options_buttons(options_menu_t *option, game_t *game)
     button_setup_offset(option->new_game, VCF{-.09, .2}, VCF{.17, .06});
     button_setup_offset(option->continue_game, VCF{-.09, .2}, VCF{.17, .06});
     button_setup_offset(option->options, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(option->quit, VCF{-.09, .2}, VCF{.17, .06});
+    button_setup_offset(option->quit, VCF{.05, .05}, VCF{.1, .1});
 }
 
 options_menu_t *init_options(game_t *game)
 {
     options_menu_t *option = malloc(sizeof(options_menu_t));
 
-    option->back = create_object("assets/img/menu/focus.jpg", VCF{0, -30},
+    option->back = create_object("assets/img/menu/workshop.jpg", VCF{0, 0},
         VCF{1, 1});
     option->title = create_object("assets/img/menu/title.png",
         VCF{480, -50}, VCF{.25, .25});
-    option->new_game = button_create(VCF{2.2, 1}, VCF{960, 412}, true);
-    option->continue_game = button_create(VCF{2.2, 1}, VCF{960, 540}, true);
-    option->options = button_create(VCF{2.2, 1}, VCF{960, 668}, true);
-    option->quit = button_create(VCF{2.2, 1}, VCF{960, 796}, true);
+    option->new_game = button_create(VCF{2.2, 1}, VCF{960 - 600, 100}, true);
+    option->continue_game = button_create(VCF{2.2, 1}, VCF{960, 100}, true);
+    option->options = button_create(VCF{2.2, 1}, VCF{960 + 600, 100}, true);
+    option->quit = button_create(VCF{1, 1}, VCF{1760, 990}, true);
     button_setup_texture_file(option->new_game,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_texture_file(option->continue_game,
@@ -68,7 +68,7 @@ options_menu_t *init_options(game_t *game)
 
 void update_options(options_menu_t *option, game_t *game)
 {
-    //sfRenderWindow_drawSprite(game->window->window, option->back->sprite, NULL);
+    sfRenderWindow_drawSprite(game->window->window, option->back->sprite, NULL);
     //sfRenderWindow_drawSprite(game->window->window, option->title->sprite, NULL);
     update_button(game->window->window, option->new_game, game->keys);
     update_button(game->window->window, option->continue_game, game->keys);
@@ -80,7 +80,7 @@ void update_options(options_menu_t *option, game_t *game)
 
 int option(game_t *game, item_t *items, competences_t *comp)
 {
-    options_menu_t *option = init_main_menu(game);
+    options_menu_t *option = init_options(game);
     int open = 1;
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {

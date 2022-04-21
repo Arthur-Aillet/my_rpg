@@ -31,7 +31,6 @@ int my_rpg(int ac, char **av)
 
     if (game == NULL)
         return 84;
-    create_windows(game->window);
     menu(game, items, comp);
     free_window_struct(game->window);
     return 0;

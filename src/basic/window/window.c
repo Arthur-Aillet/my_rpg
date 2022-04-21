@@ -25,10 +25,10 @@ void set_correct_window_size(window_t *window)
     sfFloatRect rect = {0, 0, 1, 1};
 
     if ((float) window->width / (float) window->height * size.y <= size.x) {
-        rect.width = (float) (window->width - 40) / (float) window->height;
+        rect.width = (float) window->width / (float) window->height;
         rect.width *= (float) size.y / (float) size.x;
     } else {
-        rect.height = (float) (window->height - 40) / (float) window->width;
+        rect.height = (float) window->height / (float) window->width;
         rect.height *= (float) size.x / (float) size.y;
     }
     rect.top += (1 - rect.height) / 2;

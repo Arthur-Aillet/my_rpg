@@ -121,7 +121,6 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)inventory_swaps.c			\
 							$(INVENTORY_PATH)is_adjacent_competences.c	\
 							$(INVENTORY_PATH)inventory.c				\
-							$(INVENTORY_PATH)temp_main.c				\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 							$(JSON_PATH)generate/reader/str_preprocessing.c		\
@@ -161,6 +160,7 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)particles/water.c			\
 							$(PARTICLES_PATH)particles/leaves.c			\
 							$(PARTICLES_PATH)particles/electricity.c	\
+							$(PARTICLES_PATH)particles/energy.c			\
 
 SRC_UI			=			$(UI_PATH)display_bars.c					\
 							$(UI_PATH)display_ui.c						\

@@ -34,6 +34,7 @@
 #define ELECTRICITY     13
 #define LEAF            14
 #define LIGHT_DUST      15
+#define MAGIC_VIBE      16
 
 typedef struct particle_s {
     sfVector2f pos;
@@ -49,12 +50,14 @@ typedef struct particle_s {
     struct particle_s *next;
 } particle_t;
 
+particle_t *magic_vibe(sfRenderWindow *window, particle_t *part, sfClock *);
+
 particle_t *leaf_fragment(sfRenderWindow *window, particle_t *part, sfClock *);
+particle_t *light_dust(sfRenderWindow *window, particle_t *part, sfClock *);
 
 particle_t *elctric_pulse(sfRenderWindow *window, particle_t *part, sfClock *);
 
 particle_t *spark(sfRenderWindow *window, particle_t *part, sfClock *);
-particle_t *light_dust(sfRenderWindow *window, particle_t *part, sfClock *);
 
 particle_t *rain(sfRenderWindow *window, particle_t *part, sfClock *);
 

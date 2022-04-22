@@ -9,6 +9,7 @@
 #include "inventory_macros.h"
 #include "inventory_prototypes.h"
 #include "my.h"
+#include "my_csfml_utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -33,7 +34,7 @@ void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
-    sfVector2f pos = sfSprite_getPosition(item.sprite);
+    sfVector2f pos = sfSprite_getPosition(item.obj->sprite);
     pos.x += 100;
     pos.y += 100;
     sfText_setFont(txt.text, txt.font);
@@ -52,25 +53,25 @@ void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 {
     sfVector2f scale = {4, 4};
     sfVector2f mvt;
-    mvt.x = (pos.x - sfSprite_getPosition(item.sprite).x) / 3;
-    mvt.y = (pos.y - sfSprite_getPosition(item.sprite).y) / 3;
-    sfSprite_move(item.sprite, mvt);
-    sfSprite_setScale(item.sprite, scale);
-    sfRenderWindow_drawSprite(window, item.sprite, NULL);
+    mvt.x = (pos.x - sfSprite_getPosition(item.obj->sprite).x) / 3;
+    mvt.y = (pos.y - sfSprite_getPosition(item.obj->sprite).y) / 3;
+    sfSprite_move(item.obj->sprite, mvt);
+    sfSprite_setScale(item.obj->sprite, scale);
+    sfRenderWindow_drawSprite(window, item.obj->sprite, NULL);
 }
 
 void draw_competences(sfRenderWindow *window, competences_t *comp)
 {
-    sfTexture *txture = sfTexture_createFromFile("assets/img/select.png", NULL);
-    sfSprite *select = sfSprite_create();
+    static object_t *select = NULL;
     int *state = NULL;
 
-    sfSprite_setTexture(select, txture, 0);
+    if (select == NULL)
+        select = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
     for (int i = 0; i < 67; i++) {
-        sfSprite_setPosition(select, get_comp_pos(i));
+        sfSprite_setPosition(select->sprite, get_comp_pos(i));
         state = get_competence_state(i, *comp);
         if (state != 0)
-            sfRenderWindow_drawSprite(window, select, NULL);
+            sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
 }
 

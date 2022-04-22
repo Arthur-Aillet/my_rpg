@@ -54,6 +54,12 @@ options_menu_t *init_options(game_t *game)
     option->display = button_create(VCF{2.1, 1.1}, VCF{960, 100}, true);
     option->volume = button_create(VCF{2.1, 1.1}, VCF{960 + 600, 100}, true);
     option->quit = button_create(VCF{1, 1}, VCF{1760, 990}, true);
+    option->vsync_on = button_create(VCF{1, 1}, VCF{1920 / 2, 1080 / 2}, false);
+    option->vsync_off = button_create(VCF{1, 1}, VCF{1920 / 2, 1080 / 2}, false);
+    button_setup_texture_file(option->vsync_on,
+        (sfIntRect){0, 0, 35, 35}, "assets/img/menu/check_on.jpg");
+    button_setup_texture_file(option->vsync_off,
+        (sfIntRect){0, 0, 35, 35}, "assets/img/menu/check_off.jpg");
     button_setup_texture_file(option->controls,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_texture_file(option->display,
@@ -69,7 +75,8 @@ options_menu_t *init_options(game_t *game)
 void update_options(options_menu_t *option, game_t *game)
 {
     sfRenderWindow_drawSprite(game->window->window, option->back->sprite, NULL);
-    //sfRenderWindow_drawSprite(game->window->window, option->title->sprite, NULL);
+    update_button(game->window->window, option->vsync_on, game->keys);
+    update_button(game->window->window, option->vsync_off, game->keys);
     update_button(game->window->window, option->controls, game->keys);
     update_button(game->window->window, option->display, game->keys);
     update_button(game->window->window, option->volume, game->keys);

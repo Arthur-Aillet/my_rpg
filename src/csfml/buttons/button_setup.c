@@ -19,8 +19,8 @@ button_t *button_create(sfVector2f size, sfVector2f position, bool display_text)
 
     bouton->display_text = display_text;
     bouton->sprite = sfSprite_create();
-    bouton->scale_hover = VCF{1, 1};
-    bouton->scale_click = VCF{1, 1};
+    bouton->scale_hover = VCF{0, 0};
+    bouton->scale_click = VCF{0, 0};
     bouton->original_scale = size;
     bouton->original_text_scale = VCF{1, 1};
     bouton->text_offset = VCF{0, 0};

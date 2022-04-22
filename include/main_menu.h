@@ -30,6 +30,8 @@ typedef struct options_menu_s{
     button_t *display;
     button_t *volume;
     button_t *quit;
+    button_t *vsync_on;
+    button_t *vsync_off;
 } options_menu_t;
 
 int option(game_t *game, item_t *items, competences_t *comp);

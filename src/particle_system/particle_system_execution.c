@@ -14,10 +14,10 @@ fades, scales, kills and displays all of them*/
 void update_particles(sfRenderWindow *window, particle_t *start)
 {
     static sfClock *clock = NULL;
-    static particle_t *(*tab[16])(sfRenderWindow *, particle_t *, sfClock *) = {
+    static particle_t *(*tab[17])(sfRenderWindow *, particle_t *, sfClock *) = {
             snow, rain, fire, dust_circle, dust_up, dust_ur, dust_right,
             dust_dr, fire_up, fire_ur, fire_right, fire_dr, spark,
-            elctric_pulse, leaf_fragment, light_dust};
+            elctric_pulse, leaf_fragment, light_dust, magic_vibe};
 
     if (clock == NULL)
         clock = sfClock_create();

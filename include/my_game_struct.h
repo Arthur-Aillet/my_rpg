@@ -15,6 +15,7 @@
 #include "my_text.h"
 #include "my_sound.h"
 #include "my_csfml_utils.h"
+#include "inventory_structures.h"
 
 typedef struct maps_s {
     char *name;
@@ -55,6 +56,8 @@ typedef struct in_game_s {
 
 typedef struct game_s {
     char *keys;
+    item_t *items;
+    competences_t *comp;
     control_t *status;
     window_t *window;
     object_t *mouse;

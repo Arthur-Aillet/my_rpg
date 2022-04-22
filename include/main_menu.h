@@ -23,4 +23,4 @@ typedef struct main_menu_s{
     particle_t *particle;
 } main_menu_t;
 
-int menu(game_t *game, item_t *items, competences_t *comp);
+int menu(game_t *game);

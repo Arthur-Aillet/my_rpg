@@ -29,7 +29,7 @@ char *init_keys(void);
 void intro(window_t *win);
 void transition(game_t *game, int speed);
 
-item_t *inventory(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys);
+game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);
 

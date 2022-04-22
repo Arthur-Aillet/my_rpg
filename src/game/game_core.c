@@ -20,7 +20,7 @@
 #include "main_menu.h"
 #include "inventory_structures.h"
 
-static item_t create_yellow_flower(item_t item, int number)
+item_t create_yellow_flower(item_t item, int number)
 {
     item.stack_size = 255;
     item.armor_type = HEAD;

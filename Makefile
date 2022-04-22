@@ -31,6 +31,8 @@ NAME_TEST		=			unit_test
 
 SRC_PATH		=			src/
 
+ANIM_PATH		=			$(SRC_PATH)animation/
+
 BASIC_PATH		=			$(SRC_PATH)basic/
 
 CSFML_PATH		=			$(SRC_PATH)csfml/
@@ -66,6 +68,9 @@ TEST_PATH		=			tests/
 ## ===================================================================
 ## ===============================[SRC]===============================
 ## ===================================================================
+
+SRC_ANIM		=			$(ANIM_PATH)intro_logo/intro.c				\
+							$(ANIM_PATH)utils/transition.c				\
 
 SRC_BASICS		=			$(BASIC_PATH)utils/my_error_handling.c		\
 							$(BASIC_PATH)utils/my_help.c				\
@@ -142,51 +147,50 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 																				\
 							$(JSON_PATH)dependencies/chain_chars.c				\
 
-SRC_MATH		=			$(MATH_PATH)math.c							\
+SRC_MATH		=			$(MATH_PATH)math.c								\
 
-SRC_KEY			=			$(KEY_PATH)keyboard_input.c					\
-							$(KEY_PATH)keyboard_input_init.c			\
+SRC_KEY			=			$(KEY_PATH)keyboard_input.c						\
+							$(KEY_PATH)keyboard_input_init.c				\
 
-
-
-SRC_MOUSE		=			$(MOUSE_PATH)mouse.c						\
+SRC_MOUSE		=			$(MOUSE_PATH)mouse.c							\
 
 SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
-							$(PARTICLES_PATH)creation.c					\
-							$(PARTICLES_PATH)destruction.c				\
-							$(PARTICLES_PATH)particles/dust.c			\
-							$(PARTICLES_PATH)particles/fire.c			\
-							$(PARTICLES_PATH)particles/snow.c			\
-							$(PARTICLES_PATH)particles/spark.c			\
-							$(PARTICLES_PATH)particles/water.c			\
-							$(PARTICLES_PATH)particles/leaves.c			\
-							$(PARTICLES_PATH)particles/electricity.c	\
+							$(PARTICLES_PATH)creation.c						\
+							$(PARTICLES_PATH)destruction.c					\
+							$(PARTICLES_PATH)particles/dust.c				\
+							$(PARTICLES_PATH)particles/fire.c				\
+							$(PARTICLES_PATH)particles/snow.c				\
+							$(PARTICLES_PATH)particles/spark.c				\
+							$(PARTICLES_PATH)particles/water.c				\
+							$(PARTICLES_PATH)particles/leaves.c				\
+							$(PARTICLES_PATH)particles/electricity.c		\
 
-SRC_UI			=			$(UI_PATH)display_bars.c					\
-							$(UI_PATH)display_ui.c						\
+SRC_UI			=			$(UI_PATH)display_bars.c						\
+							$(UI_PATH)display_ui.c							\
 
-SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c	\
+SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c				\
 
-SRC_GLOBAL		=			$(SRC_BASICS)								\
-							$(SRC_CSFML)								\
-							$(SRC_DIALOGUE)								\
-							$(SRC_GAME)									\
-							$(SRC_INIT)									\
-							$(SRC_INVENTORY)							\
-							$(SRC_JSON)									\
-							$(SRC_MATH)									\
-							$(SRC_POTION)								\
-							$(SRC_MINIGAME)								\
-							$(SRC_MOUSE)								\
-							$(SRC_PARTICLES)							\
-							$(SRC_UI)									\
-							$(SRC_MENU)									\
-							$(SRC_PLAYER_ANIM)							\
+SRC_GLOBAL		=			$(SRC_ANIM)										\
+							$(SRC_BASICS)									\
+							$(SRC_CSFML)									\
+							$(SRC_DIALOGUE)									\
+							$(SRC_GAME)										\
+							$(SRC_INIT)										\
+							$(SRC_INVENTORY)								\
+							$(SRC_JSON)										\
+							$(SRC_MATH)										\
+							$(SRC_POTION)									\
+							$(SRC_MINIGAME)									\
+							$(SRC_MOUSE)									\
+							$(SRC_PARTICLES)								\
+							$(SRC_UI)										\
+							$(SRC_MENU)										\
+							$(SRC_PLAYER_ANIM)								\
 
-SRC				=			$(SRC_GLOBAL)								\
+SRC				=			$(SRC_GLOBAL)									\
 							main.c
 
-TEST_SRC		=			$(TEST_PATH)tests_error_handling.c			\
+TEST_SRC		=			$(TEST_PATH)tests_error_handling.c				\
 
 OBJ				=			$(SRC:.c=.o)
 

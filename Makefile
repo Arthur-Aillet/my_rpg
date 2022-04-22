@@ -155,17 +155,6 @@ SRC_KEY			=			$(KEY_PATH)keyboard_input.c						\
 SRC_MOUSE		=			$(MOUSE_PATH)mouse.c							\
 
 SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
-<<<<<<< HEAD
-							$(PARTICLES_PATH)creation.c						\
-							$(PARTICLES_PATH)destruction.c					\
-							$(PARTICLES_PATH)particles/dust.c				\
-							$(PARTICLES_PATH)particles/fire.c				\
-							$(PARTICLES_PATH)particles/snow.c				\
-							$(PARTICLES_PATH)particles/spark.c				\
-							$(PARTICLES_PATH)particles/water.c				\
-							$(PARTICLES_PATH)particles/leaves.c				\
-							$(PARTICLES_PATH)particles/electricity.c		\
-=======
 							$(PARTICLES_PATH)creation.c					\
 							$(PARTICLES_PATH)destruction.c				\
 							$(PARTICLES_PATH)particles/dust.c			\
@@ -176,7 +165,6 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)particles/leaves.c			\
 							$(PARTICLES_PATH)particles/electricity.c	\
 							$(PARTICLES_PATH)particles/energy.c			\
->>>>>>> main
 
 SRC_UI			=			$(UI_PATH)display_bars.c						\
 							$(UI_PATH)display_ui.c							\

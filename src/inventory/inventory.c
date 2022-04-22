@@ -54,7 +54,7 @@ int count_item(item_t *items, int type)
 
 game_t *inventory(game_t *game)
 {
-    backgrounds_t backgrounds = setup_backgrounds(game->items, game->comp, game->window->window, game->keys);//
+    backgrounds_t backgrounds = setup_backgrounds(game);//
     static int page = 0;//
     events_t events = {game->window->window, game->items, &page, game->keys, game->comp};//
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
@@ -76,7 +76,7 @@ game_t *inventory(game_t *game)
         if (game->M == 2) {animation += 1;} if (animation > 2) animation = animation % 3;   place_player(game->window->window, VCF {970, 540}, animation);
         display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
         player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
-        display_ui(game->window->window, &player);
+        //display_ui(game->window->window, &player);
         sfRenderWindow_display(game->window->window);//
     }//
     return (game);//

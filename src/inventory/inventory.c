@@ -11,10 +11,12 @@
 #include "csfml_libs.h"
 #include "mouse.h"
 #include "inventory_prototypes.h"
+#include "my_game_struct.h"
     #include "my_text.h"
     #include "particles.h"
     #include "dialogue.h"
     #include "ui.h"
+    #include "player_animation.h"
 #include "my_csfml_utils.h"
 
 #include <stdio.h>
@@ -27,8 +29,7 @@ item_t *create_items(void)
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;
-        result[i].sprite = sfSprite_create();
-        result[i].texture = sfTexture_create(1, 1);
+        result[i].obj = create_object("nothing",VCF {0, 0}, VCF {0, 0});
         result[i].stack_size = 1;
         result[i].armor_type = 5;
     }
@@ -51,47 +52,32 @@ int count_item(item_t *items, int type)
     return (count);
 }
 
-/*
-         No coding style?
-⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
-⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇
-⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀
-⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀
-⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀
-⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-*/
-
-item_t *inventory(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys)
+game_t *inventory(game_t *game)
 {
-    backgrounds_t backgrounds = setup_backgrounds(items, comp, window, keys);
-    static int page = 0;
-    events_t events = {window, items, &page, keys, comp};
+    backgrounds_t backgrounds = setup_backgrounds(game->items, game->comp, game->window->window, game->keys);//
+    static int page = 0;//
+    events_t events = {game->window->window, game->items, &page, game->keys, game->comp};//
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
-    events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
+    events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};//
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     font_t **fonts = font_create_array();
     player_t player = {0, 1000, 0, 500, 0, 250, VCF {0, 0}, NULL, NULL, "\0", 0};
+    int animation = 0;
 
-    while (sfRenderWindow_isOpen(window)) {
-        if (J == 2) {   start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, SNOW, 20);    start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, RAIN, 15); start = add_particle(start, (sfVector2f) {970, 540}, FIRE, 20);  if (rand() % 100 == 0)    for (int i = 0; i < 1000; i++)  start = add_particle(start, (sfVector2f) {485, 540}, DUST_CIRCLE, 15);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP, -10);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP_RIGHT, -10);  start = add_particle(start, (sfVector2f) {1465, 540}, DUST_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, DUST_DOWN_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP, 10);    start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP_RIGHT, 10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10); start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);  start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);  start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);    start = add_particle(start, (sfVector2f) {1800, 540}, LEAF, 50);}
+    while (sfRenderWindow_isOpen(game->window->window)) {//
+        if (game->J) {   start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, SNOW, 20);    start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, RAIN, 15); start = add_particle(start, (sfVector2f) {970, 500}, FIRE, 20);  if (rand() % 100 == 0)    for (int i = 0; i < 1000; i++)  start = add_particle(start, (sfVector2f) {485, 540}, DUST_CIRCLE, 15);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP, -10);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP_RIGHT, -10);  start = add_particle(start, (sfVector2f) {1465, 540}, DUST_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, DUST_DOWN_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP, 10);    start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP_RIGHT, 10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10); start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);  start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);  start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);    start = add_particle(start, (sfVector2f) {1800, 540}, LEAF, 50);    start = add_particle(start, VCF {900, 540}, LIGHT_DUST, 10); start = add_particle(start, VCF {1920, rand() % 1080}, MAGIC_VIBE, 10);}
         disp[page](backgrounds);//
         events = evt[page](events);//
-        update_particles(window, start);
-        if (ESC == 2) {
+        update_particles(game->window->window, start);
+        if (game->ESC == 2) {//
             exterminate(start);
-            return (items);
+            return (game);//
         }
-        display_dialogue(window, "src/dialogue/example.json", keys, fonts);
+        if (game->M == 2) {animation += 1;} if (animation > 2) animation = animation % 3;   place_player(game->window->window, VCF {970, 540}, animation);
+        display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
         player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
-        display_ui(window, &player);
-        sfRenderWindow_display(window);//
-    }
-    return (items);
+        display_ui(game->window->window, &player);
+        sfRenderWindow_display(game->window->window);//
+    }//
+    return (game);//
 }

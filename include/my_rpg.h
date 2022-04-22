@@ -11,6 +11,12 @@
 #include "json.h"
 #include "my_game_struct.h"
 
+#define BIG(x, y) ((x < y) ? (y) : (x))
+#define SMALL(x, y) ((x < y) ? (x) : (y))
+#define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))
+#define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
+                , y), 0, 0.03)
+
 int my_error_handling(int ac, char **av);
 int my_help(void);
 
@@ -20,7 +26,7 @@ in_game_t *init_in_game_struct(void);
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i);
 char *init_keys(void);
 
-item_t *inventory(sfRenderWindow *window, item_t *items, competences_t *comp, char *keys);
+game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);
 

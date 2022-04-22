@@ -17,8 +17,7 @@ typedef struct competences_s {
 } competences_t;
 
 typedef struct item_s {
-    sfSprite *sprite;
-    sfTexture *texture;
+    object_t *obj;
     int quantity;
     int stack_size;
     int type;

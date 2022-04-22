@@ -80,7 +80,6 @@ void create_windows(window_t *window)
         window->window = sfRenderWindow_create(main_w, window->name, 7, NULL);
     if (window->type == 2)
         window->window = sfRenderWindow_create(main_w, window->name, 8, NULL);
-    create_icon(window);
     sfRenderWindow_setFramerateLimit(window->window, window->framerate);
     sfRenderWindow_setMouseCursorVisible(window->window, sfFalse);
     sfRenderWindow_setVerticalSyncEnabled(window->window, window->vsync);

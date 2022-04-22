@@ -10,6 +10,7 @@
 #include "my_game_struct.h"
 #include "my_button.h"
 #include "inventory_structures.h"
+#include "particles.h"
 
 typedef struct main_menu_s{
     object_t *back;
@@ -18,6 +19,8 @@ typedef struct main_menu_s{
     button_t *continue_game;
     button_t *options;
     button_t *quit;
+    sfClock *clock;
+    particle_t *particle;
 } main_menu_t;
 
-int menu(game_t *game, item_t *items, competences_t *comp);
+int menu(game_t *game);

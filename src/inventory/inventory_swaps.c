@@ -38,9 +38,9 @@ item_t *split_item(int origin, int dest, item_t *items, int number)
 {
     items[dest].quantity = number;
     items[origin].quantity = items[origin].quantity - number;
-    sfSprite_destroy(items[dest].sprite);
-    items[dest].texture = sfTexture_copy(items[origin].texture);
-    items[dest].sprite = sfSprite_copy(items[origin].sprite);
+    destroy_object(items[dest].obj);
+    items[dest].obj = create_textured_object(items[origin].obj->texture,
+        VCF sfSprite_getPosition(items[origin].obj->sprite), VCF {4, 4});
     items[dest].type = items[origin].type;
     items[dest].armor_type = items[origin].armor_type;
     items[dest].stack_size = items[origin].stack_size;
@@ -52,9 +52,9 @@ item_t *level_items(int dest, int origin, int max, item_t *items)
     if (items[dest].type == 0 && items[origin].type == 0)
         return (items);
     if (items[dest].type != items[origin].type) {
-        sfSprite_destroy(items[dest].sprite);
-        items[dest].texture = sfTexture_copy(items[origin].texture);
-        items[dest].sprite = sfSprite_copy(items[origin].sprite);
+        destroy_object(items[dest].obj);
+        items[dest].obj = create_textured_object(items[origin].obj->texture,
+        VCF sfSprite_getPosition(items[origin].obj->sprite), VCF {4, 4});
         items[dest].type = items[origin].type;
     }
     items[dest].quantity = items[origin].quantity - max + items[dest].quantity;

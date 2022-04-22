@@ -12,7 +12,7 @@
 #include "my_window_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
-#include "menu.h"
+#include "main_menu.h"
 #include "my_rpg.h"
 #include "my_mouse.h"
 #include "my_button.h"
@@ -21,8 +21,10 @@
 #include "potions.h"
 #include "inventory_structures.h"
 
-void setup_menu_buttons(main_menu_t *menu, game_t *game)
+static void setup_menu_buttons(main_menu_t *menu, game_t *game)
 {
+    button_setup_texture_file(menu->quit,
+        (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_text(menu->new_game, "New game", FONTG("Ancient.ttf"), 40);
     button_setup_text(menu->options, "Options", FONTG("Ancient.ttf"), 40);
     button_setup_text(menu->quit, "Quit", FONTG("Ancient.ttf"), 40);
@@ -42,7 +44,7 @@ void setup_menu_buttons(main_menu_t *menu, game_t *game)
     button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06});
 }
 
-main_menu_t *init_main_menu(game_t *game)
+static main_menu_t *init_main_menu(game_t *game)
 {
     main_menu_t *menu = malloc(sizeof(main_menu_t));
 
@@ -60,25 +62,34 @@ main_menu_t *init_main_menu(game_t *game)
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     button_setup_texture_file(menu->options,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_texture_file(menu->quit,
-        (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
     setup_menu_buttons(menu, game);
+    menu->clock = sfClock_create();
+    menu->particle = create_particle(VCF {500, 500}, DUST_UP, -10);
     return (menu);
 }
 
-void update_menu(main_menu_t *menu, game_t *game)
+static void update_menu(main_menu_t *menu, game_t *game)
 {
+    float random = fmod(rand(), 600);
     sfRenderWindow_drawSprite(game->window->window, menu->back->sprite, NULL);
+    update_particles(game->window->window, menu->particle);
     sfRenderWindow_drawSprite(game->window->window, menu->title->sprite, NULL);
     update_button(game->window->window, menu->new_game, game->keys);
     update_button(game->window->window, menu->continue_game, game->keys);
     update_button(game->window->window, menu->options, game->keys);
     update_button(game->window->window, menu->quit, game->keys);
     update_mouse_cursor(game->window->window, game->mouse);
+    if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1), 0, 0.03)) {
+        menu->particle = add_particle(menu->particle, VCF {1820 - random -
+            rand() % 50, 300 + random * 1.1 - rand() % 50}, LIGHT_DUST, 1);
+        menu->particle = add_particle(menu->particle, VCF {650, 530}, FIRE, 10);
+        menu->particle = add_particle(menu->particle, VCF {1970, rand() % 1080},
+             MAGIC_VIBE, 10);
+    }
     sfRenderWindow_display(game->window->window);
 }
 
-int menu(game_t *game, item_t *items, competences_t *comp)
+int menu(game_t *game)
 {
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
@@ -90,7 +101,7 @@ int menu(game_t *game, item_t *items, competences_t *comp)
         if (is_pressed(menu->quit, game->window->window, game->keys))
             open = 0;
         if (game->keys[sfKeyEscape] == PRESS)
-            inventory(game->window->window, items, comp, game->keys);
+            game = inventory(game);
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))

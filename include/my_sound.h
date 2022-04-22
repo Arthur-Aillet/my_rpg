@@ -5,10 +5,11 @@
 ** my_sound
 */
 
-#ifndef MY_SOUND_H_
-    #define MY_SOUND_H_
+#pragma once
 
-    #include <SFML/Audio.h>
+#include <SFML/Audio.h>
+
+#define SOUNDG(sound) find_sound(sound, game->sounds)
 
 typedef struct sound_s {
     char *name;
@@ -16,4 +17,5 @@ typedef struct sound_s {
     sfSoundBuffer *buffer;
 } sound_t;
 
-#endif /* !MY_SOUND_H_ */
+sfSound *find_sound(char *name, sound_t **sounds);
+sound_t **sounds_create_array(void);

@@ -8,4 +8,6 @@ my_rpg
 vgcore.*
 include/my.h
 .vscode/
+json_tests
 assets/UI utils/*
+assets/img/flame.png

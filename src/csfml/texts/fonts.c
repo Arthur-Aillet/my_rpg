@@ -15,11 +15,14 @@
 #include "my.h"
 #include "my_files.h"
 
-sfFont *font_from_array_font(char *name, font_t **fonts)
+sfFont *find_font(char *name, font_t **fonts)
 {
-    for (int i = 0; fonts[i] != NULL; i++)
-        if (fonts[i]->name == name)
+    if (fonts == NULL)
+        return (NULL);
+    for (int i = 0; fonts[i] != NULL; i++) {
+        if (my_strcmp(fonts[i]->name, name) == 0)
             return (fonts[i]->font);
+    }
     return (NULL);
 }
 

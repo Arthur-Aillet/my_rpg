@@ -22,7 +22,7 @@ Test (error_handling, simple_test_fail)
 {
     char **av = malloc(sizeof(char *) * 2);
     int ac = 2;
-    av[1] = "bonjour moi c'est tom";
+    av[1] = "bonjour moi c'est tom, pog";
 
     cr_assert_eq(error_handling(ac, av), 0);
 }

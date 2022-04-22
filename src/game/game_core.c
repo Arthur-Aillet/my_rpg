@@ -6,36 +6,44 @@
 */
 
 #include <SFML/Graphics.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #include "my_window_struct.h"
 #include "my_text.h"
+#include "my_sound.h"
 #include "my_rpg.h"
 #include "my_mouse.h"
 #include "my_button.h"
-#include "my_event.h"
+#include "keyboard.h"
 #include "my_csfml_utils.h"
+#include "main_menu.h"
+#include "inventory_structures.h"
 
-int game_loop(int ac, char **av)
+item_t create_yellow_flower(item_t item, int number)
 {
-    window_t *window = generate_default_window();
-    font_t **font = font_create_array();
-    int *keys = init_keys();
-    object *test = create_object("test", VCF{0, 0}, VCF{60, 33});
-    object *mouse = create_object("test", VCF{0, 0}, VCF{1, 1});
-    button_t *bouton_test = button_create(VCF{1, 1}, VCF{100, 100}, true);
-    button_setup_texture(bouton_test, (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
+    item.stack_size = 255;
+    item.armor_type = HEAD;
+    item.quantity = number;
+    item.armor_type = 1;
+    item.type = FLOWER_YELLOW;
+    item.obj = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
+    return (item);
+}
 
-    if (window == NULL)
+int my_rpg(int ac, char **av)
+{
+    game_t *game = init_game_struct();
+    game->items = create_items();
+    game->items[10] = create_yellow_flower(game->items[10], 100);
+    game->comp = malloc(sizeof(competences_t));
+    game->comp->dodge_roll = 0;
+    game->comp->fireball = 0;
+
+    if (game == NULL)
         return 84;
-    create_windows(window);
-    while(sfRenderWindow_isOpen(window->window)) {
-        set_correct_window_size(window);
-        sfRenderWindow_clear(window->window, sfBlack);
-        get_events(window->window, keys);
-        sfRenderWindow_drawSprite(window->window, test->sprite, NULL);
-        display_button(window->window, bouton_test, keys);
-        update_mouse_cursor(window->window, mouse);
-        sfRenderWindow_display(window->window);
-    }
-    free_window_struct(window);
+    intro(game);
+    menu(game);
+    free_window_struct(game->window);
     return 0;
 }

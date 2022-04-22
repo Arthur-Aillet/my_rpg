@@ -5,26 +5,22 @@
 ** my_event
 */
 
-#ifndef MY_EVENT_H_
-    #define MY_EVENT_H_
+#pragma once
 
+#include "my_window_struct.h"
 
-    #include "my_window_struct.h"
+#define leftMouse 101
+#define rightMouse 102
 
-    #define leftMouse 101
-    #define rightMouse 102
+#define PRESS 1
+#define HOLD 2
+#define RELEASED 3
 
-    #define PRESS 1
-    #define HOLD 2
-    #define RELEASED 3
+#define CLICKED (keys[leftMouse] == 1 || keys[leftMouse] == 2)
 
-    #define CLICKED (keys[leftMouse] == 1 || keys[leftMouse] == 2)
-
-    #define evntMousePressed event.type == sfEvtMouseButtonPressed
-    #define evntMouseReleased event.type == sfEvtMouseButtonReleased
+#define evntMousePressed event.type == sfEvtMouseButtonPressed
+#define evntMouseReleased event.type == sfEvtMouseButtonReleased
 
 void evolve_mouse(int *keys);
 int *get_events(sfRenderWindow *window, int *keys);
 int *init_keys(void);
-
-#endif /* !MY_EVENT_H_ */

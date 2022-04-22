@@ -39,9 +39,8 @@ int my_len_word(char const *str, char const *sep)
 {
     int tot = 0;
 
-    while (is_separator(str[tot], sep) && str[tot]) {
+    while (is_separator(str[tot], sep) == 0 && str[tot])
         tot++;
-    }
     return tot;
 }
 

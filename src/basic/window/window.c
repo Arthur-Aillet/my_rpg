@@ -25,13 +25,11 @@ void set_correct_window_size(window_t *window)
     sfFloatRect rect = {0, 0, 1, 1};
 
     if ((float) window->width / (float) window->height * size.y <= size.x) {
-        rect.width = (float) window->width / (float) window->height;
-        rect.width *= size.y;
-        rect.width /= size.x;
+        rect.width = (float) (window->width - 40) / (float) window->height;
+        rect.width *= (float) size.y / (float) size.x;
     } else {
-        rect.height = (float) window->height / (float) window->width;
-        rect.height *= size.x;
-        rect.height /= size.y;
+        rect.height = (float) (window->height - 40) / (float) window->width;
+        rect.height *= (float) size.x / (float) size.y;
     }
     rect.top += (1 - rect.height) / 2;
     rect.left += (1 - rect.width) / 2;
@@ -53,6 +51,7 @@ window_t *generate_default_window(void)
     window->framerate = 75;
     window->vsync = true;
     window->type = 1;
+    create_windows(window);
     return (window);
 }
 
@@ -81,7 +80,6 @@ void create_windows(window_t *window)
         window->window = sfRenderWindow_create(main_w, window->name, 7, NULL);
     if (window->type == 2)
         window->window = sfRenderWindow_create(main_w, window->name, 8, NULL);
-    create_icon(window);
     sfRenderWindow_setFramerateLimit(window->window, window->framerate);
     sfRenderWindow_setMouseCursorVisible(window->window, sfFalse);
     sfRenderWindow_setVerticalSyncEnabled(window->window, window->vsync);

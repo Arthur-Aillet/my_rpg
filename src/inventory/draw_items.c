@@ -63,16 +63,18 @@ void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 void draw_competences(sfRenderWindow *window, competences_t *comp)
 {
     static object_t *select = NULL;
-    int *state = NULL;
+    int state = 0;
 
     if (select == NULL)
         select = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
-    for (int i = 0; i < 67; i++) {
+    for (int i = 1; i < 68; i++) {
         sfSprite_setPosition(select->sprite, get_comp_pos(i));
         state = get_competence_state(i, *comp);
-        if (state != 0)
+        if (state == 1)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
+    sfSprite_setPosition(select->sprite, itofv2(sfMouse_getPositionRenderWindow(window)));
+    sfRenderWindow_drawSprite(window, select->sprite, NULL);
 }
 
 void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)

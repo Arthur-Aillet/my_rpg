@@ -45,15 +45,17 @@ events_t evt_map(events_t events)
 events_t evt_cmp(events_t events)
 {
     sfVector2i mousepos = sfMouse_getPositionRenderWindow(events.window);
-
-    static int competence = 0;
+    int competence = 0;
     static int selected = 0;
+
     events.keys = get_keyboard_input(events.keys, events.window);
     competence = get_competence(itofv2(mousepos));
     if (events.A == PRESS && *events.page > 0)
         *events.page -= 1;
-    if (events.LCLICK && competence == selected)
-        *events.comp = set_competence_state(selected, *events.comp, events.LCLICK);
+    if (events.LCLICK == RELEASE && competence != selected)
+       *events.comp = set_competence_state(selected, *events.comp, 0);
+    if (events.LCLICK == RELEASE && competence == selected)
+        *events.comp = set_competence_state(competence, *events.comp, 1);
     if (events.LCLICK == PRESS && competence != 0)
         selected = competence;
     return (events);

@@ -28,4 +28,5 @@ void disp_cmp(backgrounds_t bgs)
     sfRenderWindow_drawSprite(bgs.window, bgs.pages[0]->sprite, NULL);
     sfRenderWindow_drawSprite(bgs.window, bgs.pages[3]->sprite, NULL);
     draw_competences(bgs.window, bgs.comp);
+    draw_descriptions(bgs.window, bgs.comp, bgs.text.text);
 }

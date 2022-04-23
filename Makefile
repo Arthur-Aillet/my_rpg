@@ -128,6 +128,7 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)inventory_swaps.c			\
 							$(INVENTORY_PATH)is_adjacent_competences.c	\
 							$(INVENTORY_PATH)inventory.c				\
+							$(INVENTORY_PATH)competences_descritions.c	\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 							$(JSON_PATH)generate/reader/str_preprocessing.c		\

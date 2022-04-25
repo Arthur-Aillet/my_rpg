@@ -26,6 +26,9 @@ in_game_t *init_in_game_struct(void);
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i);
 char *init_keys(void);
 
+void intro(window_t *win);
+void transition(game_t *game, int speed);
+
 game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);

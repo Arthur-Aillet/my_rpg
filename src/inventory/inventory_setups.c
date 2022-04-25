@@ -7,6 +7,7 @@
 
 #include "inventory_structures.h"
 #include "my_csfml_utils.h"
+#include "my_game_struct.h"
 #include <stdlib.h>
 
 static object_t **setup_pages(void)
@@ -22,23 +23,23 @@ static object_t **setup_pages(void)
     return (result);
 }
 
-static txtobject_t setup_text(void)
+static txtobject_t setup_text(font_t **fonts)
 {
     txtobject_t result;
-    result.font = sfFont_createFromFile("assets/font/arcade.TTF");
+    result.font = fonts[1]->font;
     result.text = sfText_create();
     return (result);
 }
 
-backgrounds_t setup_backgrounds(item_t *items, competences_t *comp, sfRenderWindow *window, char *keys)
+backgrounds_t setup_backgrounds(game_t *game)
 {
     backgrounds_t result;
 
-    result.items = items;
+    result.items = game->items;
     result.pages = setup_pages();
-    result.text = setup_text();
-    result.window = window;
-    result.keys = keys;
-    result.comp = comp;
+    result.text = setup_text(game->fonts);
+    result.window = game->window->window;
+    result.keys = game->keys;
+    result.comp = game->comp;
     return (result);
 }

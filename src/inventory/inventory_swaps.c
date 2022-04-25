@@ -7,17 +7,6 @@
 
 #include "inventory_structures.h"
 
-competences_t set_competence_state(int comp, competences_t comps, int state)
-{
-    switch (comp) {
-        case (1) : comps.fireball = state;
-            break;
-        case (2) : comps.dodge_roll = state;
-            break;
-    }
-    return (comps);
-}
-
 item_t *swap_items(int origin, int dest, item_t *items)
 {
     item_t temp = items[dest];

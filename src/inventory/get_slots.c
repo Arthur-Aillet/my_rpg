@@ -22,15 +22,6 @@ static int get_armorpos(sfVector2f pos)
     return (0);
 }
 
-int get_competence_state(int comp, competences_t competences)
-{
-    switch (comp) {
-        case (1) : return (competences.fireball);
-        case (2) : return (competences.dodge_roll);
-    }
-    return (0);
-}
-
 int get_slot(sfVector2f pos)
 {
     int result = 0;

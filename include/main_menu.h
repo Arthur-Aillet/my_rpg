@@ -25,14 +25,17 @@ typedef struct main_menu_s{
 
 typedef struct options_menu_s{
     object_t *back;
-    object_t *title;
     button_t *controls;
     button_t *display;
     button_t *volume;
     button_t *quit;
+    int status;
     button_t *vsync_on;
     button_t *vsync_off;
     bool vsync_status;
+    sfText *general_title;
+    sfText *sfx_title;
+    sfText *music_title;
     object_t *general_back;
     object_t *general_front;
     object_t *general_slider;

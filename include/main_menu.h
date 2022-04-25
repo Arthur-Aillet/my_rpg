@@ -32,6 +32,19 @@ typedef struct options_menu_s{
     button_t *quit;
     button_t *vsync_on;
     button_t *vsync_off;
+    bool vsync_status;
+    object_t *general_back;
+    object_t *general_front;
+    object_t *general_slider;
+    object_t *sfx_back;
+    object_t *sfx_front;
+    object_t *sfx_slider;
+    object_t *music_back;
+    object_t *music_front;
+    object_t *music_slider;
+    button_t *list_up;
+    button_t *list_down;
+    bool list_value;
 } options_menu_t;
 
 int option(game_t *game, item_t *items, competences_t *comp);

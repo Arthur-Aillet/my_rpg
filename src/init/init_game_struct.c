@@ -24,6 +24,9 @@ game_t *init_game_struct(void)
     game->status = init_game_status();
     game->keys = init_keys();
     game->game = init_in_game_struct();
+    game->general_volume = 5;
+    game->music_volume = 100;
+    game->sfx_volume = 100;
     if (game->window == NULL || game->status == NULL || game->keys == NULL)
         return NULL;
     return game;

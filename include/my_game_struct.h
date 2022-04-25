@@ -61,4 +61,7 @@ typedef struct game_s {
     font_t **fonts;
     sound_t **sounds;
     in_game_t *game;
+    float general_volume;
+    float sfx_volume;
+    float music_volume;
 } game_t;

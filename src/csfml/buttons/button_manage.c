@@ -122,3 +122,17 @@ void update_button(sfRenderWindow *window, button_t *but, char *keys)
     button_play_sound(mouse_pos, but, keys, rect);
     display_button(window, but);
 }
+
+void update_button_no_display(sfRenderWindow *window, button_t *but, char *keys)
+{
+    sfVector2f mouse_pos = get_global_mouse_pos(window);
+    sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
+
+    if (MOUSE_HOVER == false)
+        leave_but(but);
+    if (MOUSE_HOVER == true && !LCLICK)
+        hover_but(but);
+    if (MOUSE_HOVER == true && LCLICK)
+        click_but(but);
+    button_play_sound(mouse_pos, but, keys, rect);
+}

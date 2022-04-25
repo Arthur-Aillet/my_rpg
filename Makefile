@@ -194,7 +194,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -g3
+CFLAGS			=		-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 
@@ -235,7 +235,7 @@ build_lib:
 
 debug:
 
-valgrind:	$(CFLAGS) += -g
+valgrind:	$(CFLAGS) += -g3
 valgrind:	re
 
 tests_run:

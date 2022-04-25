@@ -45,5 +45,6 @@ void update_button(sfRenderWindow *window, button_t *but, char *keys);
 void destroy_button(button_t *bouton);
 void button_setup_sounds(button_t *but, sfSound *click, sfSound *hover, int vo);
 void button_setup_offset(button_t *b, sfVector2f h, sfVector2f c, sfVector2f t);
+void update_button_no_display(sfRenderWindow *window, button_t *but, char *key);
 void button_setup_correct_texture(button_t *bouton, sfIntRect size);
 void sf_text_set_size(sfText *text, sfVector2f size);

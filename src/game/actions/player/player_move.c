@@ -25,13 +25,15 @@ static int more_than_one_key(game_t *game)
     return 0;
 }
 
-int player_is_collide(game_t *game)
+int player_is_collide(game_t *game, int dir, int value)
 {
     int i = -1;
     int j = 0;
     int map = 0;
     int ret = 0;
 
+    game->game->player->pos.x += dir == 1 ? value : 0;
+    game->game->player->pos.y += dir == 0 ? value : 0;
     while (game->game->maps[map] && my_strcmp(game->game->maps[map]->name,
         game->game->current) != 0)
         map++;
@@ -47,29 +49,6 @@ int player_is_collide(game_t *game)
     return ret;
 }
 
-void handle_collide(game_t *game, int spd)
-{
-    int map = 0;
-
-    while (game->game->maps[map] && my_strcmp(game->game->maps[map]->name,
-        game->game->current) != 0)
-        map++;
-    if (player_is_collide(game) ||
-        game->game->player->pos.y <= 0 ||
-        game->game->player->pos.x <= 0 ||
-        game->game->player->pos.y >= (game->game->maps[map]->height - 1) * 64 ||
-        game->game->player->pos.x >= (game->game->maps[map]->width - 1) * 64) {
-        if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
-            game->game->player->pos.y += spd;
-        if (game->keys[sfKeyDown] || game->keys[sfKeyS])
-            game->game->player->pos.y -= spd;
-        if (game->keys[sfKeyLeft] || game->keys[sfKeyQ])
-            game->game->player->pos.x += spd;
-        if (game->keys[sfKeyRight] || game->keys[sfKeyD])
-            game->game->player->pos.x -= spd;
-    }
-}
-
 void player_move(game_t *game)
 {
     int spd = 1;
@@ -81,14 +60,13 @@ void player_move(game_t *game)
         if (more_than_one_key(game))
             count /= 1.2;
     while (count--) {
-        if (game->keys[sfKeyUp] || game->keys[sfKeyZ])
-            game->game->player->pos.y -= spd;
-        if (game->keys[sfKeyDown] || game->keys[sfKeyS])
+        if (game->keys[sfKeyZ] && player_is_collide(game, 0, -spd) != 0)
             game->game->player->pos.y += spd;
-        if (game->keys[sfKeyLeft] || game->keys[sfKeyQ])
-            game->game->player->pos.x -= spd;
-        if (game->keys[sfKeyRight] || game->keys[sfKeyD])
+        if (game->keys[sfKeyS] && player_is_collide(game, 0, spd) != 0)
+            game->game->player->pos.y -= spd;
+        if (game->keys[sfKeyQ] && player_is_collide(game, 1, -spd) != 0)
             game->game->player->pos.x += spd;
-        handle_collide(game, spd);
+        if (game->keys[sfKeyD] && player_is_collide(game, 1, spd) != 0)
+            game->game->player->pos.x -= spd;
     }
 }

@@ -49,6 +49,51 @@ int player_is_collide(game_t *game, int dir, int value)
     return ret;
 }
 
+char *get_new_map(game_t *game, int i, int dir)
+{
+    if (dir == LEFT_D)
+        return game->game->maps[i]->left;
+    if (dir == UP_D)
+        return game->game->maps[i]->top;
+    if (dir == RIGHT_D)
+        return game->game->maps[i]->right;
+    return game->game->maps[i]->bot;
+}
+
+int get_current_map(game_t *game)
+{
+    int i= 0;
+
+    while (my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
+        i++;
+    return i;
+}
+
+void handle_switch_map(game_t *game)
+{
+    int i = 0;
+
+    while (my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
+        i++;
+    if (game->game->player->pos.x <= 0) {
+        game->game->current = get_new_map(game, i, LEFT_D);
+        game->game->player->pos.x =
+            (game->game->maps[get_current_map(game)]->width - 1) * 64 - 1;
+    } else if (game->game->player->pos.y <= 0) {
+        game->game->current = get_new_map(game, i, UP_D);
+        game->game->player->pos.y =
+            (game->game->maps[get_current_map(game)]->height - 1) * 64 - 1;
+    } else if (game->game->player->pos.x >=
+        (game->game->maps[i]->width - 1) * 64) {
+        game->game->current = get_new_map(game, i, RIGHT_D);
+        game->game->player->pos.x = 1;
+    } else if (game->game->player->pos.y >=
+        (game->game->maps[i]->height - 1) * 64) {
+        game->game->current = get_new_map(game, i, DOWN_D);
+        game->game->player->pos.y = 1;
+    }
+}
+
 void player_move(game_t *game)
 {
     int spd = 1;
@@ -69,4 +114,5 @@ void player_move(game_t *game)
         if (game->keys[sfKeyD] && player_is_collide(game, 1, spd) != 0)
             game->game->player->pos.x -= spd;
     }
+    handle_switch_map(game);
 }

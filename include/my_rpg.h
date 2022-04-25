@@ -16,6 +16,10 @@
 #define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))
 #define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
                 , y), 0, 0.03)
+#define LEFT_D 0
+#define UP_D 1
+#define RIGHT_D 2
+#define DOWN_D 3
 
 int my_error_handling(int ac, char **av);
 int my_help(void);

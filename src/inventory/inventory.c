@@ -54,9 +54,13 @@ int count_item(item_t *items, int type)
 
 game_t *inventory(game_t *game)
 {
-    backgrounds_t backgrounds = setup_backgrounds(game->items, game->comp, game->window->window, game->keys);//
+    backgrounds_t backgrounds = setup_backgrounds(game);//
     static int page = 0;//
-    events_t events = {game->window->window, game->items, &page, game->keys, game->comp};//
+    events_t events = {game->window->window, game->items, &page, game->keys, button_create(VCF {1, 1}, VCF {200, 20}, 1), game->comp};//
+    button_setup_texture_file(events.button, (sfIntRect) {0, 0, 263, 79}, "assets/img/button.jpg");
+    button_setup_text(events.button, "test", FONTG("Ancient.ttf"), 20);
+    button_setup_sounds(events.button, SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 20);
+    button_setup_offset(events.button, VCF {2, 2}, VCF {1, 1});
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};//
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
@@ -74,9 +78,9 @@ game_t *inventory(game_t *game)
             return (game);//
         }
         if (game->M == 2) {animation += 1;} if (animation > 2) animation = animation % 3;   place_player(game->window->window, VCF {970, 540}, animation);
-        display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
+        if (game->K) display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
         player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
-        display_ui(game->window->window, &player);
+        if (game->G) display_ui(game->window->window, &player);
         sfRenderWindow_display(game->window->window);//
     }//
     return (game);//

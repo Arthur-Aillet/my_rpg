@@ -6,6 +6,7 @@
 */
 
 #include "inventory_structures.h"
+#include "my_game_struct.h"
 
 #ifndef MENU_PROTOTYPES_H_
     #define MENU_PROTOTYPES_H_
@@ -15,13 +16,12 @@ int get_competence(sfVector2f pos);
 int get_slot(sfVector2f pos);
 int is_adjacent_comp(int comp, int test);
 
-int *get_competence_state(int comp, competences_t competences);
+int get_competence_state(int comp, competences_t competences);
 
 sfVector2f get_comp_pos(int comp);
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window);
 
-backgrounds_t setup_backgrounds(item_t *, competences_t*, \
-sfRenderWindow *, char *);
+backgrounds_t setup_backgrounds(game_t *game);
 
 item_t *add_items(int origin, int dest, item_t *items);
 item_t *consume(item_t *items, int type, int quantity);
@@ -34,6 +34,7 @@ item_t *swap_items(int origin, int dest, item_t *items);
 
 void disp_cmp(backgrounds_t bgs);
 void draw_competences(sfRenderWindow *window, competences_t *comp);
+void draw_descriptions(sfRenderWindow *window, competences_t *comp, sfText *);
 void disp_inv(backgrounds_t bgs);
 void disp_map(backgrounds_t bgs);
 void draw_items(sfRenderWindow *window, item_t *items, txtobject_t);

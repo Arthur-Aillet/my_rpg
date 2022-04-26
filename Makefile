@@ -117,6 +117,7 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\
 							$(INIT_PATH)init_in_game_struct.c			\
 							$(INIT_PATH)init_map_objects.c				\
+							$(INIT_PATH)init_player.c					\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\

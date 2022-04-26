@@ -11,25 +11,6 @@
 #include "my.h"
 #include "my_rpg.h"
 
-player_t *init_game_player(maps_t *field)
-{
-    player_t *player = malloc(sizeof(player_t));
-    json_obj_t *obj1 = create_json_object("config/player.json");
-    json_obj_t *obj = get_obj_by_index(obj1, 0);
-
-    if (player == NULL)
-        return NULL;
-    player->move_spd = get_int_by_name(obj, "move_speed");
-    player->name = get_str_by_name(obj, "name");
-    player->tex_p = sfTexture_createFromFile(get_str_by_name(obj,
-        "sprite_sheet"), NULL);
-    player->pos.x = (field->width / 2) * 64;
-    player->pos.y = (field->height / 2) * 64;
-    player->sp_p = sfSprite_create();
-    sfSprite_setTexture(player->sp_p, player->tex_p, sfTrue);
-    return player;
-}
-
 maps_t **init_game_maps(void)
 {
     maps_t **maps = malloc(sizeof(maps_t));

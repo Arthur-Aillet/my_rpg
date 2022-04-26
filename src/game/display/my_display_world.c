@@ -30,11 +30,15 @@ void setup_camera(game_t *game, int i)
 void display_world(game_t *game)
 {
     int i = 0;
+    sfVector2f vec = game->game->pos_cam;
 
+    vec.x -= 960;
+    vec.y -= 540;
     while (game->game->maps[i] && my_strcmp(game->game->maps[i]->name,
         game->game->current) != 0)
         i++;
     display_map(game, game->game->maps[i], i);
     display_player(game, i);
+    display_ui(game->window->window, game->game->player, vec);
     setup_camera(game, i);
 }

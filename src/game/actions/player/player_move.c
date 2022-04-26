@@ -40,7 +40,7 @@ int player_is_collide(game_t *game, int dir, int value)
     while (game->game->maps[map]->map[++i]) {
         j = -1;
         while (game->game->maps[map]->map[i][++j])
-            ret = ((int)((game->game->player->pos.x + 1)/ 64) == j ||
+            ret = ((int)((game->game->player->pos.x + 1) / 64) == j ||
                 (int)((game->game->player->pos.x - 1) / 64) + 1 == j) &&
                 game->game->maps[map]->map[i][j] == '1' &&
                 ((int)((game->game->player->pos.y + 1) / 64) == i ||

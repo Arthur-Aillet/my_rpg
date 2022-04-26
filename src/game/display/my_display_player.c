@@ -9,7 +9,16 @@
 
 void display_player(game_t *game, int i)
 {
-    sfSprite_setPosition(game->game->player->sp_p, game->game->player->pos);
-    sfRenderWindow_drawSprite(game->window->window, game->game->player->sp_p,
-        NULL);
+    game->keys = get_keyboard_input(game->keys, game->window->window);
+    if (game->keys[sfKeyS]) {
+        place_player(game->window->window, game->game->player->pos, 0);
+    } else if (game->keys[sfKeyZ]) {
+        place_player(game->window->window, game->game->player->pos, 1);
+    } else if (game->keys[sfKeyD]) {
+        place_player(game->window->window, game->game->player->pos, 2);
+    } else if (game->keys[sfKeyA]) {
+        place_player(game->window->window, game->game->player->pos, 3);
+    } else {
+        place_player(game->window->window, game->game->player->pos, 4);
+    }
 }

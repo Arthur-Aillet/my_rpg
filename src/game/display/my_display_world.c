@@ -7,6 +7,7 @@
 
 #include "my_rpg.h"
 #include "my.h"
+#include "ui.h"
 
 void setup_camera(game_t *game, int i)
 {

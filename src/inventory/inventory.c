@@ -66,7 +66,7 @@ game_t *inventory(game_t *game)
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     font_t **fonts = font_create_array();
     sfVector2f vec = {0, 0};
-    player_t player = {0, 1000, 0, 500, 0, 250, VCF {0, 0}, NULL, NULL, "\0", 0};
+    player_t player = {0, 1000, 0, 500, 0, 250, 0, VCF {0, 0}, NULL, NULL, "\0", 0};
     int animation = 0;
 
     while (sfRenderWindow_isOpen(game->window->window)) {//
@@ -78,7 +78,6 @@ game_t *inventory(game_t *game)
             exterminate(start);
             return (game);//
         }
-        if (game->M == 2) {animation += 1;} if (animation > 2) animation = animation % 3;   place_player(game->window->window, VCF {970, 540}, animation);
         if (game->K) display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
         player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
         if (game->G) display_ui(game->window->window, &player, vec);

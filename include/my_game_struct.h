@@ -38,6 +38,7 @@ typedef struct player_s {
     float max_stamina;
     float exp;
     float max_exp;
+    int side;
     sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;

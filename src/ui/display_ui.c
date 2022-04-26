@@ -43,10 +43,18 @@ static void display_circle(sfRenderWindow *window, object_t **parts)
     sfRenderWindow_drawSprite(window, parts[1]->sprite, NULL);
 }
 
-void display_ui(sfRenderWindow *window, player_t *player)
+void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos)
 {
     static object_t **parts = NULL;
     parts = get_parts();
+    static sfVector2f former_pos = {0, 0};
+
+    if (former_pos.x != pos.x || former_pos.y != pos.y) {
+        former_pos = VCF {pos.x - former_pos.x, pos.y - former_pos.y};
+        for (int i = 0 ; i < 9; i++)
+            sfSprite_move(parts[i]->sprite, former_pos);
+        former_pos = pos;
+    }
     display_health(window, player->health, player->max_health, parts);
     display_stamina(window, player->stamina, player->max_stamina, parts);
     display_exp(window, player->exp, player->max_exp, parts);

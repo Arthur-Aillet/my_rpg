@@ -16,7 +16,7 @@ void display_player(game_t *game, int i)
         place_player(game->window->window, game->game->player->pos, 1);
     } else if (game->keys[sfKeyD]) {
         place_player(game->window->window, game->game->player->pos, 2);
-    } else if (game->keys[sfKeyA]) {
+    } else if (game->keys[sfKeyQ]) {
         place_player(game->window->window, game->game->player->pos, 3);
     } else {
         place_player(game->window->window, game->game->player->pos, 4);

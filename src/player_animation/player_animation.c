@@ -46,7 +46,7 @@ static animation_t create_animation(char *name, int hsize, int step_size, int an
 
 static animation_t *get_player_animations(void)
 {
-    animation_t *result = malloc(sizeof(animation_t) * 3);
+    animation_t *result = malloc(sizeof(animation_t) * 5);
 
     result[0] = create_animation("down/walk.png", 64, 64, 6);
     result[1] = create_animation("up/walk.png", 64, 64, 6);

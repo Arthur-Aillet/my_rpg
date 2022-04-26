@@ -9,15 +9,18 @@
 
 static void print_tile_map(game_t *game, char **map, sfVector2f vec, int i)
 {
-    sfIntRect rect = {0, 0, 64, 64};
+    sfIntRect rect = {0, 0,
+        game->game->maps[i]->def, game->game->maps[i]->def};
 
     if (map[(int)vec.y][(int)vec.x] == '0') {
-        rect.left = 64;
+        rect.left = game->game->maps[i]->def;
     }
     sfSprite_setTextureRect(game->game->maps[i]->sp_ts , rect);
     vec.x *= 64;
     vec.y *= 64;
     sfSprite_setPosition(game->game->maps[i]->sp_ts, vec);
+    sfSprite_setScale(game->game->maps[i]->sp_ts,
+        VCF {64 / game->game->maps[i]->def, 64 / game->game->maps[i]->def});
     sfRenderWindow_drawSprite(game->window->window, game->game->maps[i]->sp_ts,
         NULL);
 }

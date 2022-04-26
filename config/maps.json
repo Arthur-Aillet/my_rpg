@@ -3,7 +3,7 @@
         "field": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
             "map": "assets/in_game/maps/field.map",
-            "definition": 64,
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -13,7 +13,7 @@
         },"house": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
             "map": "assets/in_game/maps/house.map",
-            "definition": 64,
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -23,7 +23,7 @@
         },"garden": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
             "map": "assets/in_game/maps/garden.map",
-            "definition": 64,
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -33,7 +33,7 @@
         },"town": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
             "map": "assets/in_game/maps/town.map",
-            "definition": 64,
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "field",

@@ -9,7 +9,7 @@
 #include "my.h"
 #include "ui.h"
 
-void setup_camera(game_t *game, int i)
+static void setup_camera(game_t *game, int i)
 {
     game->game->pos_cam = game->game->player->pos;
     if (game->game->pos_cam.x - game->game->cam_rect.width / 2 < 0)

@@ -85,7 +85,7 @@ static void update_menu(main_menu_t *menu, game_t *game)
             rand() % 50, 300 + random * 1.1 - rand() % 50}, LIGHT_DUST, 1);
         menu->particle = add_particle(menu->particle, VCF {650, 530}, FIRE, 10);
         menu->particle = add_particle(menu->particle, VCF {1970, rand() % 1080},
-             MAGIC_VIBE, 10);
+        MAGIC_VIBE, 10);
     }
     sfRenderWindow_display(game->window->window);
 }

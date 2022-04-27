@@ -9,7 +9,7 @@
 #include "my_game_struct.h"
 #include "keyboard.h"
 
-void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
+static void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
 {
     int i = 0;
 

@@ -25,7 +25,7 @@ static int more_than_one_key(game_t *game)
     return 0;
 }
 
-int player_is_collide(game_t *game, int dir, int value)
+static int player_is_collide(game_t *game, int dir, int value)
 {
     int i = -1;
     int j = 0;
@@ -47,7 +47,7 @@ int player_is_collide(game_t *game, int dir, int value)
     return ret;
 }
 
-char *get_new_map(game_t *game, int i, int dir)
+static char *get_new_map(game_t *game, int i, int dir)
 {
     if (dir == LEFT_D)
         return game->game->maps[i]->left;
@@ -58,7 +58,7 @@ char *get_new_map(game_t *game, int i, int dir)
     return game->game->maps[i]->bot;
 }
 
-void handle_switch_map(game_t *game)
+static void handle_switch_map(game_t *game)
 {
     int i = get_current_map(game);
 

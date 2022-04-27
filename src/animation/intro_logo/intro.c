@@ -10,7 +10,7 @@
 #include "keyboard.h"
 #include "my_rpg.h"
 
-void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
+static void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
 {
     sfIntRect rect = {0, 0, 1920, 1080};
     int i = 0;

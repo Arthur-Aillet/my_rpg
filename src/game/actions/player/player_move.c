@@ -29,22 +29,19 @@ int player_is_collide(game_t *game, int dir, int value)
 {
     int i = -1;
     int j = 0;
-    int map = 0;
+    int map = get_current_map(game);
     int ret = 0;
 
     game->game->player->pos.x += dir == 1 ? value : 0;
     game->game->player->pos.y += dir == 0 ? value : 0;
-    while (game->game->maps[map] && my_strcmp(game->game->maps[map]->name,
-        game->game->current) != 0)
-        map++;
-    while (game->game->maps[map]->map[++i]) {
+    while (game->game->maps[map]->obs[++i]) {
         j = -1;
-        while (game->game->maps[map]->map[i][++j])
-            ret = ((int)((game->game->player->pos.x + 1) / 64) == j ||
-                (int)((game->game->player->pos.x - 1) / 64) + 1 == j) &&
-                game->game->maps[map]->map[i][j] == '1' &&
-                ((int)((game->game->player->pos.y + 1) / 64) == i ||
-                (int)((game->game->player->pos.y - 1) / 64) + 1 == i) ? 1 : ret;
+        while (game->game->maps[map]->obs[i][++j])
+            ret = ((int)((game->game->player->pos.x + 8) / 64) == j ||
+                (int)((game->game->player->pos.x - 8) / 64) + 1 == j) &&
+                game->game->maps[map]->obs[i][j] == '1' &&
+                ((int)((game->game->player->pos.y + 32) / 64) == i ||
+                (int)((game->game->player->pos.y - 16) / 64) + 1 == i) ? 1 : ret;
     }
     return ret;
 }
@@ -60,21 +57,10 @@ char *get_new_map(game_t *game, int i, int dir)
     return game->game->maps[i]->bot;
 }
 
-int get_current_map(game_t *game)
-{
-    int i= 0;
-
-    while (my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
-        i++;
-    return i;
-}
-
 void handle_switch_map(game_t *game)
 {
-    int i = 0;
+    int i = get_current_map(game);
 
-    while (my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
-        i++;
     if (game->game->player->pos.x <= 0) {
         game->game->current = get_new_map(game, i, LEFT_D);
         game->game->player->pos.x =

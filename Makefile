@@ -108,6 +108,7 @@ SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)display/my_display_player.c		\
 							$(GAME_PATH)actions/player/player_action.c	\
 							$(GAME_PATH)actions/player/player_move.c	\
+							$(GAME_PATH)utils/get_current_map.c			\
 
 SRC_MENU		=			$(MENU_PATH)main_menu/menu.c				\
 							$(MENU_PATH)options/options.c				\

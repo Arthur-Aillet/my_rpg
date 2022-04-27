@@ -41,7 +41,8 @@ int player_is_collide(game_t *game, int dir, int value)
                 (int)((game->game->player->pos.x - 8) / 64) + 1 == j) &&
                 game->game->maps[map]->obs[i][j] == '1' &&
                 ((int)((game->game->player->pos.y + 32) / 64) == i ||
-                (int)((game->game->player->pos.y - 16) / 64) + 1 == i) ? 1 : ret;
+                (int)((game->game->player->pos.y - 16) / 64) + 1 == i)
+                ? 1 : ret;
     }
     return ret;
 }

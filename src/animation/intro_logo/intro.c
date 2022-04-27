@@ -12,13 +12,9 @@
 
 void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
 {
-    sfIntRect rect;
+    sfIntRect rect = {0, 0, 1920, 1080};
     int i = 0;
 
-    rect.left = 0;
-    rect.top = 0;
-    rect.width = 1920;
-    rect.height = 1080;
     while (i < 14) {
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->ENTER)

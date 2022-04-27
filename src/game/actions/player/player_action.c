@@ -7,7 +7,6 @@
 
 #include "my_rpg.h"
 
-
 void player_actions(game_t *game)
 {
     player_move(game);

@@ -30,5 +30,5 @@ particle_t *magic_vibe(sfRenderWindow *window, particle_t *part, sfClock *clock)
     part->velocity.y = SMOOTHY;
     sfSprite_move(part->object->sprite, part->velocity);
     sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
-    return(part);
+    return part;
 }

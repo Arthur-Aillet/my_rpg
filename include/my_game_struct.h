@@ -19,7 +19,7 @@
 typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
-    sfSprite* sp_ts;
+    sfSprite *sp_ts;
     char **map;
     int def;
     int height;
@@ -60,6 +60,7 @@ typedef struct game_s {
     object_t *mouse;
     font_t **fonts;
     sound_t **sounds;
+    music_t **musics;
     in_game_t *game;
     float general_volume;
     float sfx_volume;

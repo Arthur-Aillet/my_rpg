@@ -50,7 +50,7 @@ window_t *generate_default_window(void)
     window->width = 1920;
     window->framerate = 75;
     window->vsync = true;
-    window->type = 1;
+    window->type = 0;
     create_windows(window);
     return (window);
 }
@@ -75,11 +75,13 @@ void create_windows(window_t *window)
     sfVideoMode main_w = {window->width, window->height, 24};
 
     if (window->type == 0)
-        window->window = sfRenderWindow_create(main_w, window->name, 1, NULL);
+        window->window = sfRenderWindow_create(main_w, window->name,
+        sfTitlebar | sfResize | sfClose, NULL);
     if (window->type == 1)
-        window->window = sfRenderWindow_create(main_w, window->name, 7, NULL);
+        window->window = sfRenderWindow_create(main_w, window->name, sfNone, NULL);
     if (window->type == 2)
-        window->window = sfRenderWindow_create(main_w, window->name, 8, NULL);
+        window->window = sfRenderWindow_create(main_w, window->name,
+        sfFullscreen, NULL);
     sfRenderWindow_setFramerateLimit(window->window, window->framerate);
     sfRenderWindow_setMouseCursorVisible(window->window, sfFalse);
     sfRenderWindow_setVerticalSyncEnabled(window->window, window->vsync);

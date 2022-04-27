@@ -101,7 +101,7 @@ void button_play_sound(sfVector2f mo, button_t *but, char *keys, sfFloatRect re)
         sfSound_play(but->hover);
         but->already_hoverd = true;
     }
-    if (sfFloatRect_contains(&re, mo.x, mo.y) == true && LCLICK
+    if (sfFloatRect_contains(&re, mo.x, mo.y) == true && LCLICK == RELEASE
         && but->click != NULL && but->already_clicked == false) {
         sfSound_play(but->click);
         but->already_clicked = true;

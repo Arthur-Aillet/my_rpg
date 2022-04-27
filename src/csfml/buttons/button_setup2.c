@@ -16,12 +16,12 @@
 void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
 {
     if (click != NULL) {
-        but->click = sfSound_copy(click);
+        but->click = click;
         but->click_buf = NULL;
         sfSound_setVolume(but->click, vol);
     }
     if (hover != NULL) {
-        but->hover = sfSound_copy(hover);
+        but->hover = hover;
         but->hover_buf = NULL;
         sfSound_setVolume(but->hover, vol / 2);
     }

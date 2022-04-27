@@ -21,7 +21,7 @@ void remove_particle(particle_t *prev)
     prev->next = temp;
 }
 
-/*destroys all the particles int the list*/
+/*destroys all the particles in the list*/
 void exterminate(particle_t *first)
 {
     while(first->next != NULL)

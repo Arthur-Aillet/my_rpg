@@ -20,6 +20,32 @@
 #include "main_menu.h"
 #include "inventory_structures.h"
 
+void destroy_game(game_t *game)
+{
+    if (game->fonts != NULL)
+        for (int i = 0; game->fonts[i] != NULL; i++) {
+            sfFont_destroy(game->fonts[i]->font);
+            free(game->fonts[i]->name);
+        }
+    free(game->fonts);
+    if (game->sounds != NULL)
+        for (int i = 0; game->sounds[i] != NULL; i++) {
+            sfSound_destroy(game->sounds[i]->sound);
+            sfSoundBuffer_destroy(game->sounds[i]->buffer);
+            free(game->sounds[i]->name);
+        }
+    free(game->sounds);
+    if (game->musics != NULL)
+        for (int i = 0; game->musics[i] != NULL; i++) {
+            sfMusic_destroy(game->musics[i]->music);
+            free(game->musics[i]->name);
+        }
+    free(game->musics);
+    free(game->keys);
+    destroy_object(game->mouse);
+    free(game->status);
+}
+
 int my_rpg(int ac, char **av)
 {
     game_t *game = init_game_struct();
@@ -32,6 +58,7 @@ int my_rpg(int ac, char **av)
     if (game == NULL)
         return 84;
     menu(game, items, comp);
+    destroy_game(game);
     free_window_struct(game->window);
     return 0;
 }

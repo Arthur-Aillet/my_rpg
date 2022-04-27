@@ -59,10 +59,4 @@ void destroy_button(button_t *bouton)
         sfText_destroy(bouton->text.text);
         sfFont_destroy(bouton->text.font);
     }
-    sfSound_stop(bouton->click);
-    sfSound_stop(bouton->hover);
-    sfSound_destroy(bouton->click);
-    sfSound_destroy(bouton->hover);
-    sfSoundBuffer_destroy(bouton->click_buf);
-    sfSoundBuffer_destroy(bouton->hover_buf);
 }

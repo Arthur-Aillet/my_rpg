@@ -11,6 +11,9 @@
 #include <SFML/Audio.h>
 #include <stdbool.h>
 
+#include "my_csfml_utils.h"
+#include "my_game_struct.h"
+
 #include "my_text.h"
 
 typedef struct button_s {
@@ -31,6 +34,35 @@ typedef struct button_s {
     bool already_clicked;
 } button_t;
 
+typedef struct slider_s{
+    object_t *back;
+    object_t *front;
+    object_t *slider;
+} slider_t;
+
+typedef struct check_s{
+    button_t *on;
+    button_t *off;
+    bool status;
+} check_t;
+
+typedef struct list_s{
+    button_t *up;
+    button_t *down;
+    button_t **element;
+    bool value;
+} list_t;
+
+void destroy_list(list_t *list);
+list_t *create_list(sfVector2f pos, game_t *game, char *text);
+void update_list(list_t *list, game_t *game);
+void slider_init(slider_t *slider, float volume);
+void destroy_slider(slider_t *slider);
+slider_t *create_slider(sfVector2f pos);
+check_t *create_check(sfVector2f pos, game_t *game);
+void update_checkbox_vsync(check_t *check, game_t *game);
+void destroy_check_box(check_t *check);
+void update_checkbox(check_t *check, game_t *game);
 bool is_pressed(button_t *bouton, sfRenderWindow *window, char *keys);
 button_t *button_create(sfVector2f size, sfVector2f position, bool display_tex);
 void button_setup_texture_file(button_t *bouton, sfIntRect size, char *file);

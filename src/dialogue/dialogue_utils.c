@@ -43,7 +43,6 @@ void sf_text_set_pixel_size(sfText *text, sfVector2f size)
         sfText_setCharacterSize(text, sfText_getCharacterSize(text) - 1);
     while (sfText_getLocalBounds(text).height > size.y - 10)
         sfText_setCharacterSize(text, sfText_getCharacterSize(text) - 1);
-
 }
 
 void draw_chatbox(sfRenderWindow *window, int direction)

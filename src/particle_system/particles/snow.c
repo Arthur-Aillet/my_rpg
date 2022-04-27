@@ -13,6 +13,7 @@
 /*a frosty fractal falling from the sky
 recomendend starting pos: {rand() % 1920, 0}
 recomended speed: 20*/
+
 particle_t *snow(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), part->speed * 100) / 100 * 3 / 2;
@@ -33,5 +34,5 @@ particle_t *snow(sfRenderWindow *window, particle_t *part, sfClock *clock)
     part->velocity.y = SMOOTHY;
     sfSprite_move(part->object->sprite, part->velocity);
     sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
-    return (part);
+    return part;
 }

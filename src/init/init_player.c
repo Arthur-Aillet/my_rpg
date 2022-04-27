@@ -5,6 +5,7 @@
 ** init_player
 */
 
+#include <stdlib.h>
 #include "my_game_struct.h"
 #include "json.h"
 
@@ -38,6 +39,7 @@ player_t *init_game_player(maps_t *field)
     player->name = get_str_by_name(obj, "name");
     player->pos.x = (field->width / 2) * 64;
     player->pos.y = (field->height / 2) * 64;
+    player->side = 0;
     init_player_stats(player);
     init_player_sprite(obj, player);
     return player;

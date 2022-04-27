@@ -8,17 +8,17 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "keyboard.h"
+#include "my_sound.h"
+#include "my_rpg.h"
 
-void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
+static void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
 {
-    sfIntRect rect;
+    sfIntRect rect = {0, 0, 1920, 1080};
     int i = 0;
 
-    rect.left = 0;
-    rect.top = 0;
-    rect.width = 1920;
-    rect.height = 1080;
     while (i < 14) {
+        if (i == 1)
+            sfSound_play(find_sound("intro.ogg", game->sounds));
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->ENTER)
             i = 14;
@@ -48,5 +48,6 @@ void intro(game_t *game)
     sfTexture_destroy(tex);
     sfSprite_destroy(sheet);
     sfClock_destroy(clock);
+    sfSound_stop(SOUNDG("intro.ogg"));
     transition(game, 1);
 }

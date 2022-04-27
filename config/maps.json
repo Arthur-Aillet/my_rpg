@@ -2,8 +2,9 @@
     "maps": {
         "field": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
-            "map": "assets/in_game/maps/field.map",
-            "definition": 64,
+            "base": "assets/in_game/maps/field/base.map",
+            "obs": "assets/in_game/maps/field/obstacle.map",
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -12,8 +13,9 @@
             "right": "house"
         },"house": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
-            "map": "assets/in_game/maps/house.map",
-            "definition": 64,
+            "base": "assets/in_game/maps/house/base.map",
+            "obs": "assets/in_game/maps/house/obstacle.map",
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -22,8 +24,9 @@
             "right": "garden"
         },"garden": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
-            "map": "assets/in_game/maps/garden.map",
-            "definition": 64,
+            "base": "assets/in_game/maps/garden/base.map",
+            "obs": "assets/in_game/maps/garden/obstacle.map",
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "NULL",
@@ -32,8 +35,9 @@
             "right": "NULL"
         },"town": {
             "tileset": "assets/in_game/tilesets/tileset_test.png",
-            "map": "assets/in_game/maps/town.map",
-            "definition": 64,
+            "base": "assets/in_game/maps/town/base.map",
+            "obs": "assets/in_game/maps/town/obstacle.map",
+            "definition": 32,
             "height": 18,
             "width": 46,
             "top": "field",

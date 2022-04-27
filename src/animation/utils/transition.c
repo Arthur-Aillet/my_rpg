@@ -9,7 +9,7 @@
 #include "my_game_struct.h"
 #include "keyboard.h"
 
-void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
+static void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
 {
     int i = 0;
 
@@ -17,7 +17,7 @@ void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->ENTER)
             i = 70;
-        sfSprite_setColor(black, sfColor_fromRGBA(255,255,255,i));
+        sfSprite_setColor(black, sfColor_fromRGBA(255, 255, 255, i));
         if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.02 / speed) {
             sfClock_restart(clock);
             i++;

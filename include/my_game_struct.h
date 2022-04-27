@@ -21,7 +21,8 @@ typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
     sfSprite* sp_ts;
-    char **map;
+    char **base;
+    char **obs;
     int def;
     int height;
     int width;
@@ -38,6 +39,7 @@ typedef struct player_s {
     float max_stamina;
     float exp;
     float max_exp;
+    int side;
     sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;

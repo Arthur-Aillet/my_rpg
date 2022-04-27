@@ -11,7 +11,7 @@
 #include "my.h"
 #include "my_rpg.h"
 
-maps_t **init_game_maps(void)
+static maps_t **init_game_maps(void)
 {
     maps_t **maps = malloc(sizeof(maps_t));
     json_obj_t *obj = create_json_object("config/maps.json");

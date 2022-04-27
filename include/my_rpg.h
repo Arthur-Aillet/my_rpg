@@ -32,6 +32,8 @@
 int my_error_handling(int ac, char **av);
 int my_help(void);
 
+int get_current_map(game_t *game);
+
 game_t *init_game_struct(void);
 control_t *init_game_status(void);
 in_game_t *init_in_game_struct(void);
@@ -50,7 +52,8 @@ int my_rpg(int ac, char **av);
 int game_loop(game_t *game);
 
 void display_world(game_t *game);
-void display_map(game_t *game, maps_t *maps, int i);
+void display_base(game_t *game, maps_t *maps, int begin, int end);
+void display_obs(game_t *game, maps_t *maps, int begin, int end);
 void display_player(game_t *game, int i);
 
 void player_actions(game_t *game);

@@ -21,7 +21,8 @@ typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
     sfSprite* sp_ts;
-    char **map;
+    char **base;
+    char **obs;
     int def;
     int height;
     int width;

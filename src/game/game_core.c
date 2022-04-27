@@ -31,7 +31,7 @@ item_t create_yellow_flower(item_t item, int number)
     return (item);
 }
 
-int my_rpg(int ac, char **av)
+int my_rpg(void)
 {
     game_t *game = init_game_struct();
     game->items = create_items();

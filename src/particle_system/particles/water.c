@@ -6,6 +6,7 @@
 */
 
 #include "particles.h"
+#include <math.h>
 
 /*a drop of water falls from the sky
 recomended stating pos: {rand() % 1920, 0}

@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 #include "my_window_struct.h"
 #include "my_text.h"

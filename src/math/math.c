@@ -6,7 +6,6 @@
 */
 
 #include "my_math.h"
-
 #include <math.h>
 #include <stdbool.h>
 #include <SFML/Graphics.h>

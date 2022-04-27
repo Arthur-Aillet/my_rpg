@@ -41,20 +41,20 @@ player_t *init_game_player(maps_t *field);
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i);
 char *init_keys(void);
 
-void intro(window_t *win);
+void intro(game_t *game);
 void transition(game_t *game, int speed);
 
 game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);
 
-int my_rpg(int ac, char **av);
+int my_rpg(void);
 int game_loop(game_t *game);
 
 void display_world(game_t *game);
 void display_base(game_t *game, maps_t *maps, int begin, int end);
 void display_obs(game_t *game, maps_t *maps, int begin, int end);
-void display_player(game_t *game, int i);
+void display_player(game_t *game);
 
 void player_actions(game_t *game);
 void player_move(game_t *game);

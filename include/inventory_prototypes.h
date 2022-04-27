@@ -32,6 +32,8 @@ item_t *pickup_items(item_t *items, char *keys, int *pressed, int);
 item_t *split_item(int origin, int dest, item_t *items, int number);
 item_t *swap_items(int origin, int dest, item_t *items);
 
+object_t **setup_comp_sprites();
+
 void disp_cmp(backgrounds_t bgs);
 void draw_competences(sfRenderWindow *window, competences_t *comp);
 void draw_descriptions(sfRenderWindow *window, competences_t *comp, sfText *);
@@ -43,6 +45,7 @@ void pause_menu(sfRenderWindow *window, char *keys);
 events_t evt_cmp(events_t events);
 events_t evt_inv(events_t events);
 events_t evt_map(events_t events);
+events_t setup_events(game_t *game, int *page);
 
 competences_t set_competence_state(int comp, competences_t, int);
 

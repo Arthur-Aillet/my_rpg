@@ -1,0 +1,274 @@
+{
+    "name": {
+        "description": "text",
+        "imgpath": "path"
+    },
+    "c1": {
+        "description": "c1",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c2": {
+        "description": "c2",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c3": {
+        "description": "c3",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c4": {
+        "description": "c4",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c5": {
+        "description": "c5",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c6": {
+        "description": "c6",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c7": {
+        "description": "c7",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c8": {
+        "description": "c8",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c9": {
+        "description": "c9",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c10": {
+        "description": "c10",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c11": {
+        "description": "c11",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c12": {
+        "description": "c12",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c13": {
+        "description": "c13",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c14": {
+        "description": "c14",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c15": {
+        "description": "c15",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c16": {
+        "description": "c16",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c17": {
+        "description": "c17",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c18": {
+        "description": "c18",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c19": {
+        "description": "c19",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c20": {
+        "description": "c20",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c21": {
+        "description": "c21",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c22": {
+        "description": "c22",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c23": {
+        "description": "c23",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c24": {
+        "description": "c24",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c25": {
+        "description": "c25",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c26": {
+        "description": "c26",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c27": {
+        "description": "c27",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c28": {
+        "description": "c28",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c29": {
+        "description": "c29",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c30": {
+        "description": "c30",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c31": {
+        "description": "c31",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c32": {
+        "description": "c32",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c33": {
+        "description": "c33",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c34": {
+        "description": "c34",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c35": {
+        "description": "c35",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c36": {
+        "description": "c36",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c37": {
+        "description": "c37",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c38": {
+        "description": "c38",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c39": {
+        "description": "c39",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c40": {
+        "description": "c40",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c41": {
+        "description": "c41",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c42": {
+        "description": "c42",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c43": {
+        "description": "c43",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c44": {
+        "description": "c44",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c45": {
+        "description": "c45",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c46": {
+        "description": "c46",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c47": {
+        "description": "c47",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c48": {
+        "description": "c48",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c49": {
+        "description": "c49",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c50": {
+        "description": "c50",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c51": {
+        "description": "c51",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c52": {
+        "description": "c52",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c53": {
+        "description": "c53",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c54": {
+        "description": "c54",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c55": {
+        "description": "c55",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c56": {
+        "description": "c56",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c57": {
+        "description": "c57",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c58": {
+        "description": "c58",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c59": {
+        "description": "c59",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c60": {
+        "description": "c60",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c61": {
+        "description": "c61",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c62": {
+        "description": "c62",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c63": {
+        "description": "c63",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c64": {
+        "description": "c64",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c65": {
+        "description": "c65",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c66": {
+        "description": "c66",
+        "imgpath": "assets/img/bap_open.png"
+    },
+    "c67": {
+        "description": "c67",
+        "imgpath": "assets/img/bap_open.png"
+    }
+}

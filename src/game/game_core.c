@@ -19,6 +19,7 @@
 #include "my_csfml_utils.h"
 #include "main_menu.h"
 #include "inventory_structures.h"
+#include "inventory_prototypes.h"
 
 item_t create_yellow_flower(item_t item, int number)
 {
@@ -34,12 +35,15 @@ item_t create_yellow_flower(item_t item, int number)
 int my_rpg(int ac, char **av)
 {
     game_t *game = init_game_struct();
+    competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2, 0
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0, 0 ,
+        0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL};
+    competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[10] = create_yellow_flower(game->items[10], 100);
     game->comp = malloc(sizeof(competences_t));
-    game->comp->dodge_roll = 0;
-    game->comp->fireball = 0;
-
+    game->comp = &competence;
     if (game == NULL)
         return 84;
     intro(game);

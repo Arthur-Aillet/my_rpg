@@ -80,6 +80,7 @@ typedef struct competences_s {
     int c65;
     int c66;
     int c67;
+    object_t **sprites;
 } competences_t;
 
 competences_t set_competence_six(int comp, competences_t comps, int st);

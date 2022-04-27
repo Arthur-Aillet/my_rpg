@@ -67,10 +67,12 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
 
     if (select == NULL)
         select = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
-    for (int i = 1; i < 68; i++) {
+    for (int i = 1; i <= 67; i++) {
         sfSprite_setPosition(select->sprite, get_comp_pos(i));
         state = get_competence_state(i, *comp);
-        if (state == 1)
+        if (state >= 1)
+            sfRenderWindow_drawSprite(window, comp->sprites[i]->sprite, NULL);
+        if (state == 2)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
     sfSprite_setPosition(select->sprite, itofv2(sfMouse_getPositionRenderWindow(window)));

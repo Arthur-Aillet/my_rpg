@@ -42,6 +42,14 @@ events_t evt_map(events_t events)
     return (events);
 }
 
+int is_unlockable(int target, competences_t comp)
+{
+    for (int i = 1; i < 68; i++)
+        if (is_adjacent_comp(target, i) && get_competence_state(i, comp) == 2)
+            return (1);
+    return (0);
+}
+
 events_t evt_cmp(events_t events)
 {
     sfVector2i mousepos = sfMouse_getPositionRenderWindow(events.window);
@@ -52,13 +60,14 @@ events_t evt_cmp(events_t events)
     competence = get_competence(itofv2(mousepos));
     if (events.A == PRESS && *events.page > 0)
         *events.page -= 1;
-    if (events.LCLICK == RELEASE && competence != selected)
+    if (!is_pressed(events.button, events.window, events.keys) && events.LCLICK == RELEASE && competence != selected && get_competence_state(selected, *events.comp) != 2)
        *events.comp = set_competence_state(selected, *events.comp, 0);
+    if (is_pressed(events.button, events.window, events.keys) && is_unlockable(selected, *events.comp))
+        *events.comp = set_competence_state(selected, *events.comp, 2);
     if (events.LCLICK == RELEASE && competence != 0)
         selected = competence;
-    if (events.LCLICK == RELEASE && competence == selected)
+    if (events.LCLICK == RELEASE && competence == selected && get_competence_state(selected, *events.comp) == 0)
         *events.comp = set_competence_state(competence, *events.comp, 1);
     update_button(events.window, events.button, events.keys);
-    if (is_pressed(events.button, events.window, events.keys));
     return (events);
 }

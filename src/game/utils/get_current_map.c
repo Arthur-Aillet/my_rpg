@@ -6,6 +6,7 @@
 */
 
 #include "my_rpg.h"
+#include "my.h"
 
 int get_current_map(game_t *game)
 {

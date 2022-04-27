@@ -7,8 +7,9 @@
 
 #include "my_rpg.h"
 #include "player_animation.h"
+#include "keyboard.h"
 
-void display_player(game_t *game, int i)
+void display_player(game_t *game)
 {
     game->keys = get_keyboard_input(game->keys, game->window->window);
     if (game->keys[sfKeyS]) {

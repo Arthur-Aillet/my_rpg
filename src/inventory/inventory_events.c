@@ -59,6 +59,6 @@ events_t evt_cmp(events_t events)
     if (events.LCLICK == RELEASE && competence == selected)
         *events.comp = set_competence_state(competence, *events.comp, 1);
     update_button(events.window, events.button, events.keys);
-    if (is_pressed(events.button, events.window, events.keys));
+    if (is_pressed(events.button, events.window, events.keys)){}
     return (events);
 }

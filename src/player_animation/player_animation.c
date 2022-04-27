@@ -10,6 +10,7 @@
 #include "csfml_libs.h"
 #include "my.h"
 #include "my_rpg.h"
+#include <math.h>
 #include <stdlib.h>
 
 static char *add_str(char *src1, char *src2)

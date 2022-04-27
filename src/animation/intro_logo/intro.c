@@ -8,6 +8,7 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "keyboard.h"
+#include "my_rpg.h"
 
 void do_intro_animation(game_t *game, sfSprite *s, float *time, sfClock *clock)
 {

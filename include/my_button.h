@@ -12,8 +12,8 @@
 #include <stdbool.h>
 
 #include "my_csfml_utils.h"
-#include "my_game_struct.h"
 #include "my_text.h"
+#include "my_game_struct.h"
 
 typedef struct button_s {
     sfVector2f scale_hover;

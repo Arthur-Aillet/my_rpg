@@ -32,12 +32,6 @@ item_t *create_items(void)
     return (result);
 }
 
-void free_txtobject(txtobject_t object)
-{
-    sfText_destroy(object.text);
-    sfFont_destroy(object.font);
-}
-
 int count_item(item_t *items, int type)
 {
     int count = 0;
@@ -54,6 +48,23 @@ void free_inventory(backgrounds_t background, events_t events)
         destroy_object(background.pages[i]);
     sfText_destroy(background.text.text);
     destroy_button(events.button);
+}
+
+game_t *update_stats(game_t *game)
+{
+    for (int i = 1; i < 68; i++) {
+        if (BETWEEN(i, 30, 38) && get_competence_state(i, *game->comp) == 2)
+            game->game->player->move_spd += 5;
+        if (i > 38 && get_competence_state(i, *game->comp) == 2) {
+            game->game->player->max_health += 100;
+            game->game->player->health += 10;
+        }
+        if (i < 30 && get_competence_state(i, *game->comp) == 2) {
+            game->game->player->max_stamina += 100;
+            game->game->player->stamina += 10;
+        }
+    }
+    return (game);
 }
 
 game_t *inventory(game_t *game)
@@ -73,6 +84,7 @@ game_t *inventory(game_t *game)
         events = evt[page](events);
         sfRenderWindow_display(game->window->window);
     }
+    game = update_stats(game);
     game->E = 0;
     free_inventory(backgrounds, events);
     return (game);

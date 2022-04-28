@@ -11,13 +11,23 @@
 #include "my_csfml_utils.h"
 #include "json.h"
 
+char *implement_newlines(char *str)
+{
+    for (int i = 0; str[i + 1] != '\0'; i++)
+        if (str[i] == '\\' && str[i + 1] == 'n') {
+            str[i] = '\n';
+            str[i + 1] = 6;
+        }
+    return (str);
+}
+
 void display_description(sfRenderWindow *window, json_obj_t *json, int i,
     sfText *text)
 {
     sfText_setOrigin(text, VCF {0, 0});
     sfText_setPosition(text, VCF {96, 60});
-    sfText_setString(text, get_str_by_name(get_obj_by_index(json, i)
-        , "description"));
+    sfText_setString(text, implement_newlines(get_str_by_name(get_obj_by_index
+        (json, i), "description")));
     sfRenderWindow_drawText(window, text, NULL);
 }
 

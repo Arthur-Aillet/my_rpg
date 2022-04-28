@@ -51,14 +51,17 @@ object_t **setup_comp_sprites(void)
 {
     object_t **result = malloc(sizeof(object_t *) * 68);
     json_obj_t *json = create_json_object("src/inventory/comp_desc.json");
+    sfVector2f pos = {0, 0};
 
     for (int i = 1; i <= 67; i++) {
+        pos = get_comp_pos(i);
+        pos.x += 16;
+        pos.y += 16;
         result[i] = create_object(get_str_by_name
             (get_obj_by_index(json, i), "imgpath"), VCF {1, 1}, VCF {1, 1});
-        sf_sprite_set_pixel_size(result[i]->sprite, VCF {120, 120});
-        sfSprite_setPosition(result[i]->sprite, get_comp_pos(i));
+        sf_sprite_set_pixel_size(result[i]->sprite, VCF {104, 104});
+        sfSprite_setPosition(result[i]->sprite, pos);
     }
-    
     free_json(json, 0);
     return (result);
 }

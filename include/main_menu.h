@@ -55,7 +55,7 @@ void update_list_frame(list_t *list, game_t *game);
 void change_window(options_menu_t *option);
 void init_display(game_t *game, options_menu_t *option);
 int option(game_t *game);
-int menu(game_t *game, item_t *items, competences_t *comp);
+int menu(game_t *game);
 void silder_general_manager(game_t *game, options_menu_t *option);
 void silder_music_manager(game_t *game, options_menu_t *option);
 void init_volume(game_t *game, options_menu_t *option);

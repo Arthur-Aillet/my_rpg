@@ -13,7 +13,6 @@
 
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
-
 #include "my_text.h"
 
 typedef struct button_s {

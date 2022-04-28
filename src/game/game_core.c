@@ -19,6 +19,7 @@
 #include "my_csfml_utils.h"
 #include "main_menu.h"
 #include "inventory_structures.h"
+#include "inventory_prototypes.h"
 
 void destroy_game(game_t *game)
 {
@@ -46,18 +47,33 @@ void destroy_game(game_t *game)
     free(game->status);
 }
 
-int my_rpg(int ac, char **av)
+item_t create_yellow_flower(item_t item, int number)
+{
+    item.stack_size = 255;
+    item.armor_type = HEAD;
+    item.quantity = number;
+    item.armor_type = 1;
+    item.type = FLOWER_YELLOW;
+    item.obj = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
+    return (item);
+}
+
+int my_rpg(void)
 {
     game_t *game = init_game_struct();
-    item_t *items = create_items();
-    items[10] = create_yellow_flower(items[10], 100);
-    competences_t *comp = malloc(sizeof(competences_t));
-    comp->dodge_roll = 0;
-    comp->fireball = 0;
-
+    competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2, 0
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0, 0 ,
+        0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL};
+    competence.sprites = setup_comp_sprites();
+    game->items = create_items();
+    game->items[10] = create_yellow_flower(game->items[10], 100);
+    game->comp = malloc(sizeof(competences_t));
+    game->comp = &competence;
     if (game == NULL)
         return 84;
-    menu(game, items, comp);
+    intro(game);
+    menu(game);
     destroy_game(game);
     free_window_struct(game->window);
     return 0;

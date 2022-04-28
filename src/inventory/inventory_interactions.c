@@ -22,8 +22,7 @@ item_t *pickup_item(item_t new, item_t *items)
             new.quantity -= 1;
         }
     }
-    sfTexture_destroy(items[free_spot].texture);
-    sfSprite_destroy(items[free_spot].sprite);
+    destroy_object(items[free_spot].obj);
     items[free_spot] = new;
     return (items);
 }
@@ -101,8 +100,7 @@ item_t *consume(item_t *items, int type, int quantity)
             items[j].type = 0;
             items[j].armor_type = 5;
             items[j].stack_size = 1;
-            sfSprite_destroy(items[j].sprite);
-            sfTexture_destroy(items[j].texture);
+            destroy_object(items[j].obj);
         }
     }
     return (items);

@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "my.h"
 
-bool is_separator(char c, char const *sep)
+static bool is_separator(char c, char const *sep)
 {
     if (c == '\0')
         return 0;
@@ -20,7 +20,7 @@ bool is_separator(char c, char const *sep)
     return false;
 }
 
-int my_tablen(char const *str, char const *sep)
+static int my_tablen(char const *str, char const *sep)
 {
     int tot = 0;
 
@@ -35,7 +35,7 @@ int my_tablen(char const *str, char const *sep)
     return (tot + 1);
 }
 
-int my_len_word(char const *str, char const *sep)
+static int my_len_word(char const *str, char const *sep)
 {
     int tot = 0;
 

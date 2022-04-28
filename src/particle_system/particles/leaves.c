@@ -13,6 +13,7 @@
 /*a fragment of a once proud and mighty tree destined to fall in the underworld
 recomended starting pos: exact point of inpact
 recomended speed: 50*/
+
 particle_t *leaf_fragment(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;
@@ -33,7 +34,7 @@ particle_t *leaf_fragment(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
         sfSprite_move(part->object->sprite, part->velocity);
     }
     sfRenderWindow_drawSprite(wnd, part->object->sprite, NULL);
-    return(part);
+    return part;
 }
 
 particle_t *light_dust(sfRenderWindow *window, particle_t *part, sfClock *clock)
@@ -56,5 +57,5 @@ particle_t *light_dust(sfRenderWindow *window, particle_t *part, sfClock *clock)
         sfSprite_scale(part->object->sprite, VCF {1 - random, 1 - random});
     }
     sfRenderWindow_drawSprite(window, part->object->sprite, NULL);
-    return(part);
+    return part;
 }

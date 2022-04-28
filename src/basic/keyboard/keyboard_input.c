@@ -49,24 +49,6 @@ static char *get_click(sfEvent event, char *keys)
     return (keys);
 }
 
-static char *get_scroll(sfEvent event, char *keys)
-{
-    static float previouser = 0;
-    static float previous = 0;
-    float current = 0;
-
-    current = event.mouseWheelScroll.delta;
-    if (ABS(current) >= 1 && ABS(previous) < 1 && ABS(previouser) >= 1)
-        VSCROLL = current;
-    if (ABS(current) < 1 && ABS(previous) >= 1 && ABS(previouser) < 1)
-        VSCROLL = previous;
-    if (ABS(current) >= 1 && ABS(previous) >= 1 && ABS(previouser) >= 1)
-        HSCROLL = current;
-    previouser = previous;
-    previous = current;
-    return (keys);
-}
-
 char *get_keyboard_input(char *keys, sfRenderWindow *window)
 {
     sfEvent event;
@@ -76,7 +58,7 @@ char *get_keyboard_input(char *keys, sfRenderWindow *window)
         if (event.type == sfEvtClosed)
             sfRenderWindow_close(window);
         keys = get_click(event, keys);
-        keys = get_scroll(event, keys);
+        HSCROLL = event.mouseWheelScroll.delta;
         if (event.type == sfEvtKeyPressed)
             keys = press_buttons(event, keys, PRESS);
         if (event.type == sfEvtKeyReleased)

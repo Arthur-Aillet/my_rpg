@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 #include "my_window_struct.h"
 #include "my_text.h"
@@ -81,8 +82,11 @@ static void update_menu(main_menu_t *menu, game_t *game)
     update_button(game->window->window, menu->quit, game->keys);
     update_mouse_cursor(game->window->window, game->mouse);
     if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1), 0, 0.03)) {
-        menu->particle = add_particle(menu->particle, VCF {1820 - random, 250 + random * 1.1}, LIGHT_DUST, 1);
+        menu->particle = add_particle(menu->particle, VCF {1820 - random -
+            rand() % 50, 300 + random * 1.1 - rand() % 50}, LIGHT_DUST, 1);
         menu->particle = add_particle(menu->particle, VCF {650, 530}, FIRE, 10);
+        menu->particle = add_particle(menu->particle, VCF {1970, rand() % 1080},
+        MAGIC_VIBE, 10);
     }
     sfRenderWindow_display(game->window->window);
 }
@@ -99,7 +103,7 @@ void destroy_menu(main_menu_t *menu)
     ///exterminate(menu->particle);
 }
 
-int menu(game_t *game, item_t *items, competences_t *comp)
+int menu(game_t *game)
 {
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
@@ -113,7 +117,7 @@ int menu(game_t *game, item_t *items, competences_t *comp)
         if (is_pressed(menu->quit, game->window->window, game->keys))
             open = 0;
         if (game->keys[sfKeyEscape] == PRESS)
-            inventory(game->window->window, items, comp, game->keys);
+            game = inventory(game);
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))

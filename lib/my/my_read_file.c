@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-char *my_alloc_sizeof_file(char *filepath)
+static char *my_alloc_sizeof_file(char *filepath)
 {
     FILE *file = fopen(filepath, "r");
     size_t file_size = 0;

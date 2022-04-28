@@ -15,12 +15,14 @@
 #include "my_text.h"
 #include "my_sound.h"
 #include "my_csfml_utils.h"
+#include "inventory_structures.h"
 
 typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
-    sfSprite *sp_ts;
-    char **map;
+    sfSprite* sp_ts;
+    char **base;
+    char **obs;
     int def;
     int height;
     int width;
@@ -37,6 +39,7 @@ typedef struct player_s {
     float max_stamina;
     float exp;
     float max_exp;
+    int side;
     sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;
@@ -55,6 +58,8 @@ typedef struct in_game_s {
 
 typedef struct game_s {
     char *keys;
+    item_t *items;
+    competences_t *comp;
     control_t *status;
     window_t *window;
     object_t *mouse;

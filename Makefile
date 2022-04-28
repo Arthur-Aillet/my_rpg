@@ -5,6 +5,8 @@
 ## MAKEFILE
 ##
 
+## ==========================[THINGS_NOT_IMPORTANT]==========================
+
 DEFAULT	=	"\e[0m"
 BOLD_T	=	"\e[1m"
 RED_C	=	"\e[31m"
@@ -30,6 +32,8 @@ NAME_TEST		=			unit_test
 ## ===========================[SRC]===========================
 
 SRC_PATH		=			src/
+
+ANIM_PATH		=			$(SRC_PATH)animation/
 
 BASIC_PATH		=			$(SRC_PATH)basic/
 
@@ -66,6 +70,9 @@ TEST_PATH		=			tests/
 ## ===================================================================
 ## ===============================[SRC]===============================
 ## ===================================================================
+
+SRC_ANIM		=			$(ANIM_PATH)intro_logo/intro.c				\
+							$(ANIM_PATH)utils/transition.c				\
 
 SRC_BASICS		=			$(BASIC_PATH)utils/my_error_handling.c		\
 							$(BASIC_PATH)utils/my_help.c				\
@@ -105,6 +112,7 @@ SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)display/my_display_player.c		\
 							$(GAME_PATH)actions/player/player_action.c	\
 							$(GAME_PATH)actions/player/player_move.c	\
+							$(GAME_PATH)utils/get_current_map.c			\
 
 SRC_MENU		=			$(MENU_PATH)main_menu/menu.c				\
 							$(MENU_PATH)options/options.c				\
@@ -120,6 +128,7 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\
 							$(INIT_PATH)init_in_game_struct.c			\
 							$(INIT_PATH)init_map_objects.c				\
+							$(INIT_PATH)init_player.c					\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\
@@ -131,7 +140,10 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)inventory_swaps.c			\
 							$(INVENTORY_PATH)is_adjacent_competences.c	\
 							$(INVENTORY_PATH)inventory.c				\
-							$(INVENTORY_PATH)temp_main.c				\
+							$(INVENTORY_PATH)competences_descritions.c	\
+							$(INVENTORY_PATH)get_comp_state.c			\
+							$(INVENTORY_PATH)set_competence_state_upper.c	\
+							$(INVENTORY_PATH)set_competence_state_down.c	\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 							$(JSON_PATH)generate/reader/str_preprocessing.c		\
@@ -152,14 +164,12 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
 																				\
 							$(JSON_PATH)dependencies/chain_chars.c				\
 
-SRC_MATH		=			$(MATH_PATH)math.c							\
+SRC_MATH		=			$(MATH_PATH)math.c								\
 
-SRC_KEY			=			$(KEY_PATH)keyboard_input.c					\
-							$(KEY_PATH)keyboard_input_init.c			\
+SRC_KEY			=			$(KEY_PATH)keyboard_input.c						\
+							$(KEY_PATH)keyboard_input_init.c				\
 
-
-
-SRC_MOUSE		=			$(MOUSE_PATH)mouse.c						\
+SRC_MOUSE		=			$(MOUSE_PATH)mouse.c							\
 
 SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)creation.c					\
@@ -171,32 +181,34 @@ SRC_PARTICLES	=			$(PARTICLES_PATH)particle_system_execution.c	\
 							$(PARTICLES_PATH)particles/water.c			\
 							$(PARTICLES_PATH)particles/leaves.c			\
 							$(PARTICLES_PATH)particles/electricity.c	\
+							$(PARTICLES_PATH)particles/energy.c			\
 
-SRC_UI			=			$(UI_PATH)display_bars.c					\
-							$(UI_PATH)display_ui.c						\
+SRC_UI			=			$(UI_PATH)display_bars.c						\
+							$(UI_PATH)display_ui.c							\
 
-SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c	\
+SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c				\
 
-SRC_GLOBAL		=			$(SRC_BASICS)								\
-							$(SRC_CSFML)								\
-							$(SRC_DIALOGUE)								\
-							$(SRC_GAME)									\
-							$(SRC_INIT)									\
-							$(SRC_INVENTORY)							\
-							$(SRC_JSON)									\
-							$(SRC_MATH)									\
-							$(SRC_POTION)								\
-							$(SRC_MINIGAME)								\
-							$(SRC_MOUSE)								\
-							$(SRC_PARTICLES)							\
-							$(SRC_UI)									\
-							$(SRC_MENU)									\
-							$(SRC_PLAYER_ANIM)							\
+SRC_GLOBAL		=			$(SRC_ANIM)										\
+							$(SRC_BASICS)									\
+							$(SRC_CSFML)									\
+							$(SRC_DIALOGUE)									\
+							$(SRC_GAME)										\
+							$(SRC_INIT)										\
+							$(SRC_INVENTORY)								\
+							$(SRC_JSON)										\
+							$(SRC_MATH)										\
+							$(SRC_POTION)									\
+							$(SRC_MINIGAME)									\
+							$(SRC_MOUSE)									\
+							$(SRC_PARTICLES)								\
+							$(SRC_UI)										\
+							$(SRC_MENU)										\
+							$(SRC_PLAYER_ANIM)								\
 
-SRC				=			$(SRC_GLOBAL)								\
+SRC				=			$(SRC_GLOBAL)									\
 							main.c
 
-TEST_SRC		=			$(TEST_PATH)tests_error_handling.c			\
+TEST_SRC		=			$(TEST_PATH)tests_error_handling.c				\
 
 OBJ				=			$(SRC:.c=.o)
 
@@ -204,7 +216,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=		-Wall -Wextra -g3
+CFLAGS			=			-Wall -Wextra -O2
 
 CPPFLAGS		=			-I include
 

@@ -7,8 +7,9 @@
 
 #include "my_rpg.h"
 #include "my.h"
+#include "ui.h"
 
-void setup_camera(game_t *game, int i)
+static void setup_camera(game_t *game, int i)
 {
     game->game->pos_cam = game->game->player->pos;
     if (game->game->pos_cam.x - game->game->cam_rect.width / 2 < 0)
@@ -29,12 +30,16 @@ void setup_camera(game_t *game, int i)
 
 void display_world(game_t *game)
 {
-    int i = 0;
+    int i = get_current_map(game);
+    sfVector2f vec = game->game->pos_cam;
 
-    while (game->game->maps[i] && my_strcmp(game->game->maps[i]->name,
-        game->game->current) != 0)
-        i++;
-    display_map(game, game->game->maps[i], i);
-    display_player(game, i);
+    vec.x -= 960;
+    vec.y -= 540;
+    display_base(game, game->game->maps[i],
+        0, game->game->maps[i]->height);
+    display_player(game);
+    display_obs(game, game->game->maps[i],
+        (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
+    display_ui(game->window->window, game->game->player, vec);
     setup_camera(game, i);
 }

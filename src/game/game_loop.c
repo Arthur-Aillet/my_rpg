@@ -24,8 +24,10 @@ static void poll_event_keys(game_t *game)
 
 int game_loop(game_t *game)
 {
+    transition(game, 2);
     while (game->status->end_game == 0) {
         sfRenderWindow_clear(game->window->window, sfBlack);
+        set_correct_window_size(game->window);
         display_world(game);
         player_actions(game);
         poll_event_keys(game);

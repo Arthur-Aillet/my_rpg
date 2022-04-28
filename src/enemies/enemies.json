@@ -1,0 +1,14 @@
+{
+    "enemy_1": {
+        "type": 1,
+        "speed": 2,
+        "dps": 2,
+        "sprite": "path"
+    },
+    "enemy_2": {
+        "type": 1,
+        "speed": 2,
+        "dps": 2,
+        "sprite": "path"
+    }
+}

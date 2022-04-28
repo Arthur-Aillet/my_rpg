@@ -60,11 +60,11 @@ game_t *update_stats(game_t *game)
             game->game->player->move_spd += 1;
         if (i > 38 && get_competence_state(i, *game->comp) == 2) {
             game->game->player->max_health += 100;
-//            game->game->player->health += 100;
+            game->game->player->health += 100;
         }
         if (i < 30 && get_competence_state(i, *game->comp) == 2) {
             game->game->player->max_stamina += 100;
-//            game->game->player->stamina += 100;
+            game->game->player->stamina += 100;
         }
     }
     return (game);

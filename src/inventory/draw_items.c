@@ -72,7 +72,7 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
         state = get_competence_state(i, *comp);
         if (state >= 1)
             sfRenderWindow_drawSprite(window, comp->sprites[i]->sprite, NULL);
-        if (state == 2)
+        if (state == 1)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
     sfSprite_setPosition(select->sprite, itofv2(sfMouse_getPositionRenderWindow(window)));

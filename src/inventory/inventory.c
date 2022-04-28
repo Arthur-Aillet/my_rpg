@@ -52,16 +52,19 @@ void free_inventory(backgrounds_t background, events_t events)
 
 game_t *update_stats(game_t *game)
 {
+    game->game->player->max_health = 1000;
+    game->game->player->max_stamina = 1000;
+    game->game->player->move_spd = 8;
     for (int i = 1; i < 68; i++) {
         if (BETWEEN(i, 30, 38) && get_competence_state(i, *game->comp) == 2)
-            game->game->player->move_spd += 5;
+            game->game->player->move_spd += 1;
         if (i > 38 && get_competence_state(i, *game->comp) == 2) {
             game->game->player->max_health += 100;
-            game->game->player->health += 10;
+//            game->game->player->health += 100;
         }
         if (i < 30 && get_competence_state(i, *game->comp) == 2) {
             game->game->player->max_stamina += 100;
-            game->game->player->stamina += 10;
+//            game->game->player->stamina += 100;
         }
     }
     return (game);

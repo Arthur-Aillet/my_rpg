@@ -20,6 +20,8 @@ static void poll_event_keys(game_t *game)
         game->status->end_game = 1;
     if (game->I)
         game->status->end_game = 1;
+    if (game->E)
+        game = inventory(game);
 }
 
 int game_loop(game_t *game)

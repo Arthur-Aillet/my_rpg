@@ -109,6 +109,7 @@ int menu(game_t *game)
             game_loop(game);
         update_menu(menu, game);
     }
+    exterminate(menu->particle);
     destroy_button(menu->quit);
     return 0;
 }

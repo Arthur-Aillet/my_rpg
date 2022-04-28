@@ -12,11 +12,6 @@
 #include "mouse.h"
 #include "inventory_prototypes.h"
 #include "my_game_struct.h"
-    #include "my_text.h"
-    #include "particles.h"
-    #include "dialogue.h"
-    #include "ui.h"
-    #include "player_animation.h"
 #include "my_csfml_utils.h"
 
 #include <stdio.h>
@@ -53,20 +48,32 @@ int count_item(item_t *items, int type)
     return (count);
 }
 
+void free_inventory(backgrounds_t background, events_t events)
+{
+    for (int i = 0; i < 3; i++)
+        destroy_object(background.pages[i]);
+    sfText_destroy(background.text.text);
+    destroy_button(events.button);
+}
+
 game_t *inventory(game_t *game)
 {
     backgrounds_t backgrounds = setup_backgrounds(game);
     static int page = 0;
+    sfView *view = sfRenderWindow_getView(game->window->window);
     events_t events = setup_events(game, &page);
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
 
-    while (sfRenderWindow_isOpen(game->window->window)) {
+    sfView_setCenter(view, VCF {970, 540});
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    sfRenderWindow_setView(game->window->window, view);
+    while (game->E != 2) {
         disp[page](backgrounds);
         events = evt[page](events);
-        if (game->ESC == 2)
-            return (game);
         sfRenderWindow_display(game->window->window);
     }
+    game->E = 0;
+    free_inventory(backgrounds, events);
     return (game);
 }

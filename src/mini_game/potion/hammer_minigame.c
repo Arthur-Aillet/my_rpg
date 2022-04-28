@@ -78,7 +78,7 @@ void hammer_loop(game_t *game, potion_t *potion)
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
-    sfSound *sound = sfSound_copy(find_sound("anvil.ogg", game->sounds));
+    sfSound *sound = find_sound("anvil.ogg", game->sounds);
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);

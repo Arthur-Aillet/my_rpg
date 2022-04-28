@@ -23,4 +23,44 @@ typedef struct main_menu_s{
     particle_t *particle;
 } main_menu_t;
 
+typedef struct options_menu_s{
+    object_t *back;
+    button_t *controls;
+    button_t *display;
+    button_t *volume;
+    button_t *quit;
+    int status;
+    sfText *screen_type_title;
+    button_t *screen_type_right;
+    button_t *screen_type_left;
+    object_t *screen_type_background;
+    button_t *screen_type_apply;
+    sfText *screen_type_text;
+    int screen_type_state;
+    list_t *resolution;
+    list_t *frame;
+    list_t *keyboard;
+    sfText *vsync_title;
+    check_t *vsync;
+    sfText *general_title;
+    sfText *sfx_title;
+    sfText *music_title;
+    slider_t *general;
+    slider_t *sfx;
+    slider_t *music;
+} options_menu_t;
+
+void update_display(game_t *game, options_menu_t *op);
+void update_list_frame(list_t *list, game_t *game);
+void change_window(options_menu_t *option);
+void init_display(game_t *game, options_menu_t *option);
+int option(game_t *game);
 int menu(game_t *game);
+void silder_general_manager(game_t *game, options_menu_t *option);
+void silder_music_manager(game_t *game, options_menu_t *option);
+void init_volume(game_t *game, options_menu_t *option);
+void silder_sfx_manager(game_t *game, options_menu_t *option);
+void update_volume(game_t *game, options_menu_t *option);
+void destroy_options(options_menu_t *option);
+void silder_music_manager(game_t *game, options_menu_t *option);
+void silder_sfx_manager(game_t *game, options_menu_t *option);

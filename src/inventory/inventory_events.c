@@ -7,6 +7,7 @@
 
 #include "csfml_libs.h"
 #include "inventory_macros.h"
+#include "my_button.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
 #include "keyboard.h"

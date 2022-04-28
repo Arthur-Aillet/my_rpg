@@ -21,6 +21,32 @@
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
 
+void destroy_game(game_t *game)
+{
+    if (game->fonts != NULL)
+        for (int i = 0; game->fonts[i] != NULL; i++) {
+            sfFont_destroy(game->fonts[i]->font);
+            free(game->fonts[i]->name);
+        }
+    free(game->fonts);
+    if (game->sounds != NULL)
+        for (int i = 0; game->sounds[i] != NULL; i++) {
+            sfSound_destroy(game->sounds[i]->sound);
+            sfSoundBuffer_destroy(game->sounds[i]->buffer);
+            free(game->sounds[i]->name);
+        }
+    free(game->sounds);
+    if (game->musics != NULL)
+        for (int i = 0; game->musics[i] != NULL; i++) {
+            sfMusic_destroy(game->musics[i]->music);
+            free(game->musics[i]->name);
+        }
+    free(game->musics);
+    free(game->keys);
+    destroy_object(game->mouse);
+    free(game->status);
+}
+
 item_t create_yellow_flower(item_t item, int number)
 {
     item.stack_size = 255;
@@ -48,6 +74,7 @@ int my_rpg(void)
         return 84;
     intro(game);
     menu(game);
+    destroy_game(game);
     free_window_struct(game->window);
     return 0;
 }

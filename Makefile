@@ -83,9 +83,13 @@ SRC_BASICS		=			$(BASIC_PATH)utils/my_error_handling.c		\
 
 SRC_CSFML		=			$(CSFML_PATH)object.c						\
 							$(CSFML_PATH)type_transformer.c				\
+							$(CSFML_PATH)sliders.c						\
+							$(CSFML_PATH)lists.c						\
+							$(CSFML_PATH)check_box.c					\
 							$(CSFML_PATH)texts/text.c					\
 							$(CSFML_PATH)texts/fonts.c					\
 							$(CSFML_PATH)sound/sound.c					\
+							$(CSFML_PATH)sound/music.c					\
 							$(CSFML_PATH)buttons/button_manage.c		\
 							$(CSFML_PATH)buttons/button_setup.c			\
 							$(CSFML_PATH)buttons/button_setup2.c		\
@@ -112,6 +116,12 @@ SRC_GAME		=			$(GAME_PATH)game_core.c						\
 
 SRC_MENU		=			$(MENU_PATH)main_menu/menu.c				\
 							$(MENU_PATH)options/options.c				\
+							$(MENU_PATH)options/options_utils.c			\
+							$(MENU_PATH)options/controls.c				\
+							$(MENU_PATH)options/volume.c				\
+							$(MENU_PATH)options/volume_utils.c			\
+							$(MENU_PATH)options/display.c				\
+							$(MENU_PATH)options/display_init.c			\
 
 
 SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
@@ -247,7 +257,7 @@ build_lib:
 
 debug:
 
-valgrind:	$(CFLAGS) += -g
+valgrind:	$(CFLAGS) += -g3
 valgrind:	re
 
 tests_run:

@@ -37,7 +37,7 @@ void setup_mortar_struct2(minigame_t *elements, sound_t **sounds)
         ("assets/img/potions/mortar_front.png", VCF{0, 0}, VCF{2, 2});
     elements->leaves = create_textured_object
         (elements->leaves1, VCF{0, 0}, VCF{2, 2});
-    elements->sound = sfSound_copy(find_sound("leaves.ogg", sounds));
+    elements->sound = find_sound("leaves.ogg", sounds);
 }
 
 void setup_mortar_struct_bounds(minigame_t *elements)

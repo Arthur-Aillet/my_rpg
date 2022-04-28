@@ -9,6 +9,7 @@
 #include "inventory_prototypes.h"
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
+#include "my_button.h"
 #include "json.h"
 #include <stdlib.h>
 
@@ -76,7 +77,8 @@ events_t setup_events(game_t *game, int *page)
     button_setup_text(result.button, "aquire", FONTG("Ancient.ttf"), 20);
     button_setup_sounds(result.button, SOUNDG("hover.ogg")
         , SOUNDG("click.ogg"), 20);
-    button_setup_offset(result.button, VCF {0.2, 0.2}, VCF {0.15, 0.15});
+    button_setup_offset(result.button,
+        VCF {0.2, 0.2}, VCF {0.15, 0.15}, VCF{0, 0});
     result.comp = game->comp;
     return (result);
 }

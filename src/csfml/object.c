@@ -63,7 +63,7 @@ object_t *create_object(char *name, sfVector2f pos, sfVector2f scale)
     return (obj);
 }
 
-object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scale)
+object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scl)
 {
     object_t *objet = malloc(sizeof(object_t));
     sfFloatRect rect;
@@ -80,7 +80,7 @@ object_t *create_textured_object(sfTexture *img, sfVector2f pos, sfVector2f scal
     rect = sfSprite_getGlobalBounds(objet->sprite);
     sfSprite_setOrigin(objet->sprite,
         (sfVector2f){rect.width / 2, rect.height / 2});
-    sfSprite_setScale(objet->sprite, scale);
+    sfSprite_setScale(objet->sprite, scl);
     sfSprite_setPosition(objet->sprite, pos);
     return (objet);
 }

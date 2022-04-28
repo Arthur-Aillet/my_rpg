@@ -19,9 +19,11 @@ list_t *create_list(sfVector2f pos, game_t *game, char *text)
 
     list->value = false;
     list->down = button_create(VCF{1.7, 1.7}, pos, true);
-    button_setup_sounds(list->down, SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
+    button_setup_sounds(list->down, SOUNDG("hover.ogg"),
+        SOUNDG("click.ogg"), 100);
     list->up = button_create(VCF{1.7, 1.7}, pos, true);
-    button_setup_sounds(list->up, SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
+    button_setup_sounds(list->up, SOUNDG("hover.ogg"),
+        SOUNDG("click.ogg"), 100);
     button_setup_texture_file(list->down,
         (sfIntRect){0, 0, 250, 40}, "assets/img/menu/list_up.jpg");
     button_setup_texture_file(list->up,
@@ -33,9 +35,11 @@ list_t *create_list(sfVector2f pos, game_t *game, char *text)
 
 void update_list(list_t *list, game_t *game)
 {
-    if (is_pressed(list->down, game->window->window, game->keys) && list->value == true)
+    if (is_pressed(list->down, game->window->window, game->keys)
+        && list->value == true)
         list->value = false;
-    else if (is_pressed(list->up, game->window->window, game->keys) && list->value == false)
+    else if (is_pressed(list->up, game->window->window, game->keys)
+        && list->value == false)
         list->value = true;
     if (list->value == true) {
         update_button(game->window->window, list->up, game->keys);

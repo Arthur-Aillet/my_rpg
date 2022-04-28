@@ -11,4 +11,3 @@ include/my.h
 json_tests
 assets/UI utils/*
 assets/img/flame.png
-mockup.psd

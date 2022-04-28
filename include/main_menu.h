@@ -50,7 +50,7 @@ typedef struct options_menu_s{
     slider_t *music;
 } options_menu_t;
 
-void init_display_2(options_menu_t *option, game_t *game);
+void update_display(game_t *game, options_menu_t *op);
 void update_list_frame(list_t *list, game_t *game);
 void change_window(options_menu_t *option);
 void init_display(game_t *game, options_menu_t *option);
@@ -59,4 +59,8 @@ int menu(game_t *game, item_t *items, competences_t *comp);
 void silder_general_manager(game_t *game, options_menu_t *option);
 void silder_music_manager(game_t *game, options_menu_t *option);
 void init_volume(game_t *game, options_menu_t *option);
+void silder_sfx_manager(game_t *game, options_menu_t *option);
+void update_volume(game_t *game, options_menu_t *option);
+void destroy_options(options_menu_t *option);
+void silder_music_manager(game_t *game, options_menu_t *option);
 void silder_sfx_manager(game_t *game, options_menu_t *option);

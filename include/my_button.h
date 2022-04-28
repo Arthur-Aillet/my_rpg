@@ -80,3 +80,4 @@ void button_setup_offset(button_t *b, sfVector2f h, sfVector2f c, sfVector2f t);
 void update_button_no_display(sfRenderWindow *window, button_t *but, char *key);
 void button_setup_correct_texture(button_t *bouton, sfIntRect size);
 void sf_text_set_size(sfText *text, sfVector2f size);
+void display_slider(slider_t *slider, game_t *game);

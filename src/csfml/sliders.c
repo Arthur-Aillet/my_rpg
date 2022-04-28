@@ -12,6 +12,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void display_slider(slider_t *slider, game_t *game)
+{
+    sfRenderWindow_drawSprite(game->window->window, slider->back->sprite, NULL);
+    sfRenderWindow_drawSprite(game->window->window,
+        slider->front->sprite, NULL);
+    sfRenderWindow_drawSprite(game->window->window,
+        slider->slider->sprite, NULL);
+}
+
 void slider_init(slider_t *slider, float volume)
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(slider->back->sprite);

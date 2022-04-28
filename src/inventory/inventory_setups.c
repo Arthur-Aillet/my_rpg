@@ -9,6 +9,7 @@
 #include "inventory_prototypes.h"
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
+#include "my_button.h"
 #include "json.h"
 #include <stdlib.h>
 

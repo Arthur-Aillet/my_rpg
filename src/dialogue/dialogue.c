@@ -73,7 +73,7 @@ static void display_line(sfRenderWindow *window, json_obj_t *obj, font_t **fonts
 void display_dialogue(game_t *game, char *path, int *step, font_t **fonts)
 {
     json_obj_t *json = create_json_object(path);
-    json_obj_t *obj = get_obj_by_index(json, step);
+    json_obj_t *obj = get_obj_by_index(json, *step);
 
     if (game->ENTER == 2)
         *step += 1;

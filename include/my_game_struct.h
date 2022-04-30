@@ -47,12 +47,21 @@ typedef struct player_s {
     int move_spd;
 } player_t;
 
+typedef struct pnj_s {
+    char **dialogues;
+    char *name;
+    object_t *portrait;
+    int size;
+    object_t *objet;
+} pnj_t;
+
 typedef struct in_game_s {
     char *current;
     sfVector2f pos_cam;
     sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
+    pnj_t **pnjs;
     player_t *player;
 } in_game_t;
 

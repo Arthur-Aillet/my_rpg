@@ -1,0 +1,19 @@
+{
+    "oldmen": {
+        "pos_x" : 1,
+        "pos_y" : 1,
+        "idle": "file",
+        "size": 15,
+        "portrait": "file",
+        "dialogues": {
+            "greetings": "file"
+        }
+    },"women": {
+        "idle": "file",
+        "size": 15,
+        "portrait": "file",
+        "dialogues": {
+            "greetings": "file"
+        }
+    }
+}

@@ -12,5 +12,5 @@
 
 char *add_new_lines(char *str);
 void draw_chatbox(sfRenderWindow *window, int direction);
-void display_dialogue(sfRenderWindow *window, char *path, char *, font_t **);
+void display_dialogue(game_t *game, char *path, int *, font_t **);
 char *add_new_lines(char *str);

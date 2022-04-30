@@ -59,7 +59,7 @@ static void display_line(sfRenderWindow *window, json_obj_t *obj, font_t **fonts
 {
     sfVector2f none = {0, 0};
     sfFont *font = find_font(get_str_by_name(obj, "font"), fonts);
-    object_t *pic = create_object(get_str_by_name(obj, "immage"), none, none);
+    object_t *pic = create_object(get_str_by_name(obj, "image"), none, none);
     int direction = get_int_by_name(obj, "direction");
 
     draw_chatbox(window, direction);

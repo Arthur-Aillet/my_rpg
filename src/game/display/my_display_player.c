@@ -8,24 +8,44 @@
 #include "my_rpg.h"
 #include "player_animation.h"
 #include "keyboard.h"
+#include "particles.h"
+
+void set_side(game_t *game)
+{
+    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+        case (8) :
+        case (9) :
+        case (10) : game->game->player->side = DOWN_WALK;
+            break;
+        case (4) :
+        case (5) :
+        case (6) : game->game->player->side = UP_WALK;
+            break;
+        case (2) : game->game->player->side = RIGHT_WALK;
+            break;
+        case (1) : game->game->player->side = LEFT_WALK;
+            break;
+    }
+}
 
 void display_player(game_t *game)
 {
-    game->keys = get_keyboard_input(game->keys, game->window->window);
-    if (game->keys[sfKeyS]) {
-        place_player(game->window->window, game->game->player->pos, DOWN_WALK);
-        game->game->player->side = DOWN_WALK;
-    } else if (game->keys[sfKeyZ]) {
-        place_player(game->window->window, game->game->player->pos, UP_WALK);
-        game->game->player->side = UP_WALK;
-    } else if (game->keys[sfKeyD]) {
-        place_player(game->window->window, game->game->player->pos, RIGHT_WALK);
-        game->game->player->side = RIGHT_WALK;
-    } else if (game->keys[sfKeyQ]) {
-        place_player(game->window->window, game->game->player->pos, LEFT_WALK);
-        game->game->player->side = LEFT_WALK;
-    } else {
-        place_player(game->window->window, game->game->player->pos,
-            IDLE + game->game->player->side);
+    update_particles(game->window->window, game->particles);
+    set_side(game);
+    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+        case (8) :
+        case (9) :
+        case (10) : PLACE_PLAYER(DOWN_WALK + ISDASH * 8);
+            break;
+        case (4) :
+        case (5) :
+        case (6) : PLACE_PLAYER(UP_WALK + ISDASH * 8);
+            break;
+        case (2) : PLACE_PLAYER(RIGHT_WALK + ISDASH * 8);
+            break;
+        case (1) : PLACE_PLAYER(LEFT_WALK + ISDASH * 8);
+            break;
+        default : PLACE_PLAYER(IDLE + game->game->player->side  +
+            ISDASH * 4);
     }
 }

@@ -10,6 +10,7 @@
 #include <csfml_libs.h>
 #include "my_csfml_utils.h"
 #include "my_rpg.h"
+#include "particle_struct.h"
 
 #define SIGN(x) ((x > 0) ? (1) : (-1))
 #define SFSGP(x) sfSprite_getPosition(x)
@@ -35,20 +36,6 @@
 #define LEAF            14
 #define LIGHT_DUST      15
 #define MAGIC_VIBE      16
-
-typedef struct particle_s {
-    sfVector2f pos;
-    sfVector2f trajectory;
-    sfVector2f velocity;
-    sfVector2f scale;
-    object_t *object;
-    int age;
-    int lifetime;
-    int type;
-    float speed;
-    float rotation;
-    struct particle_s *next;
-} particle_t;
 
 particle_t *magic_vibe(sfRenderWindow *window, particle_t *part, sfClock *);
 

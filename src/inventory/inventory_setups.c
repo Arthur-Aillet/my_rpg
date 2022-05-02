@@ -19,7 +19,8 @@ static object_t **setup_pages(void)
     sfVector2f scale = {4, 4};
     sfVector2f pos = {0, 0};
 
-    result[0] = create_object("assets/img/inventory_background.jpg", pos, scale);
+    result[0] = create_object
+        ("assets/img/inventory_background.jpg", pos, scale);
     result[1] = create_object("assets/img/inventory.png", pos, scale);
     result[2] = create_object("assets/img/ye_olde_map.png", pos, scale);
     result[3] = create_object("assets/img/competences.png", pos, scale);

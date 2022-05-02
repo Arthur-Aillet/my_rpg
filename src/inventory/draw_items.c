@@ -30,7 +30,7 @@ static char *my_itos(int i)
     return (result);
 }
 
-void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
+static void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
@@ -49,7 +49,7 @@ void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
     free(string);
 }
 
-void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
+static void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 {
     sfVector2f scale = {4, 4};
     sfVector2f mvt;

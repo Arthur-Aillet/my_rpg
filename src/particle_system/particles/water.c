@@ -11,7 +11,6 @@
 /*a drop of water falls from the sky
 recomended stating pos: {rand() % 1920, 0}
 recomended speed: 15*/
-
 particle_t *rain(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     if (TIME(clock, 0.05)) {

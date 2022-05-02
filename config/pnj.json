@@ -1,10 +1,10 @@
 {
     "oldmen": {
-        "pos_x" : 1,
-        "pos_y" : 1,
-        "map" : "garden",
+        "pos_x" : 400,
+        "pos_y" : 200,
+        "map" : "field",
         "idle": "assets/img/pnj/Old_man_idle.png",
-        "size": 15,
+        "size": 48,
         "portrait": "assets/img/pnj/Old_man.jpg",
         "dialogues": {
             "greetings": "config/car.json"

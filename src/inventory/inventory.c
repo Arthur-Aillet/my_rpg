@@ -21,7 +21,8 @@
 
 item_t *create_items(void)
 {
-    item_t *result = malloc(sizeof (item_t) * NB_SLOTS);
+
+    item_t *result = malloc(sizeof(item_t) * NB_SLOTS);
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;
@@ -29,6 +30,7 @@ item_t *create_items(void)
             VCF {0, 0}, VCF {0, 0});
         result[i].stack_size = 1;
         result[i].armor_type = 5;
+        result[i].action = NULL;
     }
     return (result);
 }
@@ -43,7 +45,7 @@ int count_item(item_t *items, int type)
     return (count);
 }
 
-void free_inventory(backgrounds_t background, events_t events)
+static void free_inventory(backgrounds_t background, events_t events)
 {
     for (int i = 0; i < 3; i++)
         destroy_object(background.pages[i]);
@@ -57,7 +59,8 @@ game_t *update_stats(game_t *game)
     game->game->player->max_stamina = 1000;
     game->game->player->move_spd = 8;
     for (int i = 1; i < 68; i++) {
-        if (BETWEEN(i, 30, 38) && get_competence_state(i, *game->comp) == 2)
+        if (BETWEEN(i, 30, 38) && get_competence_state
+            (i, *game->comp) == 2 && i != 33)
             game->game->player->move_spd += 1;
         if (i > 38 && get_competence_state(i, *game->comp) == 2) {
             game->game->player->max_health += 100;
@@ -67,6 +70,8 @@ game_t *update_stats(game_t *game)
             game->game->player->max_stamina += 100;
             game->game->player->stamina += 100;
         }
+        if (i == 33 && get_competence_state(i, *game->comp) == 2)
+            game->game->player->dash = 0;
     }
     return (game);
 }

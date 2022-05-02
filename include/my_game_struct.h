@@ -16,6 +16,7 @@
 #include "my_sound.h"
 #include "my_csfml_utils.h"
 #include "inventory_structures.h"
+#include "particle_struct.h"
 
 typedef struct maps_s {
     char *name;
@@ -45,6 +46,8 @@ typedef struct player_s {
     sfSprite *sp_p;
     char *name;
     int move_spd;
+    int dash;
+    int hotbar_pos;
 } player_t;
 
 typedef struct pnj_s {
@@ -62,7 +65,7 @@ typedef struct in_game_s {
     sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
-    pnj_t **gipnjs;
+    pnj_t **pnjs;
     player_t *player;
 } in_game_t;
 
@@ -80,4 +83,5 @@ typedef struct game_s {
     float general_volume;
     float sfx_volume;
     float music_volume;
+    particle_t *particles;
 } game_t;

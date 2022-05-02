@@ -20,4 +20,3 @@
 #define BIG(x, y) ((x < y) ? (y) : (x))
 #define SMALL(x, y) ((x < y) ? (x) : (y))
 #define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))
-

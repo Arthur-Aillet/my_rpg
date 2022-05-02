@@ -90,6 +90,7 @@ typedef struct item_s {
     int stack_size;
     int type;
     int armor_type;
+    void (*action)(void *);
 } item_t;
 
 typedef struct txtobject_s {

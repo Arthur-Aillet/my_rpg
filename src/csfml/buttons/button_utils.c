@@ -51,12 +51,16 @@ void sf_text_set_size(sfText *text, sfVector2f size)
     sfText_setScale(text, VCF{1, size.y / rect.height});
 }
 
-void destroy_button(button_t *bouton)
+void update_button_no_display(sfRenderWindow *window, button_t *but, char *keys)
 {
-    sfSprite_destroy(bouton->sprite);
-    sfTexture_destroy(bouton->texture);
-    if (bouton->display_text == 1) {
-        sfText_destroy(bouton->text.text);
-        sfFont_destroy(bouton->text.font);
-    }
+    sfVector2f mouse_pos = get_global_mouse_pos(window);
+    sfFloatRect rect = sfSprite_getGlobalBounds(but->sprite);
+
+    if (MOUSE_HOVER == false)
+        leave_but(but);
+    if (MOUSE_HOVER == true && !LCLICK)
+        hover_but(but);
+    if (MOUSE_HOVER == true && LCLICK)
+        click_but(but);
+    button_play_sound(mouse_pos, but, keys, rect);
 }

@@ -13,6 +13,16 @@
 #include <SFML/Audio.h>
 #include <stdlib.h>
 
+void destroy_button(button_t *bouton)
+{
+    sfSprite_destroy(bouton->sprite);
+    sfTexture_destroy(bouton->texture);
+    if (bouton->display_text == 1) {
+        sfText_destroy(bouton->text.text);
+        sfFont_destroy(bouton->text.font);
+    }
+}
+
 void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
 {
     if (click != NULL) {

@@ -26,6 +26,11 @@ static void init_display_5(options_menu_t *op, game_t *game)
 {
     sfFloatRect textRect;
 
+    button_setup_text(op->frame->element[0], "240", FONTG("Ancient.ttf"), 40);
+    button_setup_text(op->frame->element[1], "144", FONTG("Ancient.ttf"), 40);
+    button_setup_text(op->frame->element[2], "75", FONTG("Ancient.ttf"), 40);
+    button_setup_text(op->frame->element[3], "60", FONTG("Ancient.ttf"), 40);
+    button_setup_text(op->frame->element[4], "30", FONTG("Ancient.ttf"), 40);
     op->frame->element[5] = NULL;
     op->vsync_title = sfText_create();
     sfText_setFont(op->vsync_title, FONTG("Ancient.ttf"));
@@ -55,12 +60,7 @@ static void init_display_4(options_menu_t *op, game_t *game)
         button_setup_sounds(op->frame->element[i],
             SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
     }
-    button_setup_text(op->frame->element[0], "240", FONTG("Ancient.ttf"), 40);
-    button_setup_text(op->frame->element[1], "144", FONTG("Ancient.ttf"), 40);
-    button_setup_text(op->frame->element[2], "75", FONTG("Ancient.ttf"), 40);
-    button_setup_text(op->frame->element[3], "60", FONTG("Ancient.ttf"), 40);
-    button_setup_text(op->frame->element[4], "30", FONTG("Ancient.ttf"), 40);
-    init_display_5(op, game);;
+    init_display_5(op, game);
 }
 
 static void init_display_3(options_menu_t *op, game_t *game)

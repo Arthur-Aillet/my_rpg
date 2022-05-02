@@ -116,8 +116,6 @@ int menu(game_t *game)
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (is_pressed(menu->quit, game->window->window, game->keys))
             open = 0;
-        if (game->keys[sfKeyEscape] == PRESS)
-            game = inventory(game);
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))

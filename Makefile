@@ -108,6 +108,7 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
 SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)game_loop.c						\
 							$(GAME_PATH)display/my_display_world.c		\
+							$(GAME_PATH)display/my_display_pnj.c		\
 							$(GAME_PATH)display/my_display_map.c		\
 							$(GAME_PATH)display/my_display_player.c		\
 							$(GAME_PATH)actions/player/player_action.c	\
@@ -127,6 +128,7 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\
 							$(INIT_PATH)init_in_game_struct.c			\
 							$(INIT_PATH)init_map_objects.c				\
+							$(INIT_PATH)init_pnj.c				\
 							$(INIT_PATH)init_player.c					\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
@@ -215,7 +217,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O2
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 

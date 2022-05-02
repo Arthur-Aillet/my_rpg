@@ -9,6 +9,7 @@
 #include "json.h"
 #include "my_game_struct.h"
 #include "my.h"
+#include "pnjs.h"
 #include "my_rpg.h"
 
 static maps_t **init_game_maps(void)
@@ -44,6 +45,7 @@ in_game_t *init_in_game_struct(void)
     game->player = init_game_player(game->maps[0]);
     game->current = my_strdup("field");
     game->cam_rect = cam_rect;
+    game->pnjs = create_pnjs();
     game->cam = sfView_createFromRect(cam_rect);
     if (game == NULL)
         return NULL;

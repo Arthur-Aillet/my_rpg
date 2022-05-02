@@ -50,6 +50,7 @@ typedef struct player_s {
 typedef struct pnj_s {
     char **dialogues;
     char *name;
+    char *map_name;
     object_t *portrait;
     int size;
     object_t *objet;
@@ -61,7 +62,7 @@ typedef struct in_game_s {
     sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
-    pnj_t **pnjs;
+    pnj_t **gipnjs;
     player_t *player;
 } in_game_t;
 

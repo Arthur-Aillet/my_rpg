@@ -18,6 +18,7 @@
 #include "keyboard.h"
 #include "my_csfml_utils.h"
 #include "main_menu.h"
+#include "pnjs.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
 
@@ -42,6 +43,7 @@ void destroy_game(game_t *game)
             free(game->musics[i]->name);
         }
     free(game->musics);
+    destroy_pnjs(game->game->pnjs);
     free(game->keys);
     destroy_object(game->mouse);
     free(game->status);

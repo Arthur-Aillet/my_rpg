@@ -2,18 +2,12 @@
     "oldmen": {
         "pos_x" : 1,
         "pos_y" : 1,
-        "idle": "file",
+        "map" : "garden",
+        "idle": "assets/img/pnj/Old_man_idle.png",
         "size": 15,
-        "portrait": "file",
+        "portrait": "assets/img/pnj/Old_man.jpg",
         "dialogues": {
-            "greetings": "file"
-        }
-    },"women": {
-        "idle": "file",
-        "size": 15,
-        "portrait": "file",
-        "dialogues": {
-            "greetings": "file"
+            "greetings": "config/car.json"
         }
     }
 }

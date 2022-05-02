@@ -5,6 +5,9 @@
 ** init_pnj
 */
 
+#include <stdlib.h>
+
+#include "my.h"
 #include "my_rpg.h"
 #include "my_game_struct.h"
 #include "player_animation.h"
@@ -19,50 +22,54 @@ void destroy_pnjs(pnj_t **pnjs)
         for (int j = 0; pnjs[j]->dialogues[j] != NULL; j++)
             free(pnjs[i]->dialogues[j]);
         free(pnjs[i]->dialogues);
+        free(pnjs[i]->map_name);
     }
     free(pnjs);
 }
 
-void create_pnj(json_obj_t *obj)
+pnj_t *create_pnj(json_obj_t *obj)
 {
     pnj_t *pnj = malloc(sizeof(pnj_t));
     json_obj_t *dialogues = dialogues;
-    int nbr_of_dialogues;
+    int nbr;
 
     pnj->objet = create_object(get_str_by_name(obj, "idle"),
         VCF{get_int_by_name(obj, "pos_x"),
         get_int_by_name(obj, "pos_y")}, VCF{1, 1});
     pnj->portrait = create_object(get_str_by_name(obj, "portrait"),
         VCF{0, 0}, VCF{1, 1});
-    for (nbr_of_dialogues = 0; get_str_by_index(dialogues, nbr_of_dialogues)
-        != NULL; nbr_of_dialogues++);
-    pnj->dialogues = malloc(sizeof(char *) * nbr_of_dialogues);
-    for (nbr_of_dialogues = 0; get_str_by_index(dialogues, nbr_of_dialogues)
-        != NULL; nbr_of_dialogues++) {
-        pnj->dialogues[nbr_of_dialogues] = my_strdup(get_str_by_index
-            (dialogues, nbr_of_dialogues));
+    for (nbr = 0; get_str_by_index(dialogues, nbr)
+        != NULL; nbr++);
+    pnj->dialogues = malloc(sizeof(char *) * nbr);
+    for (nbr = 0; get_str_by_index(dialogues, nbr) != NULL; nbr++) {
+        pnj->dialogues[nbr] = my_strdup(get_str_by_index
+            (dialogues, nbr));
     }
-    pnj->dialogues[nbr_of_dialogues] = NULL;
+    sfSprite_setPosition(pnj->objet->sprite, VCF{get_int_by_name(obj, "pos_x"), get_int_by_name(obj, "pos_y")});
+    pnj->map_name = my_strdup(get_str_by_name(obj, "map"));
+    pnj->dialogues[nbr] = NULL;
     pnj->name = my_strdup(obj->name);
     pnj->size = get_int_by_name(obj, "size");
     free_json(dialogues, 1);
+    return (pnj);
 }
 
-void create_pnjs(in_game_t *game)
+pnj_t **create_pnjs(void)
 {
-    json_obj_t *pnjs = create_json_object("config/pnj.json");
-    json_obj_t *obj = get_obj_by_index(json, 0);
-    int len = 0;
+    json_obj_t *pnjs_json = create_json_object("config/pnj.json");
+    json_obj_t *obj = get_obj_by_index(pnjs_json, 0);
+    pnj_t **pnjs;
+    int len;
 
-    while (obj != NULL) {
-        len += 1;
-        obj = get_obj_by_index(json, len);
-        free_json(obj, 1);
+    for (len = 0; obj != NULL; len++)
+        obj = get_obj_by_index(pnjs_json, len);
+    pnjs = malloc(sizeof(pnj_t *) * (len + 1));
+    pnjs[len] = NULL;
+    for (int i = 0; obj != NULL; i++) {
+        obj = get_obj_by_index(pnjs_json, i);
+        pnjs[i] = create_pnj(obj);
     }
-    game->pnjs = malloc(sizeof(pnj_t *) * (len + 1));
-    game->pnjs[len] = NULL;
-    obj = get_obj_by_index(json, 0);
-    for (int i = 0; obj != NULL; i++)
-        game->pnjs[i] = create_pnj(get_obj_by_index(json, i));
-    free_json(pnjs);
+/*     free_json(obj, 1); */
+    free_json(pnjs_json, 1);
+    return (pnjs);
 }

@@ -8,7 +8,6 @@
 #pragma once
 
 #include "my_csfml_utils.h"
-#include "my_game_struct.h"
 
 typedef struct item_s {
     object_t *obj;
@@ -16,5 +15,5 @@ typedef struct item_s {
     int stack_size;
     int type;
     int armor_type;
-    void (*action)(game_t *);
+    void (*action)(void *);
 } item_t;

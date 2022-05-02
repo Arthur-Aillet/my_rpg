@@ -58,6 +58,12 @@ item_t create_yellow_flower(item_t item, int number)
     return (item);
 }
 
+void test_function(game_t * game)
+{
+    for (int i = 0; i < 1000; i++)
+        game->particles = add_particle(game->particles, game->game->player->pos, DUST_CIRCLE, 10);
+}
+
 int my_rpg(void)
 {
     game_t *game = init_game_struct();
@@ -68,6 +74,7 @@ int my_rpg(void)
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[10] = create_yellow_flower(game->items[10], 100);
+    game->items[10].action = (void (*)(void *)) test_function;
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 5;
     game->comp = &competence;

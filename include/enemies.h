@@ -18,3 +18,8 @@ typedef struct enemy_s {
     sfSprite *sprite;
     sfTexture *texture;
 } enemy_t;
+
+typedef struct enemy_node_s {
+    enemy_t enemy;
+    struct enemy_node_s *next;
+} enemy_node_t

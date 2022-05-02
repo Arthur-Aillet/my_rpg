@@ -19,7 +19,7 @@ int json_to_enemy(json_obj_t *data, enemy_t *e_place)
 
     e_place->name = my_strdup(data->name);
     e_place->type = get_int_by_name(data, "type");
-    if (e_place->type == -1)
+    if (e_place->type < 0)
         return 1;
     e_place->speed = get_int_by_name(data, "speed");
     e_place->dps = get_int_by_name(data, "dps");

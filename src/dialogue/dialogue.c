@@ -88,4 +88,6 @@ void display_dialogue(game_t *game, char *path, int *step, font_t **fonts)
         *step += 1;
     if (obj != NULL)
         display_line(game->window->window, obj, fonts);
+    else
+        *step = -1;
 }

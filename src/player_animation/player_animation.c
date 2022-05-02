@@ -67,8 +67,8 @@ static animation_t *get_player_animations(void)
 
 static void set_player_rect(animation_t player_animation, int step)
 {
-    sfIntRect rect = {step * player_animation.step_size, 0
-        , player_animation.step_size, player_animation.hsize};
+    sfIntRect rect = {step * player_animation.step_size, 0,
+        player_animation.step_size, player_animation.hsize};
 
     sfSprite_setTextureRect(player_animation.spritesheet->sprite, rect);
 }
@@ -79,6 +79,7 @@ animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state)
     static int previous_state = 0;
     static int step = 0;
     static sfClock *clock = NULL;
+
     if (player_animations == NULL)
         player_animations = get_player_animations();
     if (clock == NULL)

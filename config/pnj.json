@@ -8,7 +8,7 @@
         "size_y": 31,
         "portrait": "assets/img/pnj/Old_man.jpg",
         "dialogues": {
-            "greetings": "config/car.json"
+            "greetings": "config/greetings.json"
         }
     }
 }

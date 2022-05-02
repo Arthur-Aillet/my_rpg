@@ -38,7 +38,10 @@ void display_world(game_t *game)
     vec.y -= 540;
     display_base(game, game->game->maps[i],
         0, game->game->maps[i]->height);
-    display_player(game);
+    if (game->game->in_dialogue == false)
+        display_player(game);
+    else
+        PLACE_PLAYER(IDLE + game->game->player->side + ISDASH * 4);
     display_pnjs(game);
     display_obs(game, game->game->maps[i],
         (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);

@@ -45,6 +45,7 @@ in_game_t *init_in_game_struct(void)
     game->player = init_game_player(game->maps[0]);
     game->current = my_strdup("field");
     game->cam_rect = cam_rect;
+    game->in_dialogue = false;
     game->pnjs = create_pnjs();
     game->chat_box = create_object("assets/img/pnj/chat.png",
         VCF{0, 0}, VCF{2, 2});

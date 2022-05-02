@@ -21,13 +21,17 @@ static void display_talk(game_t *game, pnj_t *pnj)
     if (pnj->need_to_talk == true && dist_two_points(pos, game->game->player->pos) < 200) {
         sfSprite_setPosition(game->game->chat_box->sprite, VCF{pos.x + pnj->size_x * 2 - 58, pos.y - 45});
         sfRenderWindow_drawSprite(game->window->window, game->game->chat_box->sprite, NULL);
-        if (game->E == true && step < 0)
+        if (game->E == true && step < 0) {
+            game->game->in_dialogue = true;
             step = 0;
-        if (game->E == true && step > 0)
-            step = -1;
+        }
     }
+    if (game->E == true && step > 0)
+        step = -1;
     if (step >= 0)
         display_dialogue(game, pnj->dialogues[0], &step, game->fonts);
+    if (step < 0)
+        game->game->in_dialogue = false;
 }
 
 void display_dialogues(game_t *game)

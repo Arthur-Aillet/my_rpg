@@ -43,16 +43,18 @@ void action_particles(game_t *game)
 
 void hotbar_actions(game_t *game)
 {
-    if (abs(game->HSCROLL) > 0)
+    if (abs(game->HSCROLL) > 0 && game->game->in_dialogue == false)
         game->game->player->hotbar_pos += game ->HSCROLL;
-    if (game->LCLICK == RELEASE)
+    if (game->LCLICK == RELEASE && game->game->in_dialogue == false)
         game->items[game->game->player->hotbar_pos + 51].action((void *) game);
 }
 
 void player_actions(game_t *game)
 {
-    player_move(game);
-    player_dash(game);
-    hotbar_actions(game);
-    action_particles(game);
+    if (game->game->in_dialogue == false) {
+        player_move(game);
+        player_dash(game);
+        hotbar_actions(game);
+        action_particles(game);
+    }
 }

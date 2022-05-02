@@ -66,6 +66,7 @@ typedef struct pnj_s {
 
 typedef struct in_game_s {
     char *current;
+    bool in_dialogue;
     sfVector2f pos_cam;
     sfFloatRect cam_rect;
     sfView *cam;

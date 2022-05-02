@@ -11,6 +11,7 @@
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
 #include "my_window_struct.h"
+#include "item_structure.h"
 #include "my_controle_struct.h"
 #include "my_text.h"
 #include "my_sound.h"

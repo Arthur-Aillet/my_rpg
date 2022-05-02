@@ -38,7 +38,7 @@ events_t evt_map(events_t events)
     events.keys = get_keyboard_input(events.keys, events.window);
     if (events.D == PRESS)
         *events.page += 1;
-    if (events.A == PRESS && *events.page > 0)
+    if (events.Q == PRESS && *events.page > 0)
         *events.page -= 1;
     return (events);
 }
@@ -78,8 +78,8 @@ events_t evt_cmp(events_t events)
 
     events.keys = get_keyboard_input(events.keys, events.window);
     competence = get_competence(itofv2(mousepos));
-    if (events.A == PRESS && *events.page > 0)
+    if (events.Q == PRESS && *events.page > 0)
         *events.page -= 1;
     events = interract_comp(events, &selected, &competence);
-        return (events);
+    return (events);
 }

@@ -41,7 +41,7 @@ char *select_by_quotes(char *buffer)
 
     if (buffer[0] != '"')
         return NULL;
-    for (len = 1; buffer[len] != '"'; len++);
+    for (len = 1; buffer[len] != '"' && buffer[len] != '\0'; len++);
     output = malloc(sizeof(char) * len);
     for (int i = 0; i < len - 1; i++)
         output[i] = buffer[i + 1];

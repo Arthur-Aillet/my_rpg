@@ -12,7 +12,8 @@
 int get_field_type(char *buffer)
 {
     for (; buffer[0] != ':' && buffer[0] != '\0'; buffer++);
-    buffer++;
+    if (buffer[0] != '\0')
+        buffer++;
     switch (buffer[0]) {
         case '"':
             return 1;
@@ -65,7 +66,7 @@ void extract_int_fields(json_obj_t *obj, char **fields)
         if (get_field_type(fields[i]) != 3)
             continue;
         obj->fields_int[writer] = select_by_quotes(fields[i]);
-        for (j = 0; fields[i][j] != ':' && fields[i][j] != '\0'; j++);
+        for (j = 0; fields[i][j] != ':' && fields[i][j + 1] != '\0'; j++);
         obj->data_int[writer] = my_getnbr(fields[i] + j + 1);
         writer++;
     }

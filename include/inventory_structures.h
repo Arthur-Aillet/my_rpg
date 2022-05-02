@@ -9,6 +9,7 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
+#include "item_structure.h"
 
 typedef struct competences_s {
     int dodge_roll;
@@ -83,15 +84,6 @@ typedef struct competences_s {
 } competences_t;
 
 competences_t set_competence_six(int comp, competences_t comps, int st);
-
-typedef struct item_s {
-    object_t *obj;
-    int quantity;
-    int stack_size;
-    int type;
-    int armor_type;
-    void (*action)(void *);
-} item_t;
 
 typedef struct txtobject_s {
     sfText *text;

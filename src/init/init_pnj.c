@@ -19,8 +19,10 @@ void destroy_pnjs(pnj_t **pnjs)
         free(pnjs[i]->name);
         destroy_object(pnjs[i]->portrait);
         destroy_object(pnjs[i]->objet);
-        for (int j = 0; pnjs[j]->dialogues[j] != NULL; j++)
+/*         for (int j = 0; pnjs[j]->dialogues[j] != NULL; j++) {
+            printf("%s\n", pnjs[i]->dialogues[j]);
             free(pnjs[i]->dialogues[j]);
+        } */
         free(pnjs[i]->dialogues);
         free(pnjs[i]->map_name);
     }

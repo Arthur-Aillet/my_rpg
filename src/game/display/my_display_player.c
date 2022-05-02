@@ -12,7 +12,7 @@
 
 void set_side(game_t *game)
 {
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S == 1) * 8 + (game->Z == 1) * 4 + (game->D == 1) * 2 + (game->Q == 1)) {
         case (8) :
         case (9) :
         case (10) : game->game->player->side = DOWN_WALK;
@@ -32,7 +32,7 @@ void display_player(game_t *game)
 {
     update_particles(game->window->window, game->particles);
     set_side(game);
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S == 1) * 8 + (game->Z == 1) * 4 + (game->D == 1) * 2 + (game->Q == 1)) {
         case (8) :
         case (9) :
         case (10) : PLACE_PLAYER(DOWN_WALK + ISDASH * 8);

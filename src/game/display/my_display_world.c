@@ -44,5 +44,6 @@ void display_world(game_t *game)
         (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
     display_ui(game->window->window, game->game->player, vec);
     display_hotbar_items(game);
+    display_dialogues(game);
     setup_camera(game, i);
 }

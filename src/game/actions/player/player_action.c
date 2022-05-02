@@ -41,9 +41,18 @@ void action_particles(game_t *game)
                 ->player->pos.y + 42 + (rand() % 20 - 10)}, LEAF, 1);
 }
 
+void hotbar_actions(game_t *game)
+{
+    if (abs(game->HSCROLL) > 0)
+        game->game->player->hotbar_pos += game ->HSCROLL;
+    if (game->LCLICK == RELEASE)
+        game->items[game->game->player->hotbar_pos + 51].action((void *) game);
+}
+
 void player_actions(game_t *game)
 {
     player_move(game);
     player_dash(game);
+    hotbar_actions(game);
     action_particles(game);
 }

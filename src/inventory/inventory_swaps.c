@@ -32,6 +32,7 @@ item_t *split_item(int origin, int dest, item_t *items, int number)
     items[dest].type = items[origin].type;
     items[dest].armor_type = items[origin].armor_type;
     items[dest].stack_size = items[origin].stack_size;
+    items[dest].action = items[origin].action;
     return (items);
 }
 
@@ -43,6 +44,7 @@ item_t *level_items(int dest, int origin, int max, item_t *items)
         items[dest].obj->texture = sfTexture_copy(items[origin].obj->texture);
         items[dest].obj->sprite = sfSprite_copy(items[origin].obj->sprite);
         items[dest].type = items[origin].type;
+        items[dest].action = items[origin].action;
     }
     items[dest].quantity = items[origin].quantity - max + items[dest].quantity;
     items[origin].quantity = max;

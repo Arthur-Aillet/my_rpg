@@ -48,14 +48,16 @@ void sf_text_set_pixel_size(sfText *text, sfVector2f size)
 void draw_chatbox(sfRenderWindow *window, int direction)
 {
     static object_t *textbox = NULL;
-    sfVector2f pos = {0, 0};
+    sfVector2i pos = {0, 0};
     sfVector2f scale = {4, 4};
+    sfVector2f new_pos = sfRenderWindow_mapPixelToCoords(window, pos,
+        sfRenderWindow_getView(window));
 
     if (direction != 0) {
-        textbox = create_object("assets/img/response.png", pos, scale);
+        textbox = create_object("assets/img/response.png", new_pos, scale);
         sfRenderWindow_drawSprite(window, textbox->sprite, NULL);
         return;
     }
-    textbox = create_object("assets/img/dialogue.png", pos, scale);
+    textbox = create_object("assets/img/dialogue.png", new_pos, scale);
     sfRenderWindow_drawSprite(window, textbox->sprite, NULL);
 }

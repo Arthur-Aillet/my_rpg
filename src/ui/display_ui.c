@@ -10,6 +10,7 @@
 #include "ui.h"
 #include <stdlib.h>
 #include "my_game_struct.h"
+#include "inventory_prototypes.h"
 
 static object_t **get_more_parts(object_t **result)
 {
@@ -56,6 +57,18 @@ static void display_circle(sfRenderWindow *window, object_t **parts)
     sfRenderWindow_drawSprite(window, parts[0]->sprite, NULL);
     sfRenderWindow_drawSprite(window, parts[2]->sprite, NULL);
     sfRenderWindow_drawSprite(window, parts[1]->sprite, NULL);
+}
+
+void display_hotbar_items(game_t *game)
+{
+    sfVector2f pos = {342 + game->game->pos_cam.x
+        , 960 + game->game->pos_cam.x};
+    for (int i = 51; i <= 60; i++) {
+        sfSprite_setPosition(game->items[i].obj->sprite, pos);
+        pos.x += 124;
+        sfRenderWindow_drawSprite(game->window->window
+            , game->items[i].obj->sprite, NULL);
+    }
 }
 
 void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos)

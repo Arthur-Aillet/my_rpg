@@ -11,14 +11,14 @@
 #include "my_csfml_utils.h"
 #include "keyboard.h"
 
-int minigame_update(char *keys, minigame_t *elements, potion_t *pot, sfClock *clock)
+int minigame_update(char *keys, minigame_t *elem, potion_t *pot, sfClock *clock)
 {
-    if (keys[sfKeyEscape] == PRESS || elements->points >= 102)
+    if (keys[sfKeyEscape] == PRESS || elem->points >= 102)
         return (0);
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) >=
         (float) 1 / (pot->difficulty)) {
-        elements->points -= (elements->points >= 1) ? 1 : 0;
-        elements->points -= (elements->points >= 1) ? 1 : 0;
+        elem->points -= (elem->points >= 1) ? 1 : 0;
+        elem->points -= (elem->points >= 1) ? 1 : 0;
         sfClock_restart(clock);
     }
     return (1);

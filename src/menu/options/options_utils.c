@@ -33,7 +33,6 @@ static void destroy_options_2(options_menu_t *option)
 void destroy_options(options_menu_t *option)
 {
     destroy_object(option->back);
-    destroy_button(option->controls);
     destroy_button(option->display);
     destroy_button(option->volume);
     destroy_button(option->quit);
@@ -45,7 +44,6 @@ void destroy_options(options_menu_t *option)
     sfText_destroy(option->screen_type_text);
     destroy_list(option->resolution);
     destroy_list(option->frame);
-    destroy_list(option->keyboard);
     sfText_destroy(option->vsync_title);
     destroy_check_box(option->vsync);
     sfText_destroy(option->general_title);

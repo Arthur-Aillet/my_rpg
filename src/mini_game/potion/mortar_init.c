@@ -26,9 +26,12 @@
 void setup_mortar_struct2(minigame_t *elements, sound_t **sounds)
 {
     elements->has_spawn = true;
-    elements->leaves1 = sfTexture_createFromFile("assets/img/potions/leaves.png", NULL);
-    elements->leaves2 = sfTexture_createFromFile("assets/img/potions/leaves2.png", NULL);
-    elements->leaves3 = sfTexture_createFromFile("assets/img/potions/leaves3.png", NULL);
+    elements->leaves1 = sfTexture_createFromFile
+        ("assets/img/potions/leaves.png", NULL);
+    elements->leaves2 = sfTexture_createFromFile
+        ("assets/img/potions/leaves2.png", NULL);
+    elements->leaves3 = sfTexture_createFromFile
+        ("assets/img/potions/leaves3.png", NULL);
     elements->pilon = create_object
         ("assets/img/potions/pilon.png", VCF{0, 0}, VCF{1, 1});
     elements->mortar_back = create_object

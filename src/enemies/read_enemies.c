@@ -13,7 +13,7 @@
 utilise le json pour créer un ennemi. e_place doit déjà être alouée.
 renvoie 1 si une erreur apparait.
 */
-int json_to_enemy(json_obj_t *data, enemy_t *e_place)
+static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
 {
     char *sprite_path = get_str_by_name(data, "sprite");
 
@@ -33,6 +33,7 @@ int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     return 0;
 }
 
+//créé les ennemis depuis src/enemies/enemies.json
 enemy_t *create_enemies_array(void)
 {
     json_obj_t *enemies_src = create_json_object("src/enemies/enemies.json");

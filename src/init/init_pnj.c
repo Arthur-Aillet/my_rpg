@@ -46,8 +46,12 @@ pnj_t *create_pnj(json_obj_t *obj)
     sfSprite_setPosition(pnj->objet->sprite, VCF{get_int_by_name(obj, "pos_x"), get_int_by_name(obj, "pos_y")});
     pnj->map_name = my_strdup(get_str_by_name(obj, "map"));
     pnj->name = my_strdup(obj->name);
-    pnj->size = get_int_by_name(obj, "size");
-    sfSprite_setTextureRect(pnj->objet->sprite, (sfIntRect){0, 0, pnj->size, pnj->size});
+    pnj->actual = 0;
+    pnj->need_to_talk = true;
+    pnj->size_x = get_int_by_name(obj, "size_x");
+    pnj->size_y = get_int_by_name(obj, "size_y");
+    pnj->frames = sfTexture_getSize(pnj->objet->texture).x / pnj->size_x;
+    sfSprite_setTextureRect(pnj->objet->sprite, (sfIntRect){0, 0, pnj->size_x, pnj->size_y});
     return (pnj);
 }
 

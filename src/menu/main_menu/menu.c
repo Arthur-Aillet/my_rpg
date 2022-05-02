@@ -81,7 +81,8 @@ static void update_menu(main_menu_t *menu, game_t *game)
     update_button(game->window->window, menu->options, game->keys);
     update_button(game->window->window, menu->quit, game->keys);
     update_mouse_cursor(game->window->window, game->mouse);
-    if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1), 0, 0.03)) {
+    if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1),
+        0, 0.03)) {
         menu->particle = add_particle(menu->particle, VCF {1820 - random -
             rand() % 50, 300 + random * 1.1 - rand() % 50}, LIGHT_DUST, 1);
         menu->particle = add_particle(menu->particle, VCF {650, 530}, FIRE, 10);
@@ -100,7 +101,6 @@ void destroy_menu(main_menu_t *menu)
     destroy_object(menu->back);
     sfClock_destroy(menu->clock);
     destroy_object(menu->title);
-    ///exterminate(menu->particle);
 }
 
 int menu(game_t *game)

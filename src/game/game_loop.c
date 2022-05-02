@@ -20,13 +20,14 @@ static void poll_event_keys(game_t *game)
         game->status->end_game = 1;
     if (game->I)
         game->status->end_game = 1;
-    if (game->E)
+    if (game->TAB)
         game = inventory(game);
 }
 
 int game_loop(game_t *game)
 {
     transition(game, 2);
+
     while (game->status->end_game == 0) {
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);

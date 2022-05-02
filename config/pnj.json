@@ -4,7 +4,8 @@
         "pos_y" : 200,
         "map" : "field",
         "idle": "assets/img/pnj/Old_man_idle.png",
-        "size": 48,
+        "size_x": 18,
+        "size_y": 31,
         "portrait": "assets/img/pnj/Old_man.jpg",
         "dialogues": {
             "greetings": "config/car.json"

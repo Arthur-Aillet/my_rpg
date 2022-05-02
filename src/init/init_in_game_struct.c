@@ -46,6 +46,8 @@ in_game_t *init_in_game_struct(void)
     game->current = my_strdup("field");
     game->cam_rect = cam_rect;
     game->pnjs = create_pnjs();
+    game->chat_box = create_object("assets/img/pnj/chat.png",
+        VCF{0, 0}, VCF{2, 2});
     game->cam = sfView_createFromRect(cam_rect);
     if (game == NULL)
         return NULL;

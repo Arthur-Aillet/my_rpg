@@ -22,7 +22,7 @@ static char *my_itos(int i)
     for (n = 0; temp != 0; n++)
         temp /= 10;
     result = malloc(sizeof(char) * n + 1);
-    for (int j = 0; j < n; j ++) {
+    for (int j = 0; j < n; j++) {
         result[n - j - 1] = (i % 10) + '0';
         i = i / 10;
     }

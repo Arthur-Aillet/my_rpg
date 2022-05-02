@@ -117,7 +117,6 @@ SRC_GAME		=			$(GAME_PATH)game_core.c						\
 SRC_MENU		=			$(MENU_PATH)main_menu/menu.c				\
 							$(MENU_PATH)options/options.c				\
 							$(MENU_PATH)options/options_utils.c			\
-							$(MENU_PATH)options/controls.c				\
 							$(MENU_PATH)options/volume.c				\
 							$(MENU_PATH)options/volume_utils.c			\
 							$(MENU_PATH)options/display.c				\

@@ -80,3 +80,7 @@ void update_button_no_display(sfRenderWindow *window, button_t *but, char *key);
 void button_setup_correct_texture(button_t *bouton, sfIntRect size);
 void sf_text_set_size(sfText *text, sfVector2f size);
 void display_slider(slider_t *slider, game_t *game);
+void hover_but(button_t *but);
+void leave_but(button_t *but);
+void button_play_sound(sfVector2f mo, button_t *but, char *keys, sfFloatRect r);
+void click_but(button_t *but);

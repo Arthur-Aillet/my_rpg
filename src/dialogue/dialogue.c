@@ -10,6 +10,7 @@
 #include "dialogue.h"
 #include "keyboard.h"
 #include "my_text.h"
+#include "my_game_struct.h"
 #include <stdlib.h>
 
 static void draw_pic(sfRenderWindow *window, object_t *pic, int direction)
@@ -69,14 +70,13 @@ static void display_line(sfRenderWindow *window, json_obj_t *obj, font_t **fonts
     destroy_object(pic);
 }
 
-void display_dialogue(sfRenderWindow *window, char *path, char *keys, font_t **fonts)
+void display_dialogue(game_t *game, char *path, int *step, font_t **fonts)
 {
-    static int step = 0;
     json_obj_t *json = create_json_object(path);
-    json_obj_t *obj = get_obj_by_index(json, step);
+    json_obj_t *obj = get_obj_by_index(json, *step);
 
-    if (ENTER == 2)
-        step += 1;
+    if (game->ENTER == 2)
+        *step += 1;
     if (obj != NULL)
-        display_line(window, obj, fonts);
+        display_line(game->window->window, obj, fonts);
 }

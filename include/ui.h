@@ -15,3 +15,4 @@ void display_stamina(sfRenderWindow *window, float current, float max, object_t 
 void display_exp(sfRenderWindow *window, float current, float max, object_t **parts);
 void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos);
 void display_health(sfRenderWindow *window, float current, float max, object_t **parts);
+void display_hotbar(sfRenderWindow *window, player_t *player, object_t **parts);

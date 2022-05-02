@@ -11,27 +11,42 @@
 #include <stdlib.h>
 #include "my_game_struct.h"
 
+static object_t **get_more_parts(object_t **result)
+{
+    sfVector2f pos_exp = {130, 94};
+    sfVector2f pos_bar = {342, 960};
+    sfVector2f select_pos = {334, 952};
+    sfVector2f scaleexp = {0.5, 0.5};
+    sfVector2f scalebar = {4, 4};
+
+    result[7] = create_object("assets/img/ui/exp_bg.png", pos_exp, scaleexp);
+    result[8] = create_object("assets/img/ui/exp.png", pos_exp, scaleexp);
+    result[9] = create_object("assets/img/ui/hotbar.png", pos_bar, scalebar);
+    result[10] = create_object("assets/img/select.png", select_pos, scalebar);
+    return (result);
+}
+
 static object_t **get_parts(void)
 {
     static object_t **result = NULL;
     sfVector2f pos_circle = {0, 0};
     sfVector2f pos_health = {130, 38};
     sfVector2f pos_stamina = {130, 66};
-    sfVector2f pos_exp = {130, 94};
     sfVector2f scale = {0.5, 0.5};
 
     if (result != NULL)
         return (result);
-    result = malloc(sizeof(object_t) * 9);
+    result = malloc(sizeof(object_t) * 11);
     result[0] = create_object("assets/img/ui/pp_bg.png", pos_circle, scale);
     result[1] = create_object("assets/img/ui/pp_circle.png", pos_circle, scale);
-    result[2] = create_object("assets/img/player/neutral.png", VCF {49, 25}, scale);
+    result[2] = create_object("assets/img/player/neutral.png"
+        , VCF {49, 25}, scale);
     result[3] = create_object("assets/img/ui/health_bg.png", pos_health, scale);
     result[4] = create_object("assets/img/ui/health.png", pos_health, scale);
-    result[5] = create_object("assets/img/ui/stamina_bg.png", pos_stamina, scale);
+    result[5] = create_object("assets/img/ui/stamina_bg.png"
+        , pos_stamina, scale);
     result[6] = create_object("assets/img/ui/stamina.png", pos_stamina, scale);
-    result[7] = create_object("assets/img/ui/exp_bg.png", pos_exp, scale);
-    result[8] = create_object("assets/img/ui/exp.png", pos_exp, scale);
+    result = get_more_parts(result);
     return (result);
 }
 
@@ -51,7 +66,7 @@ void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos)
 
     if (former_pos.x != pos.x || former_pos.y != pos.y) {
         former_pos = VCF {pos.x - former_pos.x, pos.y - former_pos.y};
-        for (int i = 0 ; i < 9; i++)
+        for (int i = 0 ; i < 11; i++)
             sfSprite_move(parts[i]->sprite, former_pos);
         former_pos = pos;
     }
@@ -59,4 +74,5 @@ void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos)
     display_stamina(window, player->stamina, player->max_stamina, parts);
     display_exp(window, player->exp, player->max_exp, parts);
     display_circle(window, parts);
+    display_hotbar(window, player, parts);
 }

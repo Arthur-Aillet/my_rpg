@@ -34,7 +34,7 @@ void display_description(sfRenderWindow *window, json_obj_t *json, int i,
 void draw_descriptions(sfRenderWindow *window, competences_t *comp, sfText *txt)
 {
     int state = 0;
-    json_obj_t *json = NULL;
+    static json_obj_t *json = NULL;
 
     if (json == NULL)
         json = create_json_object("src/inventory/comp_desc.json");

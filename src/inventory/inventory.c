@@ -19,6 +19,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "ui.h"
+
 item_t *create_items(void)
 {
     item_t *result = malloc(sizeof (item_t) * NB_SLOTS);
@@ -87,13 +89,13 @@ game_t *inventory(game_t *game)
     sfView_setCenter(view, VCF {970, 540});
     sfRenderWindow_clear(game->window->window, sfBlack);
     sfRenderWindow_setView(game->window->window, view);
-    while (game->E != 2) {
+    while (game->TAB != 2) {
         disp[page](backgrounds);
         events = evt[page](events);
         sfRenderWindow_display(game->window->window);
     }
     game = update_stats(game);
-    game->E = 0;
+    game->TAB = 0;
     free_inventory(backgrounds, events);
     return (game);
 }

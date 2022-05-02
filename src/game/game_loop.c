@@ -20,7 +20,7 @@ static void poll_event_keys(game_t *game)
         game->status->end_game = 1;
     if (game->I)
         game->status->end_game = 1;
-    if (game->E)
+    if (game->TAB)
         game = inventory(game);
 }
 

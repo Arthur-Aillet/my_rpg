@@ -25,7 +25,6 @@ typedef struct main_menu_s{
 
 typedef struct options_menu_s{
     object_t *back;
-    button_t *controls;
     button_t *display;
     button_t *volume;
     button_t *quit;
@@ -39,7 +38,6 @@ typedef struct options_menu_s{
     int screen_type_state;
     list_t *resolution;
     list_t *frame;
-    list_t *keyboard;
     sfText *vsync_title;
     check_t *vsync;
     sfText *general_title;

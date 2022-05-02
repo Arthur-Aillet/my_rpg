@@ -9,6 +9,7 @@
 #include "particles.h"
 #include "pause_menu.h"
 #include "csfml_libs.h"
+#include "my_button.h"
 #include "mouse.h"
 #include "inventory_prototypes.h"
 #include "my_game_struct.h"

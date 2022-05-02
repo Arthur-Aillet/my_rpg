@@ -15,7 +15,6 @@
 you can make them go up and left with negative speed
 recomended starting pos: right on the source
 recomended speed: 10*/
-
 particle_t *dust_dr(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
@@ -38,7 +37,6 @@ particle_t *dust_dr(sfRenderWindow *window, particle_t *part, sfClock *clock)
 you can make them go left with negative speed
 recomended starting pos: right on the source
 recomended speed: 10*/
-
 particle_t *dust_right(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
@@ -60,7 +58,6 @@ particle_t *dust_right(sfRenderWindow *window, particle_t *part, sfClock *clock)
 you can make them go down and left with negative speed
 recomended starting pos: right on the source
 recomended speed: 10*/
-
 particle_t *dust_ur(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
@@ -83,7 +80,6 @@ particle_t *dust_ur(sfRenderWindow *window, particle_t *part, sfClock *clock)
 you can make them go down with negative speed
 recomended starting pos: right on the source
 recomended speed: 10*/
-
 particle_t *dust_up(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float f = (part->speed * 2) + SIGN(part->speed);
@@ -105,7 +101,6 @@ but in a group of about a thousand it makes a circle simmilar to
 the conequences of dropping anything in your grandparent's attic
 recomended starting pos: point of inpact
 recomended speed: 15*/
-
 particle_t *dust_circle(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), (part->speed * 2 + 1) * 100) / 100 - part->speed;

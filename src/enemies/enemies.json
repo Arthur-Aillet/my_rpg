@@ -6,7 +6,13 @@
         "sprite": "path"
     },
     "enemy_2": {
-        "type": 1,
+        "type": 2,
+        "speed": 2,
+        "dps": 2,
+        "sprite": "path"
+    },
+    "enemy_3": {
+        "type": 3,
         "speed": 2,
         "dps": 2,
         "sprite": "path"

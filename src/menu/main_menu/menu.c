@@ -100,7 +100,7 @@ void destroy_menu(main_menu_t *menu)
     destroy_object(menu->back);
     sfClock_destroy(menu->clock);
     destroy_object(menu->title);
-    ///exterminate(menu->particle);
+    exterminate(menu->particle);
 }
 
 int menu(game_t *game)

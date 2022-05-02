@@ -81,5 +81,5 @@ events_t evt_cmp(events_t events)
     if (events.A == PRESS && *events.page > 0)
         *events.page -= 1;
     events = interract_comp(events, &selected, &competence);
-        return (events);
+    return (events);
 }

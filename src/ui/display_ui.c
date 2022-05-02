@@ -60,9 +60,8 @@ static void display_circle(sfRenderWindow *window, object_t **parts)
 
 void display_ui(sfRenderWindow *window, player_t *player, sfVector2f pos)
 {
-    static object_t **parts = NULL;
-    parts = get_parts();
-    static sfVector2f former_pos = {0, 0};
+    object_t **parts = get_parts();
+    sfVector2f former_pos = sfSprite_getPosition(parts[0]->sprite);
 
     if (former_pos.x != pos.x || former_pos.y != pos.y) {
         former_pos = VCF {pos.x - former_pos.x, pos.y - former_pos.y};

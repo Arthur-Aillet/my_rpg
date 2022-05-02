@@ -135,7 +135,7 @@
         "description": "dash:\nyour combat training allows you\nto launch yourself out of the way of attacks\nwich can be usefull in order to avoid it",
         "imgpath": "assets/img/dash.png"
     },
-    "c34": {
+    "center": {
         "description": "heroic speed:\nrunning headfirst into battle has made you\na bit faster every time.\nor runnig for your life, it's defenetly\none of the two",
         "imgpath": "assets/img/shoes.png"
     },

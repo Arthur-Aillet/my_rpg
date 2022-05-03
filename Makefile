@@ -217,7 +217,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O1 -g3
+CFLAGS			=			-Wall -Wextra -O1
 
 CPPFLAGS		=			-I include
 
@@ -256,10 +256,8 @@ fclean:		clean
 build_lib:
 		make re -C lib/my
 
-debug:
-
-valgrind:	$(CFLAGS) += -g3
-valgrind:	re
+debug:		$(CFLAGS) += -g3
+debug:		re
 
 tests_run:
 	make re -C lib/my

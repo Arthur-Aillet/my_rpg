@@ -49,6 +49,8 @@ INVENTORY_PATH	=			$(SRC_PATH)inventory/
 
 JSON_PATH		=			$(SRC_PATH)json/
 
+ENEMIES_PATH	=			$(SRC_PATH)enemies/
+
 MATH_PATH		=			$(SRC_PATH)math/
 
 MINGAME_PATH	=			$(SRC_PATH)mini_game/
@@ -135,24 +137,29 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)set_competence_state_upper.c	\
 							$(INVENTORY_PATH)set_competence_state_down.c	\
 
-SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c			\
-							$(JSON_PATH)generate/reader/str_preprocessing.c		\
-							$(JSON_PATH)generate/reader/object_preprocessing.c	\
-							$(JSON_PATH)generate/reader/extract_fields.c		\
-							$(JSON_PATH)generate/reader/json_split.c			\
-							$(JSON_PATH)generate/reader/json_error_handling.c	\
-							$(JSON_PATH)use/get/json_get_by_name.c				\
-							$(JSON_PATH)use/get/json_get_by_index.c				\
-							$(JSON_PATH)use/get/json_display_obj.c				\
-							$(JSON_PATH)use/json_main.c							\
-																				\
-							$(JSON_PATH)use/edit/json_add_field.c				\
-							$(JSON_PATH)use/edit/json_edit_by_name.c			\
-							$(JSON_PATH)use/edit/manage_json.c					\
-							$(JSON_PATH)generate/reader/duplicate_data.c		\
-							$(JSON_PATH)generate/reader/allocation.c			\
-																				\
-							$(JSON_PATH)dependencies/chain_chars.c				\
+SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
+							$(JSON_PATH)generate/reader/str_preprocessing.c	\
+							$(JSON_PATH)generate/reader/object_preprocessing.c\
+							$(JSON_PATH)generate/reader/extract_fields.c	\
+							$(JSON_PATH)generate/reader/json_split.c		\
+							$(JSON_PATH)generate/reader/json_error_handling.c\
+							$(JSON_PATH)use/get/json_get_by_name.c			\
+							$(JSON_PATH)use/get/json_get_by_index.c			\
+							$(JSON_PATH)use/get/json_display_obj.c			\
+							$(JSON_PATH)use/json_main.c						\
+																			\
+							$(JSON_PATH)use/edit/json_add_field.c			\
+							$(JSON_PATH)use/edit/json_edit_by_name.c		\
+							$(JSON_PATH)use/edit/manage_json.c				\
+							$(JSON_PATH)generate/reader/duplicate_data.c	\
+							$(JSON_PATH)generate/reader/allocation.c		\
+																			\
+							$(JSON_PATH)dependencies/chain_chars.c			\
+
+SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
+							$(ENEMIES_PATH)evolve_enemies.c					\
+							$(ENEMIES_PATH)read_enemies.c					\
+							$(ENEMIES_PATH)spawn_enemies.c					\
 
 SRC_MATH		=			$(MATH_PATH)math.c								\
 
@@ -186,6 +193,7 @@ SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_INIT)										\
 							$(SRC_INVENTORY)								\
 							$(SRC_JSON)										\
+							$(SRC_ENEMIES)									\
 							$(SRC_MATH)										\
 							$(SRC_POTION)									\
 							$(SRC_MINIGAME)									\

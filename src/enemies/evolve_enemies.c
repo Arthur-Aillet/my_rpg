@@ -7,6 +7,7 @@
 
 #include "enemies.h"
 #include "my.h"
+#include "json.h"
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 

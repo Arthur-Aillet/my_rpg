@@ -16,6 +16,11 @@
 #include "my_sound.h"
 #include "my_csfml_utils.h"
 #include "inventory_structures.h"
+#include "enemies.h"
+
+typedef struct enemy_s enemy_t;
+
+typedef struct enemy_node_s enemy_node_t;
 
 typedef struct maps_s {
     char *name;
@@ -54,6 +59,8 @@ typedef struct in_game_s {
     sfView *cam;
     maps_t **maps;
     player_t *player;
+    enemy_t *samples_enemies;
+    enemy_node_t *enemies;
 } in_game_t;
 
 typedef struct game_s {

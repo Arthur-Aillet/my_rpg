@@ -7,12 +7,12 @@
 
 #pragma once
 
+#include "my_game_struct.h"
 #include "csfml_libs.h"
-#include "enemies.h"
 #include "my.h"
 #include "my_csfml_utils.h"
-#include "my_game_struct.h"
 
+typedef struct game_s game_t;
 typedef struct enemy_s {
     char *name;
     int type;

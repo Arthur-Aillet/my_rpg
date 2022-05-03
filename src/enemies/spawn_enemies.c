@@ -26,9 +26,8 @@ enemy_node_t *spawn_ennemies(int nb, enemy_t *types, game_t *game)
         if (i < nb - 1) {
             actual->next = malloc(sizeof(enemy_node_t));
             actual = actual->next;
-        } else {
+        } else
             actual->next = NULL;
-        }
     }
     return first;
 }

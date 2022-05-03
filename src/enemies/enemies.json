@@ -3,18 +3,18 @@
         "type": 1,
         "speed": 2,
         "dps": 2,
-        "sprite": "path"
+        "sprite": "assets/img/blobs.png"
     },
     "enemy_2": {
         "type": 2,
         "speed": 2,
         "dps": 2,
-        "sprite": "path"
+        "sprite": "assets/img/blobs.png"
     },
     "enemy_3": {
         "type": 3,
         "speed": 2,
         "dps": 2,
-        "sprite": "path"
+        "sprite": "assets/img/blobs.png"
     }
 }

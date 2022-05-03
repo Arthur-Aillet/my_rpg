@@ -20,8 +20,8 @@ static sfVector2f enemy_movement(enemy_t *enemy, game_t *game)
         {player_pos.x - enemy_pos.x, player_pos.y - enemy_pos.y};
     float max_range = MAX(ABS(differential.x), ABS(differential.y));
 
-    differential.x = (differential.x / max_range) * enemy->speed;
-    differential.y = (differential.y / max_range) * enemy->speed;
+    differential.x = (differential.x / MAX(1, max_range)) * enemy->speed;
+    differential.y = (differential.y / MAX(1, max_range)) * enemy->speed;
     return differential;
 }
 
@@ -31,4 +31,13 @@ void displace_enemies(enemy_node_t *all, game_t *game)
         sfSprite_move(all->enemy.object->sprite, enemy_movement(&(all->enemy), game));
         all = all->next;
     }
+}
+
+void remove_enemy_pv(enemy_node_t *enemy, int nb)
+{
+    if (enemy == NULL)
+        return;
+    enemy->enemy.pv -= nb;
+    if (enemy->enemy.pv <= 0)
+        enemy->enemy.type = -2;
 }

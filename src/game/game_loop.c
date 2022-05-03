@@ -29,6 +29,8 @@ int game_loop(game_t *game)
 {
     transition(game, 2);
     game->game->samples_enemies = create_enemies_array();
+    if (game->game->samples_enemies == NULL)
+        return 84;
     game->game->enemies = spawn_ennemies(5, game->game->samples_enemies, game);
     while (game->status->end_game == 0) {
         sfRenderWindow_clear(game->window->window, sfBlack);

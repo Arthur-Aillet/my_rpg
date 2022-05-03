@@ -26,6 +26,9 @@ typedef struct enemy_s {
     int last_update;
     object_t *object;
     sfTexture *texture;
+    int pv;
+    int status;
+    int status_data;
 } enemy_t;
 
 typedef struct enemy_node_s {

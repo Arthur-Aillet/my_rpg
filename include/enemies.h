@@ -16,3 +16,4 @@ void displace_enemies(enemy_node_t *all, game_t *game);
 enemy_node_t *spawn_ennemies(int nb, enemy_t *types, game_t *game);
 enemy_t *create_enemies_array(void);
 void display_enemies(game_t *game, enemy_node_t *enemies);
+void free_enemies(enemy_node_t *enemies);

@@ -16,12 +16,22 @@
 #include "my_sound.h"
 #include "my_csfml_utils.h"
 #include "inventory_structures.h"
-#include "enemies.h"
 #include "particle_struct.h"
 
-typedef struct enemy_s enemy_t;
+typedef struct enemy_s {
+    char *name;
+    int type;
+    int speed;
+    int dps;
+    int last_update;
+    sfSprite *sprite;
+    sfTexture *texture;
+} enemy_t;
 
-typedef struct enemy_node_s enemy_node_t;
+typedef struct enemy_node_s {
+    enemy_t enemy;
+    struct enemy_node_s *next;
+} enemy_node_t;
 
 typedef struct maps_s {
     char *name;

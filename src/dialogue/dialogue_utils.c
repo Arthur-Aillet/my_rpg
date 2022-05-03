@@ -7,6 +7,7 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
+#include <stdlib.h>
 
 static char *remove(char *str, int pos)
 {

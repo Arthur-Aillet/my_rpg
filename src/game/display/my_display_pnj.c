@@ -18,13 +18,11 @@ static void display_talk(game_t *game, pnj_t *pnj)
     sfVector2f pos = sfSprite_getPosition(pnj->objet->sprite);
     static int step = -1;
 
-    if (pnj->need_to_talk == true && dist_two_points(pos, game->game->player->pos) < 200) {
-        sfSprite_setPosition(game->game->chat_box->sprite, VCF{pos.x + pnj->size_x * 2 - 58, pos.y - 45});
-        sfRenderWindow_drawSprite(game->window->window, game->game->chat_box->sprite, NULL);
-        if (game->E == true && step < 0) {
-            game->game->in_dialogue = true;
-            step = 0;
-        }
+    sfSprite_setPosition(game->game->chat_box->sprite, VCF{pos.x + pnj->size_x * 2 - 58, pos.y - 45});
+    sfRenderWindow_drawSprite(game->window->window, game->game->chat_box->sprite, NULL);
+    if (game->E == true && step < 0 && game->game->in_dialogue == false) {
+        game->game->in_dialogue = true;
+        step = 0;
     }
     if (game->E == true && step > 0)
         step = -1;
@@ -36,22 +34,26 @@ static void display_talk(game_t *game, pnj_t *pnj)
 
 void display_dialogues(game_t *game)
 {
+    int nearest_index = -1;
+    int nearest_dist = 10000000000;
+
     for (int i = 0; game->game->pnjs[i] != NULL; i++) {
-        if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0) {
-            display_talk(game, game->game->pnjs[i]);
+        if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0
+            && dist_two_points(sfSprite_getPosition(game->game->pnjs[i]->objet->sprite), game->game->player->pos) < nearest_dist
+            && game->game->pnjs[i]->need_to_talk == true) {
+            nearest_index = i;
+            nearest_dist = dist_two_points(sfSprite_getPosition(game->game->pnjs[i]->objet->sprite), game->game->player->pos);
         }
     }
+    if (nearest_dist <= 200 && nearest_index >= 0)
+        display_talk(game, game->game->pnjs[nearest_index]);
 }
 
-static void display_pnj(game_t *game, pnj_t *pnj, sfClock *clock, int *last_sec)
+static void display_pnj(game_t *game, pnj_t *pnj)
 {
-    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) - *last_sec > 1) {
-        pnj->actual = (pnj->actual + 1) % (pnj->frames);
-        sfSprite_setTextureRect(pnj->objet->sprite,
-            (sfIntRect) {pnj->actual * pnj->size_x, 0, pnj->size_x, pnj->size_y});
-        *last_sec = sfTime_asSeconds(sfClock_getElapsedTime(clock));
-    }
-    sfRenderWindow_drawSprite(game->window->window, pnj->objet->sprite, NULL);
+    pnj->actual = (pnj->actual + 1) % (pnj->frames);
+    sfSprite_setTextureRect(pnj->objet->sprite,
+        (sfIntRect) {pnj->actual * pnj->size_x, 0, pnj->size_x, pnj->size_y});
 }
 
 void display_pnjs(game_t *game)
@@ -61,9 +63,13 @@ void display_pnjs(game_t *game)
 
     if (clock == NULL)
         clock = sfClock_create();
-    for (int i = 0; game->game->pnjs[i] != NULL; i++) {
-        if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0) {
-            display_pnj(game, game->game->pnjs[i], clock, &last_sec);
-        }
+    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) - last_sec > 1) {
+        for (int i = 0; game->game->pnjs[i] != NULL; i++)
+            if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0)
+                display_pnj(game, game->game->pnjs[i]);
+        last_sec = sfTime_asSeconds(sfClock_getElapsedTime(clock));
     }
+    for (int i = 0; game->game->pnjs[i] != NULL; i++)
+        if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0)
+            sfRenderWindow_drawSprite(game->window->window, game->game->pnjs[i]->objet->sprite, NULL);
 }

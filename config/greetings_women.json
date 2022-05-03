@@ -1,0 +1,10 @@
+
+{
+    "step1": {
+        "direction": 0,
+        "image": "assets/img/pnj/Women.jpg",
+        "font": "Ancient.ttf",
+        "name": "Women",
+        "text": "Sup"
+    }
+}

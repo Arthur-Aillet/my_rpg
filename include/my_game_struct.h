@@ -24,7 +24,7 @@ typedef struct enemy_s {
     int speed;
     int dps;
     int last_update;
-    sfSprite *sprite;
+    object_t *object;
     sfTexture *texture;
 } enemy_t;
 

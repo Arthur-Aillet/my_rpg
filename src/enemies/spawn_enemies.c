@@ -21,11 +21,8 @@ enemy_node_t *spawn_ennemies(int nb, enemy_t *types, game_t *game)
     for (len = 0; types[len].type != -1; len++);
     for (int i = 0; i < nb; i++) {
         actual->enemy = types[rand() % len];
-        actual->enemy.sprite = sfSprite_create();
-        sfSprite_setTexture(actual->enemy.sprite, types[0].texture, sfTrue);
-        //actual->enemy.sprite = sfSprite_copy(types[rand() % len].sprite);
-        sfSprite_setPosition(actual->enemy.sprite,
-            VCF{rand() % map_dim.x, rand() % map_dim.y});
+        actual->enemy.object = create_textured_object(actual->enemy.texture,
+            VCF{rand() % map_dim.x, rand() % map_dim.y}, VCF{1, 1});
         if (i < nb - 1) {
             actual->next = malloc(sizeof(enemy_node_t));
             actual = actual->next;

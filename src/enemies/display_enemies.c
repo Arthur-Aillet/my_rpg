@@ -13,9 +13,9 @@
 void display_enemies(game_t *game, enemy_node_t *all)
 {
     while (all) {
-        printf("e name = %s\n", all->enemy.name);
         if (all->enemy.type >= 0)
-            sfRenderWindow_drawSprite(game->window, all->enemy.sprite, NULL);
+            sfRenderWindow_drawSprite(game->window->window,
+                all->enemy.object->sprite, NULL);
         all = all->next;
     }
 }

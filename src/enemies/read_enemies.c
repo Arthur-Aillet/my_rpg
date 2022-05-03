@@ -24,12 +24,10 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     e_place->speed = get_int_by_name(data, "speed");
     e_place->dps = get_int_by_name(data, "dps");
     e_place->last_update = 0;
-
+    e_place->object = NULL;
     e_place->texture = sfTexture_createFromFile(sprite_path, NULL);
-    e_place->sprite = sfSprite_create();
-    if (e_place->name == NULL || sprite_path == NULL || e_place->texture == NULL)
+    if (e_place->name == NULL || sprite_path == NULL)
         return 1;
-    sfSprite_setTexture(e_place->sprite, e_place->texture, sfTrue);
     return 0;
 }
 

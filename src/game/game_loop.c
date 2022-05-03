@@ -7,6 +7,7 @@
 
 #include "my_rpg.h"
 #include "keyboard.h"
+#include "enemies.h"
 #include "my_game_struct.h"
 #include "my.h"
 #include "keyboard.h"
@@ -34,6 +35,7 @@ int game_loop(game_t *game)
         set_correct_window_size(game->window);
         display_world(game);
         display_enemies(game, game->game->enemies);
+        displace_enemies(game->game->enemies, game);
         player_actions(game);
         poll_event_keys(game);
         sfRenderWindow_display(game->window->window);

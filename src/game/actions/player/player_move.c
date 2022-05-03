@@ -12,13 +12,13 @@ static int more_than_one_key(game_t *game)
 {
     int i = 0;
 
-    if (game->UP == 1 || game->Z == 1)
+    if (game->UP > 0 || game->Z > 0)
         i++;
-    if (game->DOWN == 1 || game->S == 1)
+    if (game->DOWN > 0 || game->S > 0)
         i++;
-    if (game->LEFT == 1 || game->Q == 1)
+    if (game->LEFT > 0 || game->Q > 0)
         i++;
-    if (game->RIGHT == 1 || game->D == 1)
+    if (game->RIGHT > 0 || game->D > 0)
         i++;
     if (i != 1)
         return 1;
@@ -32,7 +32,7 @@ int player_is_collide(game_t *game, int dir, int value)
     int map = get_current_map(game);
     int ret = 0;
 
-    game->game->player->pos.x += dir == 1 ? value : 0;
+    game->game->player->pos.x += dir > 0 ? value : 0;
     game->game->player->pos.y += dir == 0 ? value : 0;
     while (game->game->maps[map]->obs[++i]) {
         j = -1;
@@ -86,18 +86,18 @@ void player_move(game_t *game)
     int spd = 1;
     int count = game->game->player->move_spd;
 
-    if (game->LSHIFT == 1 && game->game->in_dialogue == false)
+    if (game->LSHIFT > 0 && game->game->in_dialogue == false)
             count *= 1.5;
         if (more_than_one_key(game))
             count /= 1.2;
     while (count--) {
-        if (game->Z == 1 && player_is_collide(game, 0, -spd) != 0)
+        if (game->Z > 0 && player_is_collide(game, 0, -spd) != 0)
             game->game->player->pos.y += spd;
-        if (game->S == 1 && player_is_collide(game, 0, spd) != 0)
+        if (game->S > 0 && player_is_collide(game, 0, spd) != 0)
             game->game->player->pos.y -= spd;
-        if (game->Q == 1 && player_is_collide(game, 1, -spd) != 0)
+        if (game->Q > 0 && player_is_collide(game, 1, -spd) != 0)
             game->game->player->pos.x += spd;
-        if (game->D == 1 && player_is_collide(game, 1, spd) != 0)
+        if (game->D > 0 && player_is_collide(game, 1, spd) != 0)
             game->game->player->pos.x -= spd;
     }
     handle_switch_map(game);

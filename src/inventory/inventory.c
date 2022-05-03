@@ -19,8 +19,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "ui.h"
-
 item_t *create_items(void)
 {
     item_t *result = malloc(sizeof (item_t) * NB_SLOTS);

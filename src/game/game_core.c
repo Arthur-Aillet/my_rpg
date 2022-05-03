@@ -74,7 +74,7 @@ int my_rpg(void)
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[10] = create_yellow_flower(game->items[10], 100);
-    game->items[10].action = (void (*)(void *)) test_function;
+    game->items[10].action = test_function;
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 5;
     game->comp = &competence;

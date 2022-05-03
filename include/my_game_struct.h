@@ -59,6 +59,9 @@ typedef struct in_game_s {
     player_t *player;
 } in_game_t;
 
+typedef struct item_s item_t;
+typedef struct competences_s competences_t;
+
 typedef struct game_s {
     char *keys;
     item_t *items;

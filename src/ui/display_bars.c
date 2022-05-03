@@ -66,6 +66,8 @@ void display_hotbar(sfRenderWindow *window, player_t *player
     static int prev_pos = 0;
 
     player->hotbar_pos = player->hotbar_pos % 10;
+    if (player->hotbar_pos < 0)
+        player->hotbar_pos = 9;
     if (prev_pos != player->hotbar_pos) {
         sfSprite_move(parts[10]->sprite
             , VCF {(player->hotbar_pos - prev_pos) * 124, 0});

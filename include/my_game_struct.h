@@ -11,7 +11,7 @@
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
 #include "my_window_struct.h"
-#include "item_structure.h"
+/* #include "item_structure.h" */
 #include "my_controle_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
@@ -75,6 +75,9 @@ typedef struct in_game_s {
     object_t *chat_box;
     player_t *player;
 } in_game_t;
+
+typedef struct item_s item_t;
+typedef struct competences_s competences_t;
 
 typedef struct game_s {
     char *keys;

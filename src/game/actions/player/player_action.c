@@ -45,8 +45,9 @@ void hotbar_actions(game_t *game)
 {
     if (abs(game->HSCROLL) > 0 && game->game->in_dialogue == false)
         game->game->player->hotbar_pos += game ->HSCROLL;
-    if (game->LCLICK == RELEASE && game->game->in_dialogue == false)
-        game->items[game->game->player->hotbar_pos + 51].action((void *) game);
+    if (game->LCLICK == RELEASE && game->game->in_dialogue == false &&
+        game->items[game->game->player->hotbar_pos + 51].action != NULL)
+        game->items[game->game->player->hotbar_pos + 51].action(game);
 }
 
 void player_actions(game_t *game)

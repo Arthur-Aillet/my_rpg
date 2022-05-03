@@ -47,14 +47,15 @@ void destroy_game(game_t *game)
     free(game->status);
 }
 
-item_t create_yellow_flower(item_t item, int number)
+item_t create_sword(item_t item, int number)
 {
     item.stack_size = 255;
     item.armor_type = HEAD;
     item.quantity = number;
-    item.armor_type = 1;
-    item.type = FLOWER_YELLOW;
-    item.obj = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
+    item.armor_type = 0;
+    item.type = SWORD;
+    item.obj = create_object("assets/img/sword.png", VCF {0, 0}, VCF {4, 4});
+    sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     return (item);
 }
 
@@ -73,7 +74,7 @@ int my_rpg(void)
          0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
-    game->items[10] = create_yellow_flower(game->items[10], 100);
+    game->items[10] = create_sword(game->items[10], 1);
     game->items[10].action = test_function;
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 5;

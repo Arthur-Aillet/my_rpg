@@ -61,8 +61,8 @@ static void display_circle(sfRenderWindow *window, object_t **parts)
 
 void display_hotbar_items(game_t *game)
 {
-    sfVector2f pos = {342 + game->game->pos_cam.x
-        , 960 + game->game->pos_cam.x};
+    sfVector2f pos = {-606 + game->game->pos_cam.x
+        , 433 + game->game->pos_cam.y};
     for (int i = 51; i <= 60; i++) {
         sfSprite_setPosition(game->items[i].obj->sprite, pos);
         pos.x += 124;

@@ -8,8 +8,7 @@
 #pragma once
 
 #define NOTHING 0
-#define FLOWER_YELLOW 1
-#define FLOWER_RED 2
+#define SWORD 1
 #define NB_SLOTS 65
 #define SCALEX 1
 #define SCALEY 1

@@ -90,6 +90,8 @@ typedef struct txtobject_s {
     sfFont *font;
 } txtobject_t;
 
+typedef struct game_s game_t;
+
 typedef struct item_s {
     object_t *obj;
     int quantity;

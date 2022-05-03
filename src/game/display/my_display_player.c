@@ -32,7 +32,8 @@ void display_player(game_t *game)
 {
     update_particles(game->window->window, game->particles);
     set_side(game);
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S > 0) * 8 + (game->Z > 0) * 4 +
+        (game->D > 0) * 2 + (game->Q > 0)) {
         case (8) :
         case (9) :
         case (10) : PLACE_PLAYER(DOWN_WALK + ISDASH * 8);

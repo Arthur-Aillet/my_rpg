@@ -17,7 +17,9 @@
 #include "my_button.h"
 #include "keyboard.h"
 #include "my_csfml_utils.h"
+#include "my_game_struct.h"
 #include "main_menu.h"
+#include "pnjs.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
 
@@ -42,6 +44,7 @@ void destroy_game(game_t *game)
             free(game->musics[i]->name);
         }
     free(game->musics);
+    destroy_pnjs(game->game->pnjs);
     free(game->keys);
     destroy_object(game->mouse);
     free(game->status);
@@ -70,8 +73,8 @@ int my_rpg(void)
     game_t *game = init_game_struct();
     competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2
-        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0,
-         0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[10] = create_sword(game->items[10], 1);

@@ -11,6 +11,7 @@
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
 #include "my_window_struct.h"
+/* #include "item_structure.h" */
 #include "my_controle_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
@@ -50,12 +51,28 @@ typedef struct player_s {
     int hotbar_pos;
 } player_t;
 
+typedef struct pnj_s {
+    char **dialogues;
+    char *name;
+    char *map_name;
+    object_t *portrait;
+    int size_x;
+    int size_y;
+    int frames;
+    int actual;
+    bool need_to_talk;
+    object_t *objet;
+} pnj_t;
+
 typedef struct in_game_s {
     char *current;
+    bool in_dialogue;
     sfVector2f pos_cam;
     sfFloatRect cam_rect;
     sfView *cam;
     maps_t **maps;
+    pnj_t **pnjs;
+    object_t *chat_box;
     player_t *player;
 } in_game_t;
 

@@ -12,7 +12,7 @@
 
 void set_side(game_t *game)
 {
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S > 0) * 8 + (game->Z > 0) * 4 + (game->D > 0) * 2 + (game->Q > 0)) {
         case (8) :
         case (9) :
         case (10) : game->game->player->side = DOWN_WALK;

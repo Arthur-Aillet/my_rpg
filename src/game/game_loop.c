@@ -14,20 +14,21 @@
 static void poll_event_keys(game_t *game)
 {
     game->keys = get_keyboard_input(game->keys, game->window->window);
-    if (game->ESC)
+    if (game->ESC == 2)
         game->status->end_game = 1;
-    if (game->P)
+    if (game->P == 2)
         game->status->end_game = 1;
-    if (game->I)
+    if (game->I == 2)
         game->status->end_game = 1;
-    if (game->TAB)
+    if (game->TAB == 2)
         game = inventory(game);
 }
 
 int game_loop(game_t *game)
 {
     transition(game, 2);
-    while (game->status->end_game == 0) {
+
+    while (game->status->end_game == 0 && sfRenderWindow_isOpen(game->window->window)) {
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         display_world(game);

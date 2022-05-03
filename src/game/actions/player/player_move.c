@@ -12,13 +12,13 @@ static int more_than_one_key(game_t *game)
 {
     int i = 0;
 
-    if (game->UP || game->Z)
+    if (game->UP == 1 || game->Z == 1)
         i++;
-    if (game->DOWN || game->S)
+    if (game->DOWN == 1 || game->S == 1)
         i++;
-    if (game->LEFT || game->Q)
+    if (game->LEFT == 1 || game->Q == 1)
         i++;
-    if (game->RIGHT || game->D)
+    if (game->RIGHT == 1 || game->D == 1)
         i++;
     if (i != 1)
         return 1;
@@ -86,19 +86,18 @@ void player_move(game_t *game)
     int spd = 1;
     int count = game->game->player->move_spd;
 
-    game->keys = get_keyboard_input(game->keys, game->window->window);
-    if (game->LSHIFT)
+    if (game->LSHIFT == 1 && game->game->in_dialogue == false)
             count *= 1.5;
         if (more_than_one_key(game))
             count /= 1.2;
     while (count--) {
-        if (game->Z && player_is_collide(game, 0, -spd) != 0)
+        if (game->Z == 1 && player_is_collide(game, 0, -spd) != 0)
             game->game->player->pos.y += spd;
-        if (game->S && player_is_collide(game, 0, spd) != 0)
+        if (game->S == 1 && player_is_collide(game, 0, spd) != 0)
             game->game->player->pos.y -= spd;
-        if (game->Q && player_is_collide(game, 1, -spd) != 0)
+        if (game->Q == 1 && player_is_collide(game, 1, -spd) != 0)
             game->game->player->pos.x += spd;
-        if (game->D && player_is_collide(game, 1, spd) != 0)
+        if (game->D == 1 && player_is_collide(game, 1, spd) != 0)
             game->game->player->pos.x -= spd;
     }
     handle_switch_map(game);

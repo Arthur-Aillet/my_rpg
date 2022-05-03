@@ -7,6 +7,7 @@
 
 #include "my_rpg.h"
 #include "my.h"
+#include "pnjs.h"
 #include "ui.h"
 
 static void setup_camera(game_t *game, int i)
@@ -37,10 +38,15 @@ void display_world(game_t *game)
     vec.y -= 540;
     display_base(game, game->game->maps[i],
         0, game->game->maps[i]->height);
-    display_player(game);
+    if (game->game->in_dialogue == false)
+        display_player(game);
+    else
+        PLACE_PLAYER(IDLE + game->game->player->side + ISDASH * 4);
+    display_pnjs(game);
     display_obs(game, game->game->maps[i],
         (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
     display_ui(game->window->window, game->game->player, vec);
     display_hotbar_items(game);
+    display_dialogues(game);
     setup_camera(game, i);
 }

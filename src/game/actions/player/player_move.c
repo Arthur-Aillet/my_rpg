@@ -12,13 +12,13 @@ static int more_than_one_key(game_t *game)
 {
     int i = 0;
 
-    if (game->UP > 0 || game->Z > 0)
+    if (game->Z > 0)
         i++;
-    if (game->DOWN > 0 || game->S > 0)
+    if (game->S > 0)
         i++;
-    if (game->LEFT > 0 || game->Q > 0)
+    if (game->Q > 0)
         i++;
-    if (game->RIGHT > 0 || game->D > 0)
+    if (game->D > 0)
         i++;
     if (i != 1)
         return 1;

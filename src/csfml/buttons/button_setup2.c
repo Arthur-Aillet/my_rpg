@@ -13,24 +13,35 @@
 #include <SFML/Audio.h>
 #include <stdlib.h>
 
+void destroy_button(button_t *bouton)
+{
+    sfSprite_destroy(bouton->sprite);
+    sfTexture_destroy(bouton->texture);
+    if (bouton->display_text == 1) {
+        sfText_destroy(bouton->text.text);
+        sfFont_destroy(bouton->text.font);
+    }
+}
+
 void button_setup_sounds(button_t *but, sfSound *hover, sfSound *click, int vol)
 {
     if (click != NULL) {
-        but->click = sfSound_copy(click);
+        but->click = click;
         but->click_buf = NULL;
         sfSound_setVolume(but->click, vol);
     }
     if (hover != NULL) {
-        but->hover = sfSound_copy(hover);
+        but->hover = hover;
         but->hover_buf = NULL;
         sfSound_setVolume(but->hover, vol / 2);
     }
 }
 
-void button_setup_offset(button_t *bouton, sfVector2f hover, sfVector2f click)
+void button_setup_offset(button_t *bouton, VCFO hover, VCFO click, VCFO text)
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(bouton->sprite);
 
+    bouton->text_offset = VCF{text.x, text.y};
     bouton->scale_hover = VCF{rect.width * hover.x, rect.height * hover.y};
     bouton->scale_click = VCF{rect.width * click.x, rect.height * click.y};
 }

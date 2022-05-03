@@ -7,6 +7,7 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
+#include <stdlib.h>
 
 static char *remove(char *str, int pos)
 {
@@ -43,20 +44,23 @@ void sf_text_set_pixel_size(sfText *text, sfVector2f size)
         sfText_setCharacterSize(text, sfText_getCharacterSize(text) - 1);
     while (sfText_getLocalBounds(text).height > size.y - 10)
         sfText_setCharacterSize(text, sfText_getCharacterSize(text) - 1);
-
 }
 
 void draw_chatbox(sfRenderWindow *window, int direction)
 {
-    static object_t *textbox = NULL;
+    static object_t **textbox = NULL;
     sfVector2f pos = {0, 0};
     sfVector2f scale = {4, 4};
 
+
+    if (textbox == NULL) {
+        textbox = malloc(sizeof(object_t) * 2);
+        textbox[0] = create_object("assets/img/dialogue.png", pos, scale);
+        textbox[1] = create_object("assets/img/response.png", pos, scale);
+    }
     if (direction != 0) {
-        textbox = create_object("assets/img/response.png", pos, scale);
-        sfRenderWindow_drawSprite(window, textbox->sprite, NULL);
+        sfRenderWindow_drawSprite(window, textbox[1]->sprite, NULL);
         return;
     }
-    textbox = create_object("assets/img/dialogue.png", pos, scale);
-    sfRenderWindow_drawSprite(window, textbox->sprite, NULL);
+    sfRenderWindow_drawSprite(window, textbox[0]->sprite, NULL);
 }

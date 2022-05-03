@@ -5,12 +5,11 @@
 ** dere be definitions
 */
 
-
 #pragma once
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
-#include "my_button.h"
+#include "item_structure.h"
 
 typedef struct competences_s {
     int dodge_roll;
@@ -80,17 +79,11 @@ typedef struct competences_s {
     int c65;
     int c66;
     int c67;
+    object_t **sprites;
+    int comp_points;
 } competences_t;
 
 competences_t set_competence_six(int comp, competences_t comps, int st);
-
-typedef struct item_s {
-    object_t *obj;
-    int quantity;
-    int stack_size;
-    int type;
-    int armor_type;
-} item_t;
 
 typedef struct txtobject_s {
     sfText *text;
@@ -111,6 +104,6 @@ typedef struct events_s {
     item_t *items;
     int *page;
     char *keys;
-    button_t *button;
+    struct button_s *button;
     competences_t *comp;
 } events_t;

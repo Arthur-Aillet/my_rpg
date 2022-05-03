@@ -27,7 +27,7 @@ sfVector2f get_comp_pos(int comp)
 
 sfVector2f get_slot_pos(int slot, sfRenderWindow *window)
 {
-    sfVector2f result = {88,164};
+    sfVector2f result = {88, 164};
     sfVector2f mousepos = {0, 0};
 
     if (slot == 0) {

@@ -44,25 +44,25 @@ minigame_t *setup_hammer_struct(void)
     return (elements);
 }
 
-void hammer_controls(minigame_t *elements, particle_t **start, char *keys, sfSound *sound)
+void hammer_controls(minigame_t *elem, particle_t **st, char *keys, sfSound *sn)
 {
-    if (LCLICK == 1 && sfSprite_getRotation(elements->hammer->sprite) < 41)
-        sfSprite_rotate(elements->hammer->sprite, 9);
-    if (LCLICK != 1 && sfSprite_getRotation(elements->hammer->sprite) > 0)
-        sfSprite_rotate(elements->hammer->sprite, -9);
-    if (sfSprite_getRotation(elements->hammer->sprite) >= 41
-        && elements->has_spawn == false) {
-        sfSound_play(sound);
+    if (LCLICK == 1 && sfSprite_getRotation(elem->hammer->sprite) < 41)
+        sfSprite_rotate(elem->hammer->sprite, 9);
+    if (LCLICK != 1 && sfSprite_getRotation(elem->hammer->sprite) > 0)
+        sfSprite_rotate(elem->hammer->sprite, -9);
+    if (sfSprite_getRotation(elem->hammer->sprite) >= 41
+        && elem->has_spawn == false) {
+        sfSound_play(sn);
         for (int i = rand() % 5 + 2; i != 0; i--) {
-            *start = add_particle(*start, VCF{960, 1080 / 2}, 12,
+            *st = add_particle(*st, VCF{960, 1080 / 2}, 12,
                 (rand() % 100 + 100) / 10);
         }
-        elements->has_spawn = true;
-        for (int i = 0; elements->points + 1 <= 102 && i < 8; i++)
-            elements->points += 1;
+        elem->has_spawn = true;
+        for (int i = 0; elem->points + 1 <= 102 && i < 8; i++)
+            elem->points += 1;
     }
-    if (sfSprite_getRotation(elements->hammer->sprite) < 41)
-        elements->has_spawn = false;
+    if (sfSprite_getRotation(elem->hammer->sprite) < 41)
+        elem->has_spawn = false;
 }
 
 void display_hammer(minigame_t *eleme, window_t *window, potion_t *pot)
@@ -78,7 +78,7 @@ void hammer_loop(game_t *game, potion_t *potion)
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
     int open = true;
     sfClock *clock = sfClock_create();
-    sfSound *sound = sfSound_copy(find_sound("anvil.ogg", game->sounds));
+    sfSound *sound = find_sound("anvil.ogg", game->sounds);
 
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);

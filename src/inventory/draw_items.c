@@ -22,7 +22,7 @@ static char *my_itos(int i)
     for (n = 0; temp != 0; n++)
         temp /= 10;
     result = malloc(sizeof(char) * n + 1);
-    for (int j = 0; j < n; j ++) {
+    for (int j = 0; j < n; j++) {
         result[n - j - 1] = (i % 10) + '0';
         i = i / 10;
     }
@@ -30,7 +30,7 @@ static char *my_itos(int i)
     return (result);
 }
 
-void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
+static void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
@@ -49,7 +49,7 @@ void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
     free(string);
 }
 
-void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
+static void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 {
     sfVector2f scale = {4, 4};
     sfVector2f mvt;
@@ -67,9 +67,11 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
 
     if (select == NULL)
         select = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
-    for (int i = 1; i < 68; i++) {
+    for (int i = 1; i <= 67; i++) {
         sfSprite_setPosition(select->sprite, get_comp_pos(i));
         state = get_competence_state(i, *comp);
+        if (state >= 1)
+            sfRenderWindow_drawSprite(window, comp->sprites[i]->sprite, NULL);
         if (state == 1)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }

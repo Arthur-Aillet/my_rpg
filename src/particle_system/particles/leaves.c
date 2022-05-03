@@ -13,11 +13,11 @@
 /*a fragment of a once proud and mighty tree destined to fall in the underworld
 recomended starting pos: exact point of inpact
 recomended speed: 50*/
-
 particle_t *leaf_fragment(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;
 
+    part->lifetime = (part->speed == 1) ? (20) : (1920);
     if (part->age <= 0) {
         part->velocity.x = log2f(rdom * rdom);
         part->velocity.y = log2f(part->speed * 4 - ABS(rdom)) * 2;
@@ -25,7 +25,7 @@ particle_t *leaf_fragment(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
         if (rand() % 2 == 0)
             part->velocity.x *= -1;
     }
-    part->age = sfSprite_getPosition(part->object->sprite).y;
+    part->age += 1;
     sfSprite_rotate(part->object->sprite, SIGN(part->velocity.x) * 5);
     if (TIME(clock, 0.05)) {
         part->velocity.y *= 0.97;

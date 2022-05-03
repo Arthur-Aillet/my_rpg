@@ -13,7 +13,6 @@
 /*a single spark that will dwindle before siapearing
 recomended starting pos: exact point of inpact
 recomended speed: 10*/
-
 particle_t *spark(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;

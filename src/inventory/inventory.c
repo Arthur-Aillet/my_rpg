@@ -9,19 +9,17 @@
 #include "particles.h"
 #include "pause_menu.h"
 #include "csfml_libs.h"
+#include "my_button.h"
 #include "mouse.h"
 #include "inventory_prototypes.h"
 #include "my_game_struct.h"
-    #include "my_text.h"
-    #include "particles.h"
-    #include "dialogue.h"
-    #include "ui.h"
-    #include "player_animation.h"
 #include "my_csfml_utils.h"
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#include "ui.h"
 
 item_t *create_items(void)
 {
@@ -29,17 +27,13 @@ item_t *create_items(void)
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;
-        result[i].obj = create_object("nothing",VCF {0, 0}, VCF {0, 0});
+        result[i].obj = create_object("assets/img/fine_dust.png",
+            VCF {0, 0}, VCF {0, 0});
         result[i].stack_size = 1;
         result[i].armor_type = 5;
+        result[i].action = NULL;
     }
     return (result);
-}
-
-void free_txtobject(txtobject_t object)
-{
-    sfText_destroy(object.text);
-    sfFont_destroy(object.font);
 }
 
 int count_item(item_t *items, int type)
@@ -52,35 +46,56 @@ int count_item(item_t *items, int type)
     return (count);
 }
 
+static void free_inventory(backgrounds_t background, events_t events)
+{
+    for (int i = 0; i < 3; i++)
+        destroy_object(background.pages[i]);
+    sfText_destroy(background.text.text);
+    destroy_button(events.button);
+}
+
+game_t *update_stats(game_t *game)
+{
+    game->game->player->max_health = 1000;
+    game->game->player->max_stamina = 1000;
+    game->game->player->move_spd = 8;
+    for (int i = 1; i < 68; i++) {
+        if (BETWEEN(i, 30, 38) && get_competence_state
+            (i, *game->comp) == 2 && i != 33)
+            game->game->player->move_spd += 1;
+        if (i > 38 && get_competence_state(i, *game->comp) == 2) {
+            game->game->player->max_health += 100;
+            game->game->player->health += 100;
+        }
+        if (i < 30 && get_competence_state(i, *game->comp) == 2) {
+            game->game->player->max_stamina += 100;
+            game->game->player->stamina += 100;
+        }
+        if (i == 33 && get_competence_state(i, *game->comp) == 2)
+            game->game->player->dash = 0;
+    }
+    return (game);
+}
+
 game_t *inventory(game_t *game)
 {
-    backgrounds_t backgrounds = setup_backgrounds(game);//
-    static int page = 0;//
-    events_t events = {game->window->window, game->items, &page, game->keys, button_create(VCF {1, 1}, VCF {200, 20}, 1), game->comp};//
-    button_setup_texture_file(events.button, (sfIntRect) {0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_text(events.button, "test", FONTG("Ancient.ttf"), 20);
-    button_setup_sounds(events.button, SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 20);
-    button_setup_offset(events.button, VCF {2, 2}, VCF {1, 1});
+    backgrounds_t backgrounds = setup_backgrounds(game);
+    static int page = 0;
+    sfView *view = sfRenderWindow_getView(game->window->window);
+    events_t events = setup_events(game, &page);
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
-    events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};//
-    particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
-    font_t **fonts = font_create_array();
-    sfVector2f vec = {0, 0};
-    player_t player = {0, 1000, 0, 500, 0, 250, 0, VCF {0, 0}, NULL, NULL, "\0", 0};
+    events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
 
-    while (sfRenderWindow_isOpen(game->window->window)) {//
-        if (game->J) {   start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, SNOW, 20);    start = add_particle(start, (sfVector2f) {rand() % 1920, 0}, RAIN, 15); start = add_particle(start, (sfVector2f) {970, 500}, FIRE, 20);  if (rand() % 100 == 0)    for (int i = 0; i < 1000; i++)  start = add_particle(start, (sfVector2f) {485, 540}, DUST_CIRCLE, 15);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP, -10);    start = add_particle(start, (sfVector2f) {1465, 540}, DUST_UP_RIGHT, -10);  start = add_particle(start, (sfVector2f) {1465, 540}, DUST_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, DUST_DOWN_RIGHT, -10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP, 10);    start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_UP_RIGHT, 10);   start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_RIGHT, 10); start = add_particle(start, (sfVector2f) {1465, 540}, FIRE_DOWN_RIGHT, 10);  start = add_particle(start, (sfVector2f) {970, 740}, SPARK, 10);  start = add_particle(start, (sfVector2f) {200, 540}, ELECTRICITY, 15);    start = add_particle(start, (sfVector2f) {1800, 540}, LEAF, 50);    start = add_particle(start, VCF {900, 540}, LIGHT_DUST, 10); start = add_particle(start, VCF {1920, rand() % 1080}, MAGIC_VIBE, 10);}
-        disp[page](backgrounds);//
-        events = evt[page](events);//
-        update_particles(game->window->window, start);
-        if (game->ESC == 2) {//
-            exterminate(start);
-            return (game);//
-        }
-        if (game->K) display_dialogue(game->window->window, "src/dialogue/example.json", game->keys, fonts);
-        player.exp += 1;    player.stamina += 1;    player.health += 1; if (player.exp > player.max_exp) player.exp = 0;    if (player.stamina > player.max_stamina) player.stamina = 0;    if (player.health > player.max_health) player.health = 0;
-        if (game->G) display_ui(game->window->window, &player, vec);
-        sfRenderWindow_display(game->window->window);//
-    }//
-    return (game);//
+    sfView_setCenter(view, VCF {970, 540});
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    sfRenderWindow_setView(game->window->window, view);
+    while (game->TAB != 2) {
+        disp[page](backgrounds);
+        events = evt[page](events);
+        sfRenderWindow_display(game->window->window);
+    }
+    game = update_stats(game);
+    game->TAB = 0;
+    free_inventory(backgrounds, events);
+    return (game);
 }

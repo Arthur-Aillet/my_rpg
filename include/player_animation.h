@@ -9,6 +9,8 @@
 
 #include "my_csfml_utils.h"
 
+#define PLAYER_ANIM player_animations[state].spritesheet->sprite
+
 typedef struct animation_s {
     object_t *spritesheet;
     int step_size;

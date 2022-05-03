@@ -10,6 +10,7 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "my_rpg.h"
+#include "particles.h"
 
 game_t *init_game_struct(void)
 {
@@ -21,10 +22,15 @@ game_t *init_game_struct(void)
         VCF{0, 0}, VCF{1.4, 1.4});
     game->fonts = font_create_array();
     game->sounds = sounds_create_array();
+    game->musics = musics_create_array();
     game->window = generate_default_window();
     game->status = init_game_status();
     game->keys = init_keys();
     game->game = init_in_game_struct();
+    game->general_volume = 100;
+    game->music_volume = 100;
+    game->sfx_volume = 100;
+    game->particles = create_particle(VCF {0, 0}, 1, 0);
     if (game->window == NULL || game->status == NULL || game->keys == NULL)
         return NULL;
     return game;

@@ -8,7 +8,8 @@
 #include "ui.h"
 #include "my.h"
 
-void display_health(sfRenderWindow *window, float current, float max, object_t **parts)
+void display_health(sfRenderWindow *window, float current, float max
+    , object_t **parts)
 {
     static float smoothing = 0;
     sfIntRect rect = (sfIntRect) {0, 0, (smoothing * 833 / max), 80};
@@ -23,7 +24,8 @@ void display_health(sfRenderWindow *window, float current, float max, object_t *
     sfRenderWindow_drawSprite(window, parts[4]->sprite, NULL);
 }
 
-void display_stamina(sfRenderWindow *window, float current, float max, object_t **parts)
+void display_stamina(sfRenderWindow *window, float current, float max
+    , object_t **parts)
 {
     static int smoothing = 0;
     sfIntRect rect = (sfIntRect) {0, 0, (smoothing * 833 / max), 80};
@@ -34,7 +36,8 @@ void display_stamina(sfRenderWindow *window, float current, float max, object_t 
     sfRenderWindow_drawSprite(window, parts[6]->sprite, NULL);
 }
 
-void display_exp(sfRenderWindow *window, float current, float max, object_t **parts)
+void display_exp(sfRenderWindow *window, float current, float max
+    , object_t **parts)
 {
     static int smoothing = 0;
     sfIntRect rect = (sfIntRect) {0, 0, (smoothing * 833 / max), 80};
@@ -43,4 +46,32 @@ void display_exp(sfRenderWindow *window, float current, float max, object_t **pa
     sfRenderWindow_drawSprite(window, parts[7]->sprite, NULL);
     sfSprite_setTextureRect(parts[8]->sprite, rect);
     sfRenderWindow_drawSprite(window, parts[8]->sprite, NULL);
+}
+
+static void set_hotbar_alpha(player_t *player, object_t **parts)
+{
+    if (player->pos.y > 860) {
+        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255, 100));
+        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255, 100));
+    }
+    if (player->pos.y < 860) {
+        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255, 255));
+        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255, 255));
+    }
+}
+
+void display_hotbar(sfRenderWindow *window, player_t *player
+    , object_t **parts)
+{
+    static int prev_pos = 0;
+
+    player->hotbar_pos = player->hotbar_pos % 10;
+    if (prev_pos != player->hotbar_pos) {
+        sfSprite_move(parts[10]->sprite
+            , VCF {(player->hotbar_pos - prev_pos) * 124, 0});
+        prev_pos = player->hotbar_pos;
+    }
+    set_hotbar_alpha(player, parts);
+    sfRenderWindow_drawSprite(window, parts[9]->sprite, NULL);
+    sfRenderWindow_drawSprite(window, parts[10]->sprite, NULL);
 }

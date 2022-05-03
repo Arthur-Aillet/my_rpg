@@ -16,6 +16,9 @@
 #define BETWEEN(var, x, y) (SMALL(x, y) <= var && var <= BIG(x, y))
 #define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
                 , y), 0, 0.03)
+#define PLACE_PLAYER(x) place_player(game->window->window,\
+                 game->game->player->pos, x)
+#define ISDASH (game->game->player->dash == 1)
 
 #define LEFT_D 0
 #define UP_D 1
@@ -33,6 +36,8 @@ int my_error_handling(int ac, char **av);
 int my_help(void);
 
 int get_current_map(game_t *game);
+
+int player_is_collide(game_t *game, int dir, int value);
 
 game_t *init_game_struct(void);
 control_t *init_game_status(void);

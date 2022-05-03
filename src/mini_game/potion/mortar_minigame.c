@@ -61,7 +61,7 @@ void mortar_crush_plants(minigame_t *elem, bool *grab, particle_t **start)
     }
 }
 
-void mortar_controls(minigame_t *elm, game_t *game, bool *grab, particle_t **start)
+void mortar_controls(minigame_t *elm, game_t *game, bool *grab, particle_t **st)
 {
     sfVector2f mouse_pos = get_global_mouse_pos(game->window->window);
     sfFloatRect rect = (sfFloatRect) {sfSprite_getPosition(elm->pilon->sprite).x
@@ -82,7 +82,7 @@ void mortar_controls(minigame_t *elm, game_t *game, bool *grab, particle_t **sta
     }
     if (*grab == true)
         mortar_physics(elm, game);
-    mortar_crush_plants(elm, grab, start);
+    mortar_crush_plants(elm, grab, st);
 }
 
 void display_mortar(minigame_t *elem, window_t *window, potion_t *pot)

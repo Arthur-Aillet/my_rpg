@@ -20,6 +20,7 @@
 #include "keyboard.h"
 #include "my_csfml_utils.h"
 #include "potions.h"
+#include "math.h"
 #include "inventory_structures.h"
 
 static void setup_menu_buttons(main_menu_t *menu, game_t *game)
@@ -39,10 +40,10 @@ static void setup_menu_buttons(main_menu_t *menu, game_t *game)
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
     button_setup_sounds(menu->quit,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06});
-    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06});
+    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
 }
 
 static main_menu_t *init_main_menu(game_t *game)
@@ -90,25 +91,40 @@ static void update_menu(main_menu_t *menu, game_t *game)
     sfRenderWindow_display(game->window->window);
 }
 
+void destroy_menu(main_menu_t *menu)
+{
+    destroy_button(menu->quit);
+    destroy_button(menu->new_game);
+    destroy_button(menu->continue_game);
+    destroy_button(menu->options);
+    destroy_object(menu->back);
+    sfClock_destroy(menu->clock);
+    destroy_object(menu->title);
+    exterminate(menu->particle);
+}
+
 int menu(game_t *game)
 {
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
 
+    if (MUSICG("the caves.wav") != NULL)
+        sfMusic_play(MUSICG("the caves.wav"));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (is_pressed(menu->quit, game->window->window, game->keys))
             open = 0;
-        if (game->keys[sfKeyEscape] == PRESS)
-            game = inventory(game);
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
             game_loop(game);
+        if (is_pressed(menu->options, game->window->window, game->keys))
+            option(game);
         update_menu(menu, game);
     }
+    exterminate(menu->particle);
     destroy_button(menu->quit);
     return 0;
 }

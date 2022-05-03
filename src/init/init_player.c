@@ -40,6 +40,8 @@ player_t *init_game_player(maps_t *field)
     player->pos.x = (field->width / 2) * 64;
     player->pos.y = (field->height / 2) * 64;
     player->side = 0;
+    player->dash = -1;
+    player->hotbar_pos = 0;
     init_player_stats(player);
     init_player_sprite(obj, player);
     return player;

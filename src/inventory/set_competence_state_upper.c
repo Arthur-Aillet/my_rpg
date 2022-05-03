@@ -111,5 +111,7 @@ competences_t set_competence_state(int comp, competences_t comps, int st)
             break;
         default: comps = set_competence_two(comp, comps, st);
     }
+    if (st == 2)
+        comps.comp_points -= 1;
     return (comps);
 }

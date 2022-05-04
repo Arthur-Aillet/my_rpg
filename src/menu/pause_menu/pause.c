@@ -51,7 +51,7 @@ static pause_t *setup_pause(game_t *game)
         game->game->pos_cam.y - 175}, true);
     button_setup_texture_file(pause->retour,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_text(pause->retour, "Retrun", FONTG("Ancient.ttf"), 40);
+    button_setup_text(pause->retour, "Return", FONTG("Ancient.ttf"), 40);
     button_setup_offset(pause->retour, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
         button_setup_sounds(pause->retour,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);

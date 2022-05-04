@@ -30,8 +30,6 @@ void display_enemies(game_t *game, enemy_node_t *all)
             sfRenderWindow_drawSprite(game->window->window,
                 all->enemy.object->sprite, NULL);
         }
-        printf("actual time = %d, last time = %d, a - b = %d\n", time,
-            last_time_animated, time - last_time_animated);
         if (time - last_time_animated > 120) {
             animate_enemy(game, all);
         }

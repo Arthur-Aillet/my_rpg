@@ -46,6 +46,7 @@ in_game_t *init_in_game_struct(void)
     game->cam_rect = cam_rect;
     game->cam = sfView_createFromRect(cam_rect);
     game->pos_cam = VCF {0, 0};
+    game->clock = sfClock_create();
     if (game == NULL)
         return NULL;
     return game;

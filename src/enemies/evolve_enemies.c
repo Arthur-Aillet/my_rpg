@@ -27,6 +27,14 @@ static sfVector2f enemy_movement(enemy_t *enemy, game_t *game)
 
 void displace_enemies(enemy_node_t *all, game_t *game)
 {
+    static int last_time_moved = 0;
+    int time = sfTime_asMilliseconds(sfClock_getElapsedTime(game->game->clock));
+
+    if (time - last_time_moved <= 16)
+        return;
+    last_time_moved = time;
+    if (last_time_moved - time > 16)
+        last_time_moved = 0;
     while (all) {
         sfSprite_move(all->enemy.object->sprite, enemy_movement(&(all->enemy), game));
         all = all->next;

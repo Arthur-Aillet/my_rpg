@@ -76,6 +76,7 @@ typedef struct in_game_s {
     maps_t **maps;
     player_t *player;
     enemy_t *samples_enemies;
+    sfClock *clock;
     enemy_node_t *enemies;
 } in_game_t;
 

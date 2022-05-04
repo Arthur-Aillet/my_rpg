@@ -15,11 +15,16 @@
 static sfVector2f enemy_movement(enemy_t *enemy, game_t *game)
 {
     sfVector2f player_pos = game->game->player->pos;
-    sfVector2f enemy_pos = sfSprite_getPosition(enemy->object->sprite);
-    sfVector2f differential =
-        {player_pos.x - enemy_pos.x, player_pos.y - enemy_pos.y};
-    float max_range = MAX(ABS(differential.x), ABS(differential.y));
+    sfVector2f enemy_pos;
+    sfVector2f differential;
+    float max_range;
 
+    player_pos.x += 85;
+    player_pos.y += 50;
+    enemy_pos = sfSprite_getPosition(enemy->object->sprite);
+    differential.x = player_pos.x - enemy_pos.x;
+    differential.y = player_pos.y - enemy_pos.y;
+    max_range = MAX(ABS(differential.x), ABS(differential.y));
     differential.x = (differential.x / MAX(1, max_range)) * enemy->speed;
     differential.y = (differential.y / MAX(1, max_range)) * enemy->speed;
     return differential;

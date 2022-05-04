@@ -25,7 +25,8 @@ typedef struct enemy_s {
     int dps;
     int last_update;
     object_t *object;
-    sfTexture *texture;
+    sfIntRect rect;
+    int animation_steps;
     int pv;
     int status;
     int status_data;

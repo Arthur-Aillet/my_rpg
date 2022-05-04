@@ -9,6 +9,16 @@
 #include "enemies.h"
 #include "my.h"
 
+sfIntRect configure_enemy_rect(json_obj_t *data, enemy_t *e_place)
+{
+    sfIntRect rect = {0, 0, 0, 0};
+
+    rect.height = sfTexture_getSize(e_place->object->texture).y;
+    rect.width = get_int_by_name(data, "sprite_len");
+    e_place->animation_steps = get_int_by_name(data, "animation_steps");
+    return rect;
+}
+
 /*
 utilise le json pour créer un ennemi. e_place doit déjà être alouée.
 renvoie 1 si une erreur apparait.
@@ -24,11 +34,14 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     e_place->speed = get_int_by_name(data, "speed");
     e_place->dps = get_int_by_name(data, "dps");
     e_place->last_update = 0;
-    e_place->object = NULL;
+    e_place->object = create_textured_object(
+        sfTexture_createFromFile(sprite_path, NULL), VCF{0, 0}, VCF{1, 1});
+    e_place->rect = configure_enemy_rect(data, e_place);
+    if (e_place->rect.height == 0 || e_place->rect.width == 0)
+        return 1;
     e_place->status = 0;
     e_place->status_data = 0;
     e_place->pv = get_int_by_name(data, "pv");
-    e_place->texture = sfTexture_createFromFile(sprite_path, NULL);
     if (e_place->name == NULL || sprite_path == NULL || e_place->pv == 0)
         return 1;
     return 0;

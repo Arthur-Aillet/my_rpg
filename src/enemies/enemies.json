@@ -4,20 +4,26 @@
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",
-        "pv": 10
+        "pv": 10,
+        "sprite_len": 35,
+        "animation_steps": 4
     },
     "enemy_2": {
         "type": 2,
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",
-        "pv": 10
+        "pv": 10,
+        "sprite_len": 35,
+        "animation_steps": 4
     },
     "enemy_3": {
         "type": 3,
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",
-        "pv": 10
+        "pv": 10,
+        "sprite_len": 35,
+        "animation_steps": 4
     }
 }

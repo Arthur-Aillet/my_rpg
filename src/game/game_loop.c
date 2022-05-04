@@ -11,6 +11,7 @@
 #include "my.h"
 #include "keyboard.h"
 #include "particles.h"
+#include "main_menu.h"
 
 static void poll_event_keys(game_t *game)
 {

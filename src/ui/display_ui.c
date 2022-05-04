@@ -41,7 +41,7 @@ static object_t **get_parts(void)
     result[0] = create_object("assets/img/ui/pp_bg.png", pos_circle, scale);
     result[1] = create_object("assets/img/ui/pp_circle.png", pos_circle, scale);
     result[2] = create_object("assets/img/player/neutral.png"
-        , VCF {49, 25}, scale);
+        , VCF{49, 25}, scale);
     result[3] = create_object("assets/img/ui/health_bg.png", pos_health, scale);
     result[4] = create_object("assets/img/ui/health.png", pos_health, scale);
     result[5] = create_object("assets/img/ui/stamina_bg.png"

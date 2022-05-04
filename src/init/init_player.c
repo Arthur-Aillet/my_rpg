@@ -42,6 +42,7 @@ player_t *init_game_player(maps_t *field)
     player->side = 0;
     player->dash = -1;
     player->hotbar_pos = 0;
+    player->is_attacking = 0;
     init_player_stats(player);
     init_player_sprite(obj, player);
     return player;

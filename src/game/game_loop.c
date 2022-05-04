@@ -10,6 +10,7 @@
 #include "my_game_struct.h"
 #include "my.h"
 #include "keyboard.h"
+#include "particles.h"
 
 static void poll_event_keys(game_t *game)
 {
@@ -32,6 +33,7 @@ int game_loop(game_t *game)
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         display_world(game);
+        update_particles(game->window->window, game->particles);
         player_actions(game);
         poll_event_keys(game);
         sfRenderWindow_display(game->window->window);

@@ -17,6 +17,8 @@ typedef struct pause_s{
     button_t *retour;
     button_t *option;
     button_t *quit;
+    sfView *stored;
+    sfView *view;
 } pause_t;
 
 typedef struct how_to_s{

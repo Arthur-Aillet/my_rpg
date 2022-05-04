@@ -10,7 +10,7 @@
 #include "pause_menu.h"
 #include "csfml_libs.h"
 #include "my_button.h"
-#include "mouse.h"
+#include "my_mouse.h"
 #include "inventory_prototypes.h"
 #include "my_game_struct.h"
 #include "my_csfml_utils.h"
@@ -94,6 +94,7 @@ game_t *inventory(game_t *game)
         set_correct_window_size(game->window);
         disp[page](backgrounds);
         events = evt[page](events);
+        update_mouse_cursor(game->window->window, game->mouse);
         sfRenderWindow_display(game->window->window);
     }
     game = update_stats(game);

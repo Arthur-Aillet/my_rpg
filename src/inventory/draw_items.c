@@ -74,8 +74,6 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
         if (state == 1)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
-    sfSprite_setPosition(select->sprite, itofv2(sfMouse_getPositionRenderWindow(window)));
-    sfRenderWindow_drawSprite(window, select->sprite, NULL);
 }
 
 void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)

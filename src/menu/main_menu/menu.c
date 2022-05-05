@@ -23,27 +23,28 @@
 #include "math.h"
 #include "inventory_structures.h"
 
-static void setup_menu_buttons(main_menu_t *menu, game_t *game)
+static void setup_menu_buttons(main_menu_t *men, game_t *game)
 {
-    button_setup_texture_file(menu->quit,
+    button_setup_texture_file(men->quit,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_text(menu->new_game, "Play", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->options, "Options", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->quit, "Quit", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->continue_game,
+    button_setup_text(men->new_game, "Play", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->options, "Options", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->quit, "Quit", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->continue_game,
         "How to play", FONTG("Ancient.ttf"), 40);
-    button_setup_sounds(menu->new_game,
+    button_setup_sounds(men->new_game,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->continue_game,
+    button_setup_sounds(men->continue_game,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->options,
+    button_setup_sounds(men->options,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->quit,
+    button_setup_sounds(men->quit,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->continue_game, VCF{-.09, .2}, VCF{.17, .06},
+        VCF{0, 0});
+    button_setup_offset(men->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
 }
 
 static main_menu_t *init_main_menu(game_t *game)
@@ -109,6 +110,8 @@ int menu(game_t *game)
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
 
+    if (MUSICG("mysterious_chasm.flac") != NULL)
+        sfMusic_play(MUSICG("mysterious_chasm.flac"));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);

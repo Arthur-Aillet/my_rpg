@@ -40,6 +40,7 @@ void fill_musics(DIR *fd, music_t **musics, char *name, struct dirent *dir)
             name = my_strcat(name, dir->d_name);
             musics[number] = malloc(sizeof(music_t));
             musics[number]->music = sfMusic_createFromFile(name);
+            sfMusic_setLoop(musics[number]->music, 1);
             musics[number]->name = my_strdup(dir->d_name);
             number += 1;
             free(name);

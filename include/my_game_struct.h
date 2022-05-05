@@ -18,12 +18,17 @@
 #include "inventory_structures.h"
 #include "particle_struct.h"
 
+typedef struct map_option_s {
+    int space;
+    int layer;
+    int map;
+} map_option_t;
+
 typedef struct maps_s {
     char *name;
     sfTexture *tex_ts;
     sfSprite* sp_ts;
-    char **base;
-    char **obs;
+    char ***maps;
     int def;
     int height;
     int width;
@@ -64,6 +69,7 @@ typedef struct pnj_s {
     int frames;
     int actual;
     bool need_to_talk;
+    char *next_dialogue;
     object_t *objet;
 } pnj_t;
 

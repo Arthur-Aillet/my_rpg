@@ -11,12 +11,13 @@
 #include "my.h"
 #include "keyboard.h"
 #include "particles.h"
+#include "main_menu.h"
 
 static void poll_event_keys(game_t *game)
 {
     game->keys = get_keyboard_input(game->keys, game->window->window);
     if (game->ESC == 2)
-        game->status->end_game = 1;
+        game->status->end_game = pause_menu(game);
     if (game->P == 2)
         game->status->end_game = 1;
     if (game->I == 2)

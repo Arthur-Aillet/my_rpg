@@ -60,8 +60,8 @@ void display_world(game_t *game)
 
     vec.x -= 960;
     vec.y -= 540;
-    display_base(game, game->game->maps[i],
-        0, game->game->maps[i]->height);
+    display_map(game, 0, 0, 1);
+    display_map(game, 1, 1, 0);
     if (game->game->in_dialogue == false)
         display_player(game);
     else
@@ -70,6 +70,7 @@ void display_world(game_t *game)
     display_obs(game, game->game->maps[i],
         (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
     update_particles(game->window->window, game->particles);
+    display_map(game, 2, 2, 0);
     display_ui(game->window->window, game->game->player, vec);
     display_hotbar_items(game);
     display_dialogues(game);

@@ -1,6 +1,6 @@
 {
     "enemy_1": {
-        "type": 1,
+        "type": 0,
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",
@@ -9,7 +9,7 @@
         "animation_steps": 4
     },
     "enemy_2": {
-        "type": 2,
+        "type": 0,
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",
@@ -18,7 +18,7 @@
         "animation_steps": 4
     },
     "enemy_3": {
-        "type": 3,
+        "type": 0,
         "speed": 2,
         "dps": 2,
         "sprite": "assets/img/blobs.png",

@@ -34,14 +34,14 @@ int player_is_collide(game_t *game, int dir, int value)
 
     game->game->player->pos.x += dir > 0 ? value : 0;
     game->game->player->pos.y += dir == 0 ? value : 0;
-    while (game->game->maps[map]->obs[++i]) {
+    while (game->game->maps[map]->maps[1][++i]) {
         j = -1;
-        while (game->game->maps[map]->obs[i][++j])
+        while (game->game->maps[map]->maps[1][i][++j])
             ret = ((int)((game->game->player->pos.x + 8) / 64) == j ||
                 (int)((game->game->player->pos.x - 8) / 64) + 1 == j) &&
-                game->game->maps[map]->obs[i][j] == '1' &&
+                game->game->maps[map]->maps[1][i][j] != '0' &&
                 ((int)((game->game->player->pos.y + 32) / 64) == i ||
-                (int)((game->game->player->pos.y - 16) / 64) + 1 == i)
+                (int)((game->game->player->pos.y - 1) / 64) + 1 == i)
                 ? 1 : ret;
     }
     return ret;

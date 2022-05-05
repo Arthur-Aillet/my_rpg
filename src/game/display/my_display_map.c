@@ -8,49 +8,34 @@
 #include "my_rpg.h"
 #include "my.h"
 
-static void print_tile_map(game_t *game, char **map, sfVector2f vec, int p)
+static void print_tile_map(game_t *game, maps_t *m, sfVector2f v, map_option_t opt)
 {
-    int i = get_current_map(game);
-    sfIntRect rect = {0, 0,
-        game->game->maps[i]->def, game->game->maps[i]->def};
+    sfIntRect rect = {0, 0, m->def, m->def};
 
-    if (map[(int)vec.y][(int)vec.x] == '1')
-        rect.left = game->game->maps[i]->def;
-    if (map[(int)vec.y][(int)vec.x] == '0' && p == 0)
+    rect.top = opt.layer * m->def;
+    rect.left = (m->maps[opt.map][(int)v.y][(int)v.x] - '0') * m->def;
+    if (rect.left == 0 && opt.space == 0)
         return;
-    sfSprite_setTextureRect(game->game->maps[i]->sp_ts , rect);
-    vec.x *= 64;
-    vec.y *= 64;
-    sfSprite_setPosition(game->game->maps[i]->sp_ts, vec);
-    sfSprite_setScale(game->game->maps[i]->sp_ts,
-        VCF {64 / game->game->maps[i]->def, 64 / game->game->maps[i]->def});
-    sfRenderWindow_drawSprite(game->window->window, game->game->maps[i]->sp_ts,
-        NULL);
+    if (opt.space == 0)
+        rect.left -= 1 * m->def;
+    sfSprite_setTextureRect(m->sp_ts, rect);
+    v.x *= 64;
+    v.y *= 64;
+    sfSprite_setPosition(m->sp_ts, v);
+    sfSprite_setScale(m->sp_ts, VCF {64 / m->def, 64 / m->def});
+    sfRenderWindow_drawSprite(game->window->window, m->sp_ts, NULL);
 }
 
-void display_base(game_t *game, maps_t *maps, int begin, int end)
+void display_map(game_t *game, int map, int layer, int space)
 {
-    sfVector2f vec = {0, begin};
+    sfVector2f vec = {0, 0};
+    map_option_t opt = {space, layer, map};
+    char **current_map = game->game->maps[get_current_map(game)]->maps[map];
 
-    while (maps->base[(int)vec.y] && vec.y < end) {
+    while (current_map[(int)vec.y]) {
         vec.x = 0;
-        while (maps->base[(int)vec.y][(int)vec.x]) {
-            print_tile_map(game, maps->base, vec, 1);
-            print_tile_map(game, maps->obs, vec, 0);
-            vec.x++;
-        }
-        vec.y++;
-    }
-}
-
-void display_obs(game_t *game, maps_t *maps, int begin, int end)
-{
-    sfVector2f vec = {0, begin};
-
-    while (maps->base[(int)vec.y] && vec.y < end) {
-        vec.x = 0;
-        while (maps->base[(int)vec.y][(int)vec.x]) {
-            print_tile_map(game, maps->obs, vec, 0);
+        while (current_map[(int)vec.y][(int)vec.x]) {
+            print_tile_map(game, game->game->maps[get_current_map(game)], vec, opt);
             vec.x++;
         }
         vec.y++;

@@ -35,7 +35,7 @@ static void display_talk(game_t *game, pnj_t *pnj)
 void display_dialogues(game_t *game)
 {
     int nearest_index = -1;
-    int nearest_dist = 10000000000;
+    int nearest_dist = 10000000;
 
     for (int i = 0; game->game->pnjs[i] != NULL; i++) {
         if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0

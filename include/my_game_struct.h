@@ -54,6 +54,7 @@ typedef struct player_s {
     int move_spd;
     int dash;
     int hotbar_pos;
+    int is_attacking;
 } player_t;
 
 typedef struct pnj_s {

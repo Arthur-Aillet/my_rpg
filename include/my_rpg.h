@@ -31,6 +31,7 @@
 #define LEFT_WALK 3
 #define IDLE 4
 #define STAB 8
+#define ATTACK 12
 
 int my_error_handling(int ac, char **av);
 int my_help(void);

@@ -48,7 +48,7 @@ static animation_t create_animation(char *name, int hsize
 
 static animation_t *get_player_animations(void)
 {
-    animation_t *result = malloc(sizeof(animation_t) * 12);
+    animation_t *result = malloc(sizeof(animation_t) * 16);
 
     result[DOWN_WALK] = create_animation("down/walk.png", 64, 64, 6);
     result[UP_WALK] = create_animation("up/walk.png", 64, 64, 6);
@@ -62,6 +62,10 @@ static animation_t *get_player_animations(void)
     result[9] = create_animation("up/dash.png", 64, 64, 11);;
     result[10] = create_animation("right/dash.png", 64, 64, 11);;
     result[11] = create_animation("left/dash.png", 64, 64, 11);;
+    result[12] = create_animation("down/attack.png", 64, 64, 10);
+    result[13] = create_animation("up/attack.png", 64, 64, 10);
+    result[14] = create_animation("right/attack.png", 64, 64, 10);
+    result[15] = create_animation("left/attack.png", 64, 64, 10);
     return (result);
 }
 

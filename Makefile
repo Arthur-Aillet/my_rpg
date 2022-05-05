@@ -122,6 +122,7 @@ SRC_MENU		=			$(MENU_PATH)main_menu/menu.c				\
 							$(MENU_PATH)options/volume_utils.c			\
 							$(MENU_PATH)options/display.c				\
 							$(MENU_PATH)options/display_init.c			\
+							$(MENU_PATH)pause_menu/pause.c				\
 							$(MENU_PATH)how_to_play/how_to_play.c		\
 
 

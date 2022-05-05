@@ -41,7 +41,7 @@ static object_t **get_parts(void)
     result[0] = create_object("assets/img/ui/pp_bg.png", pos_circle, scale);
     result[1] = create_object("assets/img/ui/pp_circle.png", pos_circle, scale);
     result[2] = create_object("assets/img/player/neutral.png"
-        , VCF {49, 25}, scale);
+        , VCF{49, 25}, scale);
     result[3] = create_object("assets/img/ui/health_bg.png", pos_health, scale);
     result[4] = create_object("assets/img/ui/health.png", pos_health, scale);
     result[5] = create_object("assets/img/ui/stamina_bg.png"
@@ -61,8 +61,7 @@ static void display_circle(sfRenderWindow *window, object_t **parts)
 
 void display_hotbar_items(game_t *game)
 {
-    sfVector2f pos = {-606 + game->game->pos_cam.x
-        , 433 + game->game->pos_cam.y};
+    sfVector2f pos = {-606 + game->game->pos_cam.x, 433 + game->game->pos_cam.y};
     for (int i = 51; i <= 60; i++) {
         sfSprite_setPosition(game->items[i].obj->sprite, pos);
         pos.x += 124;

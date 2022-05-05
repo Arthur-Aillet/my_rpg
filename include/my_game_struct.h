@@ -67,6 +67,7 @@ typedef struct pnj_s {
     int frames;
     int actual;
     bool need_to_talk;
+    char *next_dialogue;
     object_t *objet;
 } pnj_t;
 

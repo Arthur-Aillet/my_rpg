@@ -110,6 +110,11 @@ int menu(game_t *game)
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
 
+    if (MUSICG("mysterious_chasm.flac") != NULL)
+        sfMusic_play(MUSICG("mysterious_chasm.flac"));
+/*     if (MUSICG("our_home.flac") != NULL)
+        sfMusic_play(MUSICG("our_home.flac")); */
+    printf("%i\n",sfMusic_getLoop(MUSICG("mysterious_chasm.flac")));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);

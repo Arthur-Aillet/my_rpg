@@ -13,6 +13,14 @@
 #include "dialogue.h"
 #include "my.h"
 
+static int find_dialogue(game_t *game, pnj_t *pnj, char *name)
+{
+    for (int i = 0; pnj->dialogues[i] != NULL; i++)
+        if (my_strcmp(pnj->dialogues[i], name) == 0)
+            return i;
+    return -1;
+}
+
 static void display_talk(game_t *game, pnj_t *pnj)
 {
     sfVector2f pos = sfSprite_getPosition(pnj->objet->sprite);
@@ -27,7 +35,8 @@ static void display_talk(game_t *game, pnj_t *pnj)
     if (game->E == true && step > 0)
         step = -1;
     if (step >= 0)
-        display_dialogue(game, pnj->dialogues[0], &step, game->fonts);
+        display_dialogue(game, pnj->dialogues[find_dialogue(game,
+            pnj, pnj->next_dialogue)], &step, game->fonts);
     if (step < 0)
         game->game->in_dialogue = false;
 }
@@ -35,12 +44,12 @@ static void display_talk(game_t *game, pnj_t *pnj)
 void display_dialogues(game_t *game)
 {
     int nearest_index = -1;
-    int nearest_dist = 10000000;
+    int nearest_dist = 1000000;
 
     for (int i = 0; game->game->pnjs[i] != NULL; i++) {
         if (my_strcmp(game->game->pnjs[i]->map_name, game->game->current) == 0
             && dist_two_points(sfSprite_getPosition(game->game->pnjs[i]->objet->sprite), game->game->player->pos) < nearest_dist
-            && game->game->pnjs[i]->need_to_talk == true) {
+            && game->game->pnjs[i]->need_to_talk == true && find_dialogue(game, game->game->pnjs[i], game->game->pnjs[i]->next_dialogue) >= 0) {
             nearest_index = i;
             nearest_dist = dist_two_points(sfSprite_getPosition(game->game->pnjs[i]->objet->sprite), game->game->player->pos);
         }

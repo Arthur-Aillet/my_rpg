@@ -24,6 +24,7 @@ void destroy_pnjs(pnj_t **pnjs)
         } */
         free(pnjs[i]->dialogues);
         free(pnjs[i]->map_name);
+        free(pnjs[i]->next_dialogue);
     }
     free(pnjs);
 }
@@ -49,6 +50,7 @@ pnj_t *create_pnj(json_obj_t *obj)
     pnj->name = my_strdup(obj->name);
     pnj->actual = 0;
     pnj->need_to_talk = true;
+    pnj->next_dialogue = my_strdup("config/greetings.json");
     pnj->size_x = get_int_by_name(obj, "size_x");
     pnj->size_y = get_int_by_name(obj, "size_y");
     pnj->frames = sfTexture_getSize(pnj->objet->texture).x / pnj->size_x;

@@ -13,69 +13,60 @@
 #include "my_game_struct.h"
 #include <stdlib.h>
 
-static void draw_pic(sfRenderWindow *window, object_t *pic, int direction)
+static void draw_pic(game_t *game, object_t *pic, int direction)
 {
-    sfVector2i pos = {36 - 2, 664 - 12};
+    sfVector2f pos = {game->game->pos_cam.x - 914, 124 + game->game->pos_cam.y};
     sfVector2f size = {240, 376};
-    sfVector2f new_pos;
 
     if (direction != 0)
-        pos.x = 1644 - 37;
-    new_pos = sfRenderWindow_mapPixelToCoords(window, pos,
-        sfRenderWindow_getView(window));
-    sfSprite_setPosition(pic->sprite, new_pos);
+        pos.x += 1593;
+    sfSprite_setPosition(pic->sprite, pos);
     sf_sprite_set_pixel_size(pic->sprite, size);
-    sfRenderWindow_drawSprite(window, pic->sprite, NULL);
+    sfRenderWindow_drawSprite(game->window->window, pic->sprite, NULL);
 }
 
-static void draw_name(sfRenderWindow *window, char *name, int dir, sfFont *font)
+static void draw_name(game_t *game, char *name, int dir, sfFont *font)
 {
     sfText *text = sfText_create();
-    sfVector2i pos = {304 + 8, 688 - 23};
+    sfVector2f pos = {game->game->pos_cam.x - 642, 134 + game->game->pos_cam.y};
     sfVector2f size = {200, 44};
-    sfVector2f new_pos;
 
     if (dir != 0)
-        pos.x = 1416 - 10;
-    new_pos = sfRenderWindow_mapPixelToCoords(window, pos,
-        sfRenderWindow_getView(window));
+        pos.x += 1098;
     sfText_setFont(text, font);
-    sfText_setPosition(text, new_pos);
+    sfText_setPosition(text, pos);
     sfText_setString(text, name);
     sf_text_set_pixel_size(text, size);
-    sfRenderWindow_drawText(window, text, NULL);
+    sfRenderWindow_drawText(game->window->window, text, NULL);
 }
 
-static void draw_line(sfRenderWindow *window, char *line, int dir, sfFont *font)
+static void draw_line(game_t *game, char *line, int dir, sfFont *font)
 {
     sfText *text = sfText_create();
-    sfVector2i pos = {332 - 10, 756 - 20};
+    sfVector2f pos = {game->game->pos_cam.x - 628, 196 + game->game->pos_cam.y};
     sfVector2f size = {1544, 248};
-    sfVector2f new_pos;
 
     if (dir != 0)
-        pos.x = 64;
-    new_pos = sfRenderWindow_mapPixelToCoords(window, pos,
-        sfRenderWindow_getView(window));
+        pos.x -= 278;
     line = add_new_lines(line);
     sfText_setFont(text, font);
-    sfText_setPosition(text, new_pos);
+    sfText_setPosition(text, pos);
     sfText_setString(text, line);
     sf_text_set_pixel_size(text, size);
-    sfRenderWindow_drawText(window, text, NULL);
+    sfRenderWindow_drawText(game->window->window, text, NULL);
 }
 
-static void display_line(sfRenderWindow *window, json_obj_t *obj, font_t **fonts)
+static void display_line(game_t *game, json_obj_t *obj, font_t **fonts)
 {
     sfVector2f none = {0, 0};
     sfFont *font = find_font(get_str_by_name(obj, "font"), fonts);
     object_t *pic = create_object(get_str_by_name(obj, "image"), none, none);
     int direction = get_int_by_name(obj, "direction");
 
-    draw_chatbox(window, direction);
-    draw_pic(window, pic, direction);
-    draw_name(window, get_str_by_name(obj, "name"), direction, font);
-    draw_line(window, get_str_by_name(obj, "text"), direction, font);
+    draw_chatbox(game, direction);
+    draw_pic(game, pic, direction);
+    draw_name(game, get_str_by_name(obj, "name"), direction, font);
+    draw_line(game, get_str_by_name(obj, "text"), direction, font);
     destroy_object(pic);
 }
 
@@ -87,7 +78,7 @@ void display_dialogue(game_t *game, char *path, int *step, font_t **fonts)
     if (game->ENTER == 2)
         *step += 1;
     if (obj != NULL)
-        display_line(game->window->window, obj, fonts);
+        display_line(game, obj, fonts);
     else
         *step = -1;
 }

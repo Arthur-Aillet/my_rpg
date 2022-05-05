@@ -17,7 +17,7 @@
         "size_x": 15,
         "size_y": 32,
         "dialogues": {
-            "greetings": "config/greetings_women.json"
+            "greetings": "config/greetings.json"
         }
     }
 }

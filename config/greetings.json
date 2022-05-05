@@ -1,7 +1,7 @@
 
 {
     "step1": {
-        "direction": 0,
+        "direction": 1,
         "image": "assets/img/pnj/Old_man.jpg",
         "font": "Ancient.ttf",
         "name": "Old man",

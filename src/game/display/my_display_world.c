@@ -9,6 +9,7 @@
 #include "my.h"
 #include "pnjs.h"
 #include "ui.h"
+#include "particles.h"
 
 static void setup_camera(game_t *game, int i)
 {
@@ -29,6 +30,29 @@ static void setup_camera(game_t *game, int i)
     sfRenderWindow_setView(game->window->window, game->game->cam);
 }
 
+static void weather(game_t *game)
+{
+    static sfClock *clock = NULL;
+    static int time = 300;
+
+    if (clock == NULL)
+        clock = sfClock_create();
+    if (TIME(clock, 1200)) {
+        game->game->weather = rand() % 3;
+        time = 300;
+    }
+    if (time != 0 && game->game->weather != 2) {
+        for (int i = rand() % time / 30; i > 0; i--) {
+            game->particles = add_particle(game->particles
+                , VCF {game->game->pos_cam.x + rand () % 3000 - 1500
+                , game->game->pos_cam.y + rand() % 2000 - 1000}
+                , game->game->weather, 15);
+        }
+        if (TIME(clock, 1))
+            time -= 1;
+    }
+}
+
 void display_world(game_t *game)
 {
     int i = get_current_map(game);
@@ -45,8 +69,10 @@ void display_world(game_t *game)
     display_pnjs(game);
     display_obs(game, game->game->maps[i],
         (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
+    update_particles(game->window->window, game->particles);
     display_ui(game->window->window, game->game->player, vec);
     display_hotbar_items(game);
     display_dialogues(game);
     setup_camera(game, i);
+    weather(game);
 }

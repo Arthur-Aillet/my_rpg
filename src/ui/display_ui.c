@@ -65,8 +65,10 @@ void display_hotbar_items(game_t *game)
     for (int i = 51; i <= 60; i++) {
         sfSprite_setPosition(game->items[i].obj->sprite, pos);
         pos.x += 124;
-        sfRenderWindow_drawSprite(game->window->window
-            , game->items[i].obj->sprite, NULL);
+        if (game->items[i].quantity > 0) {
+            sfRenderWindow_drawSprite(game->window->window
+                , game->items[i].obj->sprite, NULL);
+        }
     }
 }
 

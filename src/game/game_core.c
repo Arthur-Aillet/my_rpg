@@ -22,6 +22,7 @@
 #include "pnjs.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
+#include "object creation.h"
 
 void destroy_game(game_t *game)
 {
@@ -50,23 +51,6 @@ void destroy_game(game_t *game)
     free(game->status);
 }
 
-item_t create_sword(item_t item, int number)
-{
-    item.stack_size = 255;
-    item.armor_type = HEAD;
-    item.quantity = number;
-    item.armor_type = 0;
-    item.type = SWORD;
-    item.obj = create_object("assets/img/sword.png", VCF {0, 0}, VCF {4, 4});
-    sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
-    return (item);
-}
-
-void player_attack(game_t *game)
-{
-    game->game->player->is_attacking = 1;
-}
-
 int my_rpg(void)
 {
     game_t *game = init_game_struct();
@@ -76,8 +60,9 @@ int my_rpg(void)
         , 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
-    game->items[10] = create_sword(game->items[10], 1);
-    game->items[10].action = player_attack;
+    game->items[51] = create_sword(game->items[10], 1);
+    game->items[52] = create_stamina_potion_m(game->items[52], 5);
+    game->items[53] = create_breeches(game->items[54], 1);
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 5;
     game->comp = &competence;

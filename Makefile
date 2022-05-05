@@ -65,6 +65,8 @@ POTION_PATH		=			$(MINGAME_PATH)potion/
 
 P_ANIM_PATH		=			$(SRC_PATH)player_animation/
 
+ACT_PATH		=			$(SRC_PATH)game/actions/objects/
+
 TEST_PATH		=			tests/
 
 ## ===================================================================
@@ -129,8 +131,12 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\
 							$(INIT_PATH)init_in_game_struct.c			\
 							$(INIT_PATH)init_map_objects.c				\
-							$(INIT_PATH)init_pnj.c				\
+							$(INIT_PATH)init_pnj.c						\
 							$(INIT_PATH)init_player.c					\
+							$(INIT_PATH)items/create_objects.c			\
+							$(INIT_PATH)items/health_potions.c			\
+							$(INIT_PATH)items/stamina_potions.c			\
+							$(INIT_PATH)items/speed_potions.c			\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\
@@ -190,6 +196,9 @@ SRC_UI			=			$(UI_PATH)display_bars.c						\
 
 SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c				\
 
+SRC_ACT			=			$(ACT_PATH)weapons.c							\
+							$(ACT_PATH)potions.c							\
+
 SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_BASICS)									\
 							$(SRC_CSFML)									\
@@ -206,6 +215,7 @@ SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_UI)										\
 							$(SRC_MENU)										\
 							$(SRC_PLAYER_ANIM)								\
+							$(SRC_ACT)										\
 
 SRC				=			$(SRC_GLOBAL)									\
 							main.c

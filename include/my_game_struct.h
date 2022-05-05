@@ -11,7 +11,6 @@
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
 #include "my_window_struct.h"
-/* #include "item_structure.h" */
 #include "my_controle_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
@@ -34,6 +33,8 @@ typedef struct maps_s {
     char *bot;
 } maps_t;
 
+typedef struct game_s game_t;
+
 typedef struct player_s {
     float health;
     float max_health;
@@ -50,6 +51,7 @@ typedef struct player_s {
     int dash;
     int hotbar_pos;
     int is_attacking;
+    void (*status)(game_t *);
 } player_t;
 
 typedef struct pnj_s {
@@ -75,6 +77,7 @@ typedef struct in_game_s {
     pnj_t **pnjs;
     object_t *chat_box;
     player_t *player;
+    int weather;
 } in_game_t;
 
 typedef struct item_s item_t;

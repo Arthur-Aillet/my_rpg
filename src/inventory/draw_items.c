@@ -32,6 +32,8 @@ static char *my_itos(int i)
 
 static void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
+    if (item.armor_type > 0)
+        return;
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
     sfVector2f pos = sfSprite_getPosition(item.obj->sprite);
@@ -81,8 +83,9 @@ void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)
     sfVector2f pos = {0, 0};
 
     for (int i = 0; i < NB_SLOTS; i++) {
-        if (items[i].quantity == 0) {
+        if (items[i].quantity <= 0) {
             items[i].type = 0;
+            items[i].quantity = 0;
         }
     }
     for (int i = NB_SLOTS - 1; i >= 0; i--) {

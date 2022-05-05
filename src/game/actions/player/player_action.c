@@ -59,11 +59,18 @@ void hotbar_actions(game_t *game)
     if (abs(game->HSCROLL) > 0 && game->game->in_dialogue == false)
         game->game->player->hotbar_pos += game ->HSCROLL;
     if (game->RCLICK == RELEASE && game->game->in_dialogue == false &&
-        game->items[game->game->player->hotbar_pos + 51].action != NULL)
+        game->items[game->game->player->hotbar_pos + 51].action != NULL) {
         game->items[game->game->player->hotbar_pos + 51].action(game);
-    if (game->LCLICK)
+        if (game->items[game->game->player->hotbar_pos + 51].consumable != 0)
+            game->items[game->game->player->hotbar_pos + 51].quantity -= 1;
+        }
+    if (game->LCLICK && game->game->player->stamina >= 50) {
         game->game->player->is_attacking = 1;
+        game->game->player->stamina -= 50;
+    }
     do_attack(game);
+    if (game->game->player->status != NULL)
+        game->game->player->status(game);
 }
 
 void player_actions(game_t *game)

@@ -98,7 +98,9 @@ typedef struct item_s {
     int stack_size;
     int type;
     int armor_type;
-    void (*action)(struct game_s *);
+    void (*action)(game_t *);
+    int consumable;
+    int power;
 } item_t;
 
 typedef struct backgrounds_s {

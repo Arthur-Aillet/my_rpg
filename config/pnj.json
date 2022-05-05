@@ -6,7 +6,6 @@
         "idle": "assets/img/pnj/Old_man_idle.png",
         "size_x": 18,
         "size_y": 31,
-        "portrait": "assets/img/pnj/Old_man.jpg",
         "dialogues": {
             "greetings": "config/greetings.json"
         }
@@ -17,7 +16,6 @@
         "idle": "assets/img/pnj/Woman_idle.png",
         "size_x": 15,
         "size_y": 32,
-        "portrait": "assets/img/pnj/Women.jpg",
         "dialogues": {
             "greetings": "config/greetings_women.json"
         }

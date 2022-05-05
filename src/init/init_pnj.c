@@ -17,7 +17,6 @@ void destroy_pnjs(pnj_t **pnjs)
 {
     for (int i = 0; pnjs[i] != NULL; i++) {
         free(pnjs[i]->name);
-        destroy_object(pnjs[i]->portrait);
         destroy_object(pnjs[i]->objet);
 /*         for (int j = 0; pnjs[j]->dialogues[j] != NULL; j++) {
             free(pnjs[i]->dialogues[j]);
@@ -38,8 +37,6 @@ pnj_t *create_pnj(json_obj_t *obj)
     pnj->objet = create_object(get_str_by_name(obj, "idle"),
         VCF{get_int_by_name(obj, "pos_x"),
         get_int_by_name(obj, "pos_y")}, VCF{4, 4});
-    pnj->portrait = create_object(get_str_by_name(obj, "portrait"),
-        VCF{0, 0}, VCF{1, 1});
     for (nbr = 0; get_str_by_index(dialogues, nbr) != NULL; nbr++);
     pnj->dialogues = malloc(sizeof(char *) * (nbr + 1));
     pnj->dialogues[nbr] = NULL;

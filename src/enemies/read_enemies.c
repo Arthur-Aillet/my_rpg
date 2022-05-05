@@ -12,9 +12,12 @@
 sfIntRect configure_enemy_rect(json_obj_t *data, enemy_t *e_place)
 {
     sfIntRect rect = {0, 0, 0, 0};
+    sfVector2u size = sfTexture_getSize(e_place->object->texture);
+    sfVector2f origin = {size.x / 2, size.y / 2};
 
-    rect.height = sfTexture_getSize(e_place->object->texture).y;
+    rect.height = size.y;
     rect.width = get_int_by_name(data, "sprite_len");
+    sfSprite_setOrigin(e_place->object->sprite, origin);
     e_place->animation_steps = get_int_by_name(data, "animation_steps");
     return rect;
 }

@@ -1,8 +1,8 @@
 {
     "oldmen": {
         "pos_x" : 400,
-        "pos_y" : 200,
-        "map" : "field",
+        "pos_y" : 600,
+        "map" : "town",
         "idle": "assets/img/pnj/Old_man_idle.png",
         "size_x": 18,
         "size_y": 31,
@@ -11,9 +11,9 @@
             "greetings": "config/greetings.json"
         }
     },    "women": {
-        "pos_x" : 300,
-        "pos_y" : 200,
-        "map" : "field",
+        "pos_x" : 1600,
+        "pos_y" : 600,
+        "map" : "town",
         "idle": "assets/img/pnj/Woman_idle.png",
         "size_x": 15,
         "size_y": 32,

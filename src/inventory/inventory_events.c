@@ -26,8 +26,8 @@ events_t evt_inv(events_t events)
     slot = get_slot(itofv2(mousepos));
     if ((events.LCLICK == PRESS || events.RCLICK == PRESS))
         if (slot != 0 && events.items[slot].type != 0)
-            events.items = pickup_items(events.items, events.keys, &pressed
-                , slot);
+            events.items = pickup_items(events.items, events.keys,
+            &pressed, slot);
     if ((events.LCLICK == RELEASE || events.RCLICK == RELEASE)) {
         events.items = drop_items(events.items, pressed, slot);
     }

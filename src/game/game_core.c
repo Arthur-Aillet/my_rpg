@@ -56,8 +56,8 @@ int my_rpg(void)
     game_t *game = init_game_struct();
     competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2
-        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        , 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0};
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0,
+        0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[51] = create_sword(game->items[10], 1);

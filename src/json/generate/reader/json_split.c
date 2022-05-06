@@ -33,8 +33,6 @@ int word_count(char *str, char separator, int let_brackets)
             result += 1;
         while (str[i] == separator)
             i++;
-        //if (str[i] == '\0')
-        //    return result - 1;
     }
     return result;
 }

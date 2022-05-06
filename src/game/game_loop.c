@@ -7,6 +7,7 @@
 
 #include "my_rpg.h"
 #include "keyboard.h"
+#include "enemies.h"
 #include "my_game_struct.h"
 #include "my.h"
 #include "keyboard.h"
@@ -29,12 +30,16 @@ static void poll_event_keys(game_t *game)
 int game_loop(game_t *game)
 {
     transition(game, 2);
-
+    game->game->samples_enemies = create_enemies_array();
+    if (game->game->samples_enemies == NULL)
+        return 84;
+    game->game->enemies = spawn_ennemies(5, game->game->samples_enemies, game);
     while (game->status->end_game == 0 && sfRenderWindow_isOpen
-        (game->window->window)) {
+           (game->window->window)) {
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         display_world(game);
+        displace_enemies(game->game->enemies, game);
         player_actions(game);
         poll_event_keys(game);
         sfRenderWindow_display(game->window->window);

@@ -67,6 +67,7 @@ void display_world(game_t *game)
     else
         PLACE_PLAYER(IDLE + game->game->player->side + ISDASH * 4);
     display_pnjs(game);
+    display_enemies(game, game->game->enemies);
     update_particles(game->window->window, game->particles);
     display_map(game, 2, 2, 0);
     display_ui(game->window->window, game->game->player, vec);

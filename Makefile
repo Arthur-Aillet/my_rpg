@@ -49,6 +49,8 @@ INVENTORY_PATH	=			$(SRC_PATH)inventory/
 
 JSON_PATH		=			$(SRC_PATH)json/
 
+ENEMIES_PATH	=			$(SRC_PATH)enemies/
+
 MATH_PATH		=			$(SRC_PATH)math/
 
 MINGAME_PATH	=			$(SRC_PATH)mini_game/
@@ -173,6 +175,12 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
 																			\
 							$(JSON_PATH)dependencies/chain_chars.c			\
 
+SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
+							$(ENEMIES_PATH)enemies_movement.c				\
+							$(ENEMIES_PATH)enemies_pv.c						\
+							$(ENEMIES_PATH)read_enemies.c					\
+							$(ENEMIES_PATH)spawn_enemies.c					\
+
 SRC_MATH		=			$(MATH_PATH)math.c								\
 
 SRC_KEY			=			$(KEY_PATH)keyboard_input.c						\
@@ -208,6 +216,7 @@ SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_INIT)										\
 							$(SRC_INVENTORY)								\
 							$(SRC_JSON)										\
+							$(SRC_ENEMIES)									\
 							$(SRC_MATH)										\
 							$(SRC_POTION)									\
 							$(SRC_MINIGAME)									\
@@ -229,7 +238,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O1
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 

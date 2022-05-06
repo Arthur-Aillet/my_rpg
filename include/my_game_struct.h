@@ -18,6 +18,25 @@
 #include "inventory_structures.h"
 #include "particle_struct.h"
 
+typedef struct enemy_s {
+    char *name;
+    int type;
+    int speed;
+    int dps;
+    int last_update;
+    object_t *object;
+    sfIntRect rect;
+    int animation_steps;
+    int pv;
+    int status;
+    int status_data;
+} enemy_t;
+
+typedef struct enemy_node_s {
+    enemy_t enemy;
+    struct enemy_node_s *next;
+} enemy_node_t;
+
 typedef struct map_option_s {
     int space;
     int layer;
@@ -83,6 +102,9 @@ typedef struct in_game_s {
     pnj_t **pnjs;
     object_t *chat_box;
     player_t *player;
+    enemy_t *samples_enemies;
+    sfClock *clock;
+    enemy_node_t *enemies;
     int weather;
 } in_game_t;
 

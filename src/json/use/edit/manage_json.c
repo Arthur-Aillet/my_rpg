@@ -14,15 +14,15 @@ void free_json_int_str(json_obj_t *obj)
 {
     if (obj->data_str != NULL) {
         for (int i = 0; obj->fields_str[i]; i++) {
-                free(obj->fields_str[i]);
-                free(obj->data_str[i]);
+            free(obj->fields_str[i]);
+            free(obj->data_str[i]);
         }
         free(obj->fields_str);
         free(obj->data_str);
     }
     if (obj->data_int != NULL) {
         for (int i = 0; obj->fields_int[i]; i++) {
-                free(obj->fields_int[i]);
+            free(obj->fields_int[i]);
         }
         free(obj->fields_int);
         free(obj->data_int);

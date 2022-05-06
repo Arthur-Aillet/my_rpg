@@ -17,7 +17,7 @@ static void do_intro_animation(game_t *game, sfSprite *s, float *time,
     sfIntRect rect = {0, 0, 1920, 1080};
     int i = 0;
 
-    while (i < 14) {
+    while (i < 14 && sfRenderWindow_isOpen(game->window->window)) {
         if (i == 1)
             sfSound_play(find_sound("intro.ogg", game->sounds));
         game->keys = get_keyboard_input(game->keys, game->window->window);

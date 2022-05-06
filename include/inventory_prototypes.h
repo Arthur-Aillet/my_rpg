@@ -41,7 +41,6 @@ void draw_descriptions(sfRenderWindow *window, competences_t *comp, sfText *);
 void disp_inv(backgrounds_t bgs);
 void disp_map(backgrounds_t bgs);
 void draw_items(sfRenderWindow *window, item_t *items, txtobject_t);
-void pause_menu(sfRenderWindow *window, char *keys);
 
 events_t evt_cmp(events_t events);
 events_t evt_inv(events_t events);

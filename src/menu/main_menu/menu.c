@@ -23,27 +23,28 @@
 #include "math.h"
 #include "inventory_structures.h"
 
-static void setup_menu_buttons(main_menu_t *menu, game_t *game)
+static void setup_menu_buttons(main_menu_t *men, game_t *game)
 {
-    button_setup_texture_file(menu->quit,
+    button_setup_texture_file(men->quit,
         (sfIntRect){0, 0, 263, 79}, "assets/img/button.jpg");
-    button_setup_text(menu->new_game, "New game", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->options, "Options", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->quit, "Quit", FONTG("Ancient.ttf"), 40);
-    button_setup_text(menu->continue_game,
-        "Continue game", FONTG("Ancient.ttf"), 40);
-    button_setup_sounds(menu->new_game,
+    button_setup_text(men->new_game, "Play", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->options, "Options", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->quit, "Quit", FONTG("Ancient.ttf"), 40);
+    button_setup_text(men->continue_game,
+        "How to play", FONTG("Ancient.ttf"), 40);
+    button_setup_sounds(men->new_game,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->continue_game,
+    button_setup_sounds(men->continue_game,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->options,
+    button_setup_sounds(men->options,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_sounds(menu->quit,
+    button_setup_sounds(men->quit,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
-    button_setup_offset(menu->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->continue_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
-    button_setup_offset(menu->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->new_game, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->continue_game, VCF{-.09, .2}, VCF{.17, .06},
+        VCF{0, 0});
+    button_setup_offset(men->options, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
+    button_setup_offset(men->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
 }
 
 static main_menu_t *init_main_menu(game_t *game)
@@ -81,7 +82,8 @@ static void update_menu(main_menu_t *menu, game_t *game)
     update_button(game->window->window, menu->options, game->keys);
     update_button(game->window->window, menu->quit, game->keys);
     update_mouse_cursor(game->window->window, game->mouse);
-    if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1), 0, 0.03)) {
+    if (BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(menu->clock)), 1),
+        0, 0.03)) {
         menu->particle = add_particle(menu->particle, VCF {1820 - random -
             rand() % 50, 300 + random * 1.1 - rand() % 50}, LIGHT_DUST, 1);
         menu->particle = add_particle(menu->particle, VCF {650, 530}, FIRE, 10);
@@ -108,8 +110,8 @@ int menu(game_t *game)
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
 
-    if (MUSICG("the caves.wav") != NULL)
-        sfMusic_play(MUSICG("the caves.wav"));
+    if (MUSICG("mysterious_chasm.flac") != NULL)
+        sfMusic_play(MUSICG("mysterious_chasm.flac"));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
@@ -118,6 +120,8 @@ int menu(game_t *game)
             open = 0;
         if (game->keys[sfKeyP] == PRESS)
             potion_loop(game);
+        if (is_pressed(menu->continue_game, game->window->window, game->keys))
+            how_to_play(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
             game_loop(game);
         if (is_pressed(menu->options, game->window->window, game->keys))

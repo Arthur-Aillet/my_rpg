@@ -46,7 +46,7 @@ minigame_t *setup_hammer_struct(void)
 
 void hammer_controls(minigame_t *elem, particle_t **st, char *keys, sfSound *sn)
 {
-    if (LCLICK == 1 && sfSprite_getRotation(elem->hammer->sprite) < 41)
+    if (LCLICK > 0 && sfSprite_getRotation(elem->hammer->sprite) < 41)
         sfSprite_rotate(elem->hammer->sprite, 9);
     if (LCLICK != 1 && sfSprite_getRotation(elem->hammer->sprite) > 0)
         sfSprite_rotate(elem->hammer->sprite, -9);

@@ -13,7 +13,7 @@ static void do_transition(game_t *game, sfSprite *black, sfClock *clock, int spe
 {
     int i = 0;
 
-    while (i < 70) {
+    while (sfRenderWindow_isOpen(game->window->window) && i < 70) {
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->ENTER)
             i = 70;

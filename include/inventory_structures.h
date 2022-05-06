@@ -9,7 +9,7 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
-#include "item_structure.h"
+#include "my_game_struct.h"
 
 typedef struct competences_s {
     int dodge_roll;
@@ -89,6 +89,19 @@ typedef struct txtobject_s {
     sfText *text;
     sfFont *font;
 } txtobject_t;
+
+typedef struct game_s game_t;
+
+typedef struct item_s {
+    object_t *obj;
+    int quantity;
+    int stack_size;
+    int type;
+    int armor_type;
+    void (*action)(game_t *);
+    int consumable;
+    int power;
+} item_t;
 
 typedef struct backgrounds_s {
     sfRenderWindow *window;

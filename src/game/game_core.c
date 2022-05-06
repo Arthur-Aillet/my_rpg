@@ -17,9 +17,12 @@
 #include "my_button.h"
 #include "keyboard.h"
 #include "my_csfml_utils.h"
+#include "my_game_struct.h"
 #include "main_menu.h"
+#include "pnjs.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
+#include "object creation.h"
 
 void destroy_game(game_t *game)
 {
@@ -42,26 +45,10 @@ void destroy_game(game_t *game)
             free(game->musics[i]->name);
         }
     free(game->musics);
+    destroy_pnjs(game->game->pnjs);
     free(game->keys);
     destroy_object(game->mouse);
     free(game->status);
-}
-
-item_t create_yellow_flower(item_t item, int number)
-{
-    item.stack_size = 255;
-    item.armor_type = HEAD;
-    item.quantity = number;
-    item.armor_type = 1;
-    item.type = FLOWER_YELLOW;
-    item.obj = create_object("assets/img/select.png", VCF {0, 0}, VCF {4, 4});
-    return (item);
-}
-
-void test_function(game_t * game)
-{
-    for (int i = 0; i < 1000; i++)
-        game->particles = add_particle(game->particles, game->game->player->pos, DUST_CIRCLE, 10);
 }
 
 int my_rpg(void)
@@ -73,8 +60,9 @@ int my_rpg(void)
         0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
-    game->items[10] = create_yellow_flower(game->items[10], 100);
-    game->items[10].action = (void (*)(void *)) test_function;
+    game->items[51] = create_sword(game->items[10], 1);
+    game->items[52] = create_stamina_potion_m(game->items[52], 5);
+    game->items[53] = create_breeches(game->items[54], 1);
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 5;
     game->comp = &competence;

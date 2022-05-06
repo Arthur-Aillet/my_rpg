@@ -6,6 +6,7 @@
 */
 
 #include "csfml_libs.h"
+#include "my_game_struct.h"
 #include "my_csfml_utils.h"
 #include <stdlib.h>
 
@@ -46,10 +47,10 @@ void sf_text_set_pixel_size(sfText *text, sfVector2f size)
         sfText_setCharacterSize(text, sfText_getCharacterSize(text) - 1);
 }
 
-void draw_chatbox(sfRenderWindow *window, int direction)
+void draw_chatbox(game_t *game, int direction)
 {
     static object_t **textbox = NULL;
-    sfVector2f pos = {0, 0};
+    sfVector2f pos = {game->game->pos_cam.x - 950, game->game->pos_cam.y - 540};
     sfVector2f scale = {4, 4};
 
     if (textbox == NULL) {
@@ -58,8 +59,11 @@ void draw_chatbox(sfRenderWindow *window, int direction)
         textbox[1] = create_object("assets/img/response.png", pos, scale);
     }
     if (direction != 0) {
-        sfRenderWindow_drawSprite(window, textbox[1]->sprite, NULL);
+        pos.x -= 15;
+        sfSprite_setPosition(textbox[1]->sprite, pos);
+        sfRenderWindow_drawSprite(game->window->window, textbox[1]->sprite, NULL);
         return;
     }
-    sfRenderWindow_drawSprite(window, textbox[0]->sprite, NULL);
+        sfSprite_setPosition(textbox[0]->sprite, pos);
+    sfRenderWindow_drawSprite(game->window->window, textbox[0]->sprite, NULL);
 }

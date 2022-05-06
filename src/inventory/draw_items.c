@@ -32,6 +32,8 @@ static char *my_itos(int i)
 
 static void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 {
+    if (item.armor_type > 0)
+        return;
     char *string = my_itos(item.quantity);
     sfVector2f origin = {my_strlen(string) * 15, 30};
     sfVector2f pos = sfSprite_getPosition(item.obj->sprite);
@@ -51,12 +53,11 @@ static void draw_end_at(sfRenderWindow *window, item_t item, txtobject_t txt)
 
 static void print_item(sfRenderWindow *window, item_t item, sfVector2f pos)
 {
-    sfVector2f scale = {4, 4};
     sfVector2f mvt;
     mvt.x = (pos.x - sfSprite_getPosition(item.obj->sprite).x) / 3;
     mvt.y = (pos.y - sfSprite_getPosition(item.obj->sprite).y) / 3;
     sfSprite_move(item.obj->sprite, mvt);
-    sfSprite_setScale(item.obj->sprite, scale);
+    sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     sfRenderWindow_drawSprite(window, item.obj->sprite, NULL);
 }
 
@@ -75,8 +76,6 @@ void draw_competences(sfRenderWindow *window, competences_t *comp)
         if (state == 1)
             sfRenderWindow_drawSprite(window, select->sprite, NULL);
     }
-    sfSprite_setPosition(select->sprite, itofv2(sfMouse_getPositionRenderWindow(window)));
-    sfRenderWindow_drawSprite(window, select->sprite, NULL);
 }
 
 void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)
@@ -84,13 +83,16 @@ void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)
     sfVector2f pos = {0, 0};
 
     for (int i = 0; i < NB_SLOTS; i++) {
-        if (items[i].quantity == 0) {
+        if (items[i].quantity <= 0) {
             items[i].type = 0;
+            items[i].quantity = 0;
         }
     }
     for (int i = NB_SLOTS - 1; i >= 0; i--) {
         if (items[i].quantity != 0) {
             pos = get_slot_pos(i, wnd);
+            pos.x += 20;
+            pos.y += 20;
             print_item(wnd, items[i], pos);
             draw_end_at(wnd, items[i], txt);
         }

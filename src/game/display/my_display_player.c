@@ -12,7 +12,7 @@
 
 void set_side(game_t *game)
 {
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S > 0) * 8 + (game->Z > 0) * 4 + (game->D > 0) * 2 + (game->Q > 0)) {
         case (8) :
         case (9) :
         case (10) : game->game->player->side = DOWN_WALK;
@@ -28,11 +28,10 @@ void set_side(game_t *game)
     }
 }
 
-void display_player(game_t *game)
+void animation_switch(game_t *game)
 {
-    update_particles(game->window->window, game->particles);
-    set_side(game);
-    switch ((game->S) * 8 + (game->Z) * 4 + (game->D) * 2 + (game->Q)) {
+    switch ((game->S > 0) * 8 + (game->Z > 0) * 4 +
+        (game->D > 0) * 2 + (game->Q > 0)) {
         case (8) :
         case (9) :
         case (10) : PLACE_PLAYER(DOWN_WALK + ISDASH * 8);
@@ -48,4 +47,14 @@ void display_player(game_t *game)
         default : PLACE_PLAYER(IDLE + game->game->player->side  +
             ISDASH * 4);
     }
+}
+
+void display_player(game_t *game)
+{
+    set_side(game);
+    if (game->game->player->is_attacking == 1) {
+        PLACE_PLAYER(game->game->player->side + ATTACK);
+        return;
+    }
+    animation_switch(game);
 }

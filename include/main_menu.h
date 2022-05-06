@@ -12,6 +12,20 @@
 #include "inventory_structures.h"
 #include "particles.h"
 
+typedef struct pause_s{
+    object_t *back;
+    button_t *retour;
+    button_t *option;
+    button_t *quit;
+    sfView *stored;
+    sfView *view;
+} pause_t;
+
+typedef struct how_to_s{
+    object_t *back;
+    button_t *quit;
+} how_to_t;
+
 typedef struct main_menu_s{
     object_t *back;
     object_t *title;
@@ -62,3 +76,5 @@ void update_volume(game_t *game, options_menu_t *option);
 void destroy_options(options_menu_t *option);
 void silder_music_manager(game_t *game, options_menu_t *option);
 void silder_sfx_manager(game_t *game, options_menu_t *option);
+int how_to_play(game_t *game);
+int pause_menu(game_t *game);

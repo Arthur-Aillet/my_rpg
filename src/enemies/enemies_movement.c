@@ -12,9 +12,6 @@
 #include "my_game_struct.h"
 #include "my_math.h"
 
-#define PLAYER_OFFSET_X 85
-#define PLAYER_OFFSET_Y 50
-
 //calculate enemy direction for x and y (0 <= x y <= 1)
 static sfVector2f enemy_forward(enemy_t *enemy, game_t *game)
 {
@@ -101,13 +98,4 @@ void displace_enemies(enemy_node_t *all, game_t *game)
         change_status(all, game);
         all = all->next;
     }
-}
-
-void remove_enemy_pv(enemy_node_t *enemy, int nb)
-{
-    if (enemy == NULL)
-        return;
-    enemy->enemy.pv -= nb;
-    if (enemy->enemy.pv <= 0)
-        enemy->enemy.type = -2;
 }

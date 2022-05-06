@@ -166,7 +166,8 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
 							$(JSON_PATH)dependencies/chain_chars.c			\
 
 SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
-							$(ENEMIES_PATH)evolve_enemies.c					\
+							$(ENEMIES_PATH)enemies_movement.c				\
+							$(ENEMIES_PATH)enemies_pv.c						\
 							$(ENEMIES_PATH)read_enemies.c					\
 							$(ENEMIES_PATH)spawn_enemies.c					\
 

@@ -76,6 +76,7 @@ void change_status(enemy_node_t *enmy, game_t *game)
         enmy->enemy.status = 1;
         enmy->enemy.status_data = 100;
         enmy->enemy.speed += 1;
+        game->game->player->health -= enmy->enemy.dps;
     }
     if (enmy->enemy.status == 1 && enmy->enemy.status_data <= 0) {
         enmy->enemy.status = 0;

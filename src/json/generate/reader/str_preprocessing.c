@@ -64,6 +64,5 @@ int json_preprocessing(char *buffer)
     json_to_one_line(buffer);
     if (verify_brackets(buffer))
         return 1;
-    //remove_side_curly_brackets(buffer);
     return 0;
 }

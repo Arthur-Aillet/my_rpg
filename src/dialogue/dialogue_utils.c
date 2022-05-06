@@ -52,7 +52,6 @@ void draw_chatbox(sfRenderWindow *window, int direction)
     sfVector2f pos = {0, 0};
     sfVector2f scale = {4, 4};
 
-
     if (textbox == NULL) {
         textbox = malloc(sizeof(object_t) * 2);
         textbox[0] = create_object("assets/img/dialogue.png", pos, scale);

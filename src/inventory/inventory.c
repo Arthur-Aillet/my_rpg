@@ -23,7 +23,8 @@
 
 item_t *create_items(void)
 {
-    item_t *result = malloc(sizeof (item_t) * NB_SLOTS);
+    item_t *result = malloc(sizeof(item_t) * NB_SLOTS);
+
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;

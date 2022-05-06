@@ -70,7 +70,7 @@ int my_rpg(void)
     competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2
         , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0,
-         0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
+        0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[10] = create_yellow_flower(game->items[10], 100);

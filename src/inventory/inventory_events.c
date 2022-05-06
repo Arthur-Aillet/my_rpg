@@ -26,7 +26,8 @@ events_t evt_inv(events_t events)
     slot = get_slot(itofv2(mousepos));
     if ((events.LCLICK == PRESS || events.RCLICK == PRESS))
         if (slot != 0 && events.items[slot].type != 0)
-            events.items = pickup_items(events.items, events.keys, &pressed, slot);
+            events.items = pickup_items(events.items, events.keys,
+            &pressed, slot);
     if ((events.LCLICK == RELEASE || events.RCLICK == RELEASE)) {
         events.items = drop_items(events.items, pressed, slot);
     }
@@ -54,16 +55,16 @@ static int is_unlockable(int target, competences_t comp)
 static events_t interract_comp(events_t events, int *selected, int *competence)
 {
     if (!is_pressed(events.button, events.window, events.keys) &&
-         events.LCLICK == RELEASE && *competence != *selected &&
-         get_competence_state(*selected, *events.comp) != 2)
+        events.LCLICK == RELEASE && *competence != *selected &&
+        get_competence_state(*selected, *events.comp) != 2)
        *events.comp = set_competence_state(*selected, *events.comp, 0);
     if (is_pressed(events.button, events.window, events.keys) &&
-         is_unlockable(*selected, *events.comp) && events.comp->comp_points > 0)
+        is_unlockable(*selected, *events.comp) && events.comp->comp_points > 0)
         *events.comp = set_competence_state(*selected, *events.comp, 2);
     if (events.LCLICK == RELEASE && *competence != 0)
         *selected = *competence;
     if (events.LCLICK == RELEASE && *competence == *selected &&
-         get_competence_state(*selected, *events.comp) == 0)
+        get_competence_state(*selected, *events.comp) == 0)
         *events.comp = set_competence_state(*competence, *events.comp, 1);
     if (events.comp->comp_points > 0)
         update_button(events.window, events.button, events.keys);

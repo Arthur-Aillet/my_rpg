@@ -10,7 +10,7 @@
 
 int get_current_map(game_t *game)
 {
-    int i= 0;
+    int i = 0;
 
     while (my_strcmp(game->game->maps[i]->name, game->game->current) != 0)
         i++;

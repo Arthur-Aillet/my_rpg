@@ -67,8 +67,6 @@ void display_world(game_t *game)
     else
         PLACE_PLAYER(IDLE + game->game->player->side + ISDASH * 4);
     display_pnjs(game);
-    display_obs(game, game->game->maps[i],
-        (game->game->player->pos.y + 16) / 64 + 1, game->game->maps[i]->height);
     update_particles(game->window->window, game->particles);
     display_map(game, 2, 2, 0);
     display_ui(game->window->window, game->game->player, vec);

@@ -33,7 +33,7 @@ static void setup_camera(game_t *game, int i)
 static void weather(game_t *game)
 {
     static sfClock *clock = NULL;
-    static int time = 300;
+    static int time = 0;
 
     if (clock == NULL)
         clock = sfClock_create();

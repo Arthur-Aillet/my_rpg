@@ -51,7 +51,7 @@ in_game_t *init_in_game_struct(void)
         VCF{0, 0}, VCF{2, 2});
     game->cam = sfView_createFromRect(cam_rect);
     game->pos_cam = VCF {0, 0};
-    game->weather = 0;
+    game->weather = 3;
     if (game == NULL)
         return NULL;
     return game;

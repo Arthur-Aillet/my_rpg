@@ -78,7 +78,8 @@ void create_windows(window_t *window)
         window->window = sfRenderWindow_create(main_w, window->name,
         sfTitlebar | sfResize | sfClose, NULL);
     if (window->type == 1)
-        window->window = sfRenderWindow_create(main_w, window->name, sfNone, NULL);
+        window->window = sfRenderWindow_create(main_w, window->name, sfNone
+            , NULL);
     if (window->type == 2)
         window->window = sfRenderWindow_create(main_w, window->name,
         sfFullscreen, NULL);

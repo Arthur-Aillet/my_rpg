@@ -37,12 +37,12 @@ static void weather(game_t *game)
 
     if (clock == NULL)
         clock = sfClock_create();
-    if (TIME(clock, 1200)) {
+    if (TIME(clock, 180)) {
         game->game->weather = rand() % 3;
-        time = 300;
+        time = 60;
     }
     if (time != 0 && game->game->weather != 2) {
-        for (int i = rand() % time / 30; i > 0; i--) {
+        for (int i = rand() % time / 3; i > 0; i--) {
             game->particles = add_particle(game->particles
                 , VCF {game->game->pos_cam.x + rand () % 3000 - 1500
                 , game->game->pos_cam.y + rand() % 2000 - 1000}

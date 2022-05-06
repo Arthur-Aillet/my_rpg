@@ -20,7 +20,23 @@ void equip(game_t *game)
         , game->game->player->hotbar_pos + 51, game->items);
 }
 
-void poison(game_t * game)
+void do_attack(game_t *game)
+{
+    static int cooldown = 0;
+
+    if (cooldown != 0)
+        cooldown -= 1;
+    if (cooldown == 0 && game->game->player->is_attacking == 1 &&
+        game->game->player->stamina >= 50) {
+        cooldown = 50;
+        game->game->player->stamina -= 50;
+    }
+    if (cooldown < 20)
+        game->game->player->is_attacking = 0;
+    sfIntRect damage_zone = {};
+}
+
+void poison(game_t *game)
 {
     static int time = 11;
     static sfClock *clock = NULL;
@@ -28,6 +44,7 @@ void poison(game_t * game)
     if (clock == NULL)
         clock = sfClock_create();
     if (TIME(clock, 1)){
+        printf("%d\n", time);
         time -= 1;
         game->game->player->health -= (game->game->player->max_health / 100);
     }

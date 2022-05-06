@@ -51,12 +51,16 @@ void display_exp(sfRenderWindow *window, float current, float max
 static void set_hotbar_alpha(player_t *player, object_t **parts)
 {
     if (player->pos.y > 860) {
-        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255, 100));
-        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255, 100));
+        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255
+            , 100));
+        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255
+            , 100));
     }
     if (player->pos.y < 860) {
-        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255, 255));
-        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255, 255));
+        sfSprite_setColor(parts[9]->sprite, sfColor_fromRGBA(255, 255, 255
+            , 255));
+        sfSprite_setColor(parts[10]->sprite, sfColor_fromRGBA(255, 255, 255
+            , 255));
     }
 }
 

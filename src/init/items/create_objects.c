@@ -10,21 +10,6 @@
 #include "inventory_structures.h"
 #include "object_actions.h"
 
-item_t create_sword(item_t item, int number)
-{
-    item.stack_size = 1;
-    item.armor_type = 0;
-    item.quantity = number;
-    item.type = SWORD;
-    item.armor_type = 0;
-    item.consumable = 0;
-    item.obj = create_object("assets/img/sword.png", VCF {0, 0}, VCF {4, 4});
-    item.action = player_attack;
-    item.power = 10;
-    sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
-    return (item);
-}
-
 item_t create_helmet(item_t item, int number)
 {
     item.stack_size = 1;

@@ -8,6 +8,7 @@
 #include "my_game_struct.h"
 #include "my_rpg.h"
 #include "keyboard.h"
+#include "math.h"
 
 void heal_h(game_t *game)
 {

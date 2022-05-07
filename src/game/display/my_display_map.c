@@ -8,7 +8,8 @@
 #include "my_rpg.h"
 #include "my.h"
 
-static void print_tile_map(game_t *game, maps_t *m, sfVector2f v, map_option_t opt)
+static void print_tile_map(game_t *game, maps_t *m, sfVector2f v
+    , map_option_t opt)
 {
     sfIntRect rect = {0, 0, m->def, m->def};
 
@@ -35,7 +36,8 @@ void display_map(game_t *game, int map, int layer, int space)
     while (current_map[(int)vec.y]) {
         vec.x = 0;
         while (current_map[(int)vec.y][(int)vec.x]) {
-            print_tile_map(game, game->game->maps[get_current_map(game)], vec, opt);
+            print_tile_map(game, game->game->maps[get_current_map(game)]
+                , vec, opt);
             vec.x++;
         }
         vec.y++;

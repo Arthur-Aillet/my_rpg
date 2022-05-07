@@ -27,7 +27,8 @@ enemy_node_t *spawn_ennemies(int nb, enemy_t *types, game_t *game)
         actual->enemy = types[rand() % len];
         actual->enemy.object = create_textured_object(
             sfTexture_copy(actual->enemy.object->texture),
-            VCF{rand() % map_dim.x, rand() % map_dim.y}, VCF{1, 1});
+            VCF{rand() % map_dim.x, rand() % map_dim.y},
+            VCF{actual->enemy.scale, actual->enemy.scale});
         if (i < nb - 1) {
             actual->next = malloc(sizeof(enemy_node_t));
             actual = actual->next;

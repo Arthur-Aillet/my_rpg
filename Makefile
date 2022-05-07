@@ -280,7 +280,7 @@ fclean:		clean
 		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
-		make re -C lib/my
+		make -C lib/my
 
 debug:		$(CFLAGS) += -g3
 debug:		re

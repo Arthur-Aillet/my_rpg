@@ -30,6 +30,8 @@ typedef struct enemy_s {
     int pv;
     int status;
     int status_data;
+    int scale;
+    int direction;
 } enemy_t;
 
 typedef struct enemy_node_s {

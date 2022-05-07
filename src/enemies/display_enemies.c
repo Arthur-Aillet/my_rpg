@@ -15,6 +15,7 @@ static void animate_enemy(enemy_node_t *enemy)
     enemy->enemy.rect.left = (enemy->enemy.rect.left +
         enemy->enemy.rect.width)
         % (enemy->enemy.rect.width * enemy->enemy.animation_steps);
+    enemy->enemy.rect.top = enemy->enemy.rect.height * enemy->enemy.direction;
     sfSprite_setTextureRect(enemy->enemy.object->sprite, enemy->enemy.rect);
 }
 

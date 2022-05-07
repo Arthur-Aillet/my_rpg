@@ -11,15 +11,22 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "my_math.h"
+#include "inventory_prototypes.h"
+#include "inventory_macros.h"
+#include "object_creation.h"
 
 void remove_enemy_pv(enemy_node_t *enemy, int nb, game_t *game)
 {
+    item_t useless;
+
     if (enemy == NULL)
         return;
     enemy->enemy.pv -= nb;
     if (enemy->enemy.pv <= 0 && enemy->enemy.type != -2) {
         enemy->enemy.type = -2;
         game->game->player->exp += 200;
+        useless = create_gel(useless, 1);
+        pickup_item(useless, game->items);
     }
 }
 

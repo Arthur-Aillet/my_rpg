@@ -58,13 +58,8 @@ void action_particles(game_t *game)
                 ->player->pos.y + 42 + (rand() % 20 - 10)}, LEAF, 1);
 }
 
-void set_hotbar_by_number(game_t *game)
-{
-}
-
 void hotbar_actions(game_t *game)
 {
-    set_hotbar_by_number(game);
     for (int i = 0; i < 10; i++)
         if (game->keys[sfKeyNum0 + i] == 2)
             game->game->player->hotbar_pos = i - 1;

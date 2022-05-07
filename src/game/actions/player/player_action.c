@@ -68,7 +68,6 @@ void hotbar_actions(game_t *game)
     for (int i = 0; i < 10; i++)
         if (game->keys[sfKeyNum0 + i] == 2)
             game->game->player->hotbar_pos = i - 1;
-    printf("%d\n", game->game->player->hotbar_pos);
     if (abs(game->HSCROLL) > 0 && game->game->in_dialogue == false)
         game->game->player->hotbar_pos += game->HSCROLL;
     if (game->LCLICK == PRESS && game->game->in_dialogue == false &&

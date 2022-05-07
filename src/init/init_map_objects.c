@@ -21,7 +21,6 @@ char ***get_all_maps(json_obj_t *obj)
 
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i)
 {
-    printf("ON INIT LA MAP [%s]\n", obj->name);
     maps[i]->name = obj->name;
     maps[i]->tex_ts = sfTexture_createFromFile(get_str_by_name(obj, "tileset"),
         NULL);
@@ -36,6 +35,5 @@ void init_map_objects(maps_t **maps, json_obj_t *obj, int i)
     maps[i]->right = get_str_by_name(obj, "right");
     maps[i]->enemies = get_int_by_name(obj, "enemies_amount");
     sfSprite_setTexture(maps[i]->sp_ts, maps[i]->tex_ts, sfTrue);
-    printf("INITIALISER OK !\n");
     return;
 }

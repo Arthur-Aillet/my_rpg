@@ -62,6 +62,29 @@ static void weather(game_t *game)
     }
 }
 
+void display_world_cinematic(game_t *game, int ho, int ve, object_t *bandeau)
+{
+    int i = get_current_map(game);
+    sfVector2f vec = game->game->pos_cam;
+
+    vec.x -= 960;
+    vec.y -= 540;
+    display_map(game, 0, 0, 1);
+    display_map(game, 1, 1, 0);
+    display_player_cinematic(game, ho, ve);
+    display_pnjs(game);
+    display_enemies(game, game->game->enemies);
+    update_particles(game->window->window, game->particles);
+    display_map(game, 2, 2, 0);
+    display_ui(game->window->window, game->game->player, vec);
+    display_hotbar_items(game);
+    sfRenderWindow_drawSprite(game->window->window, bandeau->sprite, NULL);
+    display_dialogues(game);
+    setup_camera(game, i);
+    weather(game);
+}
+
+
 void display_world(game_t *game)
 {
     int i = get_current_map(game);

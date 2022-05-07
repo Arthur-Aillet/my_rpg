@@ -23,8 +23,12 @@ item_t *pickup_item(item_t new, item_t *items)
             new.quantity -= 1;
         }
     }
-    destroy_object(items[free_spot].obj);
-    items[free_spot] = new;
+    if (new.quantity > 0) {
+        destroy_object(items[free_spot].obj);
+        items[free_spot] = new;
+        return (items);
+    }
+    destroy_object(new.obj);
     return (items);
 }
 

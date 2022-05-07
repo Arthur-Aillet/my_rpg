@@ -77,7 +77,8 @@ void change_status(enemy_node_t *enmy, game_t *game)
         enmy->enemy.status = 1;
         enmy->enemy.status_data = 100;
         enmy->enemy.speed += 1;
-        game->game->player->health -= enmy->enemy.dps;
+        game->game->player->health -= (enmy->enemy.dps - ARMOR_VALUE > 0) ?
+            (enmy->enemy.dps - ARMOR_VALUE) : (0);
     }
     if (game->game->player->health <= 0) {
         transition(game, 5);

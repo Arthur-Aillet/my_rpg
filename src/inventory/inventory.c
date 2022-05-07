@@ -31,6 +31,8 @@ item_t *create_items(void)
         result[i].stack_size = 1;
         result[i].armor_type = 5;
         result[i].action = NULL;
+        result[i].consumable = 0;
+        result[i].power = 0;
     }
     return (result);
 }

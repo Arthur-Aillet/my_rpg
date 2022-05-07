@@ -29,7 +29,7 @@ void update_player_status(game_t *game)
  */
     if (game->game->player->exp > game->game->player->max_exp) {
         game->game->player->exp = 0;
-        game->game->player->max_exp += game->game->player->max_exp / 10;
+        game->game->player->max_exp += game->game->player->max_exp / 3;
         game->comp->comp_points += 1;
     }
 /*     if (sfTime_asSeconds(sfClock_getElapsedTime(game->game->clock)) - last_sec > 0.5) {

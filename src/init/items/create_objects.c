@@ -20,7 +20,7 @@ item_t create_sword(item_t item, int number)
     item.consumable = 0;
     item.obj = create_object("assets/img/sword.png", VCF {0, 0}, VCF {4, 4});
     item.action = player_attack;
-    item.power = -10;
+    item.power = 10;
     sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     return (item);
 }

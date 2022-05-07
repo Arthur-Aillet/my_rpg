@@ -65,7 +65,7 @@ int my_rpg(void)
     game->items[53] = create_breeches(game->items[54], 1);
     game->items[54] = create_molotov(game->items[54], 1);
     game->comp = malloc(sizeof(competences_t));
-    competence.comp_points = 5;
+    competence.comp_points = 0;
     game->comp = &competence;
     if (game == NULL)
         return 84;

@@ -137,6 +137,7 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_pnj.c						\
 							$(INIT_PATH)init_player.c					\
 							$(INIT_PATH)items/create_objects.c			\
+							$(INIT_PATH)items/ingredients.c				\
 							$(INIT_PATH)items/health_potions.c			\
 							$(INIT_PATH)items/stamina_potions.c			\
 							$(INIT_PATH)items/speed_potions.c			\
@@ -242,7 +243,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O1
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 

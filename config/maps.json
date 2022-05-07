@@ -12,7 +12,7 @@
             "bot": "town",
             "left": "NULL",
             "right": "house",
-            "enemies_amount": 7
+            "enemies_amount": 10
         },"house": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/house/base.map",
@@ -38,7 +38,7 @@
             "bot": "NULL",
             "left": "house",
             "right": "NULL",
-            "enemies_amount": 2
+            "enemies_amount": 0
         },"town": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/town/base.map",
@@ -51,7 +51,7 @@
             "bot": "NULL",
             "left": "NULL",
             "right": "NULL",
-            "enemies_amount": 5
+            "enemies_amount": 0
         }
     }
 }

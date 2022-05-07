@@ -17,7 +17,7 @@ void main_enemies(enemy_node_t *enemies, game_t *game)
     maps_t *map_object = NULL;
 
     if (map == NULL || my_strcmp(game->game->current, map) != 0) {
-        free_enemies(game->game->enemies);
+        //free_enemies(game->game->enemies);
         map_object = game->game->maps[get_current_map(game)];
         if (map_object == NULL)
             return;

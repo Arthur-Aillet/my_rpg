@@ -69,11 +69,11 @@ void move_from_type(enemy_node_t *enemy, game_t *game)
 void change_status(enemy_node_t *enmy, game_t *game)
 {
     sfVector2f enmy_pos = sfSprite_getPosition(enmy->enemy.object->sprite);
-    sfVector2f playr_pos = game->game->player->pos;
+    sfVector2f playr_pos = VCF {game->game->player->pos.x + PLAYER_OFFSET_X,
+        game->game->player->pos.y + PLAYER_OFFSET_Y};
 
-    playr_pos.x += PLAYER_OFFSET_X;
-    playr_pos.y += PLAYER_OFFSET_Y;
     if (enmy->enemy.status == 0 && dist_two_points(enmy_pos, playr_pos) < 15) {
+        game->game->player->hurt = 5;
         enmy->enemy.status = 1;
         enmy->enemy.status_data = 100;
         enmy->enemy.speed += 1;

@@ -46,5 +46,6 @@ player_t *init_game_player(maps_t *field)
     init_player_stats(player);
     init_player_sprite(obj, player);
     player->status = NULL;
+    player->hurt = 0;
     return player;
 }

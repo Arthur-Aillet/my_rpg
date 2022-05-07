@@ -29,18 +29,18 @@ void fire_zone(game_t *game)
 
     if (clock == NULL)
         clock = sfClock_create();
-    if (game->RCLICK == 2 && game->items
+    if (game->LCLICK == 2 && game->items
         [game->game->player->hotbar_pos + 51].action == fire_zone) {
-        time = 60;
-        power = game->items[game->game->player->hotbar_pos + 51].power;
+        time = 10;
+        power = game->items[game->game->player->hotbar_pos + 51].power;power = 10;
     }
     if (time <= 0)
         game->game->player->status = NULL;
-    if (time == 60)
+    if (time == 10)
         game->game->player->status = fire_zone;
-    game->particles = add_particle(game->particles, VCF {game->game->player->pos.x + ((log2(rand() % 100 - 50))), game->game->player->pos.y + ((log2(rand() % 100 - 50)))}, FIRE, 10);
-    if (TIME(clock, 1) || 1) {
+    game->particles = add_particle(game->particles, VCF {game->game->player->pos.x + rand() % 400 - 200, game->game->player->pos.y + PLAYER_OFFSET_Y + rand() % 400 - 200}, FIRE, 10);
+    if (TIME(clock, 1)) {
         time -= 1;
-        damage_enemy_zone(game, game->game->player->pos, 30, power);
+        damage_enemy_zone(game, game->game->player->pos, 100, power);
     }
 }

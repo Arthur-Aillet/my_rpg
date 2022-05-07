@@ -77,6 +77,7 @@ typedef struct player_s {
     int dash;
     int hotbar_pos;
     int is_attacking;
+    int hurt;
     void (*status)(game_t *);
 } player_t;
 

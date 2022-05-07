@@ -10,6 +10,7 @@
 #include "my_rpg.h"
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
+#include "my_math.h"
 
 static sfVector2f enemy_forward(enemy_t *enemy, game_t *game)
 {
@@ -72,7 +73,8 @@ void move_from_type(enemy_node_t *enemy, game_t *game)
     sfVector2f differential;
     sfVector2f enemy_pos = sfSprite_getPosition(enemy->enemy.object->sprite);
 
-    if (enemy->enemy.status == 0) {
+    if (enemy->enemy.status == 0 && dist_two_points(game->game->player->pos,
+        enemy_pos) <= enemy->enemy.range) {
         if (enemy->enemy.type == 0) {
             differential = enemy_forward(&(enemy->enemy), game);
             if (enemy_is_collide(game, 0, differential, enemy_pos))

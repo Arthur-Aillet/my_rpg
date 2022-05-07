@@ -117,7 +117,6 @@ int game_loop(game_t *game)
     cinematic(game);
     while (game->status->end_game == 0 && sfRenderWindow_isOpen
             (game->window->window)) {
-        printf("%f %f\n", game->game->player->pos.x, game->game->player->pos.y);
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         main_enemies(game->game->enemies, game);

@@ -11,28 +11,12 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 
-int enemy_is_collide(game_t *game, int xy, sfVector2f diff, sfVector2f enemypos)
+int determinate_enemy_direction(sfVector2f displacement)
 {
-    int i = -1;
-    int j = 0;
-    int map = get_current_map(game);
-    int ret = 0;
-
-    if (xy == 0)
-        enemypos.x += diff.x;
+    if (ABS(displacement.x) > ABS(displacement.y))
+        return (displacement.x > 0) + (displacement.x < 0) * 3;
     else
-        enemypos.y += diff.y;
-    while (game->game->maps[map]->maps[1][++i]) {
-        j = -1;
-        while (game->game->maps[map]->maps[1][i][++j])
-            ret = ((int)((enemypos.x + 2) / 64) == j ||
-                (int)((enemypos.x - 2) / 64) + 1 == j) &&
-                game->game->maps[map]->maps[1][i][j] != '0' &&
-                ((int)((enemypos.y + 32) / 64) == i ||
-                (int)((enemypos.y - 2) / 64) + 1 == i)
-                ? 1 : ret;
-    }
-    return ret;
+        return (displacement.y < 0) * 2;
 }
 
 sfVector2f keep_only_xy(sfVector2f vector, int xy)
@@ -42,14 +26,6 @@ sfVector2f keep_only_xy(sfVector2f vector, int xy)
     else
         vector.x = 0;
     return vector;
-}
-
-int determinate_enemy_direction(sfVector2f displacement)
-{
-    if (ABS(displacement.x) > ABS(displacement.y))
-        return (displacement.x > 0) + (displacement.x < 0) * 3;
-    else
-        return (displacement.y < 0) * 2;
 }
 
 void main_enemies(enemy_node_t *enemies, game_t *game)

@@ -11,6 +11,14 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 
+int determinate_enemy_direction(sfVector2f displacement)
+{
+    if (ABS(displacement.x) > ABS(displacement.y))
+        return (displacement.x > 0) + (displacement.x < 0) * 3;
+    else
+        return (displacement.y < 0) * 2;
+}
+
 void main_enemies(enemy_node_t *enemies, game_t *game)
 {
     static char *map = NULL;

@@ -25,3 +25,4 @@ int damage_enemy_zone(game_t *game, sfVector2f pos, int rayon, int damage);
 int damage_enemy_rect(game_t *game, sfFloatRect rect, int dmg);
 void move_from_type(enemy_node_t *enemy, game_t *game);
 void change_status(enemy_node_t *enmy, game_t *game);
+int determinate_enemy_direction(sfVector2f displacement);

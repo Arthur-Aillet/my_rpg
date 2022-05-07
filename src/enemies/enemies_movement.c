@@ -29,6 +29,7 @@ static sfVector2f enemy_forward(enemy_t *enemy, game_t *game)
     max_range = MAX(ABS(differential.x), ABS(differential.y));
     differential.x = (differential.x / MAX(1, max_range)) * enemy->speed;
     differential.y = (differential.y / MAX(1, max_range)) * enemy->speed;
+    enemy->direction = determinate_enemy_direction(differential);
     return differential;
 }
 
@@ -47,6 +48,7 @@ static sfVector2f enemy_backward(enemy_t *enemy, game_t *game)
     max_range = MAX(ABS(differential.x), ABS(differential.y));
     differential.x = 0 - (differential.x / MAX(1, max_range)) * enemy->speed;
     differential.y = 0 - (differential.y / MAX(1, max_range)) * enemy->speed;
+    enemy->direction = determinate_enemy_direction(differential);
     return differential;
 }
 

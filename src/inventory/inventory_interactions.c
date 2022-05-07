@@ -12,7 +12,7 @@
 
 item_t *pickup_item(item_t new, item_t *items)
 {
-    int free_spot = 0;
+    int free_spot = 1;
     int i;
 
     for (; items[free_spot].type != 0; free_spot++);

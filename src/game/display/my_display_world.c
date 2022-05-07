@@ -6,6 +6,7 @@
 */
 
 #include "my_rpg.h"
+#include "enemies.h"
 #include "my.h"
 #include "pnjs.h"
 #include "ui.h"

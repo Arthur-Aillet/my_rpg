@@ -74,14 +74,13 @@ int game_loop(game_t *game)
     game->game->samples_enemies = create_enemies_array();
     if (game->game->samples_enemies == NULL)
         return 84;
-    game->game->enemies = spawn_ennemies(5, game->game->samples_enemies, game);
     while (game->status->end_game == 0 && sfRenderWindow_isOpen
-           (game->window->window)) {
+            (game->window->window)) {
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
+        main_enemies(game->game->enemies, game);
         display_world(game);
         update_game_status(game);
-        displace_enemies(game->game->enemies, game);
         player_actions(game);
         poll_event_keys(game);
         sfRenderWindow_display(game->window->window);

@@ -22,7 +22,7 @@ sfIntRect configure_enemy_rect(json_obj_t *data, enemy_t *e_place)
     return rect;
 }
 
-static void json_to_enemy_status(json_obj_t *data, enemy_t *e_place)
+static void define_enemy_status(enemy_t *e_place)
 {
     e_place->status = 0;
     e_place->status_data = 0;
@@ -49,7 +49,7 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     e_place->rect = configure_enemy_rect(data, e_place);
     if (e_place->rect.height == 0 || e_place->rect.width == 0)
         return 1;
-    json_to_enemy_status(data, e_place);
+    define_enemy_status(e_place);
     e_place->pv = get_int_by_name(data, "pv");
     if (e_place->name == NULL || sprite_path == NULL || e_place->pv == 0)
         return 1;

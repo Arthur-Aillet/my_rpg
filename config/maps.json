@@ -11,7 +11,8 @@
             "top": "NULL",
             "bot": "town",
             "left": "NULL",
-            "right": "house"
+            "right": "house",
+            "enemies_amount": 7
         },"house": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/house/base.map",
@@ -23,7 +24,8 @@
             "top": "NULL",
             "bot": "NULL",
             "left": "field",
-            "right": "garden"
+            "right": "garden",
+            "enemies_amount": 0
         },"garden": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/garden/base.map",
@@ -35,7 +37,8 @@
             "top": "NULL",
             "bot": "NULL",
             "left": "house",
-            "right": "NULL"
+            "right": "NULL",
+            "enemies_amount": 2
         },"town": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/town/base.map",
@@ -47,7 +50,8 @@
             "top": "field",
             "bot": "NULL",
             "left": "NULL",
-            "right": "NULL"
+            "right": "NULL",
+            "enemies_amount": 5
         }
     }
 }

@@ -7,9 +7,11 @@
         "size_x": 18,
         "size_y": 31,
         "dialogues": {
-            "greetings": "config/greetings.json"
+            "greetings": "config/greetings.json",
+            "mission": "config/mission1.json"
         }
-    },    "women": {
+    },
+    "women": {
         "pos_x" : 1600,
         "pos_y" : 600,
         "map" : "town",

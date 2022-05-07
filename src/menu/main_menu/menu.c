@@ -74,6 +74,7 @@ static main_menu_t *init_main_menu(game_t *game)
 static void update_menu(main_menu_t *menu, game_t *game)
 {
     float random = fmod(rand(), 600);
+
     sfRenderWindow_drawSprite(game->window->window, menu->back->sprite, NULL);
     update_particles(game->window->window, menu->particle);
     sfRenderWindow_drawSprite(game->window->window, menu->title->sprite, NULL);
@@ -110,7 +111,8 @@ int menu(game_t *game)
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
 
-    sfMusic_play(MUSICG("our_home.flac"));
+    if (MUSICG("our_home.flac") != NULL)
+        sfMusic_play(MUSICG("our_home.flac"));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
         set_correct_window_size(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);

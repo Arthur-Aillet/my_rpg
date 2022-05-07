@@ -42,6 +42,9 @@ void update_player_status(game_t *game)
 void update_game_status(game_t *game)
 {
     update_player_status(game);
+    if (MUSICG("our_home.flac") == NULL || MUSICG("death_mountains.flac")
+        == NULL || MUSICG("mysterious_chasm.flac") == NULL)
+        return;
     if (my_strcmp(game->game->current,"field") == 0 && sfMusic_getStatus(MUSICG("death_mountains.flac")) != 2) {
         sfMusic_play(MUSICG("death_mountains.flac"));
         if (sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) == 2)

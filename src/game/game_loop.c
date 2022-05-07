@@ -19,12 +19,50 @@ static void poll_event_keys(game_t *game)
     game->keys = get_keyboard_input(game->keys, game->window->window);
     if (game->ESC == 2)
         game->status->end_game = pause_menu(game);
-    if (game->P == 2)
-        game->status->end_game = 1;
-    if (game->I == 2)
-        game->status->end_game = 1;
-    if (game->TAB == 2)
+    if (game->TAB == 2 || game->I == 2)
         game = inventory(game);
+}
+
+void update_player_status(game_t *game)
+{
+/*     static int last_sec = 0;
+ */
+    if (game->game->player->exp > game->game->player->max_exp) {
+        game->game->player->exp = 0;
+        game->game->player->max_exp += game->game->player->max_exp / 10;
+        game->comp->comp_points += 1;
+    }
+/*     if (sfTime_asSeconds(sfClock_getElapsedTime(game->game->clock)) - last_sec > 0.5) {
+        if (game->game->player->stamina < game->game->player->max_stamina)
+            game->game->player->stamina += 0.4;
+        last_sec = sfTime_asSeconds(sfClock_getElapsedTime(game->game->clock));
+    } */
+}
+
+void update_game_status(game_t *game)
+{
+    update_player_status(game);
+    if (my_strcmp(game->game->current,"field") == 0 && sfMusic_getStatus(MUSICG("death_mountains.flac")) != 2) {
+        sfMusic_play(MUSICG("death_mountains.flac"));
+        if (sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) == 2)
+            sfMusic_stop(MUSICG("mysterious_chasm.flac"));
+        if (sfMusic_getStatus(MUSICG("our_home.flac")) == 2)
+            sfMusic_stop(MUSICG("our_home.flac"));
+    }
+    if (my_strcmp(game->game->current,"town") == 0 && sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) != 2) {
+        sfMusic_play(MUSICG("mysterious_chasm.flac"));
+        if (sfMusic_getStatus(MUSICG("our_home.flac")) == 2)
+            sfMusic_stop(MUSICG("our_home.flac"));
+        if (sfMusic_getStatus(MUSICG("death_mountains.flac")) == 2)
+            sfMusic_stop(MUSICG("death_mountains.flac"));
+    }
+    if ((my_strcmp(game->game->current,"house") == 0 || my_strcmp(game->game->current,"garden") == 0) && sfMusic_getStatus(MUSICG("our_home.flac")) != 2) {
+        sfMusic_play(MUSICG("our_home.flac"));
+        if (sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) == 2)
+            sfMusic_stop(MUSICG("mysterious_chasm.flac"));
+        if (sfMusic_getStatus(MUSICG("death_mountains.flac")) == 2)
+            sfMusic_stop(MUSICG("death_mountains.flac"));
+    }
 }
 
 int game_loop(game_t *game)
@@ -39,6 +77,7 @@ int game_loop(game_t *game)
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         display_world(game);
+        update_game_status(game);
         displace_enemies(game->game->enemies, game);
         player_actions(game);
         poll_event_keys(game);

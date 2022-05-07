@@ -4,6 +4,7 @@
         "speed": 2,
         "dps": 20,
         "sprite": "assets/img/blobs.png",
+        "drop_item": "assets/img/gel.png",
         "pv": 10,
         "sprite_len": 35,
         "animation_steps": 4
@@ -14,6 +15,7 @@
         "dps": 20,
         "sprite": "assets/img/blobs.png",
         "pv": 10,
+        "drop_item": "assets/img/gel.png",
         "sprite_len": 35,
         "animation_steps": 4
     },
@@ -22,6 +24,7 @@
         "speed": 2,
         "dps": 20,
         "sprite": "assets/img/blobs.png",
+        "drop_item": "assets/img/gel.png",
         "pv": 10,
         "sprite_len": 35,
         "animation_steps": 4

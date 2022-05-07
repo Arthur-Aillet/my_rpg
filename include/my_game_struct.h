@@ -55,6 +55,7 @@ typedef struct maps_s {
     char *right;
     char *top;
     char *bot;
+    int enemies;
 } maps_t;
 
 typedef struct game_s game_t;

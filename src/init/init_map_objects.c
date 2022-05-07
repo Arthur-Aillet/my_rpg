@@ -34,6 +34,7 @@ void init_map_objects(maps_t **maps, json_obj_t *obj, int i)
     maps[i]->bot = get_str_by_name(obj, "bot");
     maps[i]->left = get_str_by_name(obj, "left");
     maps[i]->right = get_str_by_name(obj, "right");
+    maps[i]->enemies = get_int_by_name(obj, "enemies_amount");
     sfSprite_setTexture(maps[i]->sp_ts, maps[i]->tex_ts, sfTrue);
     printf("INITIALISER OK !\n");
     return;

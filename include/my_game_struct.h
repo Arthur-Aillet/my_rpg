@@ -26,7 +26,6 @@ typedef struct enemy_s {
     int last_update;
     object_t *object;
     sfIntRect rect;
-    object_t *drop;
     int animation_steps;
     int pv;
     int status;
@@ -79,6 +78,7 @@ typedef struct player_s {
     int dash;
     int hotbar_pos;
     int is_attacking;
+    int hurt;
     void (*status)(game_t *);
 } player_t;
 

@@ -35,7 +35,7 @@ item_t create_molotov(item_t item, int number)
     item.armor_type = 0;
     item.consumable = 1;
     item.obj = create_object("assets/img/fire_it.png", VCF {0, 0}, VCF {4, 4});
-    item.action = player_attack;
+    item.action = fire_zone;
     item.power = 10;
     sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     return (item);

@@ -38,7 +38,6 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
 {
     char *sprite_path = get_str_by_name(data, "sprite");
 
-    e_place->drop = my_strdup(get_str_by_name(data, "drop_item"));
     e_place->name = my_strdup(data->name);
     e_place->type = get_int_by_name(data, "type");
     if (e_place->type < 0)

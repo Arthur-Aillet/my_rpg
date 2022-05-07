@@ -8,6 +8,7 @@
 #pragma once
 
 #include "my_csfml_utils.h"
+#include "my_game_struct.h"
 
 #define PLAYER_ANIM player_animations[state].spritesheet->sprite
 
@@ -18,4 +19,5 @@ typedef struct animation_s {
     int animation_size;
 } animation_t;
 
-animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state);
+animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state,
+    player_t *player);

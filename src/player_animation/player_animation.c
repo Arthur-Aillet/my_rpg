@@ -10,6 +10,7 @@
 #include "csfml_libs.h"
 #include "my.h"
 #include "my_rpg.h"
+#include "my_game_struct.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -69,34 +70,41 @@ static animation_t *get_player_animations(void)
     return (result);
 }
 
-static void set_player_rect(animation_t player_animation, int step)
+static void set_player_rect(animation_t *player_animations, int *step,
+    int state)
 {
-    sfIntRect rect = {step * player_animation.step_size, 0,
-        player_animation.step_size, player_animation.hsize};
+    static sfClock *clock = NULL;
+    sfIntRect rect = {*step * player_animations[state].step_size, 0,
+        player_animations[state].step_size, player_animations[state].hsize};
 
-    sfSprite_setTextureRect(player_animation.spritesheet->sprite, rect);
+    if (clock == NULL)
+        clock = sfClock_create();
+    if (TIME(clock, state == IDLE || state == IDLE + 1 ||
+        state == IDLE + 2 || state == IDLE + 3 ? 0.3 : 0.1))
+        *step += 1;
+    *step = *step % player_animations[state].animation_size;
+    sfSprite_setTextureRect(player_animations[state].spritesheet->sprite, rect);
 }
 
-animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state)
+animation_t *place_player(sfRenderWindow *window, sfVector2f pos, int state
+, player_t *player)
 {
     static animation_t *player_animations = NULL;
     static int previous_state = 0;
     static int step = 0;
-    static sfClock *clock = NULL;
 
     if (player_animations == NULL)
         player_animations = get_player_animations();
-    if (clock == NULL)
-        clock = sfClock_create();
     if (previous_state != state) {
         step = 0;
         previous_state = state;
     }
-    if (TIME(clock, state == IDLE || state == IDLE + 1 ||
-        state == IDLE + 2 || state == IDLE + 3 ? 0.3 : 0.1))
-        step += 1;
-    step = step % player_animations[state].animation_size;
-    set_player_rect(player_animations[state], step);
+    sfSprite_setColor(player_animations[state].spritesheet->sprite, sfWhite);
+    if (player->hurt >= 0) {
+        sfSprite_setColor(player_animations[state].spritesheet->sprite, sfRed);
+        player->hurt -= 1;
+    }
+    set_player_rect(player_animations, &step, state);
     sfSprite_setPosition(PLAYER_ANIM, pos);
     sfRenderWindow_drawSprite(window, PLAYER_ANIM, NULL);
     return (player_animations);

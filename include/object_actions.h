@@ -19,4 +19,3 @@ void speed(game_t *game);
 void poison(game_t * game);
 void die(game_t *game);
 void fire_zone(game_t *game);
-

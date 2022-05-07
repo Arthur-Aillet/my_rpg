@@ -17,7 +17,7 @@
 #define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
                 , y), 0, 0.03)
 #define PLACE_PLAYER(x) place_player(game->window->window,\
-                 game->game->player->pos, x)
+                 game->game->player->pos, x, game->game->player)
 #define ISDASH (game->game->player->dash == 1)
 
 #define LEFT_D 0

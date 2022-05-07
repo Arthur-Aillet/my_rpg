@@ -47,6 +47,8 @@ INVENTORY_PATH	=			$(SRC_PATH)inventory/
 
 JSON_PATH		=			$(SRC_PATH)json/
 
+ENEMIES_PATH	=			$(SRC_PATH)enemies/
+
 MATH_PATH		=			$(SRC_PATH)math/
 
 MINGAME_PATH	=			$(SRC_PATH)mini_game/
@@ -62,6 +64,8 @@ UI_PATH			=			$(SRC_PATH)ui/
 POTION_PATH		=			$(MINGAME_PATH)potion/
 
 P_ANIM_PATH		=			$(SRC_PATH)player_animation/
+
+ACT_PATH		=			$(SRC_PATH)game/actions/objects/
 
 TEST_PATH		=			tests/
 
@@ -128,8 +132,12 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_game_status.c				\
 							$(INIT_PATH)init_in_game_struct.c			\
 							$(INIT_PATH)init_map_objects.c				\
-							$(INIT_PATH)init_pnj.c				\
+							$(INIT_PATH)init_pnj.c						\
 							$(INIT_PATH)init_player.c					\
+							$(INIT_PATH)items/create_objects.c			\
+							$(INIT_PATH)items/health_potions.c			\
+							$(INIT_PATH)items/stamina_potions.c			\
+							$(INIT_PATH)items/speed_potions.c			\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\
@@ -165,6 +173,12 @@ SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
 																			\
 							$(JSON_PATH)dependencies/chain_chars.c			\
 
+SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
+							$(ENEMIES_PATH)enemies_movement.c				\
+							$(ENEMIES_PATH)enemies_pv.c						\
+							$(ENEMIES_PATH)read_enemies.c					\
+							$(ENEMIES_PATH)spawn_enemies.c					\
+
 SRC_MATH		=			$(MATH_PATH)math.c								\
 
 SRC_KEY			=			$(KEY_PATH)keyboard_input.c						\
@@ -189,6 +203,10 @@ SRC_UI			=			$(UI_PATH)display_bars.c						\
 
 SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c				\
 
+SRC_ACT			=			$(ACT_PATH)weapons.c							\
+							$(ACT_PATH)potions.c							\
+							$(ACT_PATH)misc.c								\
+
 SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_BASICS)									\
 							$(SRC_CSFML)									\
@@ -197,6 +215,7 @@ SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_INIT)										\
 							$(SRC_INVENTORY)								\
 							$(SRC_JSON)										\
+							$(SRC_ENEMIES)									\
 							$(SRC_MATH)										\
 							$(SRC_POTION)									\
 							$(SRC_MINIGAME)									\
@@ -205,6 +224,7 @@ SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_UI)										\
 							$(SRC_MENU)										\
 							$(SRC_PLAYER_ANIM)								\
+							$(SRC_ACT)										\
 
 SRC				=			$(SRC_GLOBAL)									\
 							main.c

@@ -21,8 +21,8 @@
 
 item_t *create_items(void)
 {
-
     item_t *result = malloc(sizeof(item_t) * NB_SLOTS);
+
     for (int i = 0; i < NB_SLOTS; i++) {
         result[i].quantity = 0;
         result[i].type = NOTHING;
@@ -31,6 +31,8 @@ item_t *create_items(void)
         result[i].stack_size = 1;
         result[i].armor_type = 5;
         result[i].action = NULL;
+        result[i].consumable = 0;
+        result[i].power = 0;
     }
     return (result);
 }
@@ -80,17 +82,14 @@ game_t *inventory(game_t *game)
 {
     backgrounds_t backgrounds = setup_backgrounds(game);
     static int page = 0;
-    sfView *view = sfRenderWindow_getView(game->window->window);
-    sfView *original = sfView_copy(sfRenderWindow_getView(game->window->window));
     events_t events = setup_events(game, &page);
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
 
-    sfView_setCenter(view, VCF {970, 540});
-    sfRenderWindow_clear(game->window->window, sfBlack);
-    sfRenderWindow_setView(game->window->window, view);
     game->TAB = 0;
-    while (game->TAB != 2 && sfRenderWindow_isOpen(game->window->window) == true) {
+    set_view_inv(game);
+    while (game->TAB != 2 && sfRenderWindow_isOpen
+        (game->window->window) == true) {
         set_correct_window_size(game->window);
         disp[page](backgrounds);
         events = evt[page](events);
@@ -99,8 +98,6 @@ game_t *inventory(game_t *game)
     }
     game = update_stats(game);
     game->TAB = 0;
-    sfRenderWindow_setView(game->window->window, original);
-    sfView_destroy(original);
     free_inventory(backgrounds, events);
     return (game);
 }

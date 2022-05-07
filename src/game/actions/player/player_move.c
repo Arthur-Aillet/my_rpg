@@ -86,8 +86,10 @@ void player_move(game_t *game)
     int spd = 1;
     int count = game->game->player->move_spd;
 
-    if (game->LSHIFT > 0 && game->game->in_dialogue == false)
+    if (game->LSHIFT > 0 && game->game->in_dialogue == false) {
             count *= 1.5;
+            game->game->player->stamina -= 1;
+    }
         if (more_than_one_key(game))
             count /= 1.2;
     while (count--) {

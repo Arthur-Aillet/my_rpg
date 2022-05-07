@@ -11,13 +11,32 @@
 #include "my_window_struct.h"
 #include "my_controle_struct.h"
 #include "my_window_struct.h"
-/* #include "item_structure.h" */
 #include "my_controle_struct.h"
 #include "my_text.h"
 #include "my_sound.h"
 #include "my_csfml_utils.h"
 #include "inventory_structures.h"
 #include "particle_struct.h"
+
+typedef struct enemy_s {
+    char *name;
+    int type;
+    int speed;
+    int dps;
+    int last_update;
+    object_t *object;
+    sfIntRect rect;
+    object_t *drop;
+    int animation_steps;
+    int pv;
+    int status;
+    int status_data;
+} enemy_t;
+
+typedef struct enemy_node_s {
+    enemy_t enemy;
+    struct enemy_node_s *next;
+} enemy_node_t;
 
 typedef struct map_option_s {
     int space;
@@ -39,6 +58,8 @@ typedef struct maps_s {
     char *bot;
 } maps_t;
 
+typedef struct game_s game_t;
+
 typedef struct player_s {
     float health;
     float max_health;
@@ -55,6 +76,7 @@ typedef struct player_s {
     int dash;
     int hotbar_pos;
     int is_attacking;
+    void (*status)(game_t *);
 } player_t;
 
 typedef struct pnj_s {
@@ -81,6 +103,10 @@ typedef struct in_game_s {
     pnj_t **pnjs;
     object_t *chat_box;
     player_t *player;
+    enemy_t *samples_enemies;
+    sfClock *clock;
+    enemy_node_t *enemies;
+    int weather;
 } in_game_t;
 
 typedef struct item_s item_t;

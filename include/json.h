@@ -17,8 +17,8 @@ typedef struct json_object_s {
     int *data_int;
 } json_obj_t;
 
-    #define MAX(x, y) x > y ? x : y
-    #define MIN(x, y) x < y ? x : y
+    #define MAX(x, y) (x > y ? x : y)
+    #define MIN(x, y) (x < y ? x : y)
 
 // ########################################################
 // ####################### LIB PART #######################

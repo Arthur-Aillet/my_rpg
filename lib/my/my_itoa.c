@@ -25,7 +25,7 @@ int my_nbrlen(int nb)
 char *my_itoa(int nb)
 {
     char *str;
-    int	n = nb;
+    int n = nb;
     int i = my_nbrlen(n);
 
     str = malloc(sizeof(char) * (i + 1));

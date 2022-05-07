@@ -43,14 +43,16 @@ in_game_t *init_in_game_struct(void)
 
     game->maps = init_game_maps();
     game->player = init_game_player(game->maps[0]);
-    game->current = my_strdup("field");
+    game->current = my_strdup("house");
     game->cam_rect = cam_rect;
     game->in_dialogue = false;
     game->pnjs = create_pnjs();
     game->chat_box = create_object("assets/img/pnj/chat.png",
         VCF{0, 0}, VCF{2, 2});
     game->cam = sfView_createFromRect(cam_rect);
-    game->pos_cam = VCF {0, 0};
+    game->pos_cam = VCF {970, 540};
+    game->clock = sfClock_create();
+    game->weather = 3;
     if (game == NULL)
         return NULL;
     return game;

@@ -13,9 +13,10 @@
 item_t *pickup_item(item_t new, item_t *items)
 {
     int free_spot = 0;
+    int i;
 
     for (; items[free_spot].type != 0; free_spot++);
-    for (int i = 0; i < NB_SLOTS; i++) {
+    for (i = 0; i < NB_SLOTS; i++) {
         while (items[i].type == new.type &&
             items[i].quantity < items[i].stack_size && new.quantity > 0) {
             items[i].quantity += 1;
@@ -96,10 +97,11 @@ item_t *consume(item_t *items, int type, int quantity)
             nb_items -= 1;
             items[j].quantity -= 1;
         }
-        if (items[j].quantity == 0) {
+        if (items[j].quantity <= 0) {
             items[j].type = 0;
             items[j].armor_type = 5;
             items[j].stack_size = 1;
+            items[j].quantity = 0;
             destroy_object(items[j].obj);
         }
     }

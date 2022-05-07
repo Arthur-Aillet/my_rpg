@@ -39,7 +39,7 @@ sfVector2f get_slot_pos(int slot, sfRenderWindow *window)
     slot -= 1;
     result.x += 124 * (slot % 10);
     result.y += 124 * (slot / 10);
-    switch(slot) {
+    switch (slot) {
         case (60) : return ((sfVector2f){1572, 220});
         case (61) : return ((sfVector2f){1572, 356});
         case (62) : return ((sfVector2f){1572, 492});

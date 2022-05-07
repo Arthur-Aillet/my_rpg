@@ -47,6 +47,11 @@ void player_dash(game_t *game)
 
 void action_particles(game_t *game)
 {
+    game->game->player->stamina += 0.2;
+    if (game->game->player->stamina > game->game->player->max_stamina)
+        game->game->player->stamina = game->game->player->max_stamina;
+    if (game->game->player->health > game->game->player->max_health)
+        game->game->player->health = game->game->player->max_health;
     if (game->game->player->dash == 1)
             game->particles = add_particle(game->particles, VCF {
                 game->game->player->pos.x + rand() % 28, game->game

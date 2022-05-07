@@ -27,7 +27,7 @@ item_t create_stamina_potion_s(item_t item, int number)
 
 item_t create_stamina_potion_m(item_t item, int number)
 {
-    item.stack_size = 10;
+    item.stack_size = 1;
     item.armor_type = 0;
     item.quantity = number;
     item.type = STAMINA_POTION_M;
@@ -42,7 +42,7 @@ item_t create_stamina_potion_m(item_t item, int number)
 
 item_t create_stamina_potion_l(item_t item, int number)
 {
-    item.stack_size = 10;
+    item.stack_size = 1;
     item.armor_type = 0;
     item.quantity = number;
     item.type = STAMINA_POTION_L;
@@ -57,7 +57,7 @@ item_t create_stamina_potion_l(item_t item, int number)
 
 item_t create_stamina_regen(item_t item, int number)
 {
-    item.stack_size = 10;
+    item.stack_size = 1;
     item.armor_type = 0;
     item.quantity = number;
     item.type = STAMINA_POTION_R;

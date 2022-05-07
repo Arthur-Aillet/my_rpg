@@ -140,6 +140,7 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)items/health_potions.c			\
 							$(INIT_PATH)items/stamina_potions.c			\
 							$(INIT_PATH)items/speed_potions.c			\
+							$(INIT_PATH)items/weapons.c					\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\

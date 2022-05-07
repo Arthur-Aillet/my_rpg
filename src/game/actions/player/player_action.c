@@ -22,9 +22,7 @@ static void dash_movement(game_t *game, int cooldown)
            game->game->player->pos.x += 1;
         if (game->game->player->side == 3 && !player_is_collide(game, 1, 0))
             game->game->player->pos.x -= 1;
-
     }
-    return (game);
 }
 
 void player_dash(game_t *game)

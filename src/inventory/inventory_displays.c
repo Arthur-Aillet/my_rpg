@@ -34,8 +34,6 @@ void disp_cmp(backgrounds_t bgs)
 
 void set_view_inv(game_t *game)
 {
-    sfView *view = sfRenderWindow_getView(game->window->window);
-
-    sfView_setCenter(view, VCF {970, 540});
-    sfRenderWindow_setView(game->window->window, view);
+    sfView_setCenter(game->game->cam, VCF {970, 540});
+    sfRenderWindow_setView(game->window->window, game->game->cam);
 }

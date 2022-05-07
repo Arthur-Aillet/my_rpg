@@ -41,6 +41,7 @@ static pause_t *setup_pause_2(game_t *game, pause_t *pause)
     button_setup_offset(pause->quit, VCF{-.09, .2}, VCF{.17, .06}, VCF{0, 0});
         button_setup_sounds(pause->quit,
         SOUNDG("hover.ogg"), SOUNDG("click.ogg"), 100);
+    return (pause);
 }
 
 static pause_t *setup_pause(game_t *game)

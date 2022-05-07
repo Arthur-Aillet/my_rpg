@@ -33,6 +33,27 @@ int damage_enemy_zone(game_t *game, sfVector2f pos, int rayon, int damage)
             remove_enemy_pv(actual, damage);
             enemis_touched++;
         }
+        actual = actual->next;
+    }
+    return enemis_touched;
+}
+
+int damage_enemy_rect(game_t *game, sfFloatRect rect, int dmg)
+{
+    enemy_node_t *actual = game->game->enemies;
+    sfVector2f e_pos;
+    sfFloatRect enemy_rect = {0, 0, 0, 0};
+    int enemis_touched = 0;
+
+    while (actual) {
+        e_pos = sfSprite_getPosition(actual->enemy.object->sprite);
+        enemy_rect = sfSprite_getGlobalBounds(actual->enemy.object->sprite);
+        if (sfFloatRect_intersects((const sfFloatRect *) &rect,
+            (const sfFloatRect *) &enemy_rect, NULL)) {
+            remove_enemy_pv(actual, dmg);
+            enemis_touched++;
+        }
+        actual = actual->next;
     }
     return enemis_touched;
 }

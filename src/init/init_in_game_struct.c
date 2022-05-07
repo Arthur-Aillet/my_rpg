@@ -42,6 +42,7 @@ in_game_t *init_in_game_struct(void)
     sfFloatRect cam_rect = {0, 0, 1920, 1080};
 
     game->maps = init_game_maps();
+    game->enemies = NULL;
     game->player = init_game_player(game->maps[0]);
     game->current = my_strdup("house");
     game->cam_rect = cam_rect;

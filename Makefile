@@ -207,6 +207,7 @@ SRC_PLAYER_ANIM	=			$(P_ANIM_PATH)player_animation.c				\
 
 SRC_ACT			=			$(ACT_PATH)weapons.c							\
 							$(ACT_PATH)potions.c							\
+							$(ACT_PATH)misc.c								\
 
 SRC_GLOBAL		=			$(SRC_ANIM)										\
 							$(SRC_BASICS)									\

@@ -64,3 +64,4 @@ void display_player(game_t *game);
 void do_attack(game_t *game);
 void player_actions(game_t *game);
 void player_move(game_t *game);
+void die(game_t *game);

@@ -58,11 +58,20 @@ void action_particles(game_t *game)
                 ->player->pos.y + 42 + (rand() % 20 - 10)}, LEAF, 1);
 }
 
+void set_hotbar_by_number(game_t *game)
+{
+}
+
 void hotbar_actions(game_t *game)
 {
+    set_hotbar_by_number(game);
+    for (int i = 0; i < 10; i++)
+        if (game->keys[sfKeyNum0 + i] == 2)
+            game->game->player->hotbar_pos = i - 1;
+    printf("%d\n", game->game->player->hotbar_pos);
     if (abs(game->HSCROLL) > 0 && game->game->in_dialogue == false)
-        game->game->player->hotbar_pos += game ->HSCROLL;
-    if (game->LCLICK == RELEASE && game->game->in_dialogue == false &&
+        game->game->player->hotbar_pos += game->HSCROLL;
+    if (game->LCLICK == PRESS && game->game->in_dialogue == false &&
         game->items[game->game->player->hotbar_pos + 51].action != NULL) {
         game->items[game->game->player->hotbar_pos + 51].action(game);
         if (game->items[game->game->player->hotbar_pos + 51].consumable != 0)

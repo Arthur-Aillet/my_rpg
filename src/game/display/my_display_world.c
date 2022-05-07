@@ -32,7 +32,7 @@ static void setup_camera(game_t *game, int i)
         game->game->pos_cam.y = game->game->maps[i]->height * 64 -
             game->game->cam_rect.height / 2;
     if (game->game->player->hurt > 0)
-        sfView_zoom(game->game->cam, 1.02);
+        sfView_zoom(game->game->cam, 0.98);
     if (game->game->player->hurt == 0)
         sfView_setSize(game->game->cam, VCF {1920, 1080});
     sfView_setCenter(game->game->cam, game->game->pos_cam);

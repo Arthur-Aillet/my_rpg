@@ -45,6 +45,7 @@ backgrounds_t setup_backgrounds(game_t *game)
     result.window = game->window->window;
     result.keys = game->keys;
     result.comp = game->comp;
+    result.player = game->game->player;
     return (result);
 }
 
@@ -84,5 +85,6 @@ events_t setup_events(game_t *game, int *page)
     button_setup_offset(result.button,
         VCF {0.2, 0.2}, VCF {0.15, 0.15}, VCF{0, 0});
     result.comp = game->comp;
+    sfRenderWindow_clear(game->window->window, sfBlack);
     return (result);
 }

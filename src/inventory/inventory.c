@@ -77,7 +77,7 @@ game_t *update_stats(game_t *game)
 game_t *inventory(game_t *game)
 {
     backgrounds_t backgrounds = setup_backgrounds(game);
-    static int page = 0;
+    int page = 0;
     events_t events = setup_events(game, &page);
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};

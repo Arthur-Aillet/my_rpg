@@ -12,7 +12,7 @@
 
 item_t *pickup_item(item_t new, item_t *items)
 {
-    int free_spot = 0;
+    int free_spot = 1;
     int i;
 
     for (; items[free_spot].type != 0; free_spot++);
@@ -23,8 +23,12 @@ item_t *pickup_item(item_t new, item_t *items)
             new.quantity -= 1;
         }
     }
-    destroy_object(items[free_spot].obj);
-    items[free_spot] = new;
+    if (new.quantity > 0) {
+        destroy_object(items[free_spot].obj);
+        items[free_spot] = new;
+        return (items);
+    }
+    destroy_object(new.obj);
     return (items);
 }
 

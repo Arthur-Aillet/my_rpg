@@ -9,7 +9,8 @@
         "scale": 2,
         "sprite_len": 18,
         "sprite_height": 13,
-        "animation_steps": 4
+        "animation_steps": 4,
+        "view_range": 700
     },
     "enemy_2": {
         "poison": 1,
@@ -21,7 +22,8 @@
         "scale": 3,
         "sprite_len": 18,
         "sprite_height": 13,
-        "animation_steps": 4
+        "animation_steps": 4,
+        "view_range": 800
     },
     "enemy_3": {
         "poison": 0,
@@ -33,7 +35,8 @@
         "scale": 2,
         "sprite_len": 18,
         "sprite_height": 13,
-        "animation_steps": 4
+        "animation_steps": 4,
+        "view_range": 550
     },
     "enemy_4": {
         "poison": 0,
@@ -45,6 +48,7 @@
         "scale": 3,
         "sprite_len": 18,
         "sprite_height": 13,
-        "animation_steps": 4
+        "animation_steps": 4,
+        "view_range": 400
     }
 }

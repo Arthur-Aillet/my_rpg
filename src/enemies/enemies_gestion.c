@@ -19,6 +19,15 @@ int determinate_enemy_direction(sfVector2f displacement)
         return (displacement.y < 0) * 2;
 }
 
+sfVector2f keep_only_xy(sfVector2f vector, int xy)
+{
+    if (xy == 0)
+        vector.y = 0;
+    else
+        vector.x = 0;
+    return vector;
+}
+
 void main_enemies(enemy_node_t *enemies, game_t *game)
 {
     static char *map = NULL;

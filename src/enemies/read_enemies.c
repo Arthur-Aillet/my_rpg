@@ -52,6 +52,7 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
         return 1;
     define_enemy_status(e_place);
     e_place->pv = get_int_by_name(data, "pv");
+    e_place->range = get_int_by_name(data, "view_range");
     if (e_place->name == NULL || sprite_path == NULL || e_place->pv == 0)
         return 1;
     return 0;

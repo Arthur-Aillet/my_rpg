@@ -184,6 +184,7 @@ SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
 							$(ENEMIES_PATH)spawn_enemies.c					\
 							$(ENEMIES_PATH)enemies_gestion.c				\
 							$(ENEMIES_PATH)free_enemies.c					\
+							$(ENEMIES_PATH)enemies_collisions.c				\
 
 SRC_MATH		=			$(MATH_PATH)math.c								\
 

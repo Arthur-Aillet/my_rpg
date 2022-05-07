@@ -26,3 +26,6 @@ int damage_enemy_rect(game_t *game, sfFloatRect rect, int dmg);
 void move_from_type(enemy_node_t *enemy, game_t *game);
 void change_status(enemy_node_t *enmy, game_t *game);
 int determinate_enemy_direction(sfVector2f displacement);
+int enemy_is_collide(game_t *, int xy, sfVector2f diff, sfVector2f enemypos);
+sfVector2f keep_only_xy(sfVector2f vector, int xy);
+void main_enemies(enemy_node_t *enemies, game_t *game);

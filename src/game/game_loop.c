@@ -68,14 +68,56 @@ void update_game_status(game_t *game)
     }
 }
 
+void player_move_cinematic(game_t *game, int horizontal, int veritcal)
+{
+    float spd = 0.4;
+    int count = game->game->player->move_spd;
+
+    while (count--)
+        game->game->player->pos = VCF{game->game->player->pos.x + spd *
+            horizontal, game->game->player->pos.y + spd * veritcal};
+}
+
+
+void cinematic(game_t *game)
+{
+    object_t *bandeau = create_object("assets/img/bandeau.png", VCF{0, 0}, VCF{60, 50});
+
+    game->ENTER = 0;
+    game->game->player->pos.x = 876;
+    game->game->player->pos.y = 440;
+    while (game->status->end_game == 0 && sfRenderWindow_isOpen
+            (game->window->window) && game->ENTER != 2) {
+        sfRenderWindow_clear(game->window->window, sfBlack);
+        set_correct_window_size(game->window);
+        main_enemies(game->game->enemies, game);
+        update_game_status(game);
+        if (game->game->player->pos.x <= 1292) {
+            display_world_cinematic(game, 1, 0, bandeau);
+            player_move_cinematic(game, 1, 0);
+        } else {
+            display_world_cinematic(game, 0, 0, bandeau);
+            player_move_cinematic(game, 0, 0);
+        }
+        sfSprite_setPosition(bandeau->sprite, VCF{game->game->pos_cam.x - 1920 / 2, game->game->pos_cam.y - 1080 / 2});
+        game->keys = get_keyboard_input(game->keys, game->window->window);
+        sfRenderWindow_display(game->window->window);
+    }
+    destroy_object(bandeau);
+    game->game->player->pos.x = 1292;
+    game->game->player->pos.y = 440;
+}
+
 int game_loop(game_t *game)
 {
     transition(game, 2);
     game->game->samples_enemies = create_enemies_array();
     if (game->game->samples_enemies == NULL)
         return 84;
+    cinematic(game);
     while (game->status->end_game == 0 && sfRenderWindow_isOpen
             (game->window->window)) {
+        printf("%f %f\n", game->game->player->pos.x, game->game->player->pos.y);
         sfRenderWindow_clear(game->window->window, sfBlack);
         set_correct_window_size(game->window);
         main_enemies(game->game->enemies, game);

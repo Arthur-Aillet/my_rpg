@@ -61,8 +61,10 @@ int my_rpg(void);
 int game_loop(game_t *game);
 
 void display_world(game_t *game);
+void display_world_cinematic(game_t *game, int ho, int ve, object_t *bandeau);
 void display_map(game_t *game, int map, int layer, int space);
 void display_player(game_t *game);
+void display_player_cinematic(game_t *game, int horizontal, int vertical);
 
 void do_attack(game_t *game);
 void player_actions(game_t *game);

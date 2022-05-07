@@ -54,15 +54,27 @@ static sfVector2f enemy_backward(enemy_t *enemy, game_t *game)
 
 void move_from_type(enemy_node_t *enemy, game_t *game)
 {
+    sfVector2f differential;
+    sfVector2f enemy_pos = sfSprite_getPosition(enemy->enemy.object->sprite);
+
     if (enemy->enemy.status == 0) {
-        if (enemy->enemy.type == 0)
-            sfSprite_move(enemy->enemy.object->sprite,
-                enemy_forward(&(enemy->enemy), game));
+        if (enemy->enemy.type == 0) {
+            differential = enemy_forward(&(enemy->enemy), game);
+            if (enemy_is_collide(game, 0, differential, enemy_pos))
+                differential = keep_only_xy(differential, 1);
+            if (enemy_is_collide(game, 1, differential, enemy_pos))
+                differential = keep_only_xy(differential, 0);
+            sfSprite_move(enemy->enemy.object->sprite, differential);
+        }
     }
     if (enemy->enemy.status == 1) {
         if (enemy->enemy.type == 0) {
-            sfSprite_move(enemy->enemy.object->sprite,
-                enemy_backward(&(enemy->enemy), game));
+            differential = enemy_backward(&(enemy->enemy), game);
+            if (enemy_is_collide(game, 0, differential, enemy_pos))
+                differential = keep_only_xy(differential, 1);
+            if (enemy_is_collide(game, 1, differential, enemy_pos))
+                differential = keep_only_xy(differential, 0);
+            sfSprite_move(enemy->enemy.object->sprite, differential);
             enemy->enemy.status_data -= 1;
         }
     }

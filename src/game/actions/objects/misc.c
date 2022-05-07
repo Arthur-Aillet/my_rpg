@@ -23,24 +23,24 @@ void die(game_t *game)
 
 void fire_zone(game_t *game)
 {
-    static int time = 10;
+    static int time = 40;
     static sfClock *clock = NULL;
-    static int power = 1;
+    float a = fmod(rand(), 100000000) / 100000000 * 2 * 3.141592;
+    float r = 300 * sqrt(fmod(rand(), 100000000) / 100000000);
+    sfVector2f pos = {r *cos(a) + game->game->player->pos.x + PLAYER_OFFSET_X / 2 , r * sin(a) + game->game->player->pos.y + PLAYER_OFFSET_Y / 2};
 
     if (clock == NULL)
         clock = sfClock_create();
     if (game->LCLICK == 2 && game->items
-        [game->game->player->hotbar_pos + 51].action == fire_zone) {
-        time = 10;
-        power = game->items[game->game->player->hotbar_pos + 51].power;power = 10;
-    }
+        [game->game->player->hotbar_pos + 51].action == fire_zone)
+        time = 40;
     if (time <= 0)
         game->game->player->status = NULL;
-    if (time == 10)
+    if (time == 40)
         game->game->player->status = fire_zone;
-    game->particles = add_particle(game->particles, VCF {game->game->player->pos.x + rand() % 400 - 200, game->game->player->pos.y + PLAYER_OFFSET_Y + rand() % 400 - 200}, FIRE, 10);
-    if (TIME(clock, 1)) {
+    game->particles = add_particle(game->particles, pos, FIRE, 10);
+    damage_enemy_zone(game, VCF {game->game->player->pos.x + PLAYER_OFFSET_X,
+        game->game->player->pos.y + PLAYER_OFFSET_Y}, 300, 2);
+    if (TIME(clock, 1))
         time -= 1;
-        damage_enemy_zone(game, game->game->player->pos, 100, power);
-    }
 }

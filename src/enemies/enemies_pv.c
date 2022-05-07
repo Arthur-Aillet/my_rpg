@@ -56,7 +56,6 @@ int damage_enemy_rect(game_t *game, sfFloatRect rect, int dmg)
     int enemis_touched = 0;
 
     while (actual) {
-        sfSprite_setColor(actual->enemy.object->sprite, sfWhite);
         enemy_rect = sfSprite_getGlobalBounds(actual->enemy.object->sprite);
         if (sfFloatRect_intersects((const sfFloatRect *) &rect,
             (const sfFloatRect *) &enemy_rect, NULL)) {

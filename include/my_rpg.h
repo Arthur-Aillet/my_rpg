@@ -45,7 +45,7 @@ int player_is_collide(game_t *game, int dir, int value);
 
 game_t *init_game_struct(void);
 control_t *init_game_status(void);
-in_game_t *init_in_game_struct(void);
+in_game_t *init_in_game_struct(game_t *game);
 player_t *init_game_player(maps_t *field);
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i);
 char *init_keys(void);

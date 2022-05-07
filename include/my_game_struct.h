@@ -69,6 +69,7 @@ typedef struct player_s {
     float max_stamina;
     float exp;
     float max_exp;
+    int slime_killed;
     int side;
     sfVector2f pos;
     sfTexture *tex_p;
@@ -109,6 +110,7 @@ typedef struct in_game_s {
     enemy_t *samples_enemies;
     sfClock *clock;
     enemy_node_t *enemies;
+    sfText *quest;
     int weather;
 } in_game_t;
 

@@ -49,6 +49,7 @@ void destroy_game(game_t *game)
     free(game->keys);
     destroy_object(game->mouse);
     free(game->status);
+    sfText_destroy(game->game->quest);
 }
 
 int my_rpg(void)

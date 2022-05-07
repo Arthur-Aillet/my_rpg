@@ -11,5 +11,11 @@
         "font": "Ancient.ttf",
         "name": "Old man",
         "text": "Could you help me to chase them away ?"
+    }, "step3": {
+        "direction": 1,
+        "image": "assets/img/pnj/Old_man.jpg",
+        "font": "Ancient.ttf",
+        "name": "Old man",
+        "text": "If you accept come back to me when you're done\nI'll give you a reward for your kindness !"
     }
 }

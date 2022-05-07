@@ -8,7 +8,8 @@
         "size_y": 31,
         "dialogues": {
             "greetings": "config/greetings.json",
-            "mission": "config/mission1.json"
+            "mission": "config/mission1.json",
+            "mission_end": "config/mission1_end.json"
         }
     },
     "women": {

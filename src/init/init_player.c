@@ -17,6 +17,7 @@ void init_player_stats(player_t *player)
     player->max_exp = 1000;
     player->stamina = 1000;
     player->max_stamina = 1000;
+    player->slime_killed = 0;
 }
 
 void init_player_sprite(json_obj_t *obj, player_t *player)

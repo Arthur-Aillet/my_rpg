@@ -36,7 +36,15 @@ static maps_t **init_game_maps(void)
     return maps;
 }
 
-in_game_t *init_in_game_struct(void)
+void init_quest(in_game_t *ingame, game_t *game)
+{
+    ingame->quest = sfText_create();
+    sfText_setString(ingame->quest, "Quest: kill 10 slimes\n\t\t0/10");
+    sfText_setFont(ingame->quest, FONTG("Ancient.ttf"));
+    sfText_setScale(ingame->quest, VCF{1, 1});
+}
+
+in_game_t *init_in_game_struct(game_t *main_game)
 {
     in_game_t *game = malloc(sizeof(in_game_t));
     sfFloatRect cam_rect = {0, 0, 1920, 1080};
@@ -50,6 +58,7 @@ in_game_t *init_in_game_struct(void)
     game->pnjs = create_pnjs();
     game->chat_box = create_object("assets/img/pnj/chat.png",
         VCF{0, 0}, VCF{2, 2});
+    init_quest(game, main_game);
     game->cam = sfView_createFromRect(cam_rect);
     game->pos_cam = VCF {970, 540};
     game->clock = sfClock_create();

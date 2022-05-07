@@ -60,8 +60,9 @@ void display_dialogues(game_t *game)
                 game->game->pnjs[i]->objet->sprite), game->game->player->pos);
         }
     }
-    if (nearest_dist <= 200 && nearest_index >= 0)
+    if (nearest_dist <= 200 && nearest_index >= 0) {
         display_talk(game, game->game->pnjs[nearest_index]);
+    }
 }
 
 static void display_pnj(game_t *game, pnj_t *pnj)

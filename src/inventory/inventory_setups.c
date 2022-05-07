@@ -27,10 +27,10 @@ static object_t **setup_pages(void)
     return (result);
 }
 
-static txtobject_t setup_text(font_t **fonts)
+static txtobject_t setup_text(font_t **fonts, game_t *game)
 {
     txtobject_t result;
-    result.font = fonts[1]->font;
+    result.font = FONTG("Ancient.ttf");
     result.text = sfText_create();
     return (result);
 }
@@ -41,7 +41,7 @@ backgrounds_t setup_backgrounds(game_t *game)
 
     result.items = game->items;
     result.pages = setup_pages();
-    result.text = setup_text(game->fonts);
+    result.text = setup_text(game->fonts, game);
     result.window = game->window->window;
     result.keys = game->keys;
     result.comp = game->comp;

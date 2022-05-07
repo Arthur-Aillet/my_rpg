@@ -24,6 +24,7 @@
 #define CUIRASS 14
 #define BREECHES 15
 #define SABATON 16
+#define GEL 17
 #define NB_SLOTS 65
 #define HEAD 1
 #define CHEST 2

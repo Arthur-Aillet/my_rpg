@@ -180,6 +180,8 @@ SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
 							$(ENEMIES_PATH)enemies_pv.c						\
 							$(ENEMIES_PATH)read_enemies.c					\
 							$(ENEMIES_PATH)spawn_enemies.c					\
+							$(ENEMIES_PATH)enemies_gestion.c				\
+							$(ENEMIES_PATH)free_enemies.c					\
 
 SRC_MATH		=			$(MATH_PATH)math.c								\
 

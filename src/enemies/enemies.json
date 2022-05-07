@@ -30,7 +30,7 @@
         "sprite": "assets/img/blob_blue.png",
         "drop_item": "assets/img/gel.png",
         "pv": 2,
-        "scale": 1,
+        "scale": 2,
         "sprite_len": 18,
         "sprite_height": 13,
         "animation_steps": 4
@@ -42,7 +42,7 @@
         "sprite": "assets/img/blob_green.png",
         "drop_item": "assets/img/gel.png",
         "pv": 2,
-        "scale": 1,
+        "scale": 3,
         "sprite_len": 18,
         "sprite_height": 13,
         "animation_steps": 4

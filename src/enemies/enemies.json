@@ -6,7 +6,7 @@
         "sprite": "assets/img/blobs_full.png",
         "drop_item": "assets/img/gel.png",
         "pv": 10,
-        "scale": 2,
+        "scale": 25,
         "sprite_len": 18,
         "sprite_height": 13,
         "animation_steps": 4
@@ -14,9 +14,9 @@
     "enemy_2": {
         "poison": 1,
         "speed": 3,
-        "dps": 20,
+        "dps": 60,
         "sprite": "assets/img/blobs_full.png",
-        "pv": 10,
+        "pv": 20,
         "drop_item": "assets/img/gel.png",
         "scale": 3,
         "sprite_len": 18,
@@ -26,11 +26,11 @@
     "enemy_3": {
         "poison": 0,
         "speed": 2,
-        "dps": 20,
+        "dps": 2,
         "sprite": "assets/img/blobs_full.png",
         "drop_item": "assets/img/gel.png",
-        "pv": 10,
-        "scale": 2,
+        "pv": 2,
+        "scale": 1,
         "sprite_len": 18,
         "sprite_height": 13,
         "animation_steps": 4

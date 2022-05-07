@@ -17,3 +17,4 @@ void regen_h(game_t *game);
 void regen_s(game_t *game);
 void speed(game_t *game);
 void poison(game_t * game);
+void die(game_t *game);

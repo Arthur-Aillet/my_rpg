@@ -22,5 +22,6 @@ void display_enemies(game_t *game, enemy_node_t *enemies);
 void free_enemies(enemy_node_t *enemies);
 void remove_enemy_pv(enemy_node_t *enemy, int nb);
 int damage_enemy_zone(game_t *game, sfVector2f pos, int rayon, int damage);
+int damage_enemy_rect(game_t *game, sfFloatRect rect, int dmg);
 void move_from_type(enemy_node_t *enemy, game_t *game);
 void change_status(enemy_node_t *enmy, game_t *game);

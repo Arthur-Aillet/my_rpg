@@ -25,6 +25,9 @@
 #define RIGHT_D 2
 #define DOWN_D 3
 
+#define ARMOR_VALUE game->items[61].power + game->items[62].power +\
+                game->items[63].power + game->items[64].power
+
 #define DOWN_WALK 0
 #define UP_WALK 1
 #define RIGHT_WALK 2
@@ -61,5 +64,7 @@ void display_world(game_t *game);
 void display_map(game_t *game, int map, int layer, int space);
 void display_player(game_t *game);
 
+void do_attack(game_t *game);
 void player_actions(game_t *game);
 void player_move(game_t *game);
+void die(game_t *game);

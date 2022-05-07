@@ -9,7 +9,8 @@
 #include "my_game_struct.h"
 #include "keyboard.h"
 
-static void do_transition(game_t *game, sfSprite *black, sfClock *clock, int speed)
+static void do_transition(game_t *game, sfSprite *black, sfClock *clock
+    , int speed)
 {
     int i = 0;
 
@@ -35,6 +36,9 @@ void transition(game_t *game, int speed)
         NULL);
     sfClock *clock = sfClock_create();
 
+    sfSprite_setPosition(black, VCF {game->game->pos_cam.x - 970,
+        game->game->pos_cam.y - 540});
+    sfSprite_setScale(black, VCF {2, 2});
     sfSprite_setTexture(black, tex, sfTrue);
     do_transition(game, black, clock, speed);
     sfTexture_destroy(tex);

@@ -22,6 +22,12 @@ sfIntRect configure_enemy_rect(json_obj_t *data, enemy_t *e_place)
     return rect;
 }
 
+static void json_to_enemy_status(json_obj_t *data, enemy_t *e_place)
+{
+    e_place->status = 0;
+    e_place->status_data = 0;
+}
+
 /*
 utilise le json pour créer un ennemi. e_place doit déjà être alouée.
 renvoie 1 si une erreur apparait.
@@ -30,6 +36,7 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
 {
     char *sprite_path = get_str_by_name(data, "sprite");
 
+    e_place->drop = my_strdup(get_str_by_name(data, "drop_item"));
     e_place->name = my_strdup(data->name);
     e_place->type = get_int_by_name(data, "type");
     if (e_place->type < 0)
@@ -42,8 +49,7 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     e_place->rect = configure_enemy_rect(data, e_place);
     if (e_place->rect.height == 0 || e_place->rect.width == 0)
         return 1;
-    e_place->status = 0;
-    e_place->status_data = 0;
+    json_to_enemy_status(data, e_place);
     e_place->pv = get_int_by_name(data, "pv");
     if (e_place->name == NULL || sprite_path == NULL || e_place->pv == 0)
         return 1;

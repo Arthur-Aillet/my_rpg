@@ -11,6 +11,7 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 #include "my_math.h"
+#include "my_rpg.h"
 
 //calculate enemy direction for x and y (0 <= x y <= 1)
 static sfVector2f enemy_forward(enemy_t *enemy, game_t *game)
@@ -76,7 +77,12 @@ void change_status(enemy_node_t *enmy, game_t *game)
         enmy->enemy.status = 1;
         enmy->enemy.status_data = 100;
         enmy->enemy.speed += 1;
-        game->game->player->health -= enmy->enemy.dps;
+        game->game->player->health -= (enmy->enemy.dps - ARMOR_VALUE > 0) ?
+            (enmy->enemy.dps - ARMOR_VALUE) : (0);
+    }
+    if (game->game->player->health <= 0) {
+        transition(game, 5);
+        die(game);
     }
     if (enmy->enemy.status == 1 && enmy->enemy.status_data <= 0) {
         enmy->enemy.status = 0;

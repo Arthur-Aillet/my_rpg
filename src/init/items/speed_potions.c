@@ -27,7 +27,7 @@ item_t create_speed_potion_s(item_t item, int number)
 
 item_t create_speed_potion_l(item_t item, int number)
 {
-    item.stack_size = 10;
+    item.stack_size = 1;
     item.armor_type = 0;
     item.quantity = number;
     item.type = SPEED_POTION_L;
@@ -42,7 +42,7 @@ item_t create_speed_potion_l(item_t item, int number)
 
 item_t create_speed_potion_m(item_t item, int number)
 {
-    item.stack_size = 10;
+    item.stack_size = 1;
     item.armor_type = 0;
     item.quantity = number;
     item.type = SPEED_POTION_M;

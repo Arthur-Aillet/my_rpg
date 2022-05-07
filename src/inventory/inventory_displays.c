@@ -7,6 +7,7 @@
 
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
+#include "my_game_struct.h"
 #include <stdio.h>
 
 void disp_inv(backgrounds_t bgs)
@@ -29,4 +30,12 @@ void disp_cmp(backgrounds_t bgs)
     sfRenderWindow_drawSprite(bgs.window, bgs.pages[3]->sprite, NULL);
     draw_competences(bgs.window, bgs.comp);
     draw_descriptions(bgs.window, bgs.comp, bgs.text.text);
+}
+
+void set_view_inv(game_t *game)
+{
+    sfView *view = sfRenderWindow_getView(game->window->window);
+
+    sfView_setCenter(view, VCF {970, 540});
+    sfRenderWindow_setView(game->window->window, view);
 }

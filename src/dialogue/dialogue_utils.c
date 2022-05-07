@@ -61,7 +61,8 @@ void draw_chatbox(game_t *game, int direction)
     if (direction != 0) {
         pos.x -= 15;
         sfSprite_setPosition(textbox[1]->sprite, pos);
-        sfRenderWindow_drawSprite(game->window->window, textbox[1]->sprite, NULL);
+        sfRenderWindow_drawSprite(game->window->window, textbox[1]->sprite
+            , NULL);
         return;
     }
         sfSprite_setPosition(textbox[0]->sprite, pos);

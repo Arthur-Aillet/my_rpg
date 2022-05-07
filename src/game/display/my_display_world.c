@@ -10,6 +10,10 @@
 #include "pnjs.h"
 #include "ui.h"
 #include "particles.h"
+#include "player_animation.h"
+#include "enemies.h"
+
+#include <math.h>
 
 static void setup_camera(game_t *game, int i)
 {

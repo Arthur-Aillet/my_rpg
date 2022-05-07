@@ -9,6 +9,7 @@
 #include "my_rpg.h"
 #include "inventory_prototypes.h"
 #include "enemies.h"
+#include "math.h"
 
 void player_attack(game_t *game)
 {

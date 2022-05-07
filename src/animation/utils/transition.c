@@ -9,22 +9,22 @@
 #include "my_game_struct.h"
 #include "keyboard.h"
 
-static void do_transition(game_t *game, sfSprite *black, sfClock *clock
-    , int speed)
+static void do_transition(game_t *game, sfSprite *black, sfClock *clock,
+    int speed)
 {
     int i = 0;
 
-    while (sfRenderWindow_isOpen(game->window->window) && i < 70) {
+    while (sfRenderWindow_isOpen(game->window->window) && i < 25) {
         game->keys = get_keyboard_input(game->keys, game->window->window);
         if (game->ENTER)
-            i = 70;
-        sfSprite_setColor(black, sfColor_fromRGBA(255, 255, 255, i));
+            i = 25;
+        sfSprite_setColor(black, sfColor_fromRGBA(0, 0, 0, i * 10));
         if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.02 / speed) {
             sfClock_restart(clock);
             i++;
         }
-        sfRenderWindow_drawSprite(game->window->window, black, NULL);
         set_correct_window_size(game->window);
+        sfRenderWindow_drawSprite(game->window->window, black, NULL);
         sfRenderWindow_display(game->window->window);
     }
 }

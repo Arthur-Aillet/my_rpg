@@ -1,0 +1,10 @@
+
+{
+    "step1": {
+        "direction": 1,
+        "image": "assets/img/pnj/Old_man.jpg",
+        "font": "Ancient.ttf",
+        "name": "Old man",
+        "text": "A lot of slimes invaded my field !\nThese animals are very territorial and attack people.\nCould you help me to chase them away ?"
+    }
+}

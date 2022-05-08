@@ -31,9 +31,8 @@ item_t *pickup_items(item_t *items, char *keys, int *pressed, int slot)
 
 static item_t *equip(int pressed, int slot, item_t *items)
 {
-    if (items[0].armor_type == slot - 60 || items[0].armor_type == 5) {
+    if (items[0].armor_type == slot - 60 || items[0].armor_type == 5)
         return (swap_items(slot, 0, items));
-    }
     return (swap_items(pressed, 0, items));
 }
 

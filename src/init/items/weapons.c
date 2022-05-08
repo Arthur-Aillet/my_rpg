@@ -39,5 +39,4 @@ item_t create_molotov(item_t item, int number)
     item.power = 10;
     sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     return (item);
-
 }

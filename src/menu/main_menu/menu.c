@@ -94,19 +94,14 @@ static void update_menu(main_menu_t *menu, game_t *game)
     sfRenderWindow_display(game->window->window);
 }
 
-void destroy_menu(main_menu_t *menu)
+void menu_reset(game_t *game)
 {
-    destroy_button(menu->quit);
-    destroy_button(menu->new_game);
-    destroy_button(menu->continue_game);
-    destroy_button(menu->options);
-    destroy_object(menu->back);
-    sfClock_destroy(menu->clock);
-    destroy_object(menu->title);
-    exterminate(menu->particle);
+    set_correct_window_size(game->window);
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    game->keys = get_keyboard_input(game->keys, game->window->window);
 }
 
-int menu(game_t *game)
+void menu(game_t *game)
 {
     main_menu_t *menu = init_main_menu(game);
     int open = 1;
@@ -114,13 +109,9 @@ int menu(game_t *game)
     if (MUSICG("our_home.flac") != NULL)
         sfMusic_play(MUSICG("our_home.flac"));
     while (sfRenderWindow_isOpen(game->window->window) && open) {
-        set_correct_window_size(game->window);
-        sfRenderWindow_clear(game->window->window, sfBlack);
-        game->keys = get_keyboard_input(game->keys, game->window->window);
+        menu_reset(game);
         if (is_pressed(menu->quit, game->window->window, game->keys))
             open = 0;
-        if (game->keys[sfKeyP] == PRESS)
-            potion_loop(game);
         if (is_pressed(menu->continue_game, game->window->window, game->keys))
             how_to_play(game);
         if (is_pressed(menu->new_game, game->window->window, game->keys))
@@ -131,5 +122,4 @@ int menu(game_t *game)
     }
     exterminate(menu->particle);
     destroy_button(menu->quit);
-    return 0;
 }

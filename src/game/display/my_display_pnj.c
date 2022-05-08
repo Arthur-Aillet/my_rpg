@@ -43,8 +43,7 @@ static void display_talk(game_t *game, pnj_t *pnj)
         game->game->in_dialogue = false;
 }
 
-void display_dialogues(game_t *game)
-{
+void display_dialogues(game_t *game
     int nearest_index = -1;
     int nearest_dist = 1000000;
 

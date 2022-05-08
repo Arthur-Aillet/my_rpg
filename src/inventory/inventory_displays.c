@@ -21,23 +21,23 @@ void disp_inv(backgrounds_t bgs)
 
 void display_stats(backgrounds_t bgs)
 {
-    sfText_setPosition(bgs.text.text, VCF {1500, 200});
+    sfText_setPosition(bgs.text.text, VCF {1500, 300});
     sfText_setString(bgs.text.text, "max health     :\nmax stamina    :\n"
         "speed          :\ndash           :\nxp to next lvl :\n");
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
-    sfText_setPosition(bgs.text.text, VCF {1700, 200});
+    sfText_setPosition(bgs.text.text, VCF {1700, 300});
     sfText_setString(bgs.text.text, my_itoa((int) bgs.player->max_health));
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
-    sfText_setPosition(bgs.text.text, VCF {1700, 230});
+    sfText_setPosition(bgs.text.text, VCF {1700, 330});
     sfText_setString(bgs.text.text, my_itoa((int) bgs.player->max_stamina));
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
-    sfText_setPosition(bgs.text.text, VCF {1700, 260});
+    sfText_setPosition(bgs.text.text, VCF {1700, 360});
     sfText_setString(bgs.text.text, my_itoa((int) bgs.player->move_spd));
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
-    sfText_setPosition(bgs.text.text, VCF {1700, 290});
+    sfText_setPosition(bgs.text.text, VCF {1700, 390});
     sfText_setString(bgs.text.text, my_itoa((int) bgs.player->dash >= 0));
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
-    sfText_setPosition(bgs.text.text, VCF {1700, 310});
+    sfText_setPosition(bgs.text.text, VCF {1700, 410});
     sfText_setString(bgs.text.text, my_itoa((int) 1000 - bgs.player->exp));
     sfRenderWindow_drawText(bgs.window, bgs.text.text, NULL);
 }

@@ -96,3 +96,5 @@ int how_to_play(game_t *game);
 int pause_menu(game_t *game);
 void destroy_menu(main_menu_t *menu);
 potion_craft_t *init_potion_menu(game_t *game);
+void potion_update_hp(sfText *desc, game_t *game, potion_craft_t *pot, int nb);
+void potion_update_st(sfText *desc, game_t *game, potion_craft_t *pot, int nb);

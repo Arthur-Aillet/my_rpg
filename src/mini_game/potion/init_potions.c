@@ -23,10 +23,56 @@
 #include "inventory_prototypes.h"
 #include "inventory_structures.h"
 
+void potion_update_hp(sfText *desc, game_t *game, potion_craft_t *pot, int nb)
+{
+    if (pot->status == nb) {
+        if (is_pressed(pot->l_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 4, 5, 7);
+        if (is_pressed(pot->m_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 2, 3, 6);
+        if (is_pressed(pot->s_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 1, 1, 5);
+        if (is_pressed(pot->r_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 3, 10, 4);
+        update_button(game->window->window, pot->l_make, game->keys);
+        update_button(game->window->window, pot->m_make, game->keys);
+        update_button(game->window->window, pot->s_make, game->keys);
+        update_button(game->window->window, pot->r_make, game->keys);
+        sfRenderWindow_drawText(game->window->window, desc, NULL);
+    }
+}
+
+void potion_update_st(sfText *desc, game_t *game, potion_craft_t *pot, int nb)
+{
+    if (pot->status == nb) {
+        if (is_pressed(pot->l_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 4, 5, 3);
+        if (is_pressed(pot->m_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 2, 3, 2);
+        if (is_pressed(pot->s_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 1, 1, 1);
+        if (is_pressed(pot->r_make, game->window->window,
+            game->keys) == true)
+            create_potion(game, 3, 10, 0);
+        update_button(game->window->window, pot->l_make, game->keys);
+        update_button(game->window->window, pot->m_make, game->keys);
+        update_button(game->window->window, pot->s_make, game->keys);
+        update_button(game->window->window, pot->r_make, game->keys);
+        sfRenderWindow_drawText(game->window->window, desc, NULL);
+    }
+}
+
 static void init_potion_menu_2(potion_craft_t *potion_menu, game_t *game)
 {
     sfText_setString(potion_menu->fire_desc, "An aura of fire \
-        \nsurrounds you, killing your \nenemies without mercy \nCost: 5 gel");
+        \nsurrounds you, killing your \nenemies without mercy \nCost: 2 gel");
     sfText_setFont(potion_menu->fire_desc, FONTG("Ancient.ttf"));
     sfText_setCharacterSize(potion_menu->fire_desc, 35);
     sfText_setPosition(potion_menu->fire_desc, VCF{1460, 300});
@@ -52,7 +98,8 @@ potion_craft_t *init_potion_menu(game_t *game)
     potion_craft_t *potion_menu = malloc(sizeof(potion_craft_t));
 
     potion_menu->status = 0;
-    potion_menu->back = create_object("assets/img/craft.jpg", VCF{0, 0}, VCF{4, 4});
+    potion_menu->back = create_object("assets/img/craft.jpg",
+        VCF{0, 0}, VCF{4, 4});
     potion_menu->stamina =
         create_p(game, "Stamina potion", VCF{810, 430}, VCF{2, 1});
     potion_menu->health =

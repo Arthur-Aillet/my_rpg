@@ -27,10 +27,10 @@ void create_potion(game_t *game, int steps, int difficulty, int type)
 {
     potion_t *potion = malloc(sizeof(potion_t));
     item_t final_potion;
-    item_t (*give_pot[12])(item_t, int) = {create_stamina_regen,
+    item_t (*give_pot[9])(item_t, int) = {create_stamina_regen,
         create_stamina_potion_s, create_stamina_potion_m,
-        create_stamina_potion_l, create_health_regen, create_molotov,
-        create_heal_potion_s, create_heal_potion_m, create_heal_potion_l};
+        create_stamina_potion_l, create_health_regen, create_heal_potion_s,
+        create_heal_potion_m, create_heal_potion_l, create_molotov};
 
     if (count_item(game->items, GEL) < steps)
         return;
@@ -64,33 +64,10 @@ void potion_update_fire(game_t *game, potion_craft_t *potion_menu)
     if (potion_menu->status == 3) {
         if (is_pressed(potion_menu->fire_make,
             game->window->window, game->keys) == true)
-            create_potion(game, 5, 6, 6);
+            create_potion(game, 2, 9, 8);
         update_button(game->window->window, potion_menu->fire_make, game->keys);
         sfRenderWindow_drawText(game->window->window,
             potion_menu->fire_desc, NULL);
-    }
-}
-
-void potion_update(sfText *desc, game_t *game, potion_craft_t *pot, int nb)
-{
-    if (pot->status == nb) {
-        if (is_pressed(pot->l_make, game->window->window,
-            game->keys) == true)
-            create_potion(game, 4, 5, 3);
-        if (is_pressed(pot->m_make, game->window->window,
-            game->keys) == true)
-            create_potion(game, 2, 3, 2);
-        if (is_pressed(pot->s_make, game->window->window,
-            game->keys) == true)
-            create_potion(game, 1, 1, 1);
-        if (is_pressed(pot->r_make, game->window->window,
-            game->keys) == true)
-            create_potion(game, 3, 10, 0);
-        update_button(game->window->window, pot->l_make, game->keys);
-        update_button(game->window->window, pot->m_make, game->keys);
-        update_button(game->window->window, pot->s_make, game->keys);
-        update_button(game->window->window, pot->r_make, game->keys);
-        sfRenderWindow_drawText(game->window->window, desc, NULL);
     }
 }
 
@@ -108,8 +85,8 @@ void potion_main(game_t *game, potion_craft_t *potion, int *open)
     if (is_pressed(potion->fire, game->window->window, game->keys) == true)
         potion->status = 3;
     sfRenderWindow_drawSprite(game->window->window, potion->back->sprite, NULL);
-    potion_update(potion->health_desc, game, potion, 2);
-    potion_update(potion->stamina_desc, game, potion, 1);
+    potion_update_hp(potion->health_desc, game, potion, 2);
+    potion_update_st(potion->stamina_desc, game, potion, 1);
     potion_update_fire(game, potion);
     update_button(game->window->window, potion->fire, game->keys);
     update_button(game->window->window, potion->health, game->keys);

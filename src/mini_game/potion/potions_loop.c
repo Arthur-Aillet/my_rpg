@@ -29,10 +29,12 @@ void create_potion(game_t *game, int steps, int difficulty, int type)
     item_t final_potion;
     item_t (*give_pot[12])(item_t, int) = {create_stamina_regen, create_stamina_potion_s,
         create_stamina_potion_m, create_stamina_potion_l, create_health_regen,
-        create_speed_potion_s, create_speed_potion_m, create_speed_potion_l,
         create_molotov, create_heal_potion_s, create_heal_potion_m,
         create_heal_potion_l};
 
+    if (count_item(game->items, GEL) < steps)
+        return;
+    game->items = consume(game->items, GEL, steps);
     potion->current_step = 0;
     potion->numbers_steps = steps;
     potion->difficulty = difficulty;
@@ -78,12 +80,12 @@ potion_craft_t *init_potion_menu(game_t *game)
     sfText_setCharacterSize(potion_menu->fire_desc, 35);
     sfText_setPosition(potion_menu->fire_desc, VCF{1920 / 2 + 500, 300});
     potion_menu->health_desc = sfText_create();
-    sfText_setString(potion_menu->health_desc, "R: Regenerate over time\nCost: 5 gel\n\nL: Large\nEnough to heal you from\nthe most dangerous injuries\nCost: 4 gel\n\nM: Medium\nuseful to heal your common wounds\nCost: 3 gel\n\nS: Small\neffective for bruises\nCost: 2 gel");
+    sfText_setString(potion_menu->health_desc, "R: Regenerate over time\nCost: 3 gel\n\nL: Large\nEnough to heal you from\nthe most dangerous injuries\nCost: 4 gel\n\nM: Medium\nuseful to heal your common wounds\nCost: 2 gel\n\nS: Small\neffective for bruises\nCost: 1 gel");
     sfText_setFont(potion_menu->health_desc, FONTG("Ancient.ttf"));
     sfText_setCharacterSize(potion_menu->health_desc, 27);
     sfText_setPosition(potion_menu->health_desc, VCF{1920 / 2 + 500, 280});
     potion_menu->stamina_desc = sfText_create();
-    sfText_setString(potion_menu->stamina_desc, "R: Regenerate over time\nCost: 4 gel\n\nL: Large\nYou will forget how to sleep\nCost: 3 gel\n\nM: Medium\nExtremely effective\nCost: 2 gel\n\nS: Small\nIt's just coffee\nCost: 1 gel");
+    sfText_setString(potion_menu->stamina_desc, "R: Regenerate over time\nCost: 3 gel\n\nL: Large\nYou will forget how to sleep\nCost: 4 gel\n\nM: Medium\nExtremely effective\nCost: 2 gel\n\nS: Small\nIt's just coffee\nCost: 1 gel");
     sfText_setFont(potion_menu->stamina_desc, FONTG("Ancient.ttf"));
     sfText_setPosition(potion_menu->stamina_desc, VCF{1920 / 2 + 500, 270});
     return (potion_menu);
@@ -112,6 +114,14 @@ void potion_loop(game_t *game)
             potion_menu->status = 3;
         sfRenderWindow_drawSprite(game->window->window, potion_menu->back->sprite, NULL);
         if (potion_menu->status == 1) {
+            if (is_pressed(potion_menu->l_make, game->window->window, game->keys) == true)
+                create_potion(game, 4, 5, 3);
+            if (is_pressed(potion_menu->m_make, game->window->window, game->keys) == true)
+                create_potion(game, 2, 3, 2);
+            if (is_pressed(potion_menu->s_make, game->window->window, game->keys) == true)
+                create_potion(game, 1, 1, 1);
+            if (is_pressed(potion_menu->r_make, game->window->window, game->keys) == true)
+                create_potion(game, 3, 10, 0);
             update_button(game->window->window, potion_menu->l_make, game->keys);
             update_button(game->window->window, potion_menu->m_make, game->keys);
             update_button(game->window->window, potion_menu->s_make, game->keys);
@@ -119,6 +129,14 @@ void potion_loop(game_t *game)
             sfRenderWindow_drawText(game->window->window, potion_menu->stamina_desc, NULL);
         }
         if (potion_menu->status == 2) {
+            if (is_pressed(potion_menu->l_make, game->window->window, game->keys) == true)
+                create_potion(game, 4, 5, 9);
+            if (is_pressed(potion_menu->m_make, game->window->window, game->keys) == true)
+                create_potion(game, 2, 3, 8);
+            if (is_pressed(potion_menu->s_make, game->window->window, game->keys) == true)
+                create_potion(game, 1, 1, 7);
+            if (is_pressed(potion_menu->r_make, game->window->window, game->keys) == true)
+                create_potion(game, 3, 10, 5);
             update_button(game->window->window, potion_menu->l_make, game->keys);
             update_button(game->window->window, potion_menu->m_make, game->keys);
             update_button(game->window->window, potion_menu->s_make, game->keys);
@@ -127,7 +145,7 @@ void potion_loop(game_t *game)
         }
         if (potion_menu->status == 3) {
             if (is_pressed(potion_menu->fire_make, game->window->window, game->keys) == true)
-                create_potion(game, 1, 1, 8);
+                create_potion(game, 5, 6, 6);
             update_button(game->window->window, potion_menu->fire_make, game->keys);
             sfRenderWindow_drawText(game->window->window, potion_menu->fire_desc, NULL);
         }

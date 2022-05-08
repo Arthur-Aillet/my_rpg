@@ -30,6 +30,8 @@ static void poll_event_keys(game_t *game)
 
 void launch_craft(game_t *game)
 {
+    potion_t *fake_potion;
+
     if (my_strcmp(game->game->current, "house") == 0 &&
         dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200) {
         sfSprite_setPosition(game->game->player->craft_box->sprite,
@@ -40,6 +42,25 @@ void launch_craft(game_t *game)
     if (game->E == 2 && my_strcmp(game->game->current, "house") == 0 &&
         dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200)
         potion_loop(game);
+    if (my_strcmp(game->game->current, "house") == 0 &&
+        dist_two_points(game->game->player->pos, VCF{960, 400}) <= 200) {
+        sfSprite_setPosition(game->game->player->craft_box->sprite,
+            VCF{960 - 24, 400 - 23});
+        sfRenderWindow_drawSprite(game->window->window,
+            game->game->player->craft_box->sprite, NULL);
+    }
+    if (game->E == 2 && my_strcmp(game->game->current, "house") == 0 &&
+        dist_two_points(game->game->player->pos, VCF{960, 400}) <= 200) {
+        fake_potion = malloc(sizeof(potion_t));
+        fake_potion->current_step = 0;
+        fake_potion->numbers_steps = 3;
+        fake_potion->difficulty = 4;
+        for (; fake_potion->current_step != 3; fake_potion->current_step++)
+            if (hammer_loop(game, fake_potion)
+                && game->keys[sfKeyEscape] == PRESS)
+            return;
+        // ICIIIIIIII AUGUSTE ICIII
+    }
 }
 
 void game_anim_complement(game_t *game, pnj_t *oldmen, int switched)

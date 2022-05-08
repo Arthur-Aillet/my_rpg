@@ -42,7 +42,7 @@ void destroy_minigame_struct(minigame_t *hammer);
 minigame_t *setup_hammer_struct(void);
 minigame_t *setup_elements(void);
 void potion_loop(game_t *game);
-void hammer_loop(game_t *game, potion_t *potion);
+int hammer_loop(game_t *game, potion_t *potion);
 int mortar_loop(game_t *game, potion_t *potion);
 minigame_t *setup_elements(void);
 minigame_t *setup_hammer_struct(void);

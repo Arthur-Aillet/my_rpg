@@ -72,7 +72,7 @@ void display_hammer(minigame_t *eleme, window_t *window, potion_t *pot)
     sfRenderWindow_drawSprite(window->window, eleme->hammer->sprite, NULL);
 }
 
-void hammer_loop(game_t *game, potion_t *potion)
+int hammer_loop(game_t *game, potion_t *potion)
 {
     minigame_t *elements = setup_hammer_struct();
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
@@ -93,4 +93,5 @@ void hammer_loop(game_t *game, potion_t *potion)
     }
     sfClock_destroy(clock);
     destroy_minigame_struct(elements);
+    return 1;
 }

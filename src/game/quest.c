@@ -72,7 +72,5 @@ void give_reward(game_t *game)
         pickup_item(reward, game->items);
         reward = create_stamina_regen(reward, 5);
         pickup_item(reward, game->items);
-        transition(game, 1);
-        game->status->end_game = 1;
     }
 }

@@ -64,7 +64,13 @@ void give_reward(game_t *game)
         >= 10 && game->E == 2 && dist_two_points(sfSprite_getPosition(
         oldmen->objet->sprite), game->game->player->pos) <= 200) {
         given = true;
-        reward = create_speed_potion_l(reward, 10);
+        reward = create_speed_potion_l(reward, 2);
+        pickup_item(reward, game->items);
+        reward = create_molotov(reward, 5);
+        pickup_item(reward, game->items);
+        reward = create_health_regen(reward, 5);
+        pickup_item(reward, game->items);
+        reward = create_stamina_regen(reward, 5);
         pickup_item(reward, game->items);
         transition(game, 1);
         game->status->end_game = 1;

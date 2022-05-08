@@ -24,7 +24,7 @@ void remove_enemy_pv(enemy_node_t *enemy, int nb, game_t *game)
     enemy->enemy.pv -= nb;
     if (enemy->enemy.pv <= 0 && enemy->enemy.type != -2) {
         enemy->enemy.type = -2;
-        game->game->player->exp += 200;
+        game->game->player->exp += 800;
         gel = create_gel(gel, 1);
         pickup_item(gel, game->items);
         game->game->player->slime_killed += 1;

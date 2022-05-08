@@ -66,7 +66,5 @@ void give_reward(game_t *game)
         given = true;
         reward = create_speed_potion_l(reward, 10);
         pickup_item(reward, game->items);
-        transition(game, 1);
-        game->status->end_game = 1;
     }
 }

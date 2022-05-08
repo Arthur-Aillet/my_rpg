@@ -55,7 +55,6 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
     poll_event_keys(game);
     give_reward(game);
     sfRenderWindow_display(game->window->window);
-
 }
 
 void game_loop(game_t *game)

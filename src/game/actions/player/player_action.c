@@ -32,10 +32,10 @@ void player_dash(game_t *game)
     dash_movement(game, cooldown);
     if (cooldown != 0) {
         cooldown -= 1;
-        game->game->player->dash = 1;
+        game->game->player->dash = 0;
     }
     if (cooldown > 90)
-        game->game->player->dash = 2;
+        game->game->player->dash = 1;
     if (game->SPACE == 2 && cooldown == 0 && game->game->player->dash == 0 &&
         game->game->player->stamina >= 150) {
         cooldown = 100;
@@ -48,10 +48,15 @@ void action_particles(game_t *game)
     static sfClock *clock = NULL;
     int regen = 1;
 
-    if (game->game->player->dash > 0 && game->game->player->is_attacking > 0)
+    if (clock == NULL)
+        clock = sfClock_create();
+    if (game->game->player->dash > 1 || game->game->player->is_attacking > 0 ||
+        game->LSHIFT > 0) {
         regen = 0;
-    if (regen == 1)
-        game->game->player->stamina += 2;
+        sfClock_restart(clock);
+    }
+    if (regen == 1 && sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 3)
+        game->game->player->stamina += game->game->player->max_stamina / 300;
     if (game->game->player->stamina > game->game->player->max_stamina)
         game->game->player->stamina = game->game->player->max_stamina;
     if (game->game->player->health > game->game->player->max_health)

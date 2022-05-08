@@ -54,6 +54,8 @@ item_t *drop_item_switch(int caseint, item_t *items, int slot, int pressed)
     case (6) : add_items(0, slot, items);
         break;
     case (7) : add_items(0, pressed, items);
+        break;
+    default : swap_items(pressed, 0, items);
     }
     return (items);
 }

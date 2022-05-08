@@ -104,8 +104,8 @@ int enemy_is_collide(game_t *game, int xy, sfVector2f diff, sfVector2f enemypos)
             ret = ((int)((enemypos.x - 40) / 64) == j ||
                 (int)((enemypos.x - 20) / 64) - 1 == j) &&
                 game->game->maps[map]->maps[1][i][j] != '0' &&
-                ((int)((enemypos.y + 10) / 64 - 1) == i ||
-                (int)((enemypos.y - 20) / 64 - 1) + 1 == i)
+                ((int)((enemypos.y + 15) / 64 - 1) == i ||
+                (int)((enemypos.y - 25) / 64 - 1) + 1 == i)
                 ? 1 : ret;
     }
     return ret;

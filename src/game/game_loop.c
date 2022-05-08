@@ -31,7 +31,7 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
     if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
         if (oldmen != NULL) {
             free(oldmen->map_name);
-            sfSprite_setPosition(oldmen->objet->sprite, VCF{775, 600});
+            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 768});
             oldmen->map_name = my_strdup("town");
             oldmen->next_dialogue = my_strdup("config/greetings.json");
         }

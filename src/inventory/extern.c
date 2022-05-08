@@ -38,11 +38,11 @@ item_t *consume(item_t *items, int type, int quantity)
     int j = 0;
     if (quantity > nb_items)
         return (items);
-    while (nb_items > 0) {
+    while (quantity > 0) {
         if (items[j].type != type)
             j += 1;
         while (items[j].type == type && items[j].quantity > 0) {
-            nb_items -= 1;
+            quantity -= 1;
             items[j].quantity -= 1;
         }
         if (items[j].quantity <= 0) {

@@ -6,11 +6,5 @@
         "font": "Ancient.ttf",
         "name": "Old man",
         "text": "Thanks for your help kind kid !\nHere is your reward !"
-    }, "step2": {
-        "direction": 2,
-        "image": "assets/img/player/neutral.png",
-        "font": "Ancient.ttf",
-        "name": "Old man",
-        "text": "Thanks."
     }
 }

@@ -43,14 +43,14 @@ item_t *pickup_item(item_t new, item_t *items)
 
 item_t *consume(item_t *items, int type, int quantity)
 {
-    int nb_items = count_item(items, type);
     int j = 0;
-    if (quantity > nb_items)
+
+    if (quantity > count_item(items, type))
         return (items);
     while (quantity > 0) {
         if (items[j].type != type)
             j += 1;
-        while (items[j].type == type && items[j].quantity > 0) {
+        while (items[j].type == type && items[j].quantity > 0 && quantity > 0) {
             quantity -= 1;
             items[j].quantity -= 1;
         }

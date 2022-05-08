@@ -81,19 +81,21 @@ void speed(game_t *game)
     static int power = 1;
 
     if (game->LCLICK == 2 && game->items
-        [game->game->player->hotbar_pos + 51].action == regen_s) {
+        [game->game->player->hotbar_pos + 51].action == speed) {
         time = 60;
-        power = game->items[game->game->player->hotbar_pos + 51].power + game->
-            game->player->move_spd;
+        power = game->items[game->game->player->hotbar_pos + 51].power +
+            game->game->player->move_spd;
     }
     if (clock == NULL)
         clock = sfClock_create();
-    if (time == 0)
+    if (time == 0) {
+        game->game->player->move_spd = 8;
         game->game->player->status = NULL;
+    }
     if (time == 60)
         game->game->player->status = regen_s;
+    game->game->player->move_spd = power;
     if (TIME(clock, 1)){
         time -= 1;
-        game->game->player->move_spd = power;
     }
 }

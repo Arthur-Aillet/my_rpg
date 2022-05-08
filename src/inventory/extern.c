@@ -10,16 +10,6 @@
 #include "keyboard.h"
 #include "csfml_libs.h"
 
-item_t *set_new_item(item_t new, item_t *items, int pos)
-{
-    if (items[pos].obj != NULL) {
-        destroy_object(items[pos].obj);
-        items[pos].obj = NULL;
-    }
-    items[pos] = new;
-    return (items);
-}
-
 item_t *pickup_item(item_t new, item_t *items)
 {
     int free_spot = 1;
@@ -34,7 +24,7 @@ item_t *pickup_item(item_t new, item_t *items)
         }
     }
     if (new.quantity > 0) {
-        set_new_item(new, items, free_spot);
+        items[free_spot] = new;
         return (items);
     }
     destroy_object(new.obj);

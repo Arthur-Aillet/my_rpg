@@ -13,10 +13,11 @@ void init_player_stats(player_t *player)
 {
     player->health = 1000;
     player->max_health = 1000;
-    player->exp = 500;
+    player->exp = 0;
     player->max_exp = 1000;
     player->stamina = 1000;
     player->max_stamina = 1000;
+    player->slime_killed = 0;
 }
 
 void init_player_sprite(json_obj_t *obj, player_t *player)
@@ -46,5 +47,6 @@ player_t *init_game_player(maps_t *field)
     init_player_stats(player);
     init_player_sprite(obj, player);
     player->status = NULL;
+    player->hurt = 0;
     return player;
 }

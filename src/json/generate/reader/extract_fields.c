@@ -8,7 +8,9 @@
 #include "json.h"
 #include "my.h"
 
-//return 1 for str ("), 2 for another object_t ({) and 3 (default) for int
+/*
+return 1 for str ("), 2 for another object_t ({) and 3 (default) for int
+*/
 int get_field_type(char *buffer)
 {
     for (; buffer[0] != ':' && buffer[0] != '\0'; buffer++);

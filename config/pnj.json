@@ -1,15 +1,18 @@
 {
     "oldmen": {
-        "pos_x" : 400,
-        "pos_y" : 600,
-        "map" : "town",
+        "pos_x" : 1476,
+        "pos_y" : 360,
+        "map" : "house",
         "idle": "assets/img/pnj/Old_man_idle.png",
         "size_x": 18,
         "size_y": 31,
         "dialogues": {
-            "greetings": "config/greetings.json"
+            "greetings": "config/greetings.json",
+            "mission": "config/mission1.json",
+            "mission_end": "config/mission1_end.json"
         }
-    },    "women": {
+    },
+    "women": {
         "pos_x" : 1600,
         "pos_y" : 600,
         "map" : "town",
@@ -17,7 +20,7 @@
         "size_x": 15,
         "size_y": 32,
         "dialogues": {
-            "greetings": "config/greetings.json"
+            "greetings": "config/greetings_women.json"
         }
     }
 }

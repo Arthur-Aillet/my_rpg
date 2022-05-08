@@ -45,7 +45,7 @@ void animation_switch(game_t *game)
             break;
         case (1) : PLACE_PLAYER(LEFT_WALK + ISDASH * 8);
             break;
-        default : PLACE_PLAYER(IDLE + game->game->player->side  +
+        default : PLACE_PLAYER(IDLE + game->game->player->side +
             ISDASH * 4);
     }
 }

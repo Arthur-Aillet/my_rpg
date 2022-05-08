@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2022
-** rpg - water particles
+** my_rpg
 ** File description:
-** *gaidojapamxcopacpoa*
+** water particles
 */
 
 #include "particles.h"
@@ -15,7 +15,7 @@ recomended speed: 15*/
 particle_t *rain(sfRenderWindow *window, particle_t *part, sfClock *clock)
 {
     if (part->speed == 0)
-        add_particle(part,VCF {rand() % 1000, rand() % 1000}, 1, 1);
+        add_particle(part, VCF {rand() % 1000, rand() % 1000}, 1, 1);
     if (TIME(clock, 0.05)) {
         part->age += 1;
         part->velocity.y = part->speed;

@@ -15,14 +15,16 @@ sfIntRect configure_enemy_rect(json_obj_t *data, enemy_t *e_place)
     sfVector2u size = sfTexture_getSize(e_place->object->texture);
     sfVector2f origin = {size.x / 2, size.y / 2};
 
-    rect.height = size.y;
+    rect.height = get_int_by_name(data, "sprite_height");
     rect.width = get_int_by_name(data, "sprite_len");
     sfSprite_setOrigin(e_place->object->sprite, origin);
+    e_place->scale = get_int_by_name(data, "scale");
+    e_place->direction = 0;
     e_place->animation_steps = get_int_by_name(data, "animation_steps");
     return rect;
 }
 
-static void json_to_enemy_status(json_obj_t *data, enemy_t *e_place)
+static void define_enemy_status(enemy_t *e_place)
 {
     e_place->status = 0;
     e_place->status_data = 0;
@@ -36,7 +38,6 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
 {
     char *sprite_path = get_str_by_name(data, "sprite");
 
-    e_place->drop = my_strdup(get_str_by_name(data, "drop_item"));
     e_place->name = my_strdup(data->name);
     e_place->type = get_int_by_name(data, "type");
     if (e_place->type < 0)
@@ -49,14 +50,17 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     e_place->rect = configure_enemy_rect(data, e_place);
     if (e_place->rect.height == 0 || e_place->rect.width == 0)
         return 1;
-    json_to_enemy_status(data, e_place);
+    define_enemy_status(e_place);
     e_place->pv = get_int_by_name(data, "pv");
+    e_place->range = get_int_by_name(data, "view_range");
     if (e_place->name == NULL || sprite_path == NULL || e_place->pv == 0)
         return 1;
     return 0;
 }
 
-//créé les ennemis depuis src/enemies/enemies.json
+/*
+créé les ennemis depuis src/enemies/enemies.json
+*/
 enemy_t *create_enemies_array(void)
 {
     json_obj_t *enemies_src = create_json_object("src/enemies/enemies.json");

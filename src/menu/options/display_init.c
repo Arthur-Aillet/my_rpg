@@ -128,6 +128,6 @@ void init_display(game_t *game, options_menu_t *option)
     textRect = sfText_getGlobalBounds(option->screen_type_title);
     sfText_setOrigin(option->screen_type_title, VCF{textRect.left +
         textRect.width / 2, textRect.top + textRect.height / 2});
-    sfText_setPosition(option->screen_type_title, VCF{960 , 310});
+    sfText_setPosition(option->screen_type_title, VCF{960,  310});
     init_display_2(game, option);
 }

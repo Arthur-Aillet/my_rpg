@@ -13,6 +13,8 @@ void free_enemies(enemy_node_t *enemies)
 {
     if (enemies && enemies->next)
         free_enemies(enemies->next);
+    if (enemies == NULL)
+        return;
     destroy_object(enemies->enemy.object);
     free(enemies);
 }

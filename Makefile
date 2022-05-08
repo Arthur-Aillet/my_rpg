@@ -109,6 +109,10 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)game_loop.c						\
+							$(GAME_PATH)game_status.c					\
+							$(GAME_PATH)quest.c							\
+							$(GAME_PATH)cinematic/cinematic.c			\
+							$(GAME_PATH)cinematic/cinematic_controls.c	\
 							$(GAME_PATH)display/my_display_world.c		\
 							$(GAME_PATH)display/my_display_pnj.c		\
 							$(GAME_PATH)display/my_display_map.c		\
@@ -135,9 +139,11 @@ SRC_INIT		=			$(INIT_PATH)init_game_struct.c				\
 							$(INIT_PATH)init_pnj.c						\
 							$(INIT_PATH)init_player.c					\
 							$(INIT_PATH)items/create_objects.c			\
+							$(INIT_PATH)items/ingredients.c				\
 							$(INIT_PATH)items/health_potions.c			\
 							$(INIT_PATH)items/stamina_potions.c			\
 							$(INIT_PATH)items/speed_potions.c			\
+							$(INIT_PATH)items/weapons.c					\
 
 SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_positions.c			\
@@ -153,6 +159,7 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_comp_state.c			\
 							$(INVENTORY_PATH)set_competence_state_upper.c	\
 							$(INVENTORY_PATH)set_competence_state_down.c	\
+							$(INVENTORY_PATH)extern.c					\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
 							$(JSON_PATH)generate/reader/str_preprocessing.c	\
@@ -178,6 +185,9 @@ SRC_ENEMIES		=			$(ENEMIES_PATH)display_enemies.c				\
 							$(ENEMIES_PATH)enemies_pv.c						\
 							$(ENEMIES_PATH)read_enemies.c					\
 							$(ENEMIES_PATH)spawn_enemies.c					\
+							$(ENEMIES_PATH)enemies_gestion.c				\
+							$(ENEMIES_PATH)free_enemies.c					\
+							$(ENEMIES_PATH)enemies_collisions.c				\
 
 SRC_MATH		=			$(MATH_PATH)math.c								\
 
@@ -237,7 +247,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O1
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 
@@ -274,7 +284,7 @@ fclean:		clean
 		find . -name "*.gc*" -exec $(RM) {} \;
 
 build_lib:
-		make re -C lib/my
+		make -C lib/my
 
 debug:		$(CFLAGS) += -g3
 debug:		re

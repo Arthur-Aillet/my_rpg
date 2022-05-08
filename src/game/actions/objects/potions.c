@@ -8,6 +8,7 @@
 #include "my_game_struct.h"
 #include "my_rpg.h"
 #include "keyboard.h"
+#include "math.h"
 
 void heal_h(game_t *game)
 {
@@ -31,7 +32,7 @@ void regen_h(game_t *game)
     static sfClock *clock = NULL;
     static int power = 1;
 
-    if (game->RCLICK == 2 && game->items
+    if (game->LCLICK == 2 && game->items
         [game->game->player->hotbar_pos + 51].action == regen_h) {
         time = 60;
         power = game->items[game->game->player->hotbar_pos + 51].power;
@@ -42,7 +43,7 @@ void regen_h(game_t *game)
         game->game->player->status = NULL;
     if (time == 60)
         game->game->player->status = regen_h;
-    if (TIME(clock, 1) || 1) {
+    if (TIME(clock, 1)) {
         time -= 1;
         game->game->player->health += (game->game->player->
             max_health / 100) * power;
@@ -79,7 +80,7 @@ void speed(game_t *game)
     static sfClock *clock = NULL;
     static int power = 1;
 
-    if (game->RCLICK == 2 && game->items
+    if (game->LCLICK == 2 && game->items
         [game->game->player->hotbar_pos + 51].action == regen_s) {
         time = 60;
         power = game->items[game->game->player->hotbar_pos + 51].power + game->

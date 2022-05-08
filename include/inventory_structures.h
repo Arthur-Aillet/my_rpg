@@ -103,6 +103,8 @@ typedef struct item_s {
     int power;
 } item_t;
 
+typedef struct player_s player_t;
+
 typedef struct backgrounds_s {
     sfRenderWindow *window;
     item_t *items;
@@ -110,6 +112,7 @@ typedef struct backgrounds_s {
     txtobject_t text;
     char *keys;
     competences_t *comp;
+    player_t *player;
 } backgrounds_t;
 
 typedef struct events_s {

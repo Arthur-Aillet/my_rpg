@@ -26,11 +26,13 @@ typedef struct enemy_s {
     int last_update;
     object_t *object;
     sfIntRect rect;
-    object_t *drop;
     int animation_steps;
     int pv;
     int status;
     int status_data;
+    int scale;
+    int direction;
+    int range;
 } enemy_t;
 
 typedef struct enemy_node_s {
@@ -56,6 +58,7 @@ typedef struct maps_s {
     char *right;
     char *top;
     char *bot;
+    int enemies;
 } maps_t;
 
 typedef struct game_s game_t;
@@ -67,6 +70,7 @@ typedef struct player_s {
     float max_stamina;
     float exp;
     float max_exp;
+    int slime_killed;
     int side;
     sfVector2f pos;
     sfTexture *tex_p;
@@ -76,6 +80,7 @@ typedef struct player_s {
     int dash;
     int hotbar_pos;
     int is_attacking;
+    int hurt;
     void (*status)(game_t *);
 } player_t;
 
@@ -106,6 +111,7 @@ typedef struct in_game_s {
     enemy_t *samples_enemies;
     sfClock *clock;
     enemy_node_t *enemies;
+    sfText *quest;
     int weather;
 } in_game_t;
 

@@ -22,16 +22,10 @@
 #include "pnjs.h"
 #include "inventory_structures.h"
 #include "inventory_prototypes.h"
-#include "object creation.h"
+#include "object_creation.h"
 
-void destroy_game(game_t *game)
+void free_sounds(game_t *game)
 {
-    if (game->fonts != NULL)
-        for (int i = 0; game->fonts[i] != NULL; i++) {
-            sfFont_destroy(game->fonts[i]->font);
-            free(game->fonts[i]->name);
-        }
-    free(game->fonts);
     if (game->sounds != NULL)
         for (int i = 0; game->sounds[i] != NULL; i++) {
             sfSound_destroy(game->sounds[i]->sound);
@@ -45,32 +39,42 @@ void destroy_game(game_t *game)
             free(game->musics[i]->name);
         }
     free(game->musics);
+}
+
+void destroy_game(game_t *game)
+{
+    if (game->fonts != NULL)
+        for (int i = 0; game->fonts[i] != NULL; i++) {
+            sfFont_destroy(game->fonts[i]->font);
+            free(game->fonts[i]->name);
+        }
+    free(game->fonts);
+    free_sounds(game);
     destroy_pnjs(game->game->pnjs);
     free(game->keys);
     destroy_object(game->mouse);
     free(game->status);
+    sfText_destroy(game->game->quest);
 }
 
-int my_rpg(void)
+void my_rpg(void)
 {
     game_t *game = init_game_struct();
     competences_t competence = (competences_t) {0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 2
-        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 , 0,
-        0 ,0 , 0, 0, 0, 0, 0 ,0 ,0 ,0, NULL, 0};
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2
+        , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0};
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[51] = create_sword(game->items[10], 1);
     game->items[52] = create_stamina_potion_m(game->items[52], 5);
     game->items[53] = create_breeches(game->items[54], 1);
+    game->items[54] = create_molotov(game->items[54], 1);
     game->comp = malloc(sizeof(competences_t));
-    competence.comp_points = 5;
+    competence.comp_points = 0;
     game->comp = &competence;
-    if (game == NULL)
-        return 84;
     intro(game);
     menu(game);
     destroy_game(game);
     free_window_struct(game->window);
-    return 0;
 }

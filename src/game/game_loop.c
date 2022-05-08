@@ -9,7 +9,10 @@
 #include "keyboard.h"
 #include "enemies.h"
 #include "my_game_struct.h"
+#include "pnjs.h"
 #include "my.h"
+#include "inventory_prototypes.h"
+#include "object_creation.h"
 #include "keyboard.h"
 #include "particles.h"
 #include "main_menu.h"
@@ -23,73 +26,49 @@ static void poll_event_keys(game_t *game)
         game = inventory(game);
 }
 
-void update_player_status(game_t *game)
+void game_main(game_t *game, pnj_t *oldmen, int switched)
 {
-/*     static int last_sec = 0;
- */
-    if (game->game->player->exp > game->game->player->max_exp) {
-        game->game->player->exp = 0;
-        game->game->player->max_exp += game->game->player->max_exp / 10;
-        game->comp->comp_points += 1;
+    if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
+        if (oldmen != NULL) {
+            free(oldmen->map_name);
+            sfSprite_setPosition(oldmen->objet->sprite, VCF{775, 600});
+            oldmen->map_name = my_strdup("town");
+            oldmen->next_dialogue = my_strdup("config/greetings.json");
+        }
+        switched = 1;
     }
-/*     if (sfTime_asSeconds(sfClock_getElapsedTime(game->game->clock)) - last_sec > 0.5) {
-        if (game->game->player->stamina < game->game->player->max_stamina)
-            game->game->player->stamina += 0.4;
-        last_sec = sfTime_asSeconds(sfClock_getElapsedTime(game->game->clock));
-    } */
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    set_correct_window_size(game->window);
+    main_enemies(game->game->enemies, game);
+    display_world(game);
+    update_quest(game);
+    update_game_status(game);
+    player_actions(game);
+    poll_event_keys(game);
+    give_reward(game);
+    sfRenderWindow_display(game->window->window);
 }
 
-void update_game_status(game_t *game)
+void game_loop(game_t *game)
 {
-    update_player_status(game);
-    if (MUSICG("our_home.flac") == NULL || MUSICG("death_mountains.flac")
-        == NULL || MUSICG("mysterious_chasm.flac") == NULL)
-        return;
-    if (my_strcmp(game->game->current,"field") == 0 && sfMusic_getStatus(MUSICG("death_mountains.flac")) != 2) {
-        sfMusic_play(MUSICG("death_mountains.flac"));
-        if (sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) == 2)
-            sfMusic_stop(MUSICG("mysterious_chasm.flac"));
-        if (sfMusic_getStatus(MUSICG("our_home.flac")) == 2)
-            sfMusic_stop(MUSICG("our_home.flac"));
-    }
-    if (my_strcmp(game->game->current,"town") == 0 && sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) != 2) {
-        sfMusic_play(MUSICG("mysterious_chasm.flac"));
-        if (sfMusic_getStatus(MUSICG("our_home.flac")) == 2)
-            sfMusic_stop(MUSICG("our_home.flac"));
-        if (sfMusic_getStatus(MUSICG("death_mountains.flac")) == 2)
-            sfMusic_stop(MUSICG("death_mountains.flac"));
-    }
-    if ((my_strcmp(game->game->current,"house") == 0 || my_strcmp(game->game->current,"garden") == 0) && sfMusic_getStatus(MUSICG("our_home.flac")) != 2) {
-        sfMusic_play(MUSICG("our_home.flac"));
-        if (sfMusic_getStatus(MUSICG("mysterious_chasm.flac")) == 2)
-            sfMusic_stop(MUSICG("mysterious_chasm.flac"));
-        if (sfMusic_getStatus(MUSICG("death_mountains.flac")) == 2)
-            sfMusic_stop(MUSICG("death_mountains.flac"));
-    }
-}
+    static int switched = 0;
+    static int seen = 0;
+    pnj_t *oldmen = find_pnj("oldmen", game);
 
-int game_loop(game_t *game)
-{
     transition(game, 2);
     game->game->samples_enemies = create_enemies_array();
     if (game->game->samples_enemies == NULL)
-        return 84;
-    game->game->enemies = spawn_ennemies(5, game->game->samples_enemies, game);
-    while (game->status->end_game == 0 && sfRenderWindow_isOpen
-           (game->window->window)) {
-        sfRenderWindow_clear(game->window->window, sfBlack);
-        set_correct_window_size(game->window);
-        display_world(game);
-        update_game_status(game);
-        displace_enemies(game->game->enemies, game);
-        player_actions(game);
-        poll_event_keys(game);
-        sfRenderWindow_display(game->window->window);
+        return;
+    if (seen == 0) {
+        cinematic(game);
+        seen = 1;
     }
+    while (game->status->end_game == 0 && sfRenderWindow_isOpen
+        (game->window->window))
+        game_main(game, oldmen, switched);
     game->game->pos_cam.x = 960;
     game->game->pos_cam.y = 540;
     sfView_setCenter(game->game->cam, game->game->pos_cam);
     sfRenderWindow_setView(game->window->window, game->game->cam);
     game->status->end_game = 0;
-    return 0;
 }

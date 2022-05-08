@@ -10,11 +10,12 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 
-static void animate_enemy(game_t *game, enemy_node_t *enemy)
+static void animate_enemy(enemy_node_t *enemy)
 {
     enemy->enemy.rect.left = (enemy->enemy.rect.left +
         enemy->enemy.rect.width)
         % (enemy->enemy.rect.width * enemy->enemy.animation_steps);
+    enemy->enemy.rect.top = enemy->enemy.rect.height * enemy->enemy.direction;
     sfSprite_setTextureRect(enemy->enemy.object->sprite, enemy->enemy.rect);
 }
 
@@ -26,12 +27,12 @@ void display_enemies(game_t *game, enemy_node_t *all)
     if (last_time_animated > time)
         last_time_animated = 0;
     while (all) {
+        if (time - last_time_animated > 120) {
+            animate_enemy(all);
+        }
         if (all->enemy.type >= 0) {
             sfRenderWindow_drawSprite(game->window->window,
                 all->enemy.object->sprite, NULL);
-        }
-        if (time - last_time_animated > 120) {
-            animate_enemy(game, all);
         }
         all = all->next;
     }

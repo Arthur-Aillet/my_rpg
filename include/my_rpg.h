@@ -17,7 +17,7 @@
 #define TIME(x, y) BETWEEN(fmod(sfTime_asSeconds(sfClock_getElapsedTime(x))\
                 , y), 0, 0.03)
 #define PLACE_PLAYER(x) place_player(game->window->window,\
-                 game->game->player->pos, x)
+                 game->game->player->pos, x, game->game->player)
 #define ISDASH (game->game->player->dash == 1)
 
 #define LEFT_D 0
@@ -45,7 +45,7 @@ int player_is_collide(game_t *game, int dir, int value);
 
 game_t *init_game_struct(void);
 control_t *init_game_status(void);
-in_game_t *init_in_game_struct(void);
+in_game_t *init_in_game_struct(game_t *game);
 player_t *init_game_player(maps_t *field);
 void init_map_objects(maps_t **maps, json_obj_t *obj, int i);
 char *init_keys(void);
@@ -57,14 +57,24 @@ game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);
 
-int my_rpg(void);
-int game_loop(game_t *game);
+void my_rpg(void);
+void game_loop(game_t *game);
 
 void display_world(game_t *game);
+void display_world_cinematic(game_t *game, int ho, int ve, object_t *bandeau);
 void display_map(game_t *game, int map, int layer, int space);
 void display_player(game_t *game);
+void display_player_cinematic(game_t *game, int horizontal, int vertical);
 
 void do_attack(game_t *game);
 void player_actions(game_t *game);
 void player_move(game_t *game);
 void die(game_t *game);
+
+void update_game_status(game_t *game);
+void cinematic_controls(game_t *game, object_t *bandeau, int *e_click);
+void give_reward(game_t *game);
+void update_quest(game_t *game);
+void cinematic(game_t *game);
+void cinematic_loop(game_t *game, int *clicked, object_t *bandeau, int *e_clic);
+void display_player_cinematic(game_t *game, int horizontal, int verti);

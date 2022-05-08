@@ -64,14 +64,10 @@ game_t *update_stats(game_t *game)
         if (BETWEEN(i, 30, 38) && get_competence_state
             (i, *game->comp) == 2 && i != 33)
             game->game->player->move_spd += 1;
-        if (i > 38 && get_competence_state(i, *game->comp) == 2) {
+        if (i > 38 && get_competence_state(i, *game->comp) == 2)
             game->game->player->max_health += 100;
-            game->game->player->health += 100;
-        }
-        if (i < 30 && get_competence_state(i, *game->comp) == 2) {
+        if (i < 30 && get_competence_state(i, *game->comp) == 2)
             game->game->player->max_stamina += 100;
-            game->game->player->stamina += 100;
-        }
         if (i == 33 && get_competence_state(i, *game->comp) == 2)
             game->game->player->dash = 0;
     }
@@ -81,7 +77,7 @@ game_t *update_stats(game_t *game)
 game_t *inventory(game_t *game)
 {
     backgrounds_t backgrounds = setup_backgrounds(game);
-    static int page = 0;
+    int page = 0;
     events_t events = setup_events(game, &page);
     static void (*disp[3])(backgrounds_t) = {disp_inv, disp_map, disp_cmp};
     events_t (*evt[3])(events_t) = {evt_inv, evt_map, evt_cmp};
@@ -95,8 +91,8 @@ game_t *inventory(game_t *game)
         events = evt[page](events);
         update_mouse_cursor(game->window->window, game->mouse);
         sfRenderWindow_display(game->window->window);
+        game = update_stats(game);
     }
-    game = update_stats(game);
     game->TAB = 0;
     free_inventory(backgrounds, events);
     return (game);

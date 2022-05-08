@@ -13,6 +13,14 @@
 #include "player_animation.h"
 #include "keyboard.h"
 
+pnj_t *find_pnj(char *pnj, game_t *game)
+{
+    for (int i = 0; game->game->pnjs[i] != NULL; i++)
+        if (my_strcmp(game->game->pnjs[i]->name, pnj) == 0)
+            return (game->game->pnjs[i]);
+    return NULL;
+}
+
 void destroy_pnjs(pnj_t **pnjs)
 {
     for (int i = 0; pnjs[i] != NULL; i++) {
@@ -33,7 +41,7 @@ static void create_pnj_2(json_obj_t *obj, pnj_t *pnj)
     pnj->name = my_strdup(obj->name);
     pnj->actual = 0;
     pnj->need_to_talk = true;
-    pnj->next_dialogue = my_strdup("config/greetings.json");
+    pnj->next_dialogue = NULL;
     pnj->size_x = get_int_by_name(obj, "size_x");
     pnj->size_y = get_int_by_name(obj, "size_y");
 }

@@ -21,6 +21,7 @@ static competences_t set_competence_ten(int comp, competences_t comps, int st)
     }
     return (comps);
 }
+
 static competences_t set_competence_nine(int comp, competences_t comps, int st)
 {
     switch (comp) {
@@ -42,6 +43,7 @@ static competences_t set_competence_nine(int comp, competences_t comps, int st)
     }
     return (comps);
 }
+
 static competences_t set_competence_eight(int comp, competences_t comps, int st)
 {
     switch (comp) {
@@ -63,6 +65,7 @@ static competences_t set_competence_eight(int comp, competences_t comps, int st)
     }
     return (comps);
 }
+
 static competences_t set_competence_seven(int comp, competences_t comps, int st)
 {
     switch (comp) {

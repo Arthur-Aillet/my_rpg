@@ -24,6 +24,7 @@ static void spawn_one_enemy(enemy_node_t *act, game_t *game, enemy_t *types,
         sfTexture_copy(act->enemy.object->texture),
         VCF{rand() % map_dim.x, rand() % map_dim.y},
         VCF{act->enemy.scale, act->enemy.scale});
+    animate_enemy(act);
 }
 
 enemy_node_t *spawn_ennemies(int nb, enemy_t *types, game_t *game)

@@ -1,7 +1,7 @@
 {
     "oldmen": {
-        "pos_x" : 1476,
-        "pos_y" : 360,
+        "pos_x" : 1470,
+        "pos_y" : 350,
         "map" : "house",
         "idle": "assets/img/pnj/Old_man_idle.png",
         "size_x": 18,
@@ -13,8 +13,8 @@
         }
     },
     "women": {
-        "pos_x" : 1728,
-        "pos_y" : 768,
+        "pos_x" : 1920,
+        "pos_y" : 750,
         "map" : "town",
         "idle": "assets/img/pnj/Woman_idle.png",
         "size_x": 15,

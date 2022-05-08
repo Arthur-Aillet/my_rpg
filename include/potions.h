@@ -43,7 +43,7 @@ minigame_t *setup_hammer_struct(void);
 minigame_t *setup_elements(void);
 void potion_loop(game_t *game);
 void hammer_loop(game_t *game, potion_t *potion);
-void mortar_loop(game_t *game, potion_t *potion);
+int mortar_loop(game_t *game, potion_t *potion);
 minigame_t *setup_elements(void);
 minigame_t *setup_hammer_struct(void);
 void hammer_controls(minigame_t *elm, particle_t **st, char *keys, sfSound *sd);
@@ -56,3 +56,4 @@ void setup_mortar_struct_bounds(minigame_t *elements);
 void setup_mortar_struct2(minigame_t *elements, sound_t **sounds);
 void mortar_physics(minigame_t *elements, game_t *game);
 void mortar_physics_held(minigame_t *elem, game_t *game, sfVector2f old);
+

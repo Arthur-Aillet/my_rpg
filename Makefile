@@ -101,6 +101,7 @@ SRC_DIALOGUE	=			$(DIALOGUE_PATH)dialogue.c					\
 							$(DIALOGUE_PATH)dialogue_utils.c			\
 
 SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
+							$(POTION_PATH)init_potions.c				\
 							$(POTION_PATH)hammer_minigame.c				\
 							$(POTION_PATH)minigame.c					\
 							$(POTION_PATH)mortar_physics.c				\

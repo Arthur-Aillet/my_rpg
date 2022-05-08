@@ -94,7 +94,7 @@ void display_mortar(minigame_t *elem, window_t *window, potion_t *pot)
     sfRenderWindow_drawSprite(window->window, elem->pilon->sprite, NULL);
 }
 
-void mortar_loop(game_t *game, potion_t *potion)
+int mortar_loop(game_t *game, potion_t *potion)
 {
     minigame_t *elements = setup_mortar_struct(game->sounds);
     particle_t *start = create_particle((sfVector2f) {0, 0}, 0, 0);
@@ -114,4 +114,5 @@ void mortar_loop(game_t *game, potion_t *potion)
         sfRenderWindow_display(game->window->window);
     }
     sfClock_destroy(clock);
+    return 1;
 }

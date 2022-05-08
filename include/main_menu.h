@@ -95,3 +95,4 @@ void silder_sfx_manager(game_t *game, options_menu_t *option);
 int how_to_play(game_t *game);
 int pause_menu(game_t *game);
 void destroy_menu(main_menu_t *menu);
+potion_craft_t *init_potion_menu(game_t *game);

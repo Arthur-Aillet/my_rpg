@@ -52,11 +52,11 @@ void do_attack(game_t *game)
     if (cooldown != 0)
         cooldown -= 1;
     if (cooldown == 0 && game->game->player->is_attacking == 1 &&
-        game->game->player->stamina >= 50) {
-        cooldown = 50;
-        game->game->player->stamina -= 50;
+        game->game->player->stamina >= 100) {
+        cooldown = 20;
+        game->game->player->stamina -= 100;
     }
-    if (cooldown < 20) {
+    if (cooldown < 5) {
         game->game->player->is_attacking = 0;
         return;
     }

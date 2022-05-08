@@ -90,7 +90,7 @@ void player_move(game_t *game)
     if (game->LSHIFT > 0 && game->game->in_dialogue == false &&
         game->game->player->stamina >= 1) {
             count *= 1.5;
-            game->game->player->stamina -= 1;
+            game->game->player->stamina -= 5;
     }
     more_than_one_key(game) ? (count /= 1.2) : (count = count);
     while (count--) {

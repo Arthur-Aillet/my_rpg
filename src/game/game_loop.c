@@ -16,6 +16,7 @@
 #include "keyboard.h"
 #include "particles.h"
 #include "main_menu.h"
+#include "potions.h"
 
 static void poll_event_keys(game_t *game)
 {
@@ -31,12 +32,14 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
     if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
         if (oldmen != NULL) {
             free(oldmen->map_name);
-            sfSprite_setPosition(oldmen->objet->sprite, VCF{775, 600});
+            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 768});
             oldmen->map_name = my_strdup("town");
             oldmen->next_dialogue = my_strdup("config/greetings.json");
         }
         switched = 1;
     }
+    if (game->P == 2)
+        potion_loop(game);
     sfRenderWindow_clear(game->window->window, sfBlack);
     set_correct_window_size(game->window);
     main_enemies(game->game->enemies, game);

@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2022
-** my_rpg_temp
-** File description:
 ** my_rpg
+** File description:
+** pause
 */
 
 #pragma once

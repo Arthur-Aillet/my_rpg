@@ -10,7 +10,7 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 
-static void animate_enemy(enemy_node_t *enemy)
+void animate_enemy(enemy_node_t *enemy)
 {
     enemy->enemy.rect.left = (enemy->enemy.rect.left +
         enemy->enemy.rect.width)

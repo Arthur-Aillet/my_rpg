@@ -28,51 +28,22 @@ static void poll_event_keys(game_t *game)
         game = inventory(game);
 }
 
-void launch_craft(game_t *game)
+void game_anim_complement(game_t *game, pnj_t *oldmen, int switched)
 {
-    potion_t *fake_potion;
-    item_t item;
-
-    if (my_strcmp(game->game->current, "house") == 0 &&
-        dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200) {
-        sfSprite_setPosition(game->game->player->craft_box->sprite,
-            VCF{1855 - 24, 350 - 23});
-        sfRenderWindow_drawSprite(game->window->window,
-            game->game->player->craft_box->sprite, NULL);
-    }
-    if (game->E == 2 && my_strcmp(game->game->current, "house") == 0 &&
-        dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200)
-        potion_loop(game);
-    if (my_strcmp(game->game->current, "house") == 0 &&
-        dist_two_points(game->game->player->pos, VCF{960, 400}) <= 200) {
-        sfSprite_setPosition(game->game->player->craft_box->sprite,
-            VCF{960 - 24, 400 - 23});
-        sfRenderWindow_drawSprite(game->window->window,
-            game->game->player->craft_box->sprite, NULL);
-    }
-    if (game->E == 2 && my_strcmp(game->game->current, "house") == 0 &&
-        dist_two_points(game->game->player->pos, VCF{960, 400}) <= 200) {
-        fake_potion = malloc(sizeof(potion_t));
-        fake_potion->current_step = 0;
-        fake_potion->numbers_steps = 3;
-        fake_potion->difficulty = 4;
-        for (; fake_potion->current_step != 3; fake_potion->current_step++)
-            if (hammer_loop(game, fake_potion)
-                && game->keys[sfKeyEscape] == PRESS)
-            return;
-        item = create_helmet(item, 1);
-        pickup_item(item, game->items);
-        item = create_cuirass(item, 1);
-        pickup_item(item, game->items);
-        item = create_breeches(item, 1);
-        pickup_item(item, game->items);
-        item = create_sabaton(item, 1);
-        pickup_item(item, game->items);
+    if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
+        if (oldmen != NULL) {
+            free(oldmen->map_name);
+            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 730});
+            oldmen->map_name = my_strdup("town");
+            oldmen->next_dialogue = my_strdup("config/greetings.json");
+        }
+        switched = 1;
     }
 }
 
-void game_anim_complement(game_t *game, pnj_t *oldmen, int switched)
+void game_main(game_t *game, pnj_t *oldmen, int switched)
 {
+    game_anim_complement(game, oldmen, switched);
     sfRenderWindow_clear(game->window->window, sfBlack);
     set_correct_window_size(game->window);
     main_enemies(game->game->enemies, game);
@@ -84,20 +55,7 @@ void game_anim_complement(game_t *game, pnj_t *oldmen, int switched)
     poll_event_keys(game);
     give_reward(game);
     sfRenderWindow_display(game->window->window);
-}
 
-void game_main(game_t *game, pnj_t *oldmen, int switched)
-{
-    if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
-        if (oldmen != NULL) {
-            free(oldmen->map_name);
-            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 730});
-            oldmen->map_name = my_strdup("town");
-            oldmen->next_dialogue = my_strdup("config/greetings.json");
-        }
-        switched = 1;
-    }
-    game_anim_complement(game, oldmen, switched);
 }
 
 void game_loop(game_t *game)

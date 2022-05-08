@@ -78,3 +78,4 @@ void update_quest(game_t *game);
 void cinematic(game_t *game);
 void cinematic_loop(game_t *game, int *clicked, object_t *bandeau, int *e_clic);
 void display_player_cinematic(game_t *game, int horizontal, int verti);
+void launch_craft(game_t *game);

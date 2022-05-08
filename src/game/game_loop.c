@@ -31,6 +31,7 @@ static void poll_event_keys(game_t *game)
 void launch_craft(game_t *game)
 {
     potion_t *fake_potion;
+    item_t item;
 
     if (my_strcmp(game->game->current, "house") == 0 &&
         dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200) {
@@ -59,7 +60,14 @@ void launch_craft(game_t *game)
             if (hammer_loop(game, fake_potion)
                 && game->keys[sfKeyEscape] == PRESS)
             return;
-        // ICIIIIIIII AUGUSTE ICIII
+        item = create_helmet(item, 1);
+        pickup_item(item, game->items);
+        item = create_cuirass(item, 1);
+        pickup_item(item, game->items);
+        item = create_breeches(item, 1);
+        pickup_item(item, game->items);
+        item = create_sabaton(item, 1);
+        pickup_item(item, game->items);
     }
 }
 

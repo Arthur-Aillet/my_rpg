@@ -94,11 +94,11 @@ void display_world(game_t *game)
     vec.y -= 540;
     display_map(game, 0, 0, 1);
     display_map(game, 1, 1, 0);
+    display_pnjs(game);
     if (game->game->in_dialogue == false)
         display_player(game);
     else
         PLACE_PLAYER(IDLE + game->game->player->side + ISDASH * 4);
-    display_pnjs(game);
     display_enemies(game, game->game->enemies);
     update_particles(game->window->window, game->particles);
     display_map(game, 2, 2, 0);

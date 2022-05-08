@@ -20,8 +20,8 @@ void add_int_by_name(json_obj_t *obj, char *name, int value)
 
     if (obj == NULL)
         return;
-    for (initial_len = 0; obj->fields_int &&
-        obj->fields_int[initial_len]; initial_len++);
+    for (initial_len = 0; obj->fields_int && obj->fields_int[initial_len];
+        initial_len++);
     obj->data_int = malloc(sizeof(int) * (initial_len + 1));
     obj->fields_int = malloc(sizeof(char *) * (initial_len + 2));
     for (int i = 0; i < initial_len; i++) {
@@ -48,8 +48,8 @@ void add_str_by_name(json_obj_t *obj, char *name, char *value)
 
     if (obj == NULL)
         return;
-    for (initial_len = 0; obj->fields_str &&
-        obj->fields_str[initial_len]; initial_len++);
+    for (initial_len = 0; obj->fields_str && obj->fields_str[initial_len];
+        initial_len++);
     obj->data_str = malloc(sizeof(char *) * (initial_len + 1));
     obj->fields_str = malloc(sizeof(char *) * (initial_len + 2));
     for (int i = 0; i < initial_len; i++) {
@@ -78,8 +78,8 @@ void add_obj_by_name(json_obj_t *obj, char *name, json_obj_t *value)
 
     if (obj == NULL)
         return;
-    for (initial_len = 0; obj->fields_obj &&
-        obj->fields_obj[initial_len]; initial_len++);
+    for (initial_len = 0; obj->fields_obj && obj->fields_obj[initial_len];
+        initial_len++);
     obj->data_obj = malloc(sizeof(json_obj_t) * (initial_len + 1));
     obj->fields_obj = malloc(sizeof(char *) * (initial_len + 2));
     for (int i = 0; i < initial_len; i++) {

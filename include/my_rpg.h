@@ -57,8 +57,8 @@ game_t *inventory(game_t *game);
 item_t create_yellow_flower(item_t item, int number);
 item_t *create_items(void);
 
-int my_rpg(void);
-int game_loop(game_t *game);
+void my_rpg(void);
+void game_loop(game_t *game);
 
 void display_world(game_t *game);
 void display_world_cinematic(game_t *game, int ho, int ve, object_t *bandeau);
@@ -70,3 +70,11 @@ void do_attack(game_t *game);
 void player_actions(game_t *game);
 void player_move(game_t *game);
 void die(game_t *game);
+
+void update_game_status(game_t *game);
+void cinematic_controls(game_t *game, object_t *bandeau, int *e_click);
+void give_reward(game_t *game);
+void update_quest(game_t *game);
+void cinematic(game_t *game);
+void cinematic_loop(game_t *game, int *clicked, object_t *bandeau, int *e_clic);
+void display_player_cinematic(game_t *game, int horizontal, int verti);

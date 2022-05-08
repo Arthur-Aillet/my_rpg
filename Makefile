@@ -111,6 +111,10 @@ SRC_POTION		=			$(POTION_PATH)potions_loop.c				\
 
 SRC_GAME		=			$(GAME_PATH)game_core.c						\
 							$(GAME_PATH)game_loop.c						\
+							$(GAME_PATH)game_status.c					\
+							$(GAME_PATH)quest.c							\
+							$(GAME_PATH)cinematic/cinematic.c			\
+							$(GAME_PATH)cinematic/cinematic_controls.c	\
 							$(GAME_PATH)display/my_display_world.c		\
 							$(GAME_PATH)display/my_display_pnj.c		\
 							$(GAME_PATH)display/my_display_map.c		\
@@ -245,7 +249,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -O1
+CFLAGS			=			-Wall -Wextra -g3
 
 CPPFLAGS		=			-I include
 

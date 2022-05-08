@@ -58,7 +58,9 @@ static int json_to_enemy(json_obj_t *data, enemy_t *e_place)
     return 0;
 }
 
-//créé les ennemis depuis src/enemies/enemies.json
+/*
+créé les ennemis depuis src/enemies/enemies.json
+*/
 enemy_t *create_enemies_array(void)
 {
     json_obj_t *enemies_src = create_json_object("src/enemies/enemies.json");

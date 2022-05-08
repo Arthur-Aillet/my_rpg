@@ -16,7 +16,7 @@
 
 static char *add_str(char *src1, char *src2)
 {
-    char *res = malloc(sizeof (char) * (my_strlen(src1) + my_strlen(src2) + 1));
+    char *res = malloc(sizeof(char) * (my_strlen(src1) + my_strlen(src2) + 1));
     int i = 0;
     for (int j = 0; src1[j] != '\0'; j++) {
         res[i] = src1[j];
@@ -60,9 +60,9 @@ static animation_t *get_player_animations(void)
     result[IDLE + 2] = create_animation("right/idle.png", 64, 64, 5);
     result[IDLE + 3] = create_animation("left/idle.png", 64, 64, 5);
     result[8] = create_animation("down/dash.png", 64, 64, 11);
-    result[9] = create_animation("up/dash.png", 64, 64, 11);;
-    result[10] = create_animation("right/dash.png", 64, 64, 11);;
-    result[11] = create_animation("left/dash.png", 64, 64, 11);;
+    result[9] = create_animation("up/dash.png", 64, 64, 11);
+    result[10] = create_animation("right/dash.png", 64, 64, 11);
+    result[11] = create_animation("left/dash.png", 64, 64, 11);
     result[12] = create_animation("down/attack.png", 64, 64, 10);
     result[13] = create_animation("up/attack.png", 64, 64, 10);
     result[14] = create_animation("right/attack.png", 64, 64, 10);

@@ -85,7 +85,6 @@ void display_world_cinematic(game_t *game, int ho, int ve, object_t *bandeau)
     weather(game);
 }
 
-
 void display_world(game_t *game)
 {
     int i = get_current_map(game);

@@ -13,7 +13,7 @@
             "left": "NULL",
             "right": "house",
             "enemies_amount": 10
-        },"house": {
+        }, "house": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/house/base",
             "obs": "assets/in_game/maps/house/obstacle",
@@ -26,7 +26,7 @@
             "left": "field",
             "right": "garden",
             "enemies_amount": 0
-        },"garden": {
+        }, "garden": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/garden/base",
             "obs": "assets/in_game/maps/garden/obstacle",
@@ -39,7 +39,7 @@
             "left": "house",
             "right": "NULL",
             "enemies_amount": 0
-        },"town": {
+        }, "town": {
             "tileset": "assets/in_game/tilesets/tileset.png",
             "base": "assets/in_game/maps/town/base",
             "obs": "assets/in_game/maps/town/obstacle",

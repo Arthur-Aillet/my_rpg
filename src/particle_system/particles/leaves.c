@@ -17,7 +17,7 @@ particle_t *leaf_fragment(sfRenderWindow *wnd, particle_t *part, sfClock *clock)
 {
     float rdom = fmod(rand(), (part->speed * 2) * 100) / 100 - part->speed;
 
-    part->lifetime = (part->speed == 1) ? (20) : (1920);
+    part->lifetime = (part->speed == 1) ? 20 : 1920;
     if (part->age <= 0) {
         part->velocity.x = log2f(rdom * rdom);
         part->velocity.y = log2f(part->speed * 4 - ABS(rdom)) * 2;

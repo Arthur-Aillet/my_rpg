@@ -12,8 +12,8 @@ void duplicate_int_data(json_obj_t *initial_obj, json_obj_t *new_obj)
 {
     int count = 0;
 
-    for (count = 0; initial_obj->fields_int &&
-        initial_obj->fields_int[count]; count++);
+    for (count = 0; initial_obj->fields_int && initial_obj->fields_int[count];
+        count++);
     if (count == 0) {
         new_obj->fields_int = NULL;
         new_obj->data_int = NULL;
@@ -32,8 +32,8 @@ void duplicate_str_data(json_obj_t *initial_obj, json_obj_t *new_obj)
 {
     int count = 0;
 
-    for (count = 0; initial_obj->fields_str &&
-        initial_obj->fields_str[count]; count++);
+    for (count = 0; initial_obj->fields_str && initial_obj->fields_str[count];
+        count++);
     if (count == 0) {
         new_obj->fields_str = NULL;
         new_obj->data_str = NULL;
@@ -52,8 +52,8 @@ void duplicate_obj_data(json_obj_t *initial_obj, json_obj_t *new_obj)
 {
     int count = 0;
 
-    for (count = 0; initial_obj->fields_obj &&
-        initial_obj->fields_obj[count]; count++);
+    for (count = 0; initial_obj->fields_obj && initial_obj->fields_obj[count];
+        count++);
     if (count == 0) {
         new_obj->fields_obj = NULL;
         new_obj->data_obj = NULL;

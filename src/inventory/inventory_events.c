@@ -56,7 +56,7 @@ static events_t interract_comp(events_t events, int *selected, int *competence)
     if (!is_pressed(events.button, events.window, events.keys) &&
         events.LCLICK == RELEASE && *competence != *selected &&
         get_competence_state(*selected, *events.comp) != 2)
-       *events.comp = set_competence_state(*selected, *events.comp, 0);
+        *events.comp = set_competence_state(*selected, *events.comp, 0);
     if (is_pressed(events.button, events.window, events.keys) &&
         is_unlockable(*selected, *events.comp) && events.comp->comp_points > 0)
         *events.comp = set_competence_state(*selected, *events.comp, 2);

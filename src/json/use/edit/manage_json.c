@@ -9,7 +9,6 @@
 #include "my.h"
 #include "json.h"
 
-
 void free_json_int_str(json_obj_t *obj)
 {
     if (obj->data_str != NULL) {

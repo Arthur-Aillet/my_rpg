@@ -60,7 +60,8 @@ void do_attack(game_t *game)
         game->game->player->is_attacking = 0;
         return;
     }
-    damage_enemy_rect(game, dmg_area,
+    if (cooldown % 5 == 0)
+        damage_enemy_rect(game, dmg_area,
         game->items[game->game->player->hotbar_pos + 51].power);
 }
 
@@ -82,4 +83,3 @@ void poison(game_t *game)
     if (time == 10)
         game->game->player->status = poison;
 }
-

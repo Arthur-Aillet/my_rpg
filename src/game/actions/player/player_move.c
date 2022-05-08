@@ -66,16 +66,17 @@ static void handle_switch_map(game_t *game)
         game->game->current = get_new_map(game, i, LEFT_D);
         game->game->player->pos.x =
             (game->game->maps[get_current_map(game)]->width - 1) * 64 - 1;
-    } else if (game->game->player->pos.y <= 0) {
+    }
+    if (game->game->player->pos.y <= 0) {
         game->game->current = get_new_map(game, i, UP_D);
         game->game->player->pos.y =
             (game->game->maps[get_current_map(game)]->height - 1) * 64 - 1;
-    } else if (game->game->player->pos.x >=
-        (game->game->maps[i]->width - 1) * 64) {
+    }
+    if (game->game->player->pos.x >= (game->game->maps[i]->width - 1) * 64) {
         game->game->current = get_new_map(game, i, RIGHT_D);
         game->game->player->pos.x = 1;
-    } else if (game->game->player->pos.y >=
-        (game->game->maps[i]->height - 1) * 64) {
+    }
+    if (game->game->player->pos.y >= (game->game->maps[i]->height - 1) * 64) {
         game->game->current = get_new_map(game, i, DOWN_D);
         game->game->player->pos.y = 1;
     }

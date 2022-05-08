@@ -10,7 +10,8 @@
 #include "my_csfml_utils.h"
 #include "my_game_struct.h"
 
-static void spawn_one_enemy(enemy_node_t *act, game_t *game, enemy_t *types, int len)
+static void spawn_one_enemy(enemy_node_t *act, game_t *game, enemy_t *types,
+    int len)
 {
     sfVector2i map_dim = {game->game->maps[get_current_map(game)]->width * 64,
         game->game->maps[get_current_map(game)]->height * 64};

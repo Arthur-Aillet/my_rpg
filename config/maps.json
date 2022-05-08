@@ -2,9 +2,9 @@
     "maps": {
         "field": {
             "tileset": "assets/in_game/tilesets/tileset.png",
-            "base": "assets/in_game/maps/field/base.map",
-            "obs": "assets/in_game/maps/field/obstacle.map",
-            "over": "assets/in_game/maps/field/over.map",
+            "base": "assets/in_game/maps/field/base",
+            "obs": "assets/in_game/maps/field/obstacle",
+            "over": "assets/in_game/maps/field/over",
             "definition": 32,
             "height": 18,
             "width": 46,
@@ -15,9 +15,9 @@
             "enemies_amount": 10
         },"house": {
             "tileset": "assets/in_game/tilesets/tileset.png",
-            "base": "assets/in_game/maps/house/base.map",
-            "obs": "assets/in_game/maps/house/obstacle.map",
-            "over": "assets/in_game/maps/house/over.map",
+            "base": "assets/in_game/maps/house/base",
+            "obs": "assets/in_game/maps/house/obstacle",
+            "over": "assets/in_game/maps/house/over",
             "definition": 32,
             "height": 18,
             "width": 46,
@@ -28,9 +28,9 @@
             "enemies_amount": 0
         },"garden": {
             "tileset": "assets/in_game/tilesets/tileset.png",
-            "base": "assets/in_game/maps/garden/base.map",
-            "obs": "assets/in_game/maps/garden/obstacle.map",
-            "over": "assets/in_game/maps/garden/over.map",
+            "base": "assets/in_game/maps/garden/base",
+            "obs": "assets/in_game/maps/garden/obstacle",
+            "over": "assets/in_game/maps/garden/over",
             "definition": 32,
             "height": 18,
             "width": 46,
@@ -41,9 +41,9 @@
             "enemies_amount": 0
         },"town": {
             "tileset": "assets/in_game/tilesets/tileset.png",
-            "base": "assets/in_game/maps/town/base.map",
-            "obs": "assets/in_game/maps/town/obstacle.map",
-            "over": "assets/in_game/maps/town/over.map",
+            "base": "assets/in_game/maps/town/base",
+            "obs": "assets/in_game/maps/town/obstacle",
+            "over": "assets/in_game/maps/town/over",
             "definition": 32,
             "height": 18,
             "width": 46,

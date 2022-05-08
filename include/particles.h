@@ -18,6 +18,8 @@
 #define SMOOTHX (part->pos.x - SFSGP(part->object->sprite).x) / 10
 #define TRANSPARENT(x) sfColor_fromRGBA(255, 255, 255, x)
 #define FADE TRANSPARENT(MAX(255 - (part->age * 255 / part->lifetime), 0))
+#define CIRCLE_RANDOM r *cos(a) + game->game->player->pos.x + PLAYER_OFFSET_X\
+     / 2 , r * sin(a) + game->game->player->pos.y + PLAYER_OFFSET_Y / 2
 
 #define SNOW            0
 #define RAIN            1

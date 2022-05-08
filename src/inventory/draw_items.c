@@ -86,6 +86,7 @@ void draw_items(sfRenderWindow *wnd, item_t *items, txtobject_t txt)
         if (items[i].quantity <= 0) {
             items[i].type = 0;
             items[i].quantity = 0;
+            items[i].action = 0;
         }
     }
     for (int i = NB_SLOTS - 1; i >= 0; i--) {

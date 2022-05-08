@@ -157,6 +157,7 @@ SRC_INVENTORY	=			$(INVENTORY_PATH)draw_items.c				\
 							$(INVENTORY_PATH)get_comp_state.c			\
 							$(INVENTORY_PATH)set_competence_state_upper.c	\
 							$(INVENTORY_PATH)set_competence_state_down.c	\
+							$(INVENTORY_PATH)extern.c					\
 
 SRC_JSON		=			$(JSON_PATH)generate/reader/file_gestion.c		\
 							$(JSON_PATH)generate/reader/str_preprocessing.c	\
@@ -244,7 +245,7 @@ OBJ				=			$(SRC:.c=.o)
 ## =============================[OPTIONS]=============================
 ## ===================================================================
 
-CFLAGS			=			-Wall -Wextra -g3
+CFLAGS			=			-Wall -Wextra -O1
 
 CPPFLAGS		=			-I include
 

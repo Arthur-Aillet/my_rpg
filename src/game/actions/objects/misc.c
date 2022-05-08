@@ -27,7 +27,7 @@ void fire_zone(game_t *game)
     static sfClock *clock = NULL;
     float a = fmod(rand(), 100000000) / 100000000 * 2 * 3.141592;
     float r = 300 * sqrt(fmod(rand(), 100000000) / 100000000);
-    sfVector2f pos = {r *cos(a) + game->game->player->pos.x + PLAYER_OFFSET_X / 2 , r * sin(a) + game->game->player->pos.y + PLAYER_OFFSET_Y / 2};
+    sfVector2f pos = {CIRCLE_RANDOM};
 
     if (clock == NULL)
         clock = sfClock_create();

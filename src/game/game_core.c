@@ -24,14 +24,8 @@
 #include "inventory_prototypes.h"
 #include "object_creation.h"
 
-void destroy_game(game_t *game)
+void free_sounds(game_t *game)
 {
-    if (game->fonts != NULL)
-        for (int i = 0; game->fonts[i] != NULL; i++) {
-            sfFont_destroy(game->fonts[i]->font);
-            free(game->fonts[i]->name);
-        }
-    free(game->fonts);
     if (game->sounds != NULL)
         for (int i = 0; game->sounds[i] != NULL; i++) {
             sfSound_destroy(game->sounds[i]->sound);
@@ -45,6 +39,17 @@ void destroy_game(game_t *game)
             free(game->musics[i]->name);
         }
     free(game->musics);
+}
+
+void destroy_game(game_t *game)
+{
+    if (game->fonts != NULL)
+        for (int i = 0; game->fonts[i] != NULL; i++) {
+            sfFont_destroy(game->fonts[i]->font);
+            free(game->fonts[i]->name);
+        }
+    free(game->fonts);
+    free_sounds(game);
     destroy_pnjs(game->game->pnjs);
     free(game->keys);
     destroy_object(game->mouse);

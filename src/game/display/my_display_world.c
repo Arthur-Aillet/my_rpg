@@ -46,7 +46,8 @@ static void weather(game_t *game)
 
     if (clock == NULL)
         clock = sfClock_create();
-    if (TIME(clock, 180)) {
+    if (TIME(clock, 180) &&
+        sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 1) {
         game->game->weather = rand() % 3;
         time = 60;
     }

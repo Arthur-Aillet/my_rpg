@@ -38,7 +38,6 @@ int damage_enemy_zone(game_t *game, sfVector2f pos, int rayon, int damage)
     int enemis_touched = 0;
 
     while (actual) {
-        sfSprite_setColor(actual->enemy.object->sprite, sfWhite);
         e_pos = sfSprite_getPosition(actual->enemy.object->sprite);
         if (dist_two_points(e_pos, pos) <= rayon) {
             remove_enemy_pv(actual, damage, game);

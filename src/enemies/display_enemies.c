@@ -34,6 +34,7 @@ void display_enemies(game_t *game, enemy_node_t *all)
             sfRenderWindow_drawSprite(game->window->window,
                 all->enemy.object->sprite, NULL);
         }
+        sfSprite_setColor(all->enemy.object->sprite, sfWhite);
         all = all->next;
     }
     if (time - last_time_animated > 120)

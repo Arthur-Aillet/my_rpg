@@ -12,6 +12,19 @@
 #include "inventory_structures.h"
 #include "particles.h"
 
+typedef struct potion_craft_s {
+    object_t *back;
+    int status;
+    button_t *fire_make;
+    button_t *l_make;
+    button_t *m_make;
+    button_t *s_make;
+    button_t *r_make;
+    button_t *fire;
+    button_t *health;
+    button_t *stamina;
+} potion_craft_t;
+
 typedef struct pause_s{
     object_t *back;
     button_t *retour;

@@ -16,6 +16,7 @@
 #include "keyboard.h"
 #include "particles.h"
 #include "main_menu.h"
+#include "potions.h"
 
 static void poll_event_keys(game_t *game)
 {
@@ -37,6 +38,8 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
         }
         switched = 1;
     }
+    if (game->P == 2)
+        potion_loop(game);
     sfRenderWindow_clear(game->window->window, sfBlack);
     set_correct_window_size(game->window);
     main_enemies(game->game->enemies, game);

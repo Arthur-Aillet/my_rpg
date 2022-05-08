@@ -22,7 +22,7 @@ static char *quest_string_manager(game_t *game, char *string)
 {
     char *char_slime;
 
-    string = malloc(sizeof(char) * 28);
+    string = malloc(sizeof(char) * 29);
     string = my_strcpy(string, "Quest: kill 10 slime\n\t\t\t");
     char_slime = malloc(sizeof(char) * 2);
     char_slime[0] = game->game->player->slime_killed + 48;

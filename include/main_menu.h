@@ -23,6 +23,9 @@ typedef struct potion_craft_s {
     button_t *fire;
     button_t *health;
     button_t *stamina;
+    sfText *fire_desc;
+    sfText *health_desc;
+    sfText *stamina_desc;
 } potion_craft_t;
 
 typedef struct pause_s{

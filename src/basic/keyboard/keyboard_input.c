@@ -52,13 +52,17 @@ static char *get_click(sfEvent event, char *keys)
 char *get_keyboard_input(char *keys, sfRenderWindow *window)
 {
     sfEvent event;
+    float scroll = 0;
 
     cleanup_keys(keys);
     while (sfRenderWindow_pollEvent(window, &event)) {
         if (event.type == sfEvtClosed)
             sfRenderWindow_close(window);
         keys = get_click(event, keys);
-        HSCROLL = event.mouseWheelScroll.delta;
+        if (event.type == sfEvtMouseWheelScrolled) {
+            VSCROLL = event.mouseWheelScroll.delta;
+            HSCROLL = event.mouseWheelScroll.delta;
+        }
         if (event.type == sfEvtKeyPressed)
             keys = press_buttons(event, keys, PRESS);
         if (event.type == sfEvtKeyReleased)

@@ -13,8 +13,8 @@
         }
     },
     "women": {
-        "pos_x" : 1600,
-        "pos_y" : 600,
+        "pos_x" : 1728,
+        "pos_y" : 768,
         "map" : "town",
         "idle": "assets/img/pnj/Woman_idle.png",
         "size_x": 15,

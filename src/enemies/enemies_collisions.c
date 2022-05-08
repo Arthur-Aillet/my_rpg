@@ -101,11 +101,11 @@ int enemy_is_collide(game_t *game, int xy, sfVector2f diff, sfVector2f enemypos)
     while (game->game->maps[map]->maps[1][++i]) {
         j = -1;
         while (game->game->maps[map]->maps[1][i][++j])
-            ret = ((int)((enemypos.x + 1) / 64) == j ||
-                (int)((enemypos.x - 1) / 64) + 1 == j) &&
+            ret = ((int)((enemypos.x - 19) / 64) == j ||
+                (int)((enemypos.x - 21) / 64) - 1 == j) &&
                 game->game->maps[map]->maps[1][i][j] != '0' &&
-                ((int)((enemypos.y + 1) / 64) == i ||
-                (int)((enemypos.y - 1) / 64) + 1 == i)
+                ((int)((enemypos.y - 9) / 64 - 1) == i ||
+                (int)((enemypos.y - 11) / 64 - 1) + 1 == i)
                 ? 1 : ret;
     }
     return ret;

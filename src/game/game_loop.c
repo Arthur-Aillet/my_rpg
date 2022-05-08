@@ -27,19 +27,8 @@ static void poll_event_keys(game_t *game)
         game = inventory(game);
 }
 
-void game_main(game_t *game, pnj_t *oldmen, int switched)
+void game_anim_complement(game_t *game, pnj_t *oldmen, int switched)
 {
-    if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
-        if (oldmen != NULL) {
-            free(oldmen->map_name);
-            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 750});
-            oldmen->map_name = my_strdup("town");
-            oldmen->next_dialogue = my_strdup("config/greetings.json");
-        }
-        switched = 1;
-    }
-    if (game->P == 2)
-        potion_loop(game);
     sfRenderWindow_clear(game->window->window, sfBlack);
     set_correct_window_size(game->window);
     main_enemies(game->game->enemies, game);
@@ -50,6 +39,22 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
     poll_event_keys(game);
     give_reward(game);
     sfRenderWindow_display(game->window->window);
+}
+
+void game_main(game_t *game, pnj_t *oldmen, int switched)
+{
+    if (my_strcmp(game->game->current, "house") != 0 && switched == 0) {
+        if (oldmen != NULL) {
+            free(oldmen->map_name);
+            sfSprite_setPosition(oldmen->objet->sprite, VCF{832, 730});
+            oldmen->map_name = my_strdup("town");
+            oldmen->next_dialogue = my_strdup("config/greetings.json");
+        }
+        switched = 1;
+    }
+    if (game->P == 2)
+        potion_loop(game);
+    game_anim_complement(game, oldmen, switched);
 }
 
 void game_loop(game_t *game)

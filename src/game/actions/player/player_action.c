@@ -55,8 +55,8 @@ void action_particles(game_t *game)
         regen = 0;
         sfClock_restart(clock);
     }
-    if (regen == 1 && sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 3)
-        game->game->player->stamina += game->game->player->max_stamina / 100;
+    if (regen == 1 && sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 1)
+        game->game->player->stamina += game->game->player->max_stamina / 200;
     if (game->game->player->stamina > game->game->player->max_stamina)
         game->game->player->stamina = game->game->player->max_stamina;
     if (game->game->player->health > game->game->player->max_health)

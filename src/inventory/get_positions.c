@@ -7,6 +7,7 @@
 
 #include "csfml_libs.h"
 #include "my_csfml_utils.h"
+#include "my_mouse.h"
 
 sfVector2f get_comp_pos(int comp)
 {
@@ -31,7 +32,7 @@ sfVector2f get_slot_pos(int slot, sfRenderWindow *window)
     sfVector2f mousepos = {0, 0};
 
     if (slot == 0) {
-        mousepos = itofv2(sfMouse_getPositionRenderWindow(window));
+        mousepos = get_global_mouse_pos(window);
         mousepos.x -= 68;
         mousepos.y -= 68;
         return (mousepos);

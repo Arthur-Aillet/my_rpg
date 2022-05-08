@@ -17,6 +17,7 @@
 #include "particles.h"
 #include "main_menu.h"
 #include "potions.h"
+#include "my_math.h"
 
 static void poll_event_keys(game_t *game)
 {
@@ -25,6 +26,20 @@ static void poll_event_keys(game_t *game)
         game->status->end_game = pause_menu(game);
     if (game->TAB == 2 || game->I == 2)
         game = inventory(game);
+}
+
+void launch_craft(game_t *game)
+{
+    if (my_strcmp(game->game->current, "house") == 0 &&
+        dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200) {
+        sfSprite_setPosition(game->game->player->craft_box->sprite,
+            VCF{1855 - 24, 350 - 23});
+        sfRenderWindow_drawSprite(game->window->window,
+            game->game->player->craft_box->sprite, NULL);
+    }
+    if (game->E == 2 && my_strcmp(game->game->current, "house") == 0 &&
+        dist_two_points(game->game->player->pos, VCF{1855, 350}) <= 200)
+        potion_loop(game);
 }
 
 void game_main(game_t *game, pnj_t *oldmen, int switched)
@@ -38,12 +53,11 @@ void game_main(game_t *game, pnj_t *oldmen, int switched)
         }
         switched = 1;
     }
-    if (game->P == 2)
-        potion_loop(game);
     sfRenderWindow_clear(game->window->window, sfBlack);
     set_correct_window_size(game->window);
     main_enemies(game->game->enemies, game);
     display_world(game);
+    launch_craft(game);
     update_quest(game);
     update_game_status(game);
     player_actions(game);

@@ -22,6 +22,8 @@ void init_player_stats(player_t *player)
 
 void init_player_sprite(json_obj_t *obj, player_t *player)
 {
+    player->craft_box = create_object("assets/img/menu/craft.png",
+        VCF{0, 0}, VCF{2, 2});
     player->tex_p = sfTexture_createFromFile(get_str_by_name(obj,
         "sprite_sheet"), NULL);
     player->sp_p = sfSprite_create();

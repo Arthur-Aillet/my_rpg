@@ -72,6 +72,7 @@ typedef struct player_s {
     float max_exp;
     int slime_killed;
     int side;
+    object_t *craft_box;
     sfVector2f pos;
     sfTexture *tex_p;
     sfSprite *sp_p;

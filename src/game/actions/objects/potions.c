@@ -70,7 +70,7 @@ void regen_s(game_t *game)
     if (TIME(clock, 1)){
         time -= 1;
         game->game->player->stamina += (game->game->player->
-            max_stamina / 100) * power;
+            max_stamina / 2) * power;
     }
 }
 

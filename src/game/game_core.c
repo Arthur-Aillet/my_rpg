@@ -67,9 +67,6 @@ void my_rpg(void)
     competence.sprites = setup_comp_sprites();
     game->items = create_items();
     game->items[51] = create_sword(game->items[10], 1);
-    game->items[52] = create_stamina_potion_m(game->items[52], 5);
-    game->items[53] = create_breeches(game->items[54], 1);
-    game->items[54] = create_molotov(game->items[54], 1);
     game->comp = malloc(sizeof(competences_t));
     competence.comp_points = 0;
     game->comp = &competence;

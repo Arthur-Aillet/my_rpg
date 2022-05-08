@@ -47,7 +47,7 @@ item_t create_breeches(item_t item, int number)
     item.consumable = 0;
     item.obj = create_object("assets/img/breeches.png", VCF {0, 0}, VCF {4, 4});
     item.action = equip;
-    item.power = -50;
+    item.power = -10;
     sf_sprite_set_pixel_size(item.obj->sprite, VCF {96, 96});
     return (item);
 }

@@ -64,7 +64,9 @@ void give_reward(game_t *game)
         >= 10 && game->E == 2 && dist_two_points(sfSprite_getPosition(
         oldmen->objet->sprite), game->game->player->pos) <= 200) {
         given = true;
-        reward = create_cuirass(reward, 1);
+        reward = create_speed_potion_l(reward, 10);
         pickup_item(reward, game->items);
+        transition(game, 1);
+        game->status->end_game = 1;
     }
 }

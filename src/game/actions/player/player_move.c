@@ -87,12 +87,12 @@ void player_move(game_t *game)
     int spd = 1;
     int count = game->game->player->move_spd;
 
-    if (game->LSHIFT > 0 && game->game->in_dialogue == false) {
+    if (game->LSHIFT > 0 && game->game->in_dialogue == false &&
+        game->game->player->stamina >= 1) {
             count *= 1.5;
             game->game->player->stamina -= 1;
     }
-        if (more_than_one_key(game))
-            count /= 1.2;
+    more_than_one_key(game) ? (count /= 1.2) : (count = count);
     while (count--) {
         if (game->Z > 0 && player_is_collide(game, 0, -spd) != 0)
             game->game->player->pos.y += spd;

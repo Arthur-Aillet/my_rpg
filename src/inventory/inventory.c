@@ -91,8 +91,8 @@ game_t *inventory(game_t *game)
         events = evt[page](events);
         update_mouse_cursor(game->window->window, game->mouse);
         sfRenderWindow_display(game->window->window);
+        game = update_stats(game);
     }
-    game = update_stats(game);
     game->TAB = 0;
     free_inventory(backgrounds, events);
     return (game);
